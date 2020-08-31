@@ -5,8 +5,11 @@ using UnityEngine;
 public class CharacterControl : MonoBehaviour
 {
     public float speed = 4f;
-    public float jump_force = 70f;
-    private bool _isGrounded;
+    public float jump_force = 90f;
+    private bool isGrounded=false;
+    private float groundRadius = 0.2f;
+    public LayerMask ground;
+    public Transform groundcheck;
     Rigidbody2D body;
     Transform trans;
     Animator anim;
@@ -32,12 +35,15 @@ public class CharacterControl : MonoBehaviour
 
     void Move() 
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(moveHorizontal, 0f, 0f );
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
 
+        /* Vector3 movement = new Vector3(moveHorizontal, 0f, 0f );
+         trans.Translate(movement*speed*Time.deltaTime);*/
+
+        body.velocity = new Vector2(moveHorizontal*speed,body.velocity.y);
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
 
-        trans.Translate(movement*speed*Time.deltaTime);
+       
 
         if(moveHorizontal > 0 && trans.localScale.x < 0) 
         {
@@ -54,8 +60,15 @@ public class CharacterControl : MonoBehaviour
     }
     void Jump() 
     {
-        if (Input.GetKey(KeyCode.W))
+        isGrounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, ground);
+        anim.SetBool("Ground",isGrounded);
+        anim.SetFloat("vSpeed",body.velocity.y);
+
+        if(!isGrounded) return;
+
+        if (Input.GetKey(KeyCode.Space)&&isGrounded)
             {           
+                anim.SetBool("Ground",false);
                 body.AddForce(Vector3.up * jump_force);
             }
     }
