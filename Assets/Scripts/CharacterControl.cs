@@ -7,7 +7,7 @@ public class CharacterControl : MonoBehaviour
     public float speed = 4f;
     public float jump_force = 90f;
     private bool isGrounded=false;
-    private float groundRadius = 0.2f;
+    private float groundRadius = 0.1f;
     public LayerMask ground;
     public Transform groundcheck;
     Rigidbody2D body;
@@ -69,7 +69,7 @@ public class CharacterControl : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)&&isGrounded)
             {           
                 anim.SetBool("Ground",false);
-                body.AddForce(Vector3.up * jump_force);
+                body.AddForce(Vector3.up * jump_force* Time.deltaTime, ForceMode2D.Impulse);
             }
     }
     }
