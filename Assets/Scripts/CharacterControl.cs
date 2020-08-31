@@ -40,7 +40,7 @@ public class CharacterControl : MonoBehaviour
         /* Vector3 movement = new Vector3(moveHorizontal, 0f, 0f );
          trans.Translate(movement*speed*Time.deltaTime);*/
 
-        body.velocity = new Vector2(moveHorizontal*speed,body.velocity.y);
+        body.velocity = new Vector2(moveHorizontal*speed/**Time.deltaTime*/,body.velocity.y);
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
 
        
