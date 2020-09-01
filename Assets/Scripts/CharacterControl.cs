@@ -27,7 +27,7 @@ public class CharacterControl : MonoBehaviour
     
     void OnDrawGizmos()
     {
-
+        
     }
   
     void Update()
@@ -48,7 +48,6 @@ public class CharacterControl : MonoBehaviour
         float moveHorizontal = Input.GetAxisRaw("Horizontal")* speed * Time.deltaTime;
        // checkPlatforms();
         Vector2 movement = new Vector2(moveHorizontal+other_source, body.velocity.y);
-
         body.velocity = movement;
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
 
