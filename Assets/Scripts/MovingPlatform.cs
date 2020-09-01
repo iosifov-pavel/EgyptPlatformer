@@ -42,18 +42,18 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       /* percent +=forward*pspeed*Time.deltaTime;
+        percent +=forward*pspeed*Time.deltaTime;
         float x = (end.x-start.x)*percent + start.x;
         float y = (end.y - start.y) * percent + start.y;
-        Vector2 mov = new Vector2(x,y);
-        body.velocity=mov;
+       // Vector2 mov = new Vector2(x,y);
+      //  body.velocity=mov;
         
         transform.position = new Vector3(x,y,start.z);
 
         if(forward==1&& percent>= 0.9f||forward==-1&&percent<=0.1f)
         {
             forward*=-1;
-        }*/
+        }
 
         
 
