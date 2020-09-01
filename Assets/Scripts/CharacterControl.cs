@@ -7,6 +7,7 @@ public class CharacterControl : MonoBehaviour
     private float speed = 140f;
     private float jump_force = 320f;
     private bool isGrounded=true;
+    private float other_source = 0;
    // private float groundRadius = 0.215f;
     public LayerMask ground;
    // public Transform groundcheck;
@@ -37,6 +38,7 @@ public class CharacterControl : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        //checkPlatforms();
         CheckGround();
         Jump();
     }
@@ -45,7 +47,7 @@ public class CharacterControl : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal")* speed * Time.deltaTime;
 
-        Vector2 movement = new Vector2(moveHorizontal, body.velocity.y);
+        Vector2 movement = new Vector2(moveHorizontal+other_source, body.velocity.y);
 
         body.velocity = movement;
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
@@ -85,20 +87,40 @@ public class CharacterControl : MonoBehaviour
     }
 
     void CheckGround() 
-    {
-        Bounds bnds = box.bounds;
-        Vector2 max = new Vector2(bnds.max.x-0.03f, bnds.min.y-0.03f);
-        Vector2 min = new Vector2(bnds.min.x+0.03f, bnds.min.y-0.07f);
-        Collider2D hit = Physics2D.OverlapArea(min,max);
-        /*Debug.DrawLine(new Vector3(max.x, max.y, 0), new Vector3(max.x, min.y, 0), Color.red);
-        Debug.DrawLine(new Vector3(max.x, max.y, 0), new Vector3(min.x, max.y, 0), Color.red);
-        Debug.DrawLine(new Vector3(min.x, min.y, 0), new Vector3(min.x, max.y, 0), Color.red);
-        Debug.DrawLine(new Vector3(min.x, min.y, 0), new Vector3(max.x, min.y, 0), Color.red);*/
+    { 
+        Collider2D hit = CheckBox();       
         if(hit != null)
         {
             isGrounded=true;
         }
         else isGrounded = false;
+    }
+
+    Collider2D CheckBox()
+    {
+        Bounds bnds = box.bounds;
+        Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.03f);
+        Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.07f);
+        Collider2D hit = Physics2D.OverlapArea(min, max);
+
+        Debug.DrawLine(new Vector3(max.x, max.y, 0), new Vector3(max.x, min.y, 0), Color.red);
+        Debug.DrawLine(new Vector3(max.x, max.y, 0), new Vector3(min.x, max.y, 0), Color.red);
+        Debug.DrawLine(new Vector3(min.x, min.y, 0), new Vector3(min.x, max.y, 0), Color.red);
+        Debug.DrawLine(new Vector3(min.x, min.y, 0), new Vector3(max.x, min.y, 0), Color.red);
+
+        return hit;
+    }
+
+    RaycastHit2D checkRay()
+    {    
+        Vector3 check = new Vector3(transform.position.x,transform.position.y-0.35f,transform.position.z);
+        Vector3 checkTo = Vector3.down * 0.05f;
+
+        Debug.DrawRay(check,checkTo,Color.yellow);
+
+        RaycastHit2D hit;
+        hit =  Physics2D.Raycast(check,Vector2.down, 0.05f);
+        return hit;   
     }
 }
 

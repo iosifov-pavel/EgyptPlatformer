@@ -5,14 +5,13 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    private float smoth = 0.5f;
+    private float smoth = 0.6f;
     private Vector3 velocity = Vector3.zero;
     private Vector3 offset;
     // Start is called before the first frame update
     void Start()
     {
-        offset = transform.position - player.transform.position;
-        transform.position = player.transform.position+offset;
+        transform.position = new Vector3(player.transform.position.x,player.transform.position.y,transform.position.z);
     }
 
     // Update is called once per frame
@@ -26,7 +25,8 @@ public class CameraFollow : MonoBehaviour
     /// </summary>
     void LateUpdate()
     {
+        Vector3 playerposition = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
         // Smoothly move the camera towards that target position
-        transform.position = Vector3.SmoothDamp(transform.position, player.transform.position+offset, ref velocity, smoth);
+        transform.position = Vector3.SmoothDamp(transform.position, playerposition, ref velocity, smoth);
     }
 }
