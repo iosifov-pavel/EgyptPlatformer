@@ -38,15 +38,15 @@ public class CharacterControl : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-        //checkPlatforms();
-        CheckGround();
+        
+        //CheckGround();
         Jump();
     }
 
     void Move() 
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal")* speed * Time.deltaTime;
-
+       // checkPlatforms();
         Vector2 movement = new Vector2(moveHorizontal+other_source, body.velocity.y);
 
         body.velocity = movement;
@@ -65,7 +65,7 @@ public class CharacterControl : MonoBehaviour
     }
     void Jump() 
     {
-       // isGrounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, ground);
+        CheckGround();
         anim.SetBool("Ground",isGrounded);
         anim.SetFloat("vSpeed",body.velocity.y);
 
@@ -96,6 +96,13 @@ public class CharacterControl : MonoBehaviour
         else isGrounded = false;
     }
 
+    void checkPlatforms()
+    {
+        RaycastHit2D plat = CheckRay();
+        //MovingPlatform pl = 
+        float y =1f;
+        y+=1;
+    }
     Collider2D CheckBox()
     {
         Bounds bnds = box.bounds;
@@ -111,7 +118,7 @@ public class CharacterControl : MonoBehaviour
         return hit;
     }
 
-    RaycastHit2D checkRay()
+    RaycastHit2D CheckRay()
     {    
         Vector3 check = new Vector3(transform.position.x,transform.position.y-0.35f,transform.position.z);
         Vector3 checkTo = Vector3.down * 0.05f;
