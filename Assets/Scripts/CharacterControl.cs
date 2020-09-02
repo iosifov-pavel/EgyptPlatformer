@@ -7,7 +7,7 @@ public class CharacterControl : MonoBehaviour
     private float speed = 140f;
     private float jump_force = 320f;
     private bool isGrounded=true;
-    public float other_source = 0;
+    private float other_source = 0;
    // private float groundRadius = 0.215f;
     public LayerMask ground;
    // public Transform groundcheck;
@@ -15,6 +15,7 @@ public class CharacterControl : MonoBehaviour
     Transform trans;
     Animator anim;
     BoxCollider2D box;
+    PolygonCollider2D polygon;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class CharacterControl : MonoBehaviour
         trans = GetComponent<Transform>();
         anim = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
+        polygon = GetComponent<PolygonCollider2D>();
     }
 
     
@@ -104,7 +106,8 @@ public class CharacterControl : MonoBehaviour
     }
     Collider2D CheckBox()
     {
-        Bounds bnds = box.bounds;
+        Bounds bnds = polygon.bounds;
+       // Bounds bnds = box.bounds;
         Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.03f);
         Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.07f);
         Collider2D hit = Physics2D.OverlapArea(min, max);

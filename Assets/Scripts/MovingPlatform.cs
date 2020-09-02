@@ -29,7 +29,7 @@ public class MovingPlatform : MonoBehaviour
         if(collision.gameObject.name =="Player")
         {
             collision.collider.transform.SetParent(transform);
-            player.other_source = pspeed*10;
+       //     player.other_source = pspeed*10;
         }
     }
 
