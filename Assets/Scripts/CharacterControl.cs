@@ -7,7 +7,7 @@ public class CharacterControl : MonoBehaviour
     private float speed = 140f;
     private float jump_force = 320f;
     private bool isGrounded=true;
-    private float other_source = 0;
+    public float other_source = 0;
    // private float groundRadius = 0.215f;
     public LayerMask ground;
    // public Transform groundcheck;
@@ -45,9 +45,9 @@ public class CharacterControl : MonoBehaviour
 
     void Move() 
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal")* speed * Time.deltaTime;
+        float moveHorizontal = Input.GetAxisRaw("Horizontal")* (speed+other_source) * Time.deltaTime;
        // checkPlatforms();
-        Vector2 movement = new Vector2(moveHorizontal+other_source, body.velocity.y);
+        Vector2 movement = new Vector2(moveHorizontal, body.velocity.y);
         body.velocity = movement;
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
 
