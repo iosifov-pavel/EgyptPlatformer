@@ -29,14 +29,14 @@ public class PlayerHealth : MonoBehaviour
 
     public void Death()
     {
-        Destroy(this.gameObject);
+      //  Destroy(this.gameObject);
     }
 
     private IEnumerator damageIndication()
     {
         SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
         player.color = Color.red;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.7f);
         player.color = Color.white;
     }
 }

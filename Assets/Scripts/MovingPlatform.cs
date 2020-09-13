@@ -9,7 +9,7 @@ public class MovingPlatform : MonoBehaviour
      public CharacterControl player;
     private Vector3 start;
     public Vector3 end =Vector3.zero;
-    public float pspeed = 1f;
+    public float pspeed = 0.8f;
     private float percent=0;
     int forward = 1;
     void Start()
@@ -26,10 +26,13 @@ public class MovingPlatform : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name =="Player")
+        if (collision.gameObject.name == "Player")
         {
+            Collider2D hit = collision.gameObject.GetComponent<CharacterControl>().CheckBox();
+            if(hit.gameObject.tag=="MovPlat")
+            {
             collision.collider.transform.SetParent(transform);
-       //     player.other_source = pspeed*10;
+            }
         }
     }
 

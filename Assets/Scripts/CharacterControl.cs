@@ -43,19 +43,19 @@ public class CharacterControl : MonoBehaviour
     {
         Move();
         
-        //CheckGround();
         Jump();
     }
 
     void Move() 
     {
         float moveHorizontal = (Input.GetAxisRaw("Horizontal")+forces)* (speed+other_source) * Time.deltaTime;
-       // checkPlatforms();
+      
         Vector2 movement = new Vector2(moveHorizontal, body.velocity.y);
         body.velocity = movement;
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
 
-       
+       // if(isGrounded && moveHorizontal==0) body.gravityScale = 0;
+       // else body.gravityScale = 2;
 
         if(moveHorizontal > 0 && trans.localScale.x < 0) 
         {
@@ -102,14 +102,12 @@ public class CharacterControl : MonoBehaviour
     void checkPlatforms()
     {
         RaycastHit2D plat = CheckRay();
-        //MovingPlatform pl = 
         float y =1f;
         y+=1;
     }
-    Collider2D CheckBox()
+    public Collider2D CheckBox()
     {
         Bounds bnds = polygon.bounds;
-       // Bounds bnds = box.bounds;
         Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.03f);
         Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.07f);
         Collider2D hit = Physics2D.OverlapArea(min, max);
