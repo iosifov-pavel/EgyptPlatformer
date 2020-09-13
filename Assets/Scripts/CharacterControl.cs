@@ -8,8 +8,10 @@ public class CharacterControl : MonoBehaviour
     private float jump_force = 320f;
     private bool isGrounded=true;
     private float other_source = 0;
+    public int forces = 0;
    // private float groundRadius = 0.215f;
     public LayerMask ground;
+    
    // public Transform groundcheck;
     Rigidbody2D body;
     Transform trans;
@@ -47,7 +49,7 @@ public class CharacterControl : MonoBehaviour
 
     void Move() 
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal")* (speed+other_source) * Time.deltaTime;
+        float moveHorizontal = (Input.GetAxisRaw("Horizontal")+forces)* (speed+other_source) * Time.deltaTime;
        // checkPlatforms();
         Vector2 movement = new Vector2(moveHorizontal, body.velocity.y);
         body.velocity = movement;
@@ -71,9 +73,9 @@ public class CharacterControl : MonoBehaviour
         anim.SetFloat("vSpeed",body.velocity.y);
 
         if(!isGrounded) return;
-
+       
         if (Input.GetKey(KeyCode.Space)&&isGrounded)
-            {           
+            {          
                 anim.SetBool("Ground",false);
                 body.velocity = new Vector2(body.velocity.x, 0);
                 body.AddForce(Vector3.up * jump_force * Time.fixedDeltaTime, ForceMode2D.Impulse);
@@ -89,8 +91,8 @@ public class CharacterControl : MonoBehaviour
 
     void CheckGround() 
     { 
-        Collider2D hit = CheckBox();       
-        if(hit != null)
+        Collider2D hit = CheckBox();
+        if(hit != null && hit.gameObject.tag != "Spikes")
         {
             isGrounded=true;
         }
@@ -131,5 +133,7 @@ public class CharacterControl : MonoBehaviour
         hit =  Physics2D.Raycast(check,Vector2.down, 0.05f);
         return hit;   
     }
+
+    
 }
 

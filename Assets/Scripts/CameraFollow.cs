@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    private float smoth = 0.6f;
+    [SerializeField] private Transform player = null;
+    private float smoth = 0.3f;
     private Vector3 velocity = Vector3.zero;
     private Vector3 offset;
     // Start is called before the first frame update
