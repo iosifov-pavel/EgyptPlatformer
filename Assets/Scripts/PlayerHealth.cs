@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Death()
     {
-      //  Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 
     private IEnumerator damageIndication()

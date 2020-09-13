@@ -6,7 +6,7 @@ public class CharacterControl : MonoBehaviour
 {
     private float speed = 140f;
     private float jump_force = 320f;
-    private bool isGrounded=true;
+    public bool isGrounded=true;
     private float other_source = 0;
     public int forces = 0;
    // private float groundRadius = 0.215f;
