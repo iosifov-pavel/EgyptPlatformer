@@ -8,6 +8,7 @@ public class CharacterControl : MonoBehaviour
     public bool isDamaged = false;
     private float jump_force = 320f;
     public bool isGrounded=true;
+    private bool buttonPressed = false;
     private float other_source = 0;
     public int forces = 0;
    // private float groundRadius = 0.215f;
@@ -37,6 +38,8 @@ public class CharacterControl : MonoBehaviour
   
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space)) buttonPressed=true;
+        if(Input.GetKeyUp(KeyCode.Space)) buttonPressed=false;
         CheckGround();
     }
 
@@ -74,8 +77,9 @@ public class CharacterControl : MonoBehaviour
 
         if(!isGrounded) return;
        
-        if (Input.GetKey(KeyCode.Space)&&isGrounded)
-            {          
+        if (buttonPressed&&isGrounded)
+            {      
+                buttonPressed = false;    
                 anim.SetBool("Ground",false);
                 body.velocity = new Vector2(body.velocity.x, 0);
                 body.AddForce(Vector3.up * jump_force * Time.fixedDeltaTime, ForceMode2D.Impulse);
@@ -92,8 +96,10 @@ public class CharacterControl : MonoBehaviour
     void CheckGround() 
     { 
         Collider2D hit = CheckBox();
-        if(hit != null && hit.gameObject.tag!="Obstacle")
+        
+        if(hit != null /*&& hit.gameObject.tag!="Obstacle"*/)
         {
+            
             isGrounded=true;
         }
         else isGrounded = false;
