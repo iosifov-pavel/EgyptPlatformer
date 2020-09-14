@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spikes : MonoBehaviour
+public class CanHurtYou : MonoBehaviour
 {
-    int dmg = 2;
+    int dmg = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,26 +23,17 @@ public class Spikes : MonoBehaviour
     /// object (2D physics only).
     /// </summary>
     /// <param name="other">The other Collider2D involved in this collision.</param>
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        
-       /* Rigidbody2D plb = other.gameObject.GetComponent<Rigidbody2D>();
-        CharacterControl cc = other.gameObject.GetComponent<CharacterControl>();
-        
-        plb.AddForce(new Vector3(-1,2,0)*3,ForceMode2D.Impulse);*/
+    private void OnCollisionEnter2D(Collision2D other) 
+    {  
         StartCoroutine(playerGetHit(other));
-        PlayerHealth player = other.GetComponent<PlayerHealth>();
+        PlayerHealth player = other.gameObject.GetComponent<PlayerHealth>();
         player.Hurt(dmg);
-        
-        
     }
 
     
-    private IEnumerator playerGetHit(Collider2D player) 
+    private IEnumerator playerGetHit(Collision2D player) 
     {
-
-        yield return new WaitForSeconds(0.3f);
-        
+        yield return new WaitForSeconds(1.5f);
     }
   
 }

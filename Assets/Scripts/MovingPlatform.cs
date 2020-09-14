@@ -29,7 +29,7 @@ public class MovingPlatform : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             Collider2D hit = collision.gameObject.GetComponent<CharacterControl>().CheckBox();
-            if(hit.gameObject.tag=="MovPlat")
+            if(hit!=null && hit.gameObject.tag=="MovPlat")
             {
             collision.collider.transform.SetParent(transform);
             }

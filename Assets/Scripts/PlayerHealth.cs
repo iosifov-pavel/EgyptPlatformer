@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int health = 6;
+    private int health = 3;
+    bool superman = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void Hurt(int dmg)
     {
+        if(superman==true) return;
         health-=dmg;
+        Debug.Log(health);
         StartCoroutine(damageIndication());
         if(health<=0)
         {
@@ -34,9 +37,11 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator damageIndication()
     {
+        superman = true;
         SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
         player.color = Color.red;
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.7f);
+        superman = false;
         player.color = Color.white;
     }
 }

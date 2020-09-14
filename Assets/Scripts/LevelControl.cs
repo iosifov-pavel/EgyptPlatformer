@@ -21,7 +21,7 @@ public class LevelControl : MonoBehaviour
     }
 
     public void restartCurrentScene(){
-         Scene scene = SceneManager.GetActiveScene(); 
+          Scene scene = SceneManager.GetActiveScene(); 
           SceneManager.LoadScene(scene.name);
      }
 }

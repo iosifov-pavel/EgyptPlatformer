@@ -92,7 +92,7 @@ public class CharacterControl : MonoBehaviour
     void CheckGround() 
     { 
         Collider2D hit = CheckBox();
-        if(hit != null && hit.gameObject.tag != "Spikes")
+        if(hit != null)
         {
             isGrounded=true;
         }
