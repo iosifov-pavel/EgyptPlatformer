@@ -6,10 +6,9 @@ public class MovingPlatform : MonoBehaviour
 {
     // Start is called before the first frame update
     Rigidbody2D body;
-     public CharacterControl player;
     private Vector3 start;
-    public Vector3 end =Vector3.zero;
-    public float pspeed = 0.8f;
+    public Vector3 end = Vector3.zero;
+    private float pspeed = 0.6f;
     private float percent=0;
     int forward = 1;
     void Start()
@@ -40,6 +39,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,collision.gameObject.GetComponent<Rigidbody2D>().velocity.y);
             collision.collider.transform.SetParent(null);
         }
     }
@@ -52,7 +52,7 @@ public class MovingPlatform : MonoBehaviour
         float y = (end.y - start.y) * percent + start.y;
         transform.position = new Vector3(x,y,start.z);
 
-        if(forward==1&& percent>= 0.9f||forward==-1&&percent<=0.1f)
+        if(forward==1&& percent>= 0.95f||forward==-1&&percent<=0.05f)
         {
             forward*=-1;
         }

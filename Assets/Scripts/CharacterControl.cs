@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
-    private float speed = 140f;
+    private float speed = 165f;
     public bool isDamaged = false;
     private float jump_force = 320f;
     public bool isGrounded=true;
@@ -24,6 +24,8 @@ public class CharacterControl : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        //body.drag=1f;
+        //body.
         trans = GetComponent<Transform>();
         anim = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
@@ -53,22 +55,27 @@ public class CharacterControl : MonoBehaviour
     void Move() 
     {
         if(isDamaged) return;
-        /*
-        float moveHorizontal = (Input.GetAxis("Horizontal")+forces)* (speed+other_source) * Time.deltaTime;
+        // Передвижение через velocity
+         
+        float moveHorizontal = (Input.GetAxis("Horizontal")+forces)* (speed+other_source) * Time.fixedDeltaTime;
         Vector2 movement = new Vector2(moveHorizontal, body.velocity.y);
         body.velocity = movement;
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
-        */
-        float dir = Input.GetAxis("Horizontal");
-        Vector2 moveHorizontal = new Vector2(dir*(speed+forces)*Time.fixedDeltaTime , body.velocity.y+other_source);
+        
+        // Передвижение через AddForce
+        
+       /* float dir = Input.GetAxisRaw("Horizontal");
+        if(dir==0&&isGrounded) body.velocity=new Vector2(0,body.velocity.y);
+        Vector2 moveHorizontal = new Vector2(dir*(speed+forces)*Time.fixedDeltaTime , 0+other_source);
         body.AddForce(moveHorizontal,ForceMode2D.Force);
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal.x));
+        */
 
-        if(moveHorizontal.x > 0 && trans.localScale.x < 0) 
+        if(moveHorizontal > 0 && trans.localScale.x < 0) 
         {
             Flip();
         }
-        else if(moveHorizontal.x < 0 && trans.localScale.x > 0)
+        else if(moveHorizontal < 0 && trans.localScale.x > 0)
         {
             Flip();
         }
