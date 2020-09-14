@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterControl : MonoBehaviour
 {
     private float speed = 140f;
+    public bool isDamaged = false;
     private float jump_force = 320f;
     public bool isGrounded=true;
     private float other_source = 0;
@@ -36,7 +37,7 @@ public class CharacterControl : MonoBehaviour
   
     void Update()
     {
-        
+        CheckGround();
     }
 
     void FixedUpdate()
@@ -48,14 +49,13 @@ public class CharacterControl : MonoBehaviour
 
     void Move() 
     {
+        if(isDamaged) return;
+
         float moveHorizontal = (Input.GetAxisRaw("Horizontal")+forces)* (speed+other_source) * Time.deltaTime;
-      
         Vector2 movement = new Vector2(moveHorizontal, body.velocity.y);
         body.velocity = movement;
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
 
-       // if(isGrounded && moveHorizontal==0) body.gravityScale = 0;
-       // else body.gravityScale = 2;
 
         if(moveHorizontal > 0 && trans.localScale.x < 0) 
         {
@@ -68,7 +68,7 @@ public class CharacterControl : MonoBehaviour
     }
     void Jump() 
     {
-        CheckGround();
+       // CheckGround();
         anim.SetBool("Ground",isGrounded);
         anim.SetFloat("vSpeed",body.velocity.y);
 
@@ -108,8 +108,8 @@ public class CharacterControl : MonoBehaviour
     public Collider2D CheckBox()
     {
         Bounds bnds = polygon.bounds;
-        Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.03f);
-        Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.07f);
+        Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.025f);
+        Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.035f);
         Collider2D hit = Physics2D.OverlapArea(min, max);
 
         Debug.DrawLine(new Vector3(max.x, max.y, 0), new Vector3(max.x, min.y, 0), Color.red);

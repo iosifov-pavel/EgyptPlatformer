@@ -5,7 +5,8 @@ using UnityEngine;
 public class CanHurtYou : MonoBehaviour
 {
     int dmg = 1;
-    
+    private ContactPoint2D[] contacts = new ContactPoint2D[1];
+    Vector3 dir;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class CanHurtYou : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
@@ -23,17 +24,29 @@ public class CanHurtYou : MonoBehaviour
     /// object (2D physics only).
     /// </summary>
     /// <param name="other">The other Collider2D involved in this collision.</param>
-    private void OnCollisionEnter2D(Collision2D other) 
-    {  
-        StartCoroutine(playerGetHit(other));
+    
+
+    private void OnCollisionStay2D(Collision2D other) 
+    {
         PlayerHealth player = other.gameObject.GetComponent<PlayerHealth>();
-        player.Hurt(dmg);
+        if(player.superman) return;
+        other.GetContacts(contacts);
+        Vector2 pnt = contacts[0].point;
+        Vector3 playerpos = other.gameObject.GetComponent<Transform>().position;
+        dir = new Vector3(pnt.x-playerpos.x,pnt.y-playerpos.y,playerpos.z-playerpos.z);
+        dir.Normalize();
+        player.Hurt(dmg);  
+        StartCoroutine(playerGetHit(other));     
     }
 
     
     private IEnumerator playerGetHit(Collision2D player) 
     {
-        yield return new WaitForSeconds(1.5f);
+        player.gameObject.GetComponent<CharacterControl>().isDamaged = true;
+        player.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(dir.x*(-3f),dir.y*(-4.5f),dir.z),ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.2f);
+        player.gameObject.GetComponent<CharacterControl>().isDamaged = false;
     }
+
   
 }

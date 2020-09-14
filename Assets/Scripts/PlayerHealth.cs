@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     private int health = 3;
-    bool superman = false;
+    public bool superman = false;
     // Start is called before the first frame update
     void Start()
     {
