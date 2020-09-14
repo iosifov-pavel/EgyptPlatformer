@@ -88,7 +88,7 @@ public class CharacterControl : MonoBehaviour
         anim.SetFloat("vSpeed",body.velocity.y);
 
         if(!isGrounded) return;
-        if(hit.gameObject.tag=="Obstacle" && hit.gameObject.GetComponent<CanHurtYou>().contactYes==false) return;
+        if(hit!=null && hit.gameObject.tag=="Obstacle" && hit.gameObject.GetComponent<CanHurtYou>().contactYes==false) return;
         if (buttonPressed&&isGrounded)
             {      
                 buttonPressed = false;    
