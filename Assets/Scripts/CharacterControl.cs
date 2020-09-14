@@ -20,6 +20,7 @@ public class CharacterControl : MonoBehaviour
     Animator anim;
     BoxCollider2D box;
     PolygonCollider2D polygon;
+    Collider2D hit;
     // Start is called before the first frame update
     void Start()
     {
@@ -87,7 +88,7 @@ public class CharacterControl : MonoBehaviour
         anim.SetFloat("vSpeed",body.velocity.y);
 
         if(!isGrounded) return;
-       
+        if(hit.gameObject.tag=="Obstacle" && hit.gameObject.GetComponent<CanHurtYou>().contactYes==false) return;
         if (buttonPressed&&isGrounded)
             {      
                 buttonPressed = false;    
@@ -106,7 +107,7 @@ public class CharacterControl : MonoBehaviour
 
     void CheckGround() 
     { 
-        Collider2D hit = CheckBox();
+        hit = CheckBox();
         
         if(hit != null /*&& hit.gameObject.tag!="Obstacle"*/)
         {

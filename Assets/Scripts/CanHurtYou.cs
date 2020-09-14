@@ -7,6 +7,7 @@ public class CanHurtYou : MonoBehaviour
     int dmg = 1;
     private ContactPoint2D[] contacts = new ContactPoint2D[1];
     Vector3 dir;
+    public bool contactYes = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class CanHurtYou : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other) 
     {
+        contactYes = true;
         PlayerHealth player = other.gameObject.GetComponent<PlayerHealth>();
         if(player.superman) return;
         //Debug.Log("triger");
@@ -46,6 +48,10 @@ public class CanHurtYou : MonoBehaviour
     /// object's collider (2D physics only).
     /// </summary>
     /// <param name="other">The Collision2D data associated with this collision.</param>
+    void OnCollisionExit2D(Collision2D other)
+    {
+        contactYes = false;
+    }
 
 
     

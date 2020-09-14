@@ -290,8 +290,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.62, y: -0.08, z: -10}
+  m_LocalScale: {x: 0.87846804, y: 0.87846804, z: 0.87846804}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1292,6 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactYes: 0
 --- !u!251 &3401633982183837746
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -2495,6 +2496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactYes: 0
 --- !u!1 &4086988431423780870
 GameObject:
   m_ObjectHideFlags: 0
@@ -2671,6 +2673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactYes: 0
 --- !u!1 &5115816525480431399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2961,6 +2964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactYes: 0
 --- !u!1 &7715691850033774657
 GameObject:
   m_ObjectHideFlags: 0
@@ -2992,6 +2996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactYes: 0
 --- !u!114 &7715691851306666491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3004,6 +3009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactYes: 0
 --- !u!1 &7715691851306666492
 GameObject:
   m_ObjectHideFlags: 0
@@ -3049,6 +3055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactYes: 0
 --- !u!4 &8219764864396471020
 Transform:
   m_ObjectHideFlags: 0
@@ -3094,3 +3101,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contactYes: 0
