@@ -92,7 +92,7 @@ public class CharacterControl : MonoBehaviour
     void CheckGround() 
     { 
         Collider2D hit = CheckBox();
-        if(hit != null)
+        if(hit != null && hit.gameObject.tag!="Obstacle")
         {
             isGrounded=true;
         }
@@ -108,8 +108,8 @@ public class CharacterControl : MonoBehaviour
     public Collider2D CheckBox()
     {
         Bounds bnds = polygon.bounds;
-        Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.025f);
-        Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.035f);
+        Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.022f);
+        Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.038f);
         Collider2D hit = Physics2D.OverlapArea(min, max);
 
         Debug.DrawLine(new Vector3(max.x, max.y, 0), new Vector3(max.x, min.y, 0), Color.red);
