@@ -10,7 +10,7 @@ public class CharacterControl : MonoBehaviour
     public bool isGrounded=true;
     private bool buttonPressed = false;
     private float other_source = 0;
-    public int forces = 0;
+    public float forces = 0;
    // private float groundRadius = 0.215f;
     public LayerMask ground;
     
@@ -53,18 +53,22 @@ public class CharacterControl : MonoBehaviour
     void Move() 
     {
         if(isDamaged) return;
-
-        float moveHorizontal = (Input.GetAxisRaw("Horizontal")+forces)* (speed+other_source) * Time.deltaTime;
+        /*
+        float moveHorizontal = (Input.GetAxis("Horizontal")+forces)* (speed+other_source) * Time.deltaTime;
         Vector2 movement = new Vector2(moveHorizontal, body.velocity.y);
         body.velocity = movement;
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
+        */
+        float dir = Input.GetAxis("Horizontal");
+        Vector2 moveHorizontal = new Vector2(dir*(speed+forces)*Time.fixedDeltaTime , body.velocity.y+other_source);
+        body.AddForce(moveHorizontal,ForceMode2D.Force);
+        anim.SetFloat("Speed",Mathf.Abs(moveHorizontal.x));
 
-
-        if(moveHorizontal > 0 && trans.localScale.x < 0) 
+        if(moveHorizontal.x > 0 && trans.localScale.x < 0) 
         {
             Flip();
         }
-        else if(moveHorizontal < 0 && trans.localScale.x > 0)
+        else if(moveHorizontal.x < 0 && trans.localScale.x > 0)
         {
             Flip();
         }
@@ -114,8 +118,8 @@ public class CharacterControl : MonoBehaviour
     public Collider2D CheckBox()
     {
         Bounds bnds = polygon.bounds;
-        Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.022f);
-        Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.038f);
+        Vector2 max = new Vector2(bnds.max.x - 0.02f, bnds.min.y - 0.021f);
+        Vector2 min = new Vector2(bnds.min.x + 0.02f, bnds.min.y - 0.031f);
         Collider2D hit = Physics2D.OverlapArea(min, max);
 
         Debug.DrawLine(new Vector3(max.x, max.y, 0), new Vector3(max.x, min.y, 0), Color.red);
