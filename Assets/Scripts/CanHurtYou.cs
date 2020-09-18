@@ -32,9 +32,7 @@ public class CanHurtYou : MonoBehaviour
         contactYes = true;
         PlayerHealth player = other.gameObject.GetComponent<PlayerHealth>();
         if(player.superman) return;
-        //Debug.Log("triger");
         other.GetContacts(contacts);
-        //Vector2 pnt = other.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
         Vector2 pnt = contacts[0].point;
         Vector3 playerpos = other.gameObject.GetComponent<Transform>().position;
         dir = new Vector3(pnt.x-playerpos.x,pnt.y-playerpos.y,playerpos.z-playerpos.z);
@@ -43,11 +41,6 @@ public class CanHurtYou : MonoBehaviour
         StartCoroutine(playerGetHit(other));     
     }
 
-    /// <summary>
-    /// Sent when a collider on another object stops touching this
-    /// object's collider (2D physics only).
-    /// </summary>
-    /// <param name="other">The Collision2D data associated with this collision.</param>
     void OnCollisionExit2D(Collision2D other)
     {
         contactYes = false;

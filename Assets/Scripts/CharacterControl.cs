@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
-    private float speed = 165f;
+    private float speed = 8f;
     public bool isDamaged = false;
     private float jump_force = 320f;
     public bool isGrounded=true;
@@ -25,7 +25,7 @@ public class CharacterControl : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        //body.drag=1f;
+        //body.drag=23f;
         //body.
         trans = GetComponent<Transform>();
         anim = GetComponent<Animator>();
@@ -57,20 +57,13 @@ public class CharacterControl : MonoBehaviour
     {
         if(isDamaged) return;
         // Передвижение через velocity
-         
+        
         float moveHorizontal = (Input.GetAxis("Horizontal")+forces)* (speed+other_source) * Time.fixedDeltaTime;
-        Vector2 movement = new Vector2(moveHorizontal, body.velocity.y);
+        float aceleration = moveHorizontal+body.velocity.x;
+        if(aceleration>3.3f) aceleration=3.3f;
+        Vector2 movement = new Vector2(aceleration, body.velocity.y);
         body.velocity = movement;
         anim.SetFloat("Speed",Mathf.Abs(moveHorizontal));
-        
-        // Передвижение через AddForce
-        
-       /* float dir = Input.GetAxisRaw("Horizontal");
-        if(dir==0&&isGrounded) body.velocity=new Vector2(0,body.velocity.y);
-        Vector2 moveHorizontal = new Vector2(dir*(speed+forces)*Time.fixedDeltaTime , 0+other_source);
-        body.AddForce(moveHorizontal,ForceMode2D.Force);
-        anim.SetFloat("Speed",Mathf.Abs(moveHorizontal.x));
-        */
 
         if(moveHorizontal > 0 && trans.localScale.x < 0) 
         {
@@ -80,6 +73,26 @@ public class CharacterControl : MonoBehaviour
         {
             Flip();
         }
+        
+        // Передвижение через AddForce
+        
+       /* float dir = Input.GetAxisRaw("Horizontal");
+        if(dir==0&&isGrounded) body.velocity=new Vector2(0,body.velocity.y);
+        Vector2 moveHorizontal = new Vector2(dir*(speed+forces)*Time.fixedDeltaTime , 0+other_source);
+        body.AddForce(moveHorizontal,ForceMode2D.Force);
+        anim.SetFloat("Speed",Mathf.Abs(moveHorizontal.x));
+
+        if(moveHorizontal.x > 0 && trans.localScale.x < 0) 
+        {
+            Flip();
+        }
+        else if(moveHorizontal.x < 0 && trans.localScale.x > 0)
+        {
+            Flip();
+        }
+        */
+
+        
     }
     void Jump() 
     {
