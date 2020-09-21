@@ -20,7 +20,7 @@ public class JumpingPlatform : MonoBehaviour
     {
         Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(rb.velocity.x,0);
-        rb.AddForce(transform.up*10f, ForceMode2D.Impulse);
+        rb.AddForce(transform.up*11.5f, ForceMode2D.Impulse);
     }
 
    /* void OnTriggerStay2D(Collider2D other)

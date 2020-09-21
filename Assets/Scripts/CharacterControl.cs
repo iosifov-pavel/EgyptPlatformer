@@ -9,10 +9,9 @@ public class CharacterControl : MonoBehaviour
     private float maxSpeed = 3.3f;
     private Vector2 direction;
     public bool isDamaged = false;
-    private float jump_force = 400f;
+    private float jump_force = 380f;
     public bool isGrounded = true;
     private bool buttonPressed = false;
-    private bool buttonReleased = true;
     private float fallmultiplier = 3f;
     public float gravitys = 2f;
     private float customdrag = 15f;
@@ -27,6 +26,7 @@ public class CharacterControl : MonoBehaviour
     Animator anim;
     PolygonCollider2D polygon;
     Collider2D hit;
+    Collider2D lasthit;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,17 +47,21 @@ public class CharacterControl : MonoBehaviour
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+        CheckGround();
+        
+        if(!isGrounded) {}
+        else 
+        {
         if(Input.GetKeyDown(KeyCode.Space)) 
         {
             buttonPressed=true;
-            buttonReleased = false;
         }
         if(Input.GetKeyUp(KeyCode.Space))
         { 
             buttonPressed=false;
-            buttonReleased = true;
         }
-        CheckGround();
+        }
+        
     }
 
     void FixedUpdate()
@@ -107,7 +111,7 @@ public class CharacterControl : MonoBehaviour
             {
                 body.gravityScale=gravitys;
             }
-            else if(body.velocity.y>0&& buttonReleased)
+            else if(body.velocity.y>0 && lasthit.gameObject.tag!="CantJump" && !Input.GetButton("Jump"))
             {
                 body.gravityScale =  gravitys * fallmultiplier;
             }
@@ -117,7 +121,6 @@ public class CharacterControl : MonoBehaviour
 
     void Jump() 
     {
-       // CheckGround();
         anim.SetBool("Ground",isGrounded);
         anim.SetFloat("vSpeed",body.velocity.y);
 
@@ -144,19 +147,20 @@ public class CharacterControl : MonoBehaviour
     void CheckGround() 
     { 
         hit = CheckBox();
+    
+        if(hit != null)
+        {
+            lasthit = hit;
+            jump=false;
+            isGrounded=true;
+        }
+        else isGrounded = false;
         if(hit != null && hit.gameObject.tag=="CantJump")
         {
             isGrounded=false;
-            buttonReleased = false;
             return;
         }
-        if(hit != null)
-        {
-            jump=false;
-            isGrounded=true;
-            buttonReleased = false;
-        }
-        else isGrounded = false;
+        
     }
 
 
