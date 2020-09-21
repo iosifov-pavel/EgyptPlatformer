@@ -20,12 +20,20 @@ public class CanHurtYou : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Sent when another object enters a trigger collider attached to this
-    /// object (2D physics only).
-    /// </summary>
-    /// <param name="other">The other Collider2D involved in this collision.</param>
-    
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        contactYes = true;
+        PlayerHealth player = other.gameObject.GetComponent<PlayerHealth>();
+        if(player.superman) return;
+        other.GetContacts(contacts);
+        Vector2 pnt = contacts[0].point;
+        Vector3 playerpos = other.gameObject.GetComponent<Transform>().position;
+        dir = new Vector3(pnt.x-playerpos.x,pnt.y-playerpos.y,playerpos.z-playerpos.z);
+        dir.Normalize();
+        player.Hurt(dmg);  
+        StartCoroutine(playerGetHit(other));     
+    }
 
     private void OnCollisionStay2D(Collision2D other) 
     {
@@ -46,8 +54,6 @@ public class CanHurtYou : MonoBehaviour
         contactYes = false;
     }
 
-
-    
     private IEnumerator playerGetHit(Collision2D player) 
     {
         player.gameObject.GetComponent<CharacterControl>().isDamaged = true;
