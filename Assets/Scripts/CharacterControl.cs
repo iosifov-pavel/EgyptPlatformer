@@ -94,7 +94,13 @@ public class CharacterControl : MonoBehaviour
 
         if(isGrounded)
         {
-            if((direction.x==0 || directionchanged)&&!jump)
+            bool oneway = false;
+            PlatformEffector2D pe2d=null;
+            if(hit!=null)
+            pe2d = hit.gameObject.GetComponent<PlatformEffector2D>();
+            if(pe2d!=null)
+            oneway = pe2d.useOneWay;
+            if((direction.x==0 || directionchanged) && !jump && !oneway)
             {
                 body.drag = customdrag;
             }

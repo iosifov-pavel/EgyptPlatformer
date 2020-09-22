@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelControl : MonoBehaviour
 {
+
+    public int coins = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,7 @@ public class LevelControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Coins: "+coins);
         if(Input.GetKey(KeyCode.R))
         {
             restartCurrentScene();

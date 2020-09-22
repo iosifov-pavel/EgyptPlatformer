@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(superman==true) return;
         health-=dmg;
-        Debug.Log(health);
+        Debug.Log("Health " + health);
         StartCoroutine(damageIndication());
         if(health<=0)
         {
