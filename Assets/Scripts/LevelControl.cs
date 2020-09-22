@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelControl : MonoBehaviour
 {
 
+    [SerializeField] UI userin;
     public int coins = 0;
     // Start is called before the first frame update
     void Start()
@@ -26,5 +27,11 @@ public class LevelControl : MonoBehaviour
     public void restartCurrentScene(){
           Scene scene = SceneManager.GetActiveScene(); 
           SceneManager.LoadScene(scene.name);
+     }
+
+     public void GetCoin()
+     {
+         coins++;
+         userin.GetScore(coins.ToString());
      }
 }
