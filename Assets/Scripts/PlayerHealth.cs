@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] UI userin;
     private int health = 3;
     private int MAXhealth = 3;
     public bool superman = false;
@@ -23,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(superman==true) return;
         health-=dmg;
+        userin.changeHealth(health);
         Debug.Log("Health " + health);
         StartCoroutine(damageIndication());
         if(health<=0)
