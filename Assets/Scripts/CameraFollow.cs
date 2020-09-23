@@ -18,14 +18,11 @@ public class CameraFollow : MonoBehaviour
     {
 
     }
-    /// <summary>
-    /// LateUpdate is called every frame, if the Behaviour is enabled.
-    /// It is called after all Update functions have been called.
-    /// </summary>
+    
     void LateUpdate()
     {
+        if(player == null) return;
         Vector3 playerposition = new Vector3(player.position.x, player.position.y, transform.position.z);
-        // Smoothly move the camera towards that target position
         transform.position = Vector3.SmoothDamp(transform.position, playerposition, ref velocity, smoth);
     }
 }

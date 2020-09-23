@@ -8,10 +8,12 @@ public class PlayerHealth : MonoBehaviour
     private int health = 3;
     private int MAXhealth = 3;
     public bool superman = false;
+    public bool dead = false;
     // Start is called before the first frame update
     void Start()
     {
         health=MAXhealth;
+        dead = false;
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Death()
     {
+        dead=true;
         Destroy(this.gameObject);
         userin.deathscreen();
     }

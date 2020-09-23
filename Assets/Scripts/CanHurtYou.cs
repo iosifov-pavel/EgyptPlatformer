@@ -56,11 +56,13 @@ public class CanHurtYou : MonoBehaviour
 
     private IEnumerator playerGetHit(Collision2D player) 
     {
+        if(player.gameObject.GetComponent<PlayerHealth>().dead==true) yield break;
         player.gameObject.GetComponent<CharacterControl>().isDamaged = true;
         player.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(player.gameObject.GetComponent<Rigidbody2D>().velocity.x,0);
         player.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(dir.x*(-3f),dir.y*(-5f),dir.z),ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.2f);
         player.gameObject.GetComponent<CharacterControl>().isDamaged = false;
+        
     }
 
   
