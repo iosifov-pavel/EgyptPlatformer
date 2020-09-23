@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
     [SerializeField] Text score;
     [SerializeField] GameObject healthbar;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject menu;
     PlayerHealth plh;
     List<GameObject> hearts= new List<GameObject>();
     void Start()
@@ -18,6 +19,7 @@ public class UI : MonoBehaviour
        plh = player.GetComponent<PlayerHealth>();
        GetScore("0");
        SetHealth();
+       menu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,12 +52,40 @@ public class UI : MonoBehaviour
              hearts.Add(child);
              child.transform.SetParent(healthbar.transform);
          }
+         hearts.Reverse();
     }
 
 
-    public void changeHealth(int number)
+    public void changeHealth(int damage)
     {
-        if(number<0) return;
-        hearts[number].GetComponent<Image>().sprite = h2;
+        if(damage>=3 || damage>plh.GetHealth())
+        {
+            foreach(GameObject j in hearts)
+            {
+                j.GetComponent<Image>().sprite = h2;
+            }
+        }
+        else
+        {
+            int j= damage;
+            for(int i =0;i<damage;i++)
+            {
+                if(hearts[i].GetComponent<Image>().sprite == h2)
+                {
+                    damage++;
+                    continue;
+                }
+                hearts[i].GetComponent<Image>().sprite = h2;
+            }
+        }
+
+        //if(number<0) return;
+        //hearts[number].GetComponent<Image>().sprite = h2;
+    }
+
+
+    public void deathscreen()
+    {
+        menu.SetActive(true);
     }
 }

@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(superman==true) return;
         health-=dmg;
-        userin.changeHealth(health);
+        userin.changeHealth(dmg);
         Debug.Log("Health " + health);
         StartCoroutine(damageIndication());
         if(health<=0)
@@ -38,9 +38,15 @@ public class PlayerHealth : MonoBehaviour
         return health;
     }
 
+    public int GetMAXHealth()
+    {
+        return MAXhealth;
+    }
+
     public void Death()
     {
-      //  Destroy(this.gameObject);
+        Destroy(this.gameObject);
+        userin.deathscreen();
     }
 
     private IEnumerator damageIndication()
