@@ -117,7 +117,7 @@ public class CharacterControl : MonoBehaviour
             {
                 body.gravityScale=gravitys;
             }
-            else if(body.velocity.y>0 && lasthit.gameObject.tag!="CantJump" && !Input.GetButton("Jump"))
+            else if(body.velocity.y>0 && lasthit.gameObject!=null && lasthit.gameObject.tag!="CantJump" && !Input.GetButton("Jump"))
             {
                 body.gravityScale =  gravitys * fallmultiplier;
             }

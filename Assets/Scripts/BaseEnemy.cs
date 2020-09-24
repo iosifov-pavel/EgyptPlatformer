@@ -6,8 +6,8 @@ public class BaseEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
     int health = 1;
-    int dir = -1;
-    float speed = 2f;
+    int dir = 1;
+    float speed = 2.5f;
     void Start()
     {
         
@@ -22,31 +22,23 @@ public class BaseEnemy : MonoBehaviour
     public void Move()
     {
         RaycastHit2D[] check = CheckRay();
-        if(check[0].collider==null) changedir(true);
-        else if(check[1].collider==null) changedir(false);
+        if(check[0].collider==null) changedir(dir=1);
+        else if(check[1].collider==null) changedir(dir=-1);
         Vector3 move = new Vector3((dir*0.5f),0,0);
         transform.Translate(move*Time.deltaTime*speed);
     }
 
-    public void changedir(bool forward)
+    public void changedir(int frw)
     {       
-        if(forward)
-        {
-            dir=1;
-        }
-        else if(!forward)
-        {
-            dir = -1;
-        }
         Vector3 thisScale = transform.localScale;
-        thisScale.x *= -dir;
+        thisScale.x *= -1;
         transform.localScale = thisScale;
     }
 
     RaycastHit2D[] CheckRay()
     {    
-        Vector3 check1 = new Vector3(transform.position.x-0.25f,transform.position.y-0.1f,transform.position.z);
-        Vector3 check2 = new Vector3(transform.position.x+0.25f,transform.position.y-0.1f,transform.position.z);
+        Vector3 check1 = new Vector3(transform.position.x-0.3f,transform.position.y-0.1f,transform.position.z);
+        Vector3 check2 = new Vector3(transform.position.x+0.3f,transform.position.y-0.1f,transform.position.z);
         Vector3 checkTo = Vector3.down * 0.15f;
 
         Debug.DrawRay(check1,checkTo,Color.yellow);
@@ -75,11 +67,7 @@ public class BaseEnemy : MonoBehaviour
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         sprite.color = Color.green;
         List<BoxCollider2D> bc=new List<BoxCollider2D>(GetComponents<BoxCollider2D>());
-        foreach(BoxCollider2D b in bc)
-        {
-            Destroy(b);
-        }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         Destroy(gameObject);
     }
 }
