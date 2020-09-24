@@ -56,7 +56,7 @@ public class BaseEnemy : MonoBehaviour
         {
             Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
             rb.velocity = new Vector2(rb.velocity.x,0);
-            rb.AddForce(Vector3.up*7,ForceMode2D.Impulse);
+            rb.AddForce(Vector3.up*9,ForceMode2D.Impulse);
             StartCoroutine(getdamage());
         }
     }
