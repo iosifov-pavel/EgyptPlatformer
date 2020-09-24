@@ -33,6 +33,10 @@ public class MovingPlatform : MonoBehaviour
             collision.collider.transform.SetParent(transform);
             }
         }
+        if(collision.gameObject.tag=="Enemy")
+        {
+            collision.collider.transform.SetParent(transform);
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -45,9 +49,9 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        percent +=forward*pspeed*Time.fixedDeltaTime;
+        percent +=forward*pspeed*Time.deltaTime;
         float x = (end.x-start.x)*percent + start.x;
         float y = (end.y - start.y) * percent + start.y;
         transform.position = new Vector3(x,y,start.z);

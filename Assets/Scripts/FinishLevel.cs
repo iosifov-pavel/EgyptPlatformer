@@ -19,7 +19,7 @@ public class FinishLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-       // Scene scene = SceneManager.GetSceneByName("L2");
+        if(other.gameObject.name=="Player")
         SceneManager.LoadScene("L2");   
     }
 }
