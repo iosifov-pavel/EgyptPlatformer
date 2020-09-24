@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 430733221899308940}
   - component: {fileID: 6714556954268867939}
   - component: {fileID: 6112007506417089416}
+  - component: {fileID: 7965464602639835482}
   m_Layer: 0
   m_Name: saw
   m_TagString: Obstacle
@@ -109,5 +110,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b768c8a2a93adda40864b579b5ad26f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactYes: 0
+--- !u!114 &7965464602639835482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797222665273734411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0533b43186eead409aacec7c6ea5555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
