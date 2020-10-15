@@ -71,13 +71,16 @@ public class Player_Movement : MonoBehaviour
     }
 
     void CheckGround(){
-        Collider2D[] hit = new Collider2D[10];
-        Physics2D.OverlapCollider(checkground, new ContactFilter2D(),hit);
-        if(hit[0]!=null && hit[0].gameObject.tag=="Ground"){
-            isGrounded=true;
-            isJump=false;
-        } 
-        else isGrounded=false;
+        Collider2D[] hits = new Collider2D[10];
+        Physics2D.OverlapCollider(checkground, new ContactFilter2D(),hits);
+        foreach(Collider2D hit in hits){
+            if(hit!=null && hit.gameObject.tag=="Ground"){
+                isGrounded=true;
+                isJump=false;
+                return;
+            }
+        }
+        isGrounded=false;
     }
 
     void Flip(){
