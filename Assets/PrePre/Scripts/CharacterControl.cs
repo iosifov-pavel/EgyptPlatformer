@@ -92,8 +92,7 @@ public class CharacterControl : MonoBehaviour
     {
         bool directionchanged = (direction.x > 0 && body.velocity.x < 0) || (direction.x < 0 && body.velocity.x > 0);
 
-        if(isGrounded)
-        {
+        if(isGrounded){
             bool oneway = false;
             PlatformEffector2D pe2d=null;
             if(hit!=null)
