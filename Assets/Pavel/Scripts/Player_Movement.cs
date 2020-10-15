@@ -7,12 +7,13 @@ public class Player_Movement : MonoBehaviour
     private float speed = 20f;
     private float maxSpeed = 4f;
     private Vector2 direction;
-    private float jump_force = 8f;
+    private float jump_force = 5f;
+    private float jump_time = 0f;
+    private float jump_max = 0.18f;
     public bool isGrounded = true;
     bool CanJump = false;
     bool isJump = false;
-    private float fallmultiplier = 3.5f;
-    public float gravity = 2f;
+    private float gravity = 2.8f;
     Rigidbody2D rb;
     Transform tran;
     BoxCollider2D checkground;
@@ -30,13 +31,17 @@ public class Player_Movement : MonoBehaviour
     void Update(){
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         CheckGround();
-        if(isGrounded){
-            if(Input.GetKeyDown(KeyCode.Space)){
-                CanJump=true;
-            }
-            if(Input.GetKeyUp(KeyCode.Space)){
-                CanJump=false;
-            }
+        if(isGrounded && Input.GetKeyDown(KeyCode.Space)){
+            jump_time=jump_max;
+            CanJump=true;
+        }
+        if(Input.GetKey(KeyCode.Space) && CanJump){
+            jump_time-=Time.deltaTime;
+            if(jump_time<=0) CanJump=false;
+        }
+        if(Input.GetKeyUp(KeyCode.Space)){
+            jump_time=-1;
+            CanJump=false;
         }
     }
 
@@ -60,12 +65,10 @@ public class Player_Movement : MonoBehaviour
     void Vertical(){
         anim.SetBool("Ground",isGrounded);
         anim.SetFloat("vSpeed",rb.velocity.y);
-        if(!isGrounded) return;
-        if(isGrounded && CanJump){      
+        if(jump_time>=0 && CanJump){      
             anim.SetBool("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
-            CanJump=false;
             isJump = true;
         }
     }
@@ -101,12 +104,6 @@ public class Player_Movement : MonoBehaviour
         }
         else{
             rb.drag=2.5f;
-            if(!Input.GetButton("Jump") && isJump && rb.velocity.y>0){
-                rb.gravityScale = gravity * fallmultiplier;
-            }
-            else if(rb.velocity.y<0){
-                rb.gravityScale = gravity;
-            }
         }
     }
 }
