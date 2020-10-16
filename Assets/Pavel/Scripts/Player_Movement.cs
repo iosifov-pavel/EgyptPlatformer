@@ -13,7 +13,6 @@ public class Player_Movement : MonoBehaviour
     private float jump_max = 0.18f;
     public bool isGrounded = true;
     bool CanJump = false;
-    bool isJump = false;
     private float gravity = 2.8f;
     Rigidbody2D rb;
     Transform tran;
@@ -73,7 +72,6 @@ public class Player_Movement : MonoBehaviour
             anim.SetBool("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
-            isJump = true;
         }
     }
 
@@ -83,7 +81,6 @@ public class Player_Movement : MonoBehaviour
         foreach(Collider2D hit in hits){
             if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){
                 isGrounded=true;
-                isJump=false;
                 return;
             }
         }
