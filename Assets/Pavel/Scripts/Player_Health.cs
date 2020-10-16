@@ -25,7 +25,16 @@ public class Player_Health : MonoBehaviour
         if(superman == true) return;
         hp+=source;
         Debug.Log("Health " + hp);
+        if(hp<=0){
+             Death();
+             return;
+        }
         StartCoroutine(damageIndication());
+    }
+
+    public void Death(){
+        StopAllCoroutines();
+        this.gameObject.SetActive(false);
     }
 
     private IEnumerator damageIndication()
