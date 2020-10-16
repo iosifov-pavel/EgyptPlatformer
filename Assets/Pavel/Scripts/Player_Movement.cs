@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
+    Player_Health ph;
     private float speed = 20f;
     private float maxSpeed = 4f;
-    private Vector2 direction;
+    public Vector2 direction;
     private float jump_force = 5f;
     private float jump_time = 0f;
     private float jump_max = 0.18f;
@@ -24,6 +25,7 @@ public class Player_Movement : MonoBehaviour
         rb.drag=1f;
         tran = GetComponent<Transform>();
         anim = GetComponent<Animator>();
+        ph = GetComponent<Player_Health>();
         checkground = tran.GetChild(0).gameObject.GetComponent<BoxCollider2D>();
     }
 
@@ -46,9 +48,11 @@ public class Player_Movement : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if(!ph.isDamaged){
         Horizontal();
         Vertical();
         CustomPhysics();
+        }
     }
 
     void Horizontal(){

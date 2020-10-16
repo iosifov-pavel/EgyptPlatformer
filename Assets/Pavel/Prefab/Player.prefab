@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 8434635240999591546}
   - component: {fileID: 8434635240999591540}
   - component: {fileID: 8434635240999591547}
+  - component: {fileID: 2507651598525058792}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -227,5 +228,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aeb6bd272fb5b644b55894f0f859f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0}
   isGrounded: 1
-  gravity: 2
+--- !u!114 &2507651598525058792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434635240999591549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c52b3e1a7505145933bcb0dc09ea86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDamaged: 0
