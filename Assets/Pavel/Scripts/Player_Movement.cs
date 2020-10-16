@@ -81,7 +81,7 @@ public class Player_Movement : MonoBehaviour
         Collider2D[] hits = new Collider2D[10];
         Physics2D.OverlapCollider(checkground, new ContactFilter2D(),hits);
         foreach(Collider2D hit in hits){
-            if(hit!=null && hit.gameObject.tag=="Ground"){
+            if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){
                 isGrounded=true;
                 isJump=false;
                 return;
