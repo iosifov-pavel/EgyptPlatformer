@@ -32,13 +32,14 @@ public class Platform_Move : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.tag=="Player"){
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+    if(other.gameObject.tag=="Player"){
             other.gameObject.transform.SetParent(transform);
-        }
+        } 
     }
 
-    private void OnCollisionExit2D(Collision2D other) {
+    private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
             other.gameObject.transform.SetParent(null);
         }

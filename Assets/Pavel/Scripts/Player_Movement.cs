@@ -32,6 +32,7 @@ public class Player_Movement : MonoBehaviour
     void Update(){
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         CheckGround();
+        anim.SetBool("Ground",isGrounded);
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)){
             jump_time=jump_max;
             CanJump=true;
@@ -66,7 +67,6 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Vertical(){
-        anim.SetBool("Ground",isGrounded);
         anim.SetFloat("vSpeed",rb.velocity.y);
         if(jump_time>=0 && CanJump){      
             anim.SetBool("Ground",false);
