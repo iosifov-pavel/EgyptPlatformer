@@ -5,7 +5,7 @@ using UnityEngine;
 public class Platform_Spining : MonoBehaviour
 {
 
-    private float speed = 126f;
+    private float speed = 100f;
     // Start is called before the first frame update
     void Start()
     {

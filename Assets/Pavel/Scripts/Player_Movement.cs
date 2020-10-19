@@ -17,22 +17,22 @@ public class Player_Movement : MonoBehaviour
     Rigidbody2D rb;
     Transform tran;
     BoxCollider2D checkground;
-    Animator anim;
+    Player_Animation anima;
     // Start is called before the first frame update
     void Start(){
         rb = GetComponent<Rigidbody2D>();
         rb.drag=1f;
         tran = GetComponent<Transform>();
-        anim = GetComponent<Animator>();
         ph = GetComponent<Player_Health>();
         checkground = tran.GetChild(0).gameObject.GetComponent<BoxCollider2D>();
+        anima = GetComponent<Player_Animation>();
     }
 
     // Update is called once per frame
     void Update(){
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         CheckGround();
-        anim.SetBool("Ground",isGrounded);
+        anima.setBoolAnimation("Ground", isGrounded);
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)){
             jump_time=jump_max;
             CanJump=true;
@@ -57,7 +57,7 @@ public class Player_Movement : MonoBehaviour
 
     void Horizontal(){
         rb.AddForce(new Vector2(direction.x*Time.deltaTime*speed, 0), ForceMode2D.Impulse);
-        anim.SetFloat("Speed",Mathf.Abs(direction.x));
+        anima.setFloatAnimation("Speed",Mathf.Abs(direction.x));
         if (Mathf.Abs(rb.velocity.x) > maxSpeed) {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
         }
@@ -67,9 +67,9 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Vertical(){
-        anim.SetFloat("vSpeed",rb.velocity.y);
+        anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(jump_time>=0 && CanJump){      
-            anim.SetBool("Ground",false);
+            anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
         }

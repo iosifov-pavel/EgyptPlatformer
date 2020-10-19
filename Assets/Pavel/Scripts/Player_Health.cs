@@ -5,14 +5,16 @@ using UnityEngine;
 public class Player_Health : MonoBehaviour
 {
     int hp = 3;
-    int MAXhp = 3;
+    int MAXhp = 33;
     public bool isDamaged = false;
     public bool superman = false;
     bool dead = false;
+    Player_Animation anima;
     // Start is called before the first frame update
     void Start()
     {
         hp=MAXhp;
+        anima = GetComponent<Player_Animation>();
     }
 
     // Update is called once per frame
@@ -43,8 +45,10 @@ public class Player_Health : MonoBehaviour
         superman=true;
         SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
         player.color = Color.red;
+        anima.setBoolAnimation("Damaged",isDamaged);
         yield return new WaitForSeconds(0.2f);
         isDamaged=false;
+        anima.setBoolAnimation("Damaged",isDamaged);
         yield return new WaitForSeconds(1.7f);
         superman=false;
         player.color = Color.white;
