@@ -37,7 +37,7 @@ public class Trap_Damage : MonoBehaviour
             player_dir.Normalize();
             ph.ChangeHP(damage);
             rb.velocity = new Vector2(rb.velocity.x,0);
-            rb.AddForce(player_dir*5,ForceMode2D.Impulse);
+            rb.AddForce(player_dir*4,ForceMode2D.Impulse);
         }
     }
 
