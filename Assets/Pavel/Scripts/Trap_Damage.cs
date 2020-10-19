@@ -29,7 +29,7 @@ public class Trap_Damage : MonoBehaviour
     private void Damage(Collision2D other){
             if(other.gameObject.tag=="Player"){
             ph = other.gameObject.GetComponent<Player_Health>();
-            if(ph.superman) return;
+            if(ph.superman || ph.dead) return;
             rb = other.gameObject.GetComponent<Rigidbody2D>();
             float y=0;
             if(rb.velocity.y>0.1) y=1;
