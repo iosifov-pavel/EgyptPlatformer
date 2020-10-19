@@ -102,7 +102,7 @@ public class Player_Movement : MonoBehaviour
         bool needtostop = ((rb.velocity.x>0.1f || rb.velocity.x<-0.1f) && direction.x==0);
         if(isGrounded){
             if(ph.dead){
-                rb.drag=5;
+                rb.drag=8;
                 return;
             } 
             rb.gravityScale = gravity;
@@ -112,6 +112,10 @@ public class Player_Movement : MonoBehaviour
             }         
         }
         else{
+            if(ph.dead){
+                rb.drag=4;
+                return;
+            }
             rb.drag=2.5f;
         }
     }
