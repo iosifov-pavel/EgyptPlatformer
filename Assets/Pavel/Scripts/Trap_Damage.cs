@@ -31,8 +31,11 @@ public class Trap_Damage : MonoBehaviour
             ph = other.gameObject.GetComponent<Player_Health>();
             if(ph.superman) return;
             rb = other.gameObject.GetComponent<Rigidbody2D>();
+            float y=0;
+            if(rb.velocity.y>0.1) y=1;
+            else y=-1;
             tr = other.gameObject.GetComponent<Transform>();
-            Vector3 player_dir = new Vector3(Mathf.Sign(tr.localScale.x)*1,Mathf.Sign(rb.velocity.y)*1,0);
+            Vector3 player_dir = new Vector3(Mathf.Sign(tr.localScale.x)*1,y,0);    
             player_dir*=-1;
             player_dir.Normalize();
             ph.ChangeHP(damage);

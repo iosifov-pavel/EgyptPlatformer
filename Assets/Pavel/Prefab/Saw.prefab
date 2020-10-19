@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4083390286169874572}
   - component: {fileID: 4083390286169874573}
   - component: {fileID: 4083390286169874574}
+  - component: {fileID: 181255419010112361}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Trap
@@ -109,5 +110,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90cfea0b60219f147a87fef4b1431bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &181255419010112361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4083390286169874575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560018fe25a26ee42a1aba6f1462756c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
