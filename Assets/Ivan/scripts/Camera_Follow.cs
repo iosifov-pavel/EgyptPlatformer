@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class camera : MonoBehaviour
+public class Camera_Follow : MonoBehaviour
 {
 
     float speed = 3f;
