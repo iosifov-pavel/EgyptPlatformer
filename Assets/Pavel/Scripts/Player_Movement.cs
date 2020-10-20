@@ -48,6 +48,10 @@ public class Player_Movement : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if(ph.dead){
+            CustomPhysics();
+            return;
+        } 
         if(!ph.isDamaged){
         Horizontal();
         Vertical();
@@ -97,6 +101,10 @@ public class Player_Movement : MonoBehaviour
         bool directionchanged = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
         bool needtostop = ((rb.velocity.x>0.1f || rb.velocity.x<-0.1f) && direction.x==0);
         if(isGrounded){
+            if(ph.dead){
+                rb.drag=8;
+                return;
+            } 
             rb.gravityScale = gravity;
             rb.drag=1f;
             if(directionchanged || needtostop){               
@@ -104,6 +112,10 @@ public class Player_Movement : MonoBehaviour
             }         
         }
         else{
+            if(ph.dead){
+                rb.drag=4;
+                return;
+            }
             rb.drag=2.5f;
         }
     }

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Player_Health : MonoBehaviour
 {
-    int hp = 3;
-    int MAXhp = 33;
+    int hp;
+    int MAXhp = 3;
     public bool isDamaged = false;
     public bool superman = false;
-    bool dead = false;
+    public bool dead = false;
     Player_Animation anima;
     // Start is called before the first frame update
     void Start()
     {
+        dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
     }
@@ -24,7 +25,7 @@ public class Player_Health : MonoBehaviour
     }
 
     public void ChangeHP(int source){
-        if(superman == true) return;
+        if(superman || dead) return;
         hp+=source;
         Debug.Log("Health " + hp);
         if(hp<=0){
@@ -35,8 +36,12 @@ public class Player_Health : MonoBehaviour
     }
 
     public void Death(){
+        dead = true;
         StopAllCoroutines();
-        this.gameObject.SetActive(false);
+        anima.setBoolAnimation("Dead",dead);
+        SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
+        player.color = Color.red;
+        //this.gameObject.SetActive(false);
     }
 
     private IEnumerator damageIndication()
@@ -44,7 +49,7 @@ public class Player_Health : MonoBehaviour
         isDamaged = true;
         superman=true;
         SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
-        player.color = Color.red;
+        player.color = Color.gray;
         anima.setBoolAnimation("Damaged",isDamaged);
         yield return new WaitForSeconds(0.2f);
         isDamaged=false;
