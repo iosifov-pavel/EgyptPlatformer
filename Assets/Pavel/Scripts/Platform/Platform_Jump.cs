@@ -15,7 +15,6 @@ public class Platform_Jump : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.tag=="Player") return;
         Rigidbody2D rb = other.attachedRigidbody;
         rb.velocity = new Vector2(rb.velocity.x,0);
         rb.AddForce(transform.up*12f, ForceMode2D.Impulse);
