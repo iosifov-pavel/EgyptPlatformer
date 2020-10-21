@@ -6,7 +6,7 @@ public class Player_Movement : MonoBehaviour
 {
     Player_Health ph;
     private float speed = 20f;
-    private float maxSpeed = 4f;
+    public float maxSpeed = 4f;
     public Vector2 direction;
     private float jump_force = 5f;
     private float jump_time = 0f;

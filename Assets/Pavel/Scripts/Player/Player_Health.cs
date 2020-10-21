@@ -41,7 +41,6 @@ public class Player_Health : MonoBehaviour
         anima.setBoolAnimation("Dead",dead);
         SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
         player.color = Color.red;
-        //this.gameObject.SetActive(false);
     }
 
     private IEnumerator damageIndication()

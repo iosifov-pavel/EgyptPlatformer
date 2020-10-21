@@ -43,6 +43,7 @@ public class Items : MonoBehaviour
 
         if (collision.gameObject.tag == "Heart"){
             Destroy(collision.gameObject);
+           // collision.gameObject.GetComponent<Player_Health>().ChangeHP(1);
             RecountHP(1);
         }
       // if (collision.gameObject.tag == "potion")
