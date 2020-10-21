@@ -51,10 +51,12 @@ public class Player_Health : MonoBehaviour
         SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
         player.color = Color.gray;
         anima.setBoolAnimation("Damaged",isDamaged);
+        gameObject.layer=10;
         yield return new WaitForSeconds(0.2f);
         isDamaged=false;
         anima.setBoolAnimation("Damaged",isDamaged);
         yield return new WaitForSeconds(1.7f);
+        gameObject.layer=0;
         superman=false;
         player.color = Color.white;
     }
