@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class Enemy_Ground_Patroling : MonoBehaviour
 {
-    int health = 1;
     int dir = 1;
     float speed = 2f;
     Vector3 checkground;
     Vector3 checkwall;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
 
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         Check();
         Move();
     }
@@ -42,11 +39,9 @@ public class Enemy_Ground_Patroling : MonoBehaviour
             transform.eulerAngles = new Vector3(0,0,0);
             dir=1;
         }
-
     }
 
-    RaycastHit2D CheckGround()
-    {    
+    RaycastHit2D CheckGround(){    
         checkground = transform.position;
         checkground.x+=0.33f*dir;
         RaycastHit2D hit;
@@ -55,8 +50,7 @@ public class Enemy_Ground_Patroling : MonoBehaviour
         return hit;   
     }
 
-    RaycastHit2D CheckWall()
-    {   
+    RaycastHit2D CheckWall(){   
         checkwall = transform.position;
         checkwall.x+=0.33f*dir;
         RaycastHit2D hit;
