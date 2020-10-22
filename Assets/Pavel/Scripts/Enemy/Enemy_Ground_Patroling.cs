@@ -24,7 +24,7 @@ public class Enemy_Ground_Patroling : MonoBehaviour
     void Check(){
        RaycastHit2D ground = CheckGround();
        RaycastHit2D wall = CheckWall();
-       if(ground.collider==null || (wall.collider!=null && (wall.collider.gameObject.tag=="Ground" || wall.collider.gameObject.tag=="Traps"))){
+       if(ground.collider==null || (wall.collider!=null && (wall.collider.gameObject.tag=="Ground" || wall.collider.gameObject.tag=="Trap"))){
            changeDirection();
        }
     }
@@ -56,7 +56,7 @@ public class Enemy_Ground_Patroling : MonoBehaviour
         checkwall = transform.position;
         checkwall.x+=0.33f*dir;
         RaycastHit2D hit;
-        hit =  Physics2D.Raycast(checkwall,new Vector2(dir,0), 0.1f,m2|m1);
+        hit =  Physics2D.Raycast(checkwall,new Vector2(dir,0), 0.1f,m1|m2);
         Debug.DrawRay(checkwall,new Vector2(dir,0)*0.1f,Color.yellow,0.02f);
         return hit;   
     }
