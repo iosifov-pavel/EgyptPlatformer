@@ -15,7 +15,7 @@ public class Enemy_PointToPoint_Move : MonoBehaviour
     }
     void Start()
     {
-        p1 = transform.position;
+      //  p1 = transform.position;
     }
 
     // Update is called once per frame
