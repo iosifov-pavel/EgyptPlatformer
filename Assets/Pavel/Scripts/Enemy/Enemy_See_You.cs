@@ -26,9 +26,9 @@ public class Enemy_See_You : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        //if(other.gameObject.tag=="Player"){
-         //  enemy.isTrigered=true;
-      //  }
+        if(other.gameObject.tag=="Player"){
+           enemy.isTrigered=true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
