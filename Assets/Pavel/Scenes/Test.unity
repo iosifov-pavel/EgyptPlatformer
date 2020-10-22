@@ -345,7 +345,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.27033642, g: 0.4245283, b: 0.30941597, a: 0}
+  m_BackGroundColor: {r: 0.5424528, g: 1, b: 0.7487682, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1996,6 +1996,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4256097874850221662, guid: 279205fa9e9ace84f82112aa0f568e67,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256097874850221662, guid: 279205fa9e9ace84f82112aa0f568e67,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256097874850221662, guid: 279205fa9e9ace84f82112aa0f568e67,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256097874850221662, guid: 279205fa9e9ace84f82112aa0f568e67,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256097874850221662, guid: 279205fa9e9ace84f82112aa0f568e67,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4824509607367620118, guid: 279205fa9e9ace84f82112aa0f568e67,
         type: 3}
       propertyPath: m_Radius
@@ -2019,17 +2044,17 @@ PrefabInstance:
     - target: {fileID: 5263927268603455103, guid: 279205fa9e9ace84f82112aa0f568e67,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5263927268603455103, guid: 279205fa9e9ace84f82112aa0f568e67,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5263927268603455103, guid: 279205fa9e9ace84f82112aa0f568e67,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5263927268603455103, guid: 279205fa9e9ace84f82112aa0f568e67,
         type: 3}
