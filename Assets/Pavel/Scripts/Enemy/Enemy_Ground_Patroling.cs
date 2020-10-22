@@ -8,11 +8,12 @@ public class Enemy_Ground_Patroling : MonoBehaviour
     float speed = 2f;
     Vector3 checkground;
     Vector3 checkwall;
-    LayerMask m1,m2;
+    LayerMask mask;
     // Start is called before the first frame update
     void Start(){
-         m1 = LayerMask.GetMask("Ground");
-         m2 = LayerMask.GetMask("Traps");
+        LayerMask m1 = LayerMask.GetMask("Ground");
+        LayerMask m2 = LayerMask.GetMask("Traps");
+        mask = m1 | m2;
     }
 
     // Update is called once per frame
@@ -47,7 +48,7 @@ public class Enemy_Ground_Patroling : MonoBehaviour
         checkground = transform.position;
         checkground.x+=0.33f*dir;
         RaycastHit2D hit;
-        hit =  Physics2D.Raycast(checkground,Vector3.down, 0.2f,m2|m1);
+        hit =  Physics2D.Raycast(checkground,Vector3.down, 0.2f,mask);
         Debug.DrawRay(checkground,Vector3.down*0.2f,Color.red,0.02f);
         return hit;   
     }
@@ -56,7 +57,7 @@ public class Enemy_Ground_Patroling : MonoBehaviour
         checkwall = transform.position;
         checkwall.x+=0.33f*dir;
         RaycastHit2D hit;
-        hit =  Physics2D.Raycast(checkwall,new Vector2(dir,0), 0.1f,m1|m2);
+        hit =  Physics2D.Raycast(checkwall,new Vector2(dir,0), 0.1f,mask);
         Debug.DrawRay(checkwall,new Vector2(dir,0)*0.1f,Color.yellow,0.02f);
         return hit;   
     }
