@@ -31,8 +31,8 @@ public class Items : MonoBehaviour
 
      private void OnTriggerEnter2D(Collider2D collision)
      {
-           // Random rnd = new Random();
-          //  int luck = rnd.Next(1,9);
+     // Random rnd = new Random();
+    //  int luck = rnd.Next(1,9);
 
 
         if (collision.gameObject.tag == "Coin"){
@@ -43,8 +43,8 @@ public class Items : MonoBehaviour
 
         if (collision.gameObject.tag == "Heart"){
             Destroy(collision.gameObject);
-           // collision.gameObject.GetComponent<Player_Health>().ChangeHP(1);
-            RecountHP(1);
+           collision.gameObject.GetComponent<Player_Health>().ChangeHP(1);
+            //RecountHP(1);
         }
       // if (collision.gameObject.tag == "potion")
       // {
