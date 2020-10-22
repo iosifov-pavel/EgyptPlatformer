@@ -55,7 +55,7 @@ public class Player_Health : MonoBehaviour
         isDamaged=false;
         anima.setBoolAnimation("Damaged",isDamaged);
         yield return new WaitForSeconds(1.7f);
-        gameObject.layer=0;
+        gameObject.layer=9;
         superman=false;
         player.color = Color.white;
     }
