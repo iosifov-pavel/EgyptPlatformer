@@ -13,6 +13,6 @@ public class Level_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(1f/Time.unscaledDeltaTime);
     }
 }

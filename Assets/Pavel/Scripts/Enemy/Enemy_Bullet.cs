@@ -12,8 +12,12 @@ public class Enemy_Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pos = new Vector3(player.position.x,player.position.y,transform.position.z);
+        player.position = new Vector3(player.position.x,player.position.y,transform.position.z);
+        pos = player.position;
         dir = (pos-transform.position).normalized;
+        float angle = Vector2.Angle(dir,Vector2.right);
+        if(player.position.y<transform.position.y) angle*=-1;
+        transform.Rotate(new Vector3(0,0,angle));
    }
 
     // Update is called once per frame
@@ -23,7 +27,7 @@ public class Enemy_Bullet : MonoBehaviour
         if(lifetime<=0) Destroy(gameObject);
         if(player){
             float step =  speed * Time.deltaTime; 
-            transform.Translate(dir*step);
+            transform.Translate(Vector3.right*step);
         }
     }
 
