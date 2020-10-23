@@ -7,9 +7,9 @@ public class Enemy_Attack : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     private GameObject bullet;
     public bool isTrigered = false;
-    private float time = 0.8f;
+    private float time = 1.5f;
     private bool canAttack = true;
-    
+    private bool awake = false;
     Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,10 @@ public class Enemy_Attack : MonoBehaviour
     void Update()
     {
         animator.SetBool("Trigered",isTrigered);
-        if(isTrigered && canAttack){
+        if(isTrigered){
+            StartCoroutine(Asleep());
+        }
+        if(isTrigered && canAttack && awake){
             StartCoroutine(Attack());
         }
     }
@@ -34,5 +37,10 @@ public class Enemy_Attack : MonoBehaviour
         bullet.GetComponent<Enemy_Bullet>().GetPlayerPos(player);
         yield return new WaitForSeconds(time);
         canAttack = true;
+    }
+
+    IEnumerator Asleep(){
+        yield return new WaitForSeconds(0.5f);
+        awake = true;
     }
 }

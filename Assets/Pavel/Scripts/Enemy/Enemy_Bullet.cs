@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Enemy_Bullet : MonoBehaviour
 {
-    private float speed = 4f;
-    private float lifetime = 1f;
+    private int damage = -1;
+    private float speed = 3f;
+    private float lifetime = 1.2f;
     Transform player;
     Vector3 pos;
     Vector3 dir;
@@ -33,5 +34,12 @@ public class Enemy_Bullet : MonoBehaviour
 
     public void GetPlayerPos(Transform pos){
         player = pos;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.layer==9){
+            other.gameObject.GetComponent<Player_Health>().ChangeHP(damage);
+            Destroy(gameObject);
+        }
     }
 }
