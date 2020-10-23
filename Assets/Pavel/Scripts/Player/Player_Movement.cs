@@ -95,6 +95,7 @@ public class Player_Movement : MonoBehaviour
         Vector3 thisScale = tran.localScale;
         thisScale.x *= -1;
         tran.localScale = thisScale;
+      //  transform.Rotate(0,180,0);
     }
 
     void CustomPhysics(){

@@ -54,4 +54,47 @@ public class weapon : MonoBehaviour
    //     health -= damage;
    // }
    // }
+
+
+   public Transform firePoint;
+   public GameObject bullet;
+   public int dmg = 1;
+   public LineRenderer LR;
+
+
+   void Update ()
+   {
+      if (Input.GetButtonDown("Fire1"))
+      {
+         Shoot();
+         //StartCoroutine(Shoot());
+      }
+   }
+
+   void Shoot()
+   //IEnumerator Shoot()
+   {
+      Instantiate(bullet,firePoint.position, firePoint.rotation);
+  //    RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right);
+  //    if (hit)
+  //    {
+  //       Debug.Log(hit.transform.name);
+  //       Enemy_Health enemy = hit.transform.GetComponent<Enemy_Health>();
+  //          if( enemy != null)
+  //          {
+  //             enemy.TakeDamage(dmg);
+  //          }
+//
+  //           LR.SetPosition(0, firePoint.position);
+  //           LR.SetPosition(1, hit.point);
+  //    } else 
+  //    {
+  //          LR.SetPosition(0, firePoint.position);
+  //           LR.SetPosition(1, firePoint.position + firePoint.right * 100);
+  //    }
+       //  LR.enable = true;
+        // yield return new WaitForSeconds(1f);
+         //LR.enable = false;
+  //    
+  }
 }

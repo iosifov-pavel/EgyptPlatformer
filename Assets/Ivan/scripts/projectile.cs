@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class projectale : MonoBehaviour
+public class projectile : MonoBehaviour
 {
   // public float speed;
   // public float lifeTime;
@@ -35,4 +35,25 @@ public class projectale : MonoBehaviour
   //     Instantiate(transform.position, Quaternion.identity);
   //     Destroy(gameObject);
   // }
+
+  public float speed = 5f;
+  public int dmg = 1;
+  public Rigidbody2D rb;
+
+  void Start ()
+  {
+    rb.velocity = transform.right * speed;
+  }
+
+
+    private void OnTriggerEnter2D (Collider2D hitInfo)
+    {
+      //Debug.Log(hitInfo.name);
+      Enemy_Health enemy = hitInfo.GetComponent<Enemy_Health>();
+      if( enemy != null)
+      {
+        enemy.TakeDamage(dmg);
+      }
+      Destroy(gameObject);
+    }
 }
