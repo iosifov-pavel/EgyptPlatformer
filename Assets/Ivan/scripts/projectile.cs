@@ -4,42 +4,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-  // public float speed;
-  // public float lifeTime;
-  // public float distance;
-  // public int damage;
-  // public LayerMask whatIsSolid;
-
-  // 
-
-  // private void Start()
-  // {
-  //    
-  // }
-
-  // private void Update()
-  // {
-  //     RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsSolid);
-  //     if (hitInfo.collider != null) {
-  //         if (hitInfo.collider.CompareTag("Enemy")) {
-  //             hitInfo.collider.GetComponent<Enemy>().TakeDamage(damage);
-  //         }
-  //         DestroyProjectile();
-  //     }
-
-
-  //     transform.Translate(Vector2.up * speed * Time.deltaTime);
-  // }
-
-  // void DestroyProjectile() {
-  //     Instantiate(transform.position, Quaternion.identity);
-  //     Destroy(gameObject);
-  // }
-
   public float speed = 5f;
   public int dmg = 1;
   public Rigidbody2D rb;
   public float dir = 1;
+  private float lifetime = 1.2f;
 
   void Start ()
   {
@@ -48,6 +17,8 @@ public class Projectile : MonoBehaviour
 
    private void Update() {
     rb.velocity = new Vector2(transform.localScale.x  *  speed , 0f) ;
+    lifetime-=Time.deltaTime;
+        if(lifetime<=0) Destroy(gameObject);
   }
 
 
@@ -71,4 +42,5 @@ public class Projectile : MonoBehaviour
       dir = 1*Mathf.Sign(pstn.x);
       transform.localScale = pos;
     }
+
 }
