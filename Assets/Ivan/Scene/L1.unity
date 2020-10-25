@@ -171,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 8434635240999591542, guid: d1049a2b297e3034fb38657df29e7ca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.07
+      value: 1.11
       objectReference: {fileID: 0}
     - target: {fileID: 8434635240999591542, guid: d1049a2b297e3034fb38657df29e7ca9,
         type: 3}
@@ -319,7 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 669429613}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: firePoint
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -354,12 +354,12 @@ PrefabInstance:
     - target: {fileID: 4217616809764476872, guid: b6752a921217a4a4d8cfd4fa6eb539f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8325667
+      value: -6.53
       objectReference: {fileID: 0}
     - target: {fileID: 4217616809764476872, guid: b6752a921217a4a4d8cfd4fa6eb539f1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.64730096
+      value: -0.67
       objectReference: {fileID: 0}
     - target: {fileID: 4217616809764476872, guid: b6752a921217a4a4d8cfd4fa6eb539f1,
         type: 3}
@@ -598,8 +598,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ef2819ddc290542a50dfdb11572ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
-  bullet: {fileID: 0}
+  firePoint: {fileID: 669429613}
+  bullet: {fileID: 2395063844227505713, guid: 4141ced6c3f1e3f4b92bd0b9ce90fe69, type: 3}
+  dmg: 1
+  LR: {fileID: 0}
 --- !u!114 &1919552249
 MonoBehaviour:
   m_ObjectHideFlags: 0

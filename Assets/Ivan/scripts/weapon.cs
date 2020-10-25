@@ -20,7 +20,7 @@ public class weapon : MonoBehaviour
    // private void Update()
    // {
    //     
-   //     Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+   //     Vector3 difference = Camera.main.ScreenToWorldPoint(Input.KeyDown(KeyCode('W'))) - transform.position;
    //     float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
    //     transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
 //
@@ -74,9 +74,10 @@ public class weapon : MonoBehaviour
    void Shoot()
    //IEnumerator Shoot()
    {
-      Instantiate(bullet,firePoint.position, firePoint.rotation);
+     GameObject b = Instantiate(bullet,firePoint.position, firePoint.rotation) as GameObject;
+      b.GetComponent<Projectile>().GetPosition(transform.localScale);
   //    RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right);
-  //    if (hit)
+  //    if (hit) transform.parent.transform.localScale
   //    {
   //       Debug.Log(hit.transform.name);
   //       Enemy_Health enemy = hit.transform.GetComponent<Enemy_Health>();
