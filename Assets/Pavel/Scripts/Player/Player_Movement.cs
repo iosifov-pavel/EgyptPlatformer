@@ -14,6 +14,7 @@ public class Player_Movement : MonoBehaviour
     public bool isGrounded = true;
     bool CanJump = false;
     private float gravity = 2.8f;
+    private float slopeangle;
     Rigidbody2D rb;
     Transform tran;
     BoxCollider2D checkground;
@@ -56,6 +57,7 @@ public class Player_Movement : MonoBehaviour
             return;
         } 
         if(!ph.isDamaged){
+        PreMove();
         Horizontal();
         Vertical();
         CustomPhysics();
@@ -75,24 +77,26 @@ public class Player_Movement : MonoBehaviour
 
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
-        if(jump_time>=0 && CanJump){      
+        if(jump_time>=0 && CanJump){  
+            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;    
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
         }
     }
 
-    void CheckGround(){
-        
+    void CheckGround(){  
     Collider2D[] hits = new Collider2D[10];
         Physics2D.OverlapCollider(checkground, new ContactFilter2D(),hits);
         foreach(Collider2D hit in hits){
             if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){
                 isGrounded=true;
+                slopeangle = Vector2.Angle(transform.up, hit.transform.up);
                 return;
             }
         }
         isGrounded=false;
+        slopeangle = 0f;
     }
 
     void Flip(){
@@ -118,14 +122,26 @@ public class Player_Movement : MonoBehaviour
             rb.drag=1f;
             if(directionchanged || needtostop){               
                 rb.velocity = new Vector2(0,rb.velocity.y);
-            }         
-        }
-        else{
+            }
+            if(slopeangle>=5 && direction.x==0){
+              //  Vector3 opposf = rb.velocity.normalized;
+              //  opposf*=-1;
+              //  rb.velocity = new Vector2(0,0);
+            } 
+        } else {
+            rb.gravityScale = gravity;
             if(ph.dead){
                 rb.drag=4;
                 return;
             }
             rb.drag=2.5f;
         }
+    }
+
+    void PreMove(){
+      /*  if(slopeangle>=5 && direction.x==0){
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+        } 
+        else rb.constraints = RigidbodyConstraints2D.FreezeRotation;*/
     }
 }
