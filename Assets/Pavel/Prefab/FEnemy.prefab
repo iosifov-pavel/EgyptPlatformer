@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 7197620487693887363}
   - component: {fileID: 7936311205651760209}
   - component: {fileID: 5199253794324163940}
+  - component: {fileID: -3873330088589006899}
   m_Layer: 0
   m_Name: FEnemy
   m_TagString: Enemy
@@ -234,3 +235,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5498739485171546194, guid: dfa61a3343c14844496a18ca67df1733,
     type: 3}
   isTrigered: 0
+  canAttack: 1
+  awake: 0
+--- !u!114 &-3873330088589006899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211009115601969296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ebde7cad92d5464fbd81786a452e003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3

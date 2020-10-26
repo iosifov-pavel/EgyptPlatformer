@@ -57,7 +57,7 @@ public class Player_Movement : MonoBehaviour
             jump_time=-1;
             CanJump=false;
         }
-        PreMove();
+        
     }
 
     private void FixedUpdate() {
@@ -66,6 +66,7 @@ public class Player_Movement : MonoBehaviour
             return;
         } 
         if(!ph.isDamaged){
+        PreMove();
         Horizontal();
         Vertical();
         CustomPhysics();
