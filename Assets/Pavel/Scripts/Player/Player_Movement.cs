@@ -32,8 +32,11 @@ public class Player_Movement : MonoBehaviour
     void Update(){
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         CheckGround();
+        if(Mathf.Abs(direction.x)>0 && isGrounded) GetComponent<Player_Sounds>().PlaySteps(true);
+        else GetComponent<Player_Sounds>().PlaySteps(false);
         anima.setBoolAnimation("Ground", isGrounded);
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)){
+            GetComponent<Player_Sounds>().PlaySound("jump");
             jump_time=jump_max;
             CanJump=true;
         }
@@ -80,7 +83,8 @@ public class Player_Movement : MonoBehaviour
     }
 
     void CheckGround(){
-        Collider2D[] hits = new Collider2D[10];
+        
+    Collider2D[] hits = new Collider2D[10];
         Physics2D.OverlapCollider(checkground, new ContactFilter2D(),hits);
         foreach(Collider2D hit in hits){
             if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){

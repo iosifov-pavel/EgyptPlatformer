@@ -22,7 +22,6 @@ public class Projectile1 : MonoBehaviour
 
     void DestroyProjectile() 
     {
-      
        Destroy(gameObject);
     }
 

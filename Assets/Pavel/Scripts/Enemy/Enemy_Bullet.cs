@@ -40,7 +40,7 @@ public class Enemy_Bullet : MonoBehaviour
         if(other.gameObject.layer==9){
             other.gameObject.GetComponent<Player_Health>().ChangeHP(damage);
             Destroy(gameObject);
-        } else if(other.gameObject.tag=="Enemy"){
+        } else if(other.gameObject.layer==10){
 
         }
         else{
