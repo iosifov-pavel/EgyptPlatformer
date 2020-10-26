@@ -8,8 +8,8 @@ public class Enemy_Attack : MonoBehaviour
     private GameObject bullet;
     public bool isTrigered = false;
     private float time = 1.5f;
-    private bool canAttack = true;
-    private bool awake = false;
+    public bool canAttack = true;
+    public bool awake = false;
     Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -21,12 +21,13 @@ public class Enemy_Attack : MonoBehaviour
     void Update()
     {
         animator.SetBool("Trigered",isTrigered);
-        if(isTrigered){
-            StartCoroutine(Asleep());
-        }
         if(isTrigered && canAttack && awake){
             StartCoroutine(Attack());
         }
+        if(isTrigered){
+            StartCoroutine(Asleep());
+        }
+        
     }
     
     IEnumerator Attack(){
@@ -40,6 +41,7 @@ public class Enemy_Attack : MonoBehaviour
     }
 
     IEnumerator Asleep(){
+        awake=false;
         yield return new WaitForSeconds(0.5f);
         awake = true;
     }

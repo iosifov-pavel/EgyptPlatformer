@@ -22,10 +22,6 @@ public class Player_Sounds : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-       
-    }
 
     public void PlaySound(string src){
         switch(src){

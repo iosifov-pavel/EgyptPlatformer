@@ -12,10 +12,7 @@ public class Player_Animation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void setBoolAnimation(string name, bool state){
         anim.SetBool(name, state);

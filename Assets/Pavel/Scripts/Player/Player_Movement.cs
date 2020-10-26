@@ -12,6 +12,7 @@ public class Player_Movement : MonoBehaviour
     private float jump_time = 0f;
     private float jump_max = 0.18f;
     public bool isGrounded = true;
+    public bool onSlope = false;
     bool CanJump = false;
     private float gravity = 2.8f;
     private float slopeangle;
@@ -19,6 +20,8 @@ public class Player_Movement : MonoBehaviour
     Transform tran;
     BoxCollider2D checkground;
     Player_Animation anima;
+    PhysicsMaterial2D normal;
+   // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
         rb = GetComponent<Rigidbody2D>();
@@ -27,14 +30,19 @@ public class Player_Movement : MonoBehaviour
         ph = GetComponent<Player_Health>();
         checkground = tran.GetChild(0).gameObject.GetComponent<BoxCollider2D>();
         anima = GetComponent<Player_Animation>();
+        normal = rb.sharedMaterial;
+       // OnSlope.friction=400000f;
+       // OnSlope.bounciness=0f;
     }
 
     // Update is called once per frame
     void Update(){
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         CheckGround();
+
         if(Mathf.Abs(direction.x)>0 && isGrounded) GetComponent<Player_Sounds>().PlaySteps(true);
         else GetComponent<Player_Sounds>().PlaySteps(false);
+
         anima.setBoolAnimation("Ground", isGrounded);
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)){
             GetComponent<Player_Sounds>().PlaySound("jump");
@@ -49,6 +57,7 @@ public class Player_Movement : MonoBehaviour
             jump_time=-1;
             CanJump=false;
         }
+        PreMove();
     }
 
     private void FixedUpdate() {
@@ -57,7 +66,6 @@ public class Player_Movement : MonoBehaviour
             return;
         } 
         if(!ph.isDamaged){
-        PreMove();
         Horizontal();
         Vertical();
         CustomPhysics();
@@ -77,8 +85,8 @@ public class Player_Movement : MonoBehaviour
 
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
-        if(jump_time>=0 && CanJump){  
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;    
+        if(jump_time>=0 && CanJump){    
+            rb.drag=2.5f;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
@@ -92,11 +100,13 @@ public class Player_Movement : MonoBehaviour
             if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){
                 isGrounded=true;
                 slopeangle = Vector2.Angle(transform.up, hit.transform.up);
+                if(slopeangle>=3f) onSlope=true;
+                else onSlope = false;
                 return;
             }
         }
+        onSlope = false;
         isGrounded=false;
-        slopeangle = 0f;
     }
 
     void Flip(){
@@ -123,11 +133,6 @@ public class Player_Movement : MonoBehaviour
             if(directionchanged || needtostop){               
                 rb.velocity = new Vector2(0,rb.velocity.y);
             }
-            if(slopeangle>=5 && direction.x==0){
-              //  Vector3 opposf = rb.velocity.normalized;
-              //  opposf*=-1;
-              //  rb.velocity = new Vector2(0,0);
-            } 
         } else {
             rb.gravityScale = gravity;
             if(ph.dead){
@@ -139,9 +144,9 @@ public class Player_Movement : MonoBehaviour
     }
 
     void PreMove(){
-      /*  if(slopeangle>=5 && direction.x==0){
-            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
-        } 
-        else rb.constraints = RigidbodyConstraints2D.FreezeRotation;*/
+        if(onSlope && direction.x == 0){
+            rb.sharedMaterial = null;
+            }
+        else rb.sharedMaterial = normal;
     }
 }

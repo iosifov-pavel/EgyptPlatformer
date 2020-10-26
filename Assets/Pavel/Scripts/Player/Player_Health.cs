@@ -19,10 +19,7 @@ public class Player_Health : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void ChangeHP(int source){
         if(superman || dead) return;

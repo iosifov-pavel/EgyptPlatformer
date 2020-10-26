@@ -14,10 +14,6 @@ public class Trap_Damage : MonoBehaviour
         
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnCollisionEnter2D(Collision2D other) {
         Damage(other);

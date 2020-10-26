@@ -10,9 +10,7 @@ public class Platform_Jump : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update(){
-        
-    }
+
 
     void OnTriggerEnter2D(Collider2D other){
         Rigidbody2D rb = other.attachedRigidbody;

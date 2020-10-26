@@ -15,10 +15,6 @@ public class Enemy_See_You : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
@@ -38,6 +34,7 @@ public class Enemy_See_You : MonoBehaviour
         if(other.gameObject.tag=="Player"){
             player = null;
             enemy.isTrigered=false;
+            enemy.awake = false;
         }
     }
 
