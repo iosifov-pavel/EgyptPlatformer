@@ -5,61 +5,42 @@ using UnityEngine;
 public class Player_Attack : MonoBehaviour
 {
    public GameObject bullet;
-   private float timeBtwShots;
-   public float startTimeBtwShots;
+   private float timeBtwShots=0.4f;
+   public bool canAttack = true;
+   public bool isAttacking = false;
    GameObject parent;
    Transform partran;
    bool up = false;
-   Vector3 original;
-   float prev_dir=1;
+   Vector3 original, forward, upward;
 
     void Start() {
         parent = transform.parent.gameObject;
         partran = parent.GetComponent<Transform>();
         original = transform.localPosition;
+        forward = new Vector3(transform.localPosition.x+0.3f,transform.localPosition.y,transform.localPosition.z);
+        upward = new Vector3(transform.localPosition.x,transform.localPosition.y+0.8f,transform.localPosition.z);
     }
 
-   void Update ()
-   {   
-      CheckFlip(); 
-      ShootDir();
-      if (Input.GetButtonDown("Fire1"))
-      {
+   void Update (){   
+      if(Input.GetKey(KeyCode.W)) transform.localPosition = upward;
+      else transform.localPosition = forward;
+      if (Input.GetButtonDown("Fire1") && canAttack){
+         isAttacking=true;
          if(Input.GetKey(KeyCode.W)) up=true;
          Shoot(up);
          up=false;
+         StartCoroutine(AtackTime());
       }
-      prev_dir= 1* Mathf.Sign(partran.localScale.x);
    }
 
-   void Shoot( bool up_)
-   {
+   void Shoot(bool up_){
         GameObject b = Instantiate(bullet,transform.position, transform.rotation) as GameObject;
         b.GetComponent<Player_Bullet>().GetPosition(partran.localScale, up_);  
    }
 
-   void ShootDir(){
-     /*  if(Input.GetKey(KeyCode.W)  && changeddir){
-           transform.localPosition = original;
-        transform.localPosition = new Vector3(transform.localPosition.x,transform.localPosition.y+0.5f,transform.localPosition.z);
-        changeddir=false;
-       }*/
-      /*  if(partran.localScale.x>0 && changeddir){
-             transform.localPosition= original;
-        transform.localPosition = new Vector3(transform.localPosition.x+0.3f,transform.localPosition.y,transform.localPosition.z);
-        changeddir=false;
-      } 
-      else if(partran.localScale.x<0 && changeddir){
-          transform.localPosition = original;
-        transform.localPosition = new Vector3(transform.localPosition.x-0.3f,transform.localPosition.y,transform.localPosition.z);
-        changeddir=false;
-      } */
-   }
-
-   void CheckFlip(){
-     /*  if(prev_dir!=1* Mathf.Sign(partran.localScale.x)){
-           changeddir=true;
-       }
-       else changeddir=false;   */
+   IEnumerator AtackTime(){
+         canAttack = false;
+         yield return new WaitForSeconds(timeBtwShots);
+         canAttack=true;
    }
 }
