@@ -11,29 +11,33 @@ public class Player_Attack : MonoBehaviour
    GameObject parent;
    Transform partran;
    bool up = false;
-   Vector3 original, forward, upward;
+   Vector3 forward, upward;
+   Player_Animation pa;
 
     void Start() {
         parent = transform.parent.gameObject;
         partran = parent.GetComponent<Transform>();
-        original = transform.localPosition;
-        forward = new Vector3(transform.localPosition.x+0.3f,transform.localPosition.y,transform.localPosition.z);
-        upward = new Vector3(transform.localPosition.x,transform.localPosition.y+0.8f,transform.localPosition.z);
+        forward = new Vector3(transform.localPosition.x+0.15f,transform.localPosition.y,transform.localPosition.z);
+        upward = new Vector3(transform.localPosition.x,transform.localPosition.y+0.3f,transform.localPosition.z);
+        pa = parent.GetComponent<Player_Animation>();
     }
 
    void Update (){   
-      if(Input.GetKey(KeyCode.W)) transform.localPosition = upward;
+      if(Input.GetKey(KeyCode.W)){
+         transform.localPosition = upward;
+      } 
       else transform.localPosition = forward;
-      if (Input.GetButtonDown("Fire1") && canAttack){
+      if (Input.GetKeyDown(KeyCode.O) && canAttack){
          isAttacking=true;
          if(Input.GetKey(KeyCode.W)) up=true;
          Shoot(up);
-         up=false;
          StartCoroutine(AtackTime());
       }
+      pa.setBoolAnimation("Up", up);
+      pa.setBoolAnimation("Attack", isAttacking);
    }
 
-   void Shoot(bool up_){
+   public void Shoot(bool up_){
         GameObject b = Instantiate(bullet,transform.position, transform.rotation) as GameObject;
         b.GetComponent<Player_Bullet>().GetPosition(partran.localScale, up_);  
    }
@@ -42,5 +46,7 @@ public class Player_Attack : MonoBehaviour
          canAttack = false;
          yield return new WaitForSeconds(timeBtwShots);
          canAttack=true;
+         isAttacking=false;
+         up=false;
    }
 }

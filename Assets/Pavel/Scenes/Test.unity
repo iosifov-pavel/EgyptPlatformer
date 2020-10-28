@@ -524,7 +524,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 8446175799290590029, guid: 4742054a5ae59384dbd62c6e45da07ce, type: 3}
-  startTimeBtwShots: 0
+  canAttack: 1
+  isAttacking: 0
 --- !u!4 &559865078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1934394370621599571, guid: 76ed380837db6124685bc84634043ba7,
@@ -2183,6 +2184,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150328085626927873, guid: d1049a2b297e3034fb38657df29e7ca9,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1150328085626927873, guid: d1049a2b297e3034fb38657df29e7ca9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5220855476866993195, guid: d1049a2b297e3034fb38657df29e7ca9,
         type: 3}
