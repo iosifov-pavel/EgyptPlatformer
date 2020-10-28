@@ -29,7 +29,7 @@ public class Player_Health : MonoBehaviour
              Death();
              return;
         }
-        GetComponent<Player_Sounds>().PlaySound("damage");
+    //    GetComponent<Player_Sounds>().PlaySound("damage");
         StartCoroutine(damageIndication());
     }
 
@@ -37,8 +37,8 @@ public class Player_Health : MonoBehaviour
         dead = true;
         StopAllCoroutines();
         anima.setBoolAnimation("Dead",dead);
-        GetComponent<Player_Sounds>().PlaySound("death");
-        SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
+//        GetComponent<Player_Sounds>().PlaySound("death");
+        SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.red;
     }
 
@@ -46,7 +46,7 @@ public class Player_Health : MonoBehaviour
     {
         isDamaged = true;
         superman=true;
-        SpriteRenderer player = this.gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.gray;
         anima.setBoolAnimation("Damaged",isDamaged);
         gameObject.layer=10;

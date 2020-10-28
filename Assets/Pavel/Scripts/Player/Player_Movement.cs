@@ -28,7 +28,7 @@ public class Player_Movement : MonoBehaviour
         rb.drag=1f;
         tran = GetComponent<Transform>();
         ph = GetComponent<Player_Health>();
-        checkground = tran.GetChild(0).gameObject.GetComponent<BoxCollider2D>();
+        checkground = tran.GetChild(1).gameObject.GetComponent<BoxCollider2D>();
         anima = GetComponent<Player_Animation>();
         normal = rb.sharedMaterial;
        // OnSlope.friction=400000f;
@@ -38,14 +38,15 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update(){
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        anima.setDirection(direction.x);
         CheckGround();
 
-        if(Mathf.Abs(direction.x)>0 && isGrounded) GetComponent<Player_Sounds>().PlaySteps(true);
-        else GetComponent<Player_Sounds>().PlaySteps(false);
+     //   if(Mathf.Abs(direction.x)>0 && isGrounded) GetComponent<Player_Sounds>().PlaySteps(true);
+      //  else GetComponent<Player_Sounds>().PlaySteps(false);
 
         anima.setBoolAnimation("Ground", isGrounded);
         if(isGrounded && Input.GetKeyDown(KeyCode.Space)){
-            GetComponent<Player_Sounds>().PlaySound("jump");
+        //    GetComponent<Player_Sounds>().PlaySound("jump");
             jump_time=jump_max;
             CanJump=true;
         }

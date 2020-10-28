@@ -5,10 +5,14 @@ using UnityEngine;
 public class Player_Animation : MonoBehaviour
 {
     Animator anim;
+    SpriteRenderer head;
+    [SerializeField] Sprite right;
+    [SerializeField] Sprite stand;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        head = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -20,5 +24,10 @@ public class Player_Animation : MonoBehaviour
 
     public void setFloatAnimation(string name, float value){
         anim.SetFloat(name, value);
+    }
+
+    public void setDirection(float dir){
+        if(dir==0) head.sprite = stand;
+        else head.sprite = right;
     }
 }
