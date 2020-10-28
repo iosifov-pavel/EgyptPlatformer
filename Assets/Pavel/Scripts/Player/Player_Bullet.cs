@@ -30,7 +30,7 @@ public class Player_Bullet : MonoBehaviour
     private void OnTriggerEnter2D (Collider2D hitInfo)
     {
       Debug.Log(hitInfo.name);
-      if (hitInfo.name == "Player") return;
+      if (hitInfo.name == "Player" || hitInfo.name == "GroundCheck") return;
       else if(hitInfo.tag == "Enemy"){
           Enemy_Health enemy = hitInfo.GetComponent<Enemy_Health>();
           enemy.TakeDamage(dmg);
