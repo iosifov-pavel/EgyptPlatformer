@@ -6,6 +6,7 @@ public class Enemy_Damage : MonoBehaviour
 {
     // Start is called before the first frame update
     int damage = -1;
+    public bool isDamaged=false;
     Player_Health ph;
     Rigidbody2D rb;
     Transform tr;
@@ -25,6 +26,7 @@ public class Enemy_Damage : MonoBehaviour
     }
 
     public void Damage(GameObject other){
+        if(isDamaged) return;
             if(other.tag=="Player"){
             ph = other.GetComponent<Player_Health>();
             if(ph.superman || ph.dead) return;

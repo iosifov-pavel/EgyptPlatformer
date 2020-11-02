@@ -115,16 +115,12 @@ public class Player_Movement : MonoBehaviour
         Vector3 thisScale = tran.localScale;
         thisScale.x *= -1;
         tran.localScale = thisScale;
-       // Vector3 localScl =tran.GetChild(1).transform.localScale;
-       // localScl.x *= -1;
-       // tran.GetChild(1).transform.localScale = localScl;
-
-       //transform.Rotate(0f,180f,0f);
     }
 
     void CustomPhysics(){
         bool directionchanged = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
         bool needtostop = ((rb.velocity.x>0.1f || rb.velocity.x<-0.1f) && direction.x==0);
+       // bool needtostop = (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D));
         if(isGrounded){
             if(ph.dead){
                 rb.drag=8;
@@ -133,7 +129,8 @@ public class Player_Movement : MonoBehaviour
             rb.gravityScale = gravity;
             rb.drag=1f;
             if(directionchanged || needtostop){               
-                rb.velocity = new Vector2(0,rb.velocity.y);
+               // rb.velocity = new Vector2(0,rb.velocity.y);
+               rb.drag=125f;
             }
         } else {
             rb.gravityScale = gravity;

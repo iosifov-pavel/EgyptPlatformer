@@ -936,6 +936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8295090629667612621}
   - component: {fileID: 2751429394226208594}
+  - component: {fileID: 3544929202720158016}
   m_Layer: 15
   m_Name: GroundCheck
   m_TagString: GroundCheck
@@ -983,6 +984,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.17121607, y: 0.04872781}
   m_EdgeRadius: 0
+--- !u!114 &3544929202720158016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7905603542914005123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caba3839fdf562c4493f221e9cbf4408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8498772593042003543
 GameObject:
   m_ObjectHideFlags: 0
