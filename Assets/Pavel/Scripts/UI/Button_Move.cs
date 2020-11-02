@@ -48,14 +48,19 @@ public class Button_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                float angle = Vector3.Angle(Vector3.right,dest);
                if(angle<40){
                    pa.buttonUp=false;
+                   pm.direction.x=1;
                } else if(angle>=40 && angle<80){
-                   pa.buttonUp=false;
+                   pa.buttonUp=true;
+                   pm.direction.x=1;
                } else if(angle>=80 && angle<100 && upside){
                    pa.buttonUp=true;
+                   pm.direction.x=0;
                } else if(angle>=100 && angle<140){
-                   pa.buttonUp=false;
+                   pa.buttonUp=true;
+                   pm.direction.x=-1;
                } else if(angle>=140 && angle<180){
                    pa.buttonUp=false;
+                   pm.direction.x=-1;
                }
 
             break;
@@ -69,11 +74,13 @@ public class Button_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData){
      butonPressed = true;
+     pm.stickPressed = true;
      Debug.Log("M pressed");
     }
  
     public void OnPointerUp(PointerEventData eventData){
     butonPressed = false;
+    pm.stickPressed = false;
     transform.localPosition = original;
     Debug.Log("M released");
     }

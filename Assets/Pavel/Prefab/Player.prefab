@@ -46,6 +46,8 @@ MonoBehaviour:
   bullet: {fileID: 8446175799290590029, guid: 4742054a5ae59384dbd62c6e45da07ce, type: 3}
   canAttack: 1
   isAttacking: 0
+  buttonAttack: 0
+  buttonUp: 0
 --- !u!1 &163872710274123331
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +763,8 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   isGrounded: 1
   onSlope: 0
+  buttonJump: 0
+  stickPressed: 0
 --- !u!1 &7799212350935918774
 GameObject:
   m_ObjectHideFlags: 0

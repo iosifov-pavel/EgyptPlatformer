@@ -22,6 +22,7 @@ public class Player_Movement : MonoBehaviour
     Player_Animation anima;
     PhysicsMaterial2D normal;
     public bool buttonJump = false;
+    public bool stickPressed = false;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -38,7 +39,12 @@ public class Player_Movement : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if(stickPressed){
+            
+        } else {
+            direction = new Vector2(0, 0);
+        }
+        
         anima.setDirection(direction.x);
         CheckGround();
 

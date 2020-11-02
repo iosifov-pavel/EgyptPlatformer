@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player_Attack : MonoBehaviour
 {
    public GameObject bullet;
-   private float timeBtwShots=0.4f;
+   private float timeBtwShots=0.2f;
    public bool canAttack = true;
    public bool isAttacking = false;
    GameObject parent;
