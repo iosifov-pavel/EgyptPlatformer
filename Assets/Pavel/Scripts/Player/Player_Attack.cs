@@ -13,6 +13,7 @@ public class Player_Attack : MonoBehaviour
    bool up = false;
    Vector3 forward, upward;
    Player_Animation pa;
+   public bool buttonAttack=false;
 
     void Start() {
         parent = transform.parent.gameObject;
@@ -27,7 +28,8 @@ public class Player_Attack : MonoBehaviour
          transform.localPosition = upward;
       } 
       else transform.localPosition = forward;
-      if (Input.GetKeyDown(KeyCode.O) && canAttack){
+
+      if (buttonAttack && canAttack){
          isAttacking=true;
          if(Input.GetKey(KeyCode.W)) up=true;
          Shoot(up);
