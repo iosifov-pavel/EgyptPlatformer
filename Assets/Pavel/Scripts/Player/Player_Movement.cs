@@ -21,6 +21,7 @@ public class Player_Movement : MonoBehaviour
     BoxCollider2D checkground;
     Player_Animation anima;
     PhysicsMaterial2D normal;
+    public bool buttonJump = false;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -45,16 +46,16 @@ public class Player_Movement : MonoBehaviour
       //  else GetComponent<Player_Sounds>().PlaySteps(false);
 
         anima.setBoolAnimation("Ground", isGrounded);
-        if(isGrounded && Input.GetKeyDown(KeyCode.Space)){
+        if(isGrounded && buttonJump){
         //    GetComponent<Player_Sounds>().PlaySound("jump");
             jump_time=jump_max;
             CanJump=true;
         }
-        if(Input.GetKey(KeyCode.Space) && CanJump){
+        if(buttonJump && CanJump){
             jump_time-=Time.deltaTime;
             if(jump_time<=0) CanJump=false;
         }
-        if(Input.GetKeyUp(KeyCode.Space)){
+        if(!buttonJump){
             jump_time=-1;
             CanJump=false;
         }
