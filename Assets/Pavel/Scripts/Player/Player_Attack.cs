@@ -14,6 +14,7 @@ public class Player_Attack : MonoBehaviour
    Vector3 forward, upward;
    Player_Animation pa;
    public bool buttonAttack=false;
+   public bool buttonUp=false;
 
     void Start() {
         parent = transform.parent.gameObject;
@@ -24,14 +25,14 @@ public class Player_Attack : MonoBehaviour
     }
 
    void Update (){   
-      if(Input.GetKey(KeyCode.W)){
+      if(buttonUp){
          transform.localPosition = upward;
       } 
       else transform.localPosition = forward;
 
       if (buttonAttack && canAttack){
          isAttacking=true;
-         if(Input.GetKey(KeyCode.W)) up=true;
+         if(buttonUp) up=true;
          Shoot(up);
          StartCoroutine(AtackTime());
       }
