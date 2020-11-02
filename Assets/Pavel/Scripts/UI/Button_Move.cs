@@ -41,11 +41,13 @@ public class Button_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             Debug.Log("Touch Moved");
                Vector3 dest=touch.position - new Vector2(center.x,center.y);
                bool upside = (touch.position.y>center.y);
-               if(dest.sqrMagnitude>100){
+               bool enough = (dest.sqrMagnitude>3025);
+               if(dest.sqrMagnitude>10000){
                    dest = Vector3.ClampMagnitude(dest,100f);
                }
                transform.position=center+dest;
                float angle = Vector3.Angle(Vector3.right,dest);
+               if(enough){
                if(angle<40){
                    pa.buttonUp=false;
                    pm.direction.x=1;
@@ -61,8 +63,11 @@ public class Button_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                } else if(angle>=140 && angle<180){
                    pa.buttonUp=false;
                    pm.direction.x=-1;
+               }     
                }
-
+               else {
+                   pm.direction.x=0;
+               }
             break;
             case TouchPhase.Ended:
             Debug.Log("Touch Ended");
