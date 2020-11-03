@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Items : MonoBehaviour
 {
 
-    int coins = 0;
+    //int coins = 0;
     public float speed;
 
     bool canHit = true;
@@ -15,17 +17,31 @@ public class Items : MonoBehaviour
     int buffCount = 0;
     int curHP;
     int maxHP = 3;
+    public int coinValue;
+    public static Items instance;
+    public TextMeshProUGUI text;
+    public int score;
     //public virtual int Next (int minValue, int maxValue);
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+
+     public void ChangeScore ()
+    {
+        score += coinValue;
+        text.text = "x" + score.ToString();
     }
 
 
@@ -37,8 +53,12 @@ public class Items : MonoBehaviour
 
         if (collision.gameObject.tag == "Coin"){
             Destroy(collision.gameObject);
-            coins ++;
-            print("Kol-vo coin =" + coins);
+           // coins ++;
+           // print("Kol-vo coin =" + coins);
+           if (collision.gameObject.CompareTag("Player"))
+           {
+              // Items.instance.ChangeScore(coinValue);
+           }
         }
 
         if (collision.gameObject.tag == "Heart"){
