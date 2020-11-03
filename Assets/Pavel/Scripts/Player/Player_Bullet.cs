@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_Bullet : MonoBehaviour
 {
- public float speed = 5f;
+ public float speed = 7f;
   public int dmg = 1;
   public float dir = 1;
   private float lifetime = 0.8f;

@@ -6,15 +6,15 @@ public class Player_Movement : MonoBehaviour
 {
     Player_Health ph;
     private float speed = 20f;
-    public float maxSpeed = 4f;
+    private float maxSpeed = 3f;
     public Vector2 direction;
-    private float jump_force = 5f;
+    private float jump_force = 4.8f;
     private float jump_time = 0f;
     private float jump_max = 0.18f;
     public bool isGrounded = true;
     public bool onSlope = false;
     bool CanJump = false;
-    private float gravity = 2.8f;
+    private float gravity = 2.2f;
     private float slopeangle;
     Rigidbody2D rb;
     Transform tran;
@@ -95,7 +95,7 @@ public class Player_Movement : MonoBehaviour
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(jump_time>=0 && CanJump){    
-            rb.drag=2.5f;
+            rb.drag=2f;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
@@ -145,7 +145,7 @@ public class Player_Movement : MonoBehaviour
                 rb.drag=4;
                 return;
             }
-            rb.drag=2.5f;
+            rb.drag=2f;
         }
     }
 

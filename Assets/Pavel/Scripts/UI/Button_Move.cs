@@ -40,14 +40,30 @@ public class Button_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             case TouchPhase.Moved:
             Debug.Log("Touch Moved");
                Vector3 dest=touch.position - new Vector2(center.x,center.y);
-               bool upside = (touch.position.y>center.y);
-               bool enough = (dest.sqrMagnitude>3025);
                if(dest.sqrMagnitude>10000){
-                   dest = Vector3.ClampMagnitude(dest,100f);
+                   dest = Vector3.ClampMagnitude(dest,170f);
                }
                transform.position=center+dest;
+               Vector2 local = transform.localPosition;
+              // bool enough = (local.sqrMagnitude>400);
                float angle = Vector3.Angle(Vector3.right,dest);
+               float power = local.magnitude;
+               float dir = local.x>=0 ? 1 : -1;
+               bool upside = (local.y>=0);
+               bool enough = (local.x>25 || local.x<-25);
                if(enough){
+                   if(angle<25 || angle>155){
+                       pa.buttonUp=false;
+                   } else pa.buttonUp=true;
+                   pm.direction.x = dir * (power-25f) * 0.025f;
+               }
+               else{
+                   pm.direction.x=0f;
+                   if(local.y>25){
+                       pa.buttonUp=true;
+                   } else pa.buttonUp=false;
+               }
+            /*   if(enough){
                if(angle<40){
                    pa.buttonUp=false;
                    pm.direction.x=1;
@@ -63,11 +79,11 @@ public class Button_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                } else if(angle>=140 && angle<180){
                    pa.buttonUp=false;
                    pm.direction.x=-1;
-               }     
+               }    
                }
                else {
                    pm.direction.x=0;
-               }
+               }*/ 
             break;
             case TouchPhase.Ended:
             Debug.Log("Touch Ended");
@@ -86,6 +102,7 @@ public class Button_Move : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerUp(PointerEventData eventData){
     butonPressed = false;
     pm.stickPressed = false;
+    pa.buttonUp=false;
     transform.localPosition = original;
     Debug.Log("M released");
     }

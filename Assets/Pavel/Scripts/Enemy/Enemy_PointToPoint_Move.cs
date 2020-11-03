@@ -6,7 +6,7 @@ public class Enemy_PointToPoint_Move : MonoBehaviour
 {
     [SerializeField] private Vector3 p1;
     [SerializeField] private Vector3 p2;
-    float speed = 2f;
+    float speed = 1.7f;
     // Start is called before the first frame update
 
     private void OnDrawGizmos() {
