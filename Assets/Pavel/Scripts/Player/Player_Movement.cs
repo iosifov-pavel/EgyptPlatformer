@@ -6,21 +6,23 @@ public class Player_Movement : MonoBehaviour
 {
     Player_Health ph;
     private float speed = 20f;
-    public float maxSpeed = 4f;
+    private float maxSpeed = 3f;
     public Vector2 direction;
-    private float jump_force = 5f;
+    private float jump_force = 4.8f;
     private float jump_time = 0f;
     private float jump_max = 0.18f;
     public bool isGrounded = true;
     public bool onSlope = false;
     bool CanJump = false;
-    private float gravity = 2.8f;
+    private float gravity = 2.2f;
     private float slopeangle;
     Rigidbody2D rb;
     Transform tran;
     BoxCollider2D checkground;
     Player_Animation anima;
     PhysicsMaterial2D normal;
+    public bool buttonJump = false;
+    public bool stickPressed = false;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -37,7 +39,12 @@ public class Player_Movement : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if(stickPressed){
+            
+        } else {
+            direction = new Vector2(0, 0);
+        }
+        
         anima.setDirection(direction.x);
         CheckGround();
 
@@ -45,16 +52,16 @@ public class Player_Movement : MonoBehaviour
       //  else GetComponent<Player_Sounds>().PlaySteps(false);
 
         anima.setBoolAnimation("Ground", isGrounded);
-        if(isGrounded && Input.GetKeyDown(KeyCode.Space)){
+        if(isGrounded && buttonJump){
         //    GetComponent<Player_Sounds>().PlaySound("jump");
             jump_time=jump_max;
             CanJump=true;
         }
-        if(Input.GetKey(KeyCode.Space) && CanJump){
+        if(buttonJump && CanJump){
             jump_time-=Time.deltaTime;
             if(jump_time<=0) CanJump=false;
         }
-        if(Input.GetKeyUp(KeyCode.Space)){
+        if(!buttonJump){
             jump_time=-1;
             CanJump=false;
         }
@@ -88,7 +95,7 @@ public class Player_Movement : MonoBehaviour
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(jump_time>=0 && CanJump){    
-            rb.drag=2.5f;
+            rb.drag=2f;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
@@ -115,16 +122,12 @@ public class Player_Movement : MonoBehaviour
         Vector3 thisScale = tran.localScale;
         thisScale.x *= -1;
         tran.localScale = thisScale;
-       // Vector3 localScl =tran.GetChild(1).transform.localScale;
-       // localScl.x *= -1;
-       // tran.GetChild(1).transform.localScale = localScl;
-
-       //transform.Rotate(0f,180f,0f);
     }
 
     void CustomPhysics(){
         bool directionchanged = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
         bool needtostop = ((rb.velocity.x>0.1f || rb.velocity.x<-0.1f) && direction.x==0);
+       // bool needtostop = (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D));
         if(isGrounded){
             if(ph.dead){
                 rb.drag=8;
@@ -133,7 +136,8 @@ public class Player_Movement : MonoBehaviour
             rb.gravityScale = gravity;
             rb.drag=1f;
             if(directionchanged || needtostop){               
-                rb.velocity = new Vector2(0,rb.velocity.y);
+               // rb.velocity = new Vector2(0,rb.velocity.y);
+               rb.drag=125f;
             }
         } else {
             rb.gravityScale = gravity;
@@ -141,7 +145,7 @@ public class Player_Movement : MonoBehaviour
                 rb.drag=4;
                 return;
             }
-            rb.drag=2.5f;
+            rb.drag=2f;
         }
     }
 

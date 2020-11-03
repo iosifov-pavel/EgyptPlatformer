@@ -7,7 +7,7 @@ public class Enemy_Attack : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     private GameObject bullet;
     public bool isTrigered = false;
-    private float time = 1.5f;
+    private float time = 1.8f;
     public bool canAttack = true;
     public bool awake = false;
     Animator animator;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player_Attack : MonoBehaviour
 {
    public GameObject bullet;
-   private float timeBtwShots=0.4f;
+   private float timeBtwShots=0.2f;
    public bool canAttack = true;
    public bool isAttacking = false;
    GameObject parent;
@@ -13,6 +13,8 @@ public class Player_Attack : MonoBehaviour
    bool up = false;
    Vector3 forward, upward;
    Player_Animation pa;
+   public bool buttonAttack=false;
+   public bool buttonUp=false;
 
     void Start() {
         parent = transform.parent.gameObject;
@@ -23,13 +25,14 @@ public class Player_Attack : MonoBehaviour
     }
 
    void Update (){   
-      if(Input.GetKey(KeyCode.W)){
+      if(buttonUp){
          transform.localPosition = upward;
       } 
       else transform.localPosition = forward;
-      if (Input.GetKeyDown(KeyCode.O) && canAttack){
+
+      if (buttonAttack && canAttack){
          isAttacking=true;
-         if(Input.GetKey(KeyCode.W)) up=true;
+         if(buttonUp) up=true;
          Shoot(up);
          StartCoroutine(AtackTime());
       }
