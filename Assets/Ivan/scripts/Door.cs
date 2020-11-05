@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player"))
-            Teleport(gameObject);
+            Teleport(other.gameObject);
         
         
     }
@@ -28,7 +28,7 @@ public class Door : MonoBehaviour
 
     public void Teleport (GameObject Player)
     {   
-        Player_Movement plar  = Player.GetComponent<Player_Movement>(); 
-        plar.transform.localScale = door.transform.localScale;
+       // Player_Movement plar  = Player.GetComponent<Player_Movement>(); 
+        Player.transform.position = door.transform.position;
     }
 }
