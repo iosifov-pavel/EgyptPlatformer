@@ -79,11 +79,14 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Horizontal(){
+        if( Mathf.Abs(direction.x )<0.2) direction.x =0;
         rb.AddForce(new Vector2(direction.x*Time.deltaTime*speed, 0), ForceMode2D.Impulse);
         if (Mathf.Abs(rb.velocity.x) > maxSpeed) {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
         }
-        anima.setFloatAnimation("Speed",Mathf.Abs(rb.velocity.x));
+        anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
+        anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
+
         if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
         }
