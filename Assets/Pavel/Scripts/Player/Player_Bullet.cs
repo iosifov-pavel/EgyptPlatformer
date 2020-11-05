@@ -10,16 +10,20 @@ public class Player_Bullet : MonoBehaviour
   private float lifetime = 0.8f;
   bool up = false;
   bool rotated = false;
+  SpriteRenderer sprt;
     // Start is called before the first frame update
      void Start ()
   {
-
+    sprt = GetComponent<SpriteRenderer>();
   }
     private void Update() {
         if(up && !rotated){
             transform.Rotate(0,0,90*dir);
             rotated=true;
-        } 
+        }
+        Color newc = sprt.color;
+        newc.a=1;
+        sprt.color=newc;
         float step =  speed * Time.deltaTime; 
         transform.Translate(Vector3.right*step*dir);
         lifetime-=Time.deltaTime;

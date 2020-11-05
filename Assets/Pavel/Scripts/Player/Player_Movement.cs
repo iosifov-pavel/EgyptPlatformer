@@ -40,10 +40,7 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update(){
         if(stickPressed){
-            
-        } else {
-            direction = new Vector2(0, 0);
-        }
+        } else direction = new Vector2(0, 0);
         
         anima.setDirection(direction.x);
         CheckGround();
@@ -83,10 +80,10 @@ public class Player_Movement : MonoBehaviour
 
     void Horizontal(){
         rb.AddForce(new Vector2(direction.x*Time.deltaTime*speed, 0), ForceMode2D.Impulse);
-        anima.setFloatAnimation("Speed",Mathf.Abs(direction.x));
         if (Mathf.Abs(rb.velocity.x) > maxSpeed) {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
         }
+        anima.setFloatAnimation("Speed",Mathf.Abs(rb.velocity.x));
         if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
         }
@@ -126,7 +123,7 @@ public class Player_Movement : MonoBehaviour
 
     void CustomPhysics(){
         bool directionchanged = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
-        bool needtostop = ((rb.velocity.x>0.1f || rb.velocity.x<-0.1f) && direction.x==0);
+        bool needtostop = (rb.velocity.x !=0f && direction.x==0);
        // bool needtostop = (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D));
         if(isGrounded){
             if(ph.dead){

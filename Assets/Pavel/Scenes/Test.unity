@@ -855,6 +855,7 @@ GameObject:
   - component: {fileID: 762179365}
   - component: {fileID: 762179367}
   - component: {fileID: 762179366}
+  - component: {fileID: 762179368}
   m_Layer: 5
   m_Name: Stick
   m_TagString: Untagged
@@ -920,6 +921,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762179364}
   m_CullTransparentMesh: 0
+--- !u!114 &762179368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762179364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59abc942a1a19147a8f250d8c946f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 18230605}
+  firepoint: {fileID: 1944502507}
 --- !u!1 &792245572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,7 +1522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -192.1, y: 70}
+  m_AnchoredPosition: {x: -80, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1107876589
@@ -1616,7 +1631,6 @@ GameObject:
   - component: {fileID: 1154075469}
   - component: {fileID: 1154075471}
   - component: {fileID: 1154075470}
-  - component: {fileID: 1154075473}
   - component: {fileID: 1154075472}
   m_Layer: 5
   m_Name: Touch
@@ -1725,20 +1739,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1154075473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154075468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e59abc942a1a19147a8f250d8c946f97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 18230605}
-  firepoint: {fileID: 1944502507}
 --- !u!1 &1157945089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,7 +1775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -76, y: 70}
+  m_AnchoredPosition: {x: -200, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1157945091
