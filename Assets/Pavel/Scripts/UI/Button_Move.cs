@@ -47,41 +47,13 @@ public class Button_Move : MonoBehaviour{
                
             switch(touch.phase){
             case TouchPhase.Began:
-                pm.stickPressed = true;
                 Debug.Log("Touch Began");
-                stick.position=center+dest;
-                local = stick.localPosition;
-                power = local.magnitude;
-                angle = Vector3.Angle(Vector3.right,dest);
-                upside = (local.y>25);
-                enough = (local.x>25 || local.x<-25);
-                dir = local.x>=0 ? 1 : -1;
+                pm.stickPressed = true;
+                Action();
                 break;
             case TouchPhase.Moved:
                 Debug.Log("Touch Moved");
-                stick.position=center+dest;
-                local = stick.localPosition;
-                power = local.magnitude;
-                angle = Vector3.Angle(Vector3.right,dest);
-                upside = (local.y>25);
-                enough = (local.x>25 || local.x<-25);
-                dir = local.x>=0 ? 1 : -1;
-               
-               if(enough){
-                   if(angle<25 || angle>155){
-                       pa.buttonUp=false;
-                   } else pa.buttonUp=true;
-                   pm.direction.x = dir * (power-25f) * 0.025f;
-               }
-               else{
-                   pm.direction.x=0f;
-                   if(local.y>25){
-                       pa.buttonUp=true;
-                   } else pa.buttonUp=false;
-               }
-               if(touch.position.x>width){
-                   stick.localPosition = original;
-               }
+                Action();
                 break;
             case TouchPhase.Canceled:
                 pm.stickPressed = false;
@@ -96,6 +68,29 @@ public class Button_Move : MonoBehaviour{
                 stick.localPosition = original;
                 break;
             }
+        }
+    }
+
+    private void Action(){
+        stick.position=center+dest;
+        local = stick.localPosition;
+        power = local.magnitude;
+        angle = Vector3.Angle(Vector3.right,dest);
+        upside = (local.y>25);
+        enough = (local.x>25 || local.x<-25);
+        dir = local.x>=0 ? 1 : -1;
+
+        if(enough){
+            if(angle<25 || angle>155){
+                pa.buttonUp=false;
+            } else pa.buttonUp=true;
+            pm.direction.x = dir * (power-25f) * 0.025f;
+        }
+        else{
+            pm.direction.x=0f;
+            if(local.y>25){
+                pa.buttonUp=true;
+            } else pa.buttonUp=false;
         }
     }
 }
