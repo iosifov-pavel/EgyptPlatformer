@@ -8,7 +8,7 @@ public class Player_Bullet : MonoBehaviour
   public int dmg = 1;
   public float dir = 1;
   private float lifetime = 0.8f;
-  bool up = false;
+  int up = 0;
   bool rotated = false;
   SpriteRenderer sprt;
     // Start is called before the first frame update
@@ -17,9 +17,17 @@ public class Player_Bullet : MonoBehaviour
     sprt = GetComponent<SpriteRenderer>();
   }
     private void Update() {
-        if(up && !rotated){
+        if(!rotated){
+          if(up==0){
+           // transform.Rotate(0,0,90*dir*up);
+            rotated=true;
+          } else if(up==2){
+            transform.Rotate(0,0,30*dir);
+            rotated=true;
+          } else {
             transform.Rotate(0,0,90*dir);
             rotated=true;
+          }
         }
         Color newc = sprt.color;
         newc.a=1;
@@ -43,7 +51,7 @@ public class Player_Bullet : MonoBehaviour
      
     }
 
-    public void GetPosition (Vector3 pstn, bool _up)
+    public void GetPosition (Vector3 pstn, int _up)
     {
         up = _up;
       Vector3 pos = transform.localScale;
