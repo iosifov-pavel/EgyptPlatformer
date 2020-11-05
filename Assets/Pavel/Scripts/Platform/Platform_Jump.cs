@@ -14,7 +14,7 @@ public class Platform_Jump : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         Rigidbody2D rb = other.attachedRigidbody;
-        rb.velocity = new Vector2(rb.velocity.x/5,0);
+        rb.velocity = new Vector2(rb.velocity.x/4,0);
         rb.AddForce(transform.up*10f, ForceMode2D.Impulse);
     }
 }
