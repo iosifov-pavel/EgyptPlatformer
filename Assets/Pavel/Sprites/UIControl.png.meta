@@ -26,6 +26,9 @@ TextureImporter:
   - first:
       213: 5500879983027703690
     second: UIControl_3
+  - first:
+      213: -8502734931566338571
+    second: UIControl_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -228,9 +231,9 @@ TextureImporter:
       name: UIControl_2
       rect:
         serializedVersion: 2
-        x: 449
-        y: 89
-        width: 48
+        x: 351
+        y: 88
+        width: 45
         height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -249,6 +252,27 @@ TextureImporter:
       name: UIControl_3
       rect:
         serializedVersion: 2
+        x: 449
+        y: 89
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8f4c6c133d075c40800000000000000
+      internalID: 5500879983027703690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIControl_4
+      rect:
+        serializedVersion: 2
         x: 544
         y: 84
         width: 47
@@ -260,8 +284,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8f4c6c133d075c40800000000000000
-      internalID: 5500879983027703690
+      spriteID: 5fddea011a7300a80800000000000000
+      internalID: -8502734931566338571
       vertices: []
       indices: 
       edges: []
