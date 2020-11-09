@@ -14,6 +14,8 @@ public class Button_Move : MonoBehaviour{
     Player_Movement pm;
     Transform stick;
     Vector3 dest;
+    float scale;
+    float dist;
             Vector2 local;
             float angle;
             float power;
@@ -27,6 +29,8 @@ public class Button_Move : MonoBehaviour{
         center = transform.position;
         pa = firepoint.GetComponent<Player_Attack>();
         pm = player.GetComponent<Player_Movement>();
+        scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
+        dist = gameObject.GetComponent<RectTransform>().rect.width/2 * scale;
     }
 
     // Update is called once per frame
@@ -41,8 +45,8 @@ public class Button_Move : MonoBehaviour{
             }
 
             dest=touch.position - new Vector2(center.x,center.y);
-            if(dest.sqrMagnitude>10000){
-                dest = Vector3.ClampMagnitude(dest,170f);
+            if(dest.magnitude>dist){
+                dest = Vector3.ClampMagnitude(dest,dist);
             }
                
             switch(touch.phase){
