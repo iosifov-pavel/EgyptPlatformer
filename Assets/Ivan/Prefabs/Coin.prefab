@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6254236829214632364}
   - component: {fileID: 6254236829214632355}
   - component: {fileID: 6254236829214632354}
-  - component: {fileID: 6254236829214632365}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -72,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4baf2c8710c1ddc42956258a1e2e452a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a8cb356d4be362449b5153fc4500f977, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,18 +98,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.0037170053}
   serializedVersion: 2
   m_Radius: 0.13282955
---- !u!114 &6254236829214632365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6254236829214632353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a63af3ed24261145bf85e432b6fbfca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  infinity: {fileID: 0}
-  speeds: {fileID: 0}
