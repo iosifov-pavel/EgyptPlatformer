@@ -80,8 +80,8 @@ public class Button_Move : MonoBehaviour{
         local = stick.localPosition;
         power = local.magnitude;
         angle = Vector3.Angle(Vector3.right,dest);
-        upside = (local.y>25);
-        enough = (local.x>25 || local.x<-25);
+        upside = (local.y>40);
+        enough = (local.x>40 || local.x<-40);
         dir = local.x>=0 ? 1 : -1;
 
         if(enough){
@@ -90,7 +90,7 @@ public class Button_Move : MonoBehaviour{
             } else if((angle>=25 || angle<=155) && local.y>0){
                 pa.buttonUp=2;
             } else pa.buttonUp = 0;
-            pm.direction.x = dir * (power-25f) * 0.025f;
+            pm.direction.x = dir * (power-40) * 0.01f;
         }
         else{
             pm.direction.x=0f;

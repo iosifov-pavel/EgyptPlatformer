@@ -7,6 +7,7 @@ public class Button_Restart : MonoBehaviour
 {
   public void RestartGame ()
   {
-    SceneManager.LoadScene("Test");
+          Scene scene = SceneManager.GetActiveScene(); 
+          SceneManager.LoadScene(scene.name);
   }
 }
