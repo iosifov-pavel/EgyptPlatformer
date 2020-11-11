@@ -27,7 +27,7 @@ public class Platform_Cycle : MonoBehaviour
     void Update()
     {
         timer-=Time.deltaTime;
-        if(swap_time<=0){
+        if(timer<=0){
             StartCoroutine(Swap(plats[active].gameObject));
             active++;
             if(active==5) active=0;
