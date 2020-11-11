@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform_Conveyer : MonoBehaviour
 {
-    float speed = 1f;
+    float speed = 30f;
     int dir = -1;
     Rigidbody2D player;
     Vector2 force;
@@ -34,7 +34,7 @@ public class Platform_Conveyer : MonoBehaviour
         if(other.gameObject.tag=="Player"){
            // player.Translate(force*speed*Time.deltaTime);
 
-            player.AddForce(force*speed,ForceMode2D.Impulse);
+            player.AddForce(force*speed,ForceMode2D.Force);
            // player.velocity = new Vector2(player.velocity.x+force.x,player.velocity.y);
         }
     }
