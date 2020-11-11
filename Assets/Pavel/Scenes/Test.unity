@@ -865,7 +865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -86, y: -86}
+  m_AnchoredPosition: {x: -120, y: -100}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495446027
@@ -2204,7 +2204,6 @@ GameObject:
   - component: {fileID: 1216344598}
   - component: {fileID: 1216344600}
   - component: {fileID: 1216344599}
-  - component: {fileID: 1216344601}
   m_Layer: 5
   m_Name: OnPlaying
   m_TagString: Untagged
@@ -2273,18 +2272,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216344597}
   m_CullTransparentMesh: 0
---- !u!114 &1216344601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216344597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a5848cd2803834da47d49e54ec88fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1364866535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4217616809764476872, guid: b6752a921217a4a4d8cfd4fa6eb539f1,
@@ -2301,12 +2288,12 @@ PrefabInstance:
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.67
+      value: -10.92
       objectReference: {fileID: 0}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.43
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
