@@ -21,12 +21,9 @@ public class Player_GetCoin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
      {
-     
-
-
         if (collision.gameObject.tag == "Coin"){
             Destroy(collision.gameObject);
-            LvlC.GetComponent<Level_Controller>().Manager(coinValue);
+            LvlC.GetComponent<Level_Controller>().GetCoin(coinValue);
         }
      }
 }

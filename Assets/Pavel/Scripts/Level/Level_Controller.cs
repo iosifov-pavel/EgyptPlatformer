@@ -13,7 +13,7 @@ public class Level_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        score.text = coins.ToString();
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class Level_Controller : MonoBehaviour
     }*/
 
 
-    public void Manager (int i)
+    public void GetCoin(int i)
     {   
         coins += i;
         score.text = coins.ToString();
