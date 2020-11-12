@@ -7,6 +7,7 @@ public class Platform_Fading : MonoBehaviour
 
     private float fade_time = 1.5f;
     private float reverse = 1.5f;
+    bool canfade = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +19,12 @@ public class Platform_Fading : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
-            StartCoroutine(Fade());
+            if(canfade) StartCoroutine(Fade());
         }
     }
 
    private IEnumerator Fade(){
+       canfade=false;
        var render = GetComponent<MeshRenderer>();
        render.material.color = Color.green;
        yield return new WaitForSeconds(fade_time);
@@ -33,6 +35,7 @@ public class Platform_Fading : MonoBehaviour
        render.enabled=true;
        colider.enabled = true;
        render.material.color = Color.red;
+       canfade=true;
    } 
 
 
