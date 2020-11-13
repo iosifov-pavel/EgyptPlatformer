@@ -22,6 +22,7 @@ public class Player_Movement : MonoBehaviour
     BoxCollider2D checkground;
     Player_Animation anima;
     PhysicsMaterial2D normal;
+    [SerializeField] PhysicsMaterial2D zero;
     public bool buttonJump = false;
     public bool stickPressed = false;
    // PhysicsMaterial2D OnSlope;
@@ -86,12 +87,11 @@ public class Player_Movement : MonoBehaviour
        
         //Vector2 move = new Vector2((direction.x + 1.1f*otherSource/100)*Time.deltaTime*speed, 0);
         //rb.AddForce(move, ForceMode2D.Impulse);
-        Vector2 move = new Vector2((direction.x)*Time.deltaTime*speed +maxSpeed*otherSource/100, rb.velocity.y);
-        rb.velocity= move;
-        if (Mathf.Abs(rb.velocity.x) > maxSpeed) {
-            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
+        Vector2 move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
+        if (Mathf.Abs(move.x) > maxSpeed) {
+            rb.velocity = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
-        
+        rb.velocity= new Vector2(move.x + maxSpeed*otherSource/100,move.y);
         anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
         anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
 
@@ -159,18 +159,15 @@ public class Player_Movement : MonoBehaviour
     }
 
     void PreMove(){
-        if(onSlope && direction.x == 0){
+        if(onSlope && direction.x == 0 || transform.parent!=null){
             rb.sharedMaterial = null;
             }
+        else if(!isGrounded){
+            rb.sharedMaterial = zero;
+        }
         else rb.sharedMaterial = normal;
     }
 
     void PostMove(){
-        if(otherSource!=0){
-           // transform.Translate(new Vector3(maxSpeed*otherSource/100*Time.deltaTime,0,0));
-           //Vector2 np = new Vector2(rb.position.x + maxSpeed*otherSource/100*Time.deltaTime,rb.position.y);
-            //Vector2 newP = Vector2.MoveTowards(rb.position,np,maxSpeed*otherSource/100*Time.deltaTime);           
-           //rb.MovePosition(newP);
-        }
     }
 }
