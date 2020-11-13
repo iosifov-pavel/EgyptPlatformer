@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
     Player_Health ph;
-    private float speed = 20f;
+    private float speed = 140f;
     private float maxSpeed = 3f;
     public Vector2 direction;
     public float  otherSource = 0;
@@ -81,11 +81,13 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Horizontal(){
-        if( Mathf.Abs(direction.x )<0.2) direction.x =0;
+        if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
 
-        Vector2 move = new Vector2(direction.x*Time.deltaTime*speed, 0);
-
-        rb.AddForce(move, ForceMode2D.Impulse);
+       
+        //Vector2 move = new Vector2((direction.x + 1.1f*otherSource/100)*Time.deltaTime*speed, 0);
+        //rb.AddForce(move, ForceMode2D.Impulse);
+        Vector2 move = new Vector2((direction.x)*Time.deltaTime*speed +maxSpeed*otherSource/100, rb.velocity.y);
+        rb.velocity= move;
         if (Mathf.Abs(rb.velocity.x) > maxSpeed) {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
         }
@@ -132,7 +134,7 @@ public class Player_Movement : MonoBehaviour
 
     void CustomPhysics(){
         bool directionchanged = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
-        bool needtostop = (rb.velocity.x !=0f && direction.x==0);
+        bool needtostop = (rb.velocity.x!=0f && direction.x==0);
        // bool needtostop = (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D));
         if(isGrounded){
             if(ph.dead){
@@ -143,7 +145,8 @@ public class Player_Movement : MonoBehaviour
             rb.drag=1f;
             if(directionchanged || needtostop){               
                // rb.velocity = new Vector2(0,rb.velocity.y);
-               rb.drag=125f;
+               if(otherSource!=0){}
+               else rb.drag=125f;
             }
         } else {
             rb.gravityScale = gravity;
@@ -164,7 +167,7 @@ public class Player_Movement : MonoBehaviour
 
     void PostMove(){
         if(otherSource!=0){
-            transform.Translate(new Vector3(maxSpeed*otherSource/100*Time.deltaTime,0,0));
+           // transform.Translate(new Vector3(maxSpeed*otherSource/100*Time.deltaTime,0,0));
            //Vector2 np = new Vector2(rb.position.x + maxSpeed*otherSource/100*Time.deltaTime,rb.position.y);
             //Vector2 newP = Vector2.MoveTowards(rb.position,np,maxSpeed*otherSource/100*Time.deltaTime);           
            //rb.MovePosition(newP);

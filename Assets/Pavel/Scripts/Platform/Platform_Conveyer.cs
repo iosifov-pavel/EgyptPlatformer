@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform_Conveyer : MonoBehaviour
 {
-    float percent = 100f;
+    float percent = 50f;
     int dir = -1;
     Player_Movement player;
     // Start is called before the first frame update
