@@ -10,6 +10,7 @@ public class Platform_MassResponse : MonoBehaviour
     float diff;
     float max_angle = 45;
     float percent;
+    float smooth = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,23 +23,27 @@ public class Platform_MassResponse : MonoBehaviour
     void Update()
     {
         Quaternion angle = Quaternion.Euler(0,0,max_angle*percent/100);
-        parent.rotation = angle;
+        parent.rotation = Quaternion.Slerp(parent.rotation,angle,smooth*Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag=="Player"){
+        if(other.gameObject.tag=="GroundCheck"){
            diff = parent.position.x - other.gameObject.transform.position.x;
            percent = diff/(size/2)*100; 
         }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
+        if(other.gameObject.tag=="GroundCheck"){
         diff = parent.position.x - other.gameObject.transform.position.x;
         percent = diff/(size/2)*100; 
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
+        if(other.gameObject.tag=="GroundCheck"){
         diff=0;
-        percent=0;
+        percent=0; 
+        }
     }
 }
