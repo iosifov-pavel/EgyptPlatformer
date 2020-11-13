@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Button_Move : MonoBehaviour{
     Touch touch;
-    bool butonPressed = false;
     Vector2 original;
     Vector3 center;
     [SerializeField] GameObject player;

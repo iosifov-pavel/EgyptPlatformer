@@ -19,6 +19,7 @@ public class Platform_Cycle : MonoBehaviour
         int count = transform.childCount;
         for(int i=0;i<count;i++){
             plats.Add(transform.GetChild(i));
+            plats[i].gameObject.SetActive(false);
         }
        // plats[active].gameObject.SetActive(true);
     }
