@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Platform_Conveyer : MonoBehaviour
 {
-    float speed = 30f;
+    float percent = 100f;
     int dir = -1;
-    Rigidbody2D player;
-    Vector2 force;
+    Player_Movement player;
     // Start is called before the first frame update
     void Start()
     {
-        force = new Vector2(dir,0);
+
     }
 
     // Update is called once per frame
@@ -24,7 +23,7 @@ public class Platform_Conveyer : MonoBehaviour
         if(other.gameObject.tag=="Player"){
            // player = other.gameObject.GetComponent<Transform>();
 
-            player = other.gameObject.GetComponent<Rigidbody2D>();
+            player = other.gameObject.GetComponent<Player_Movement>();
            // player.AddForce(force*speed,ForceMode2D.Force);
             //player.velocity = new Vector2(player.velocity.x+force.x,player.velocity.y);
         }
@@ -34,11 +33,11 @@ public class Platform_Conveyer : MonoBehaviour
         if(other.gameObject.tag=="Player"){
            // player.Translate(force*speed*Time.deltaTime);
 
-            player.AddForce(force*speed,ForceMode2D.Force);
+            player.otherSource = dir*percent;
            // player.velocity = new Vector2(player.velocity.x+force.x,player.velocity.y);
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
-        player=null;
+        player.otherSource = 0;
     }
 }
