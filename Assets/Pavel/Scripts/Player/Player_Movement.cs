@@ -87,11 +87,20 @@ public class Player_Movement : MonoBehaviour
        
         //Vector2 move = new Vector2((direction.x + 1.1f*otherSource/100)*Time.deltaTime*speed, 0);
         //rb.AddForce(move, ForceMode2D.Impulse);
+
+
         Vector2 move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
         if (Mathf.Abs(move.x) > maxSpeed) {
             rb.velocity = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
         rb.velocity= new Vector2(move.x + maxSpeed*otherSource/100,move.y);
+
+        //Vector2 move = new Vector2(direction.x*Time.deltaTime*speed - rb.velocity.x+maxSpeed*otherSource/100, 0 );
+        //rb.AddForce(move,ForceMode2D.Impulse);
+
+        //Vector2 move = new Vector2(direction.x*Time.deltaTime*speed - rb.velocity.x+maxSpeed*otherSource/100, 0 );
+        //rb.velocity+=move;
+
         anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
         anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
 
