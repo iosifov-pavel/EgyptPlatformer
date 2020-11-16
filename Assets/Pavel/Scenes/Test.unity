@@ -3351,6 +3351,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1111345703}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1140590503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8945349737061120866, guid: 0855f7da149412f49ab9a4a9aef7b129,
+    type: 3}
+  m_PrefabInstance: {fileID: 1387441835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1140590507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140590503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abdd886b6365b04ca10761feddb2f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 607497409}
 --- !u!1 &1154075468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4006,12 +4025,12 @@ PrefabInstance:
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.14
+      value: -4.6
       objectReference: {fileID: 0}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.151
+      value: 1.66
       objectReference: {fileID: 0}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
@@ -6353,6 +6372,7 @@ GameObject:
   - component: {fileID: 1691747183}
   - component: {fileID: 1691747182}
   - component: {fileID: 1691747181}
+  - component: {fileID: 1691747180}
   m_Layer: 0
   m_Name: CanPush
   m_TagString: Ground
@@ -6360,6 +6380,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1691747180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691747179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf7768635fed0d46aab9fa1c431d0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &1691747181
 MeshFilter:
   m_ObjectHideFlags: 0

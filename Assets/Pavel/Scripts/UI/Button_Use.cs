@@ -23,6 +23,9 @@ public class Button_Use : MonoBehaviour
             on=true;
             player.GetComponent<Player_Movement>().enabled=false;
            // player.GetComponent<Player_Interact>().interact=true;
+           
+           var aa = item.GetComponent<inter>();
+           var bb = item.GetComponent<MonoBehaviour>();
         }
         else{
             on=false;
