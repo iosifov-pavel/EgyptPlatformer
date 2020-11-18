@@ -807,6 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 299704105}
   - component: {fileID: 299704104}
+  - component: {fileID: 299704106}
   m_Layer: 0
   m_Name: Sway_Trap
   m_TagString: Untagged
@@ -826,7 +827,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2fd77d3dbadf649bb0e35e140d233a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  base_speed: 50
+  dop_speed: 0
 --- !u!4 &299704105
 Transform:
   m_ObjectHideFlags: 0
@@ -842,6 +844,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &299704106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299704103}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560018fe25a26ee42a1aba6f1462756c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &364603305 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1934394370621599571, guid: 76ed380837db6124685bc84634043ba7,
