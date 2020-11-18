@@ -30,6 +30,7 @@ public class Button_Move : MonoBehaviour{
         pm = player.GetComponent<Player_Movement>();
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
         dist = gameObject.GetComponent<RectTransform>().rect.width/2 * scale;
+        touch.phase = TouchPhase.Ended;
     }
 
     // Update is called once per frame
