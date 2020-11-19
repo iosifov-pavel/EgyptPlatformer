@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Trap_Sway : MonoBehaviour
 {
-    [SerializeField] float base_speed = 50;
-    [SerializeField] float dop_speed = 0;
+    float base_speed = 50;
+    float dop_speed = 0;
     float sway_angle = 50;
     float curr_angle;
-    int dir = 1;
-    bool go = true;
+    [SerializeField] int dir = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +21,6 @@ public class Trap_Sway : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!go) return;
         float percent = Mathf.Abs(curr_angle/(2*sway_angle)*100);
         if(percent<=50){
             dop_speed=(base_speed*2*(2*percent-50)/100) + 15;
