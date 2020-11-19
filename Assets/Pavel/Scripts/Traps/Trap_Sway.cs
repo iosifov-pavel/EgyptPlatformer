@@ -35,14 +35,7 @@ public class Trap_Sway : MonoBehaviour
             dir*=-1;
             curr_angle=0;
             dop_speed=0;
-            //StartCoroutine(Wait());
         }
         transform.Rotate(0,0,step);
-    }
-
-    IEnumerator Wait(){
-        go=false;
-        yield return new WaitForSeconds(0.09f);
-        go=true;
     }
 }
