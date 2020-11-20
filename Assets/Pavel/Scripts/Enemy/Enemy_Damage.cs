@@ -24,6 +24,13 @@ public class Enemy_Damage : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other) {
         Damage(other.gameObject);
     }
+    private void OnTriggerStay2D(Collider2D other) {
+        Damage(other.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Damage(other.gameObject);
+    }
 
     public void Damage(GameObject other){
         if(isDamaged) return;
