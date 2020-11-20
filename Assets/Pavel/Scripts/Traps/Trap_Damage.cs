@@ -16,21 +16,29 @@ public class Trap_Damage : MonoBehaviour
     // Update is called once per frame
 
     private void OnCollisionEnter2D(Collision2D other) {
-        Damage(other);
+        Damage(other.gameObject);
     }
     private void OnCollisionStay2D(Collision2D other) {
-        Damage(other);
+        Damage(other.gameObject);
     }
 
-    private void Damage(Collision2D other){
-            if(other.gameObject.tag=="Player"){
-            ph = other.gameObject.GetComponent<Player_Health>();
+    private void OnTriggerStay2D(Collider2D other) {
+        Damage(other.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Damage(other.gameObject);
+    }
+
+    private void Damage(GameObject other){
+            if(other.tag=="Player"){
+            ph = other.GetComponent<Player_Health>();
             if(ph.superman || ph.dead) return;
-            rb = other.gameObject.GetComponent<Rigidbody2D>();
+            rb = other.GetComponent<Rigidbody2D>();
             float y=0;
             if(rb.velocity.y>0.1) y=1;
             else y=-1;
-            tr = other.gameObject.GetComponent<Transform>();
+            tr = other.GetComponent<Transform>();
             Vector3 player_dir = new Vector3(Mathf.Sign(tr.localScale.x)*1,y,0);    
             player_dir*=-1;
             player_dir.Normalize();
