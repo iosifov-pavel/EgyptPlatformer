@@ -62,7 +62,7 @@ public class Traps_bottom_spikes : MonoBehaviour, ITrigger
 
     IEnumerator restart(){
         spikes.GetComponent<BoxCollider2D>().enabled=false;
-        yield return new WaitForSeconds(wait);
+        yield return new WaitForSeconds(wait/2);
         triggered=false;
         warning=false;
         waited=false;
