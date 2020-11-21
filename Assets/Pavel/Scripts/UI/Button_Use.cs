@@ -19,19 +19,15 @@ public class Button_Use : MonoBehaviour
     }
 
     public void Click(){
-        if(!on){
-            on=true;
-            player.GetComponent<Player_Movement>().enabled=false;
-           // player.GetComponent<Player_Interact>().interact=true;
-           
-           var aa = item.GetComponent<inter>();
-           var bb = item.GetComponent<MonoBehaviour>();
-        }
-        else{
-            on=false;
-            player.GetComponent<Player_Movement>().enabled=true;
-          //  player.GetComponent<Player_Interact>().interact=false;
-        }
+     if(!on){
+         on=true;
+         player.GetComponent<Player_Movement>().enabled=false;
+         item.GetComponent<IIntercatable>().Use();
+     }
+     else{
+         on=false;
+         player.GetComponent<Player_Movement>().enabled=true;
+     }
 
 
         float a = 1;

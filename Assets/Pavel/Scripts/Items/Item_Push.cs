@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_Push : MonoBehaviour, inter
+public class Item_Push : MonoBehaviour, IIntercatable
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,10 @@ public class Item_Push : MonoBehaviour, inter
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public void Use(){
         
     }
 }
