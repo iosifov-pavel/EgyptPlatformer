@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IIntercatable
 {
     // Start is called before the first frame update
-    void Use();
+    void Use(GameObject player);
 }

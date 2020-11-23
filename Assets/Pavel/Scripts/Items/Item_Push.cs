@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item_Push : MonoBehaviour, IIntercatable
 {
     // Start is called before the first frame update
+    GameObject player;
     void Start()
     {
         
@@ -16,7 +17,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
         
     }
 
-    public void Use(){
-        
+    public void Use(GameObject _player){
+        player=_player;
     }
 }

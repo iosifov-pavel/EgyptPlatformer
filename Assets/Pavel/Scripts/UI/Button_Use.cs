@@ -5,7 +5,6 @@ using UnityEngine;
 public class Button_Use : MonoBehaviour
 {
     GameObject player, item;
-    bool on=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,19 +18,7 @@ public class Button_Use : MonoBehaviour
     }
 
     public void Click(){
-     if(!on){
-         on=true;
-         player.GetComponent<Player_Movement>().enabled=false;
-         item.GetComponent<IIntercatable>().Use();
-     }
-     else{
-         on=false;
-         player.GetComponent<Player_Movement>().enabled=true;
-     }
-
-
-        float a = 1;
-        
+        item.GetComponent<IIntercatable>().Use(player);
     }
 
     public void getData(GameObject _player, GameObject _item){
