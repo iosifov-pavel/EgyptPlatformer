@@ -6,12 +6,10 @@ public class Button_Attack : MonoBehaviour{
 
     Touch touch;
     int id=-111;
-    bool touch_exist=false;
     Transform stick;
     Vector2 original;
     Vector2 center;
     Vector2 point;
-    public bool buttonPressed = false;
     [SerializeField] private GameObject aplayer;
     Player_Attack pa;
     float scale;
@@ -81,7 +79,7 @@ public class Button_Attack : MonoBehaviour{
         float angle = Vector3.Angle(Vector3.right,point);
         if(local.y>=0) pa.bUp=1;
         else pa.bUp=-1;
-        bool enough = (power>=10);
+        bool enough = (power>=15);
         if(enough) pa.angle=angle;
     }
 }

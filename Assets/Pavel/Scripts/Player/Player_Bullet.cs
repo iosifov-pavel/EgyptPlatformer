@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player_Bullet : MonoBehaviour{
 public float speed = 7f;
 public int dmg = 1;
-public float dir = 1;
 private float lifetime = 0.8f;
 float angle = 0;
 bool rotated = false;
@@ -22,7 +21,7 @@ SpriteRenderer sprt;
         newc.a=1;
         sprt.color=newc;
         float step =  speed * Time.deltaTime; 
-        transform.Translate(Vector3.right*step*dir);
+        transform.Translate(Vector3.right*step);
         lifetime-=Time.deltaTime;
         if(lifetime<=0) Destroy(gameObject);
   }
@@ -45,7 +44,6 @@ SpriteRenderer sprt;
       angle = _angle;
       Vector3 pos = transform.localScale;
       pos.x *= Mathf.Sign(pstn.x);
-      dir = 1*Mathf.Sign(pstn.x);
       transform.localScale = pos;
       direction=dir_rot;
     }

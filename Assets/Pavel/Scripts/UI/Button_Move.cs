@@ -5,14 +5,15 @@ using UnityEngine.EventSystems;
 
 public class Button_Move : MonoBehaviour{
     Touch touch;
+    int id=-111;
     Vector2 original;
-    Vector3 center;
+    Vector2 center;
     [SerializeField] GameObject player;
     //[SerializeField] GameObject firepoint;
     //Player_Attack pa;
     Player_Movement pm;
     Transform stick;
-    Vector3 dest;
+    Vector2 dest;
     float scale;
     float dist;
             Vector2 local;
@@ -30,20 +31,27 @@ public class Button_Move : MonoBehaviour{
         pm = player.GetComponent<Player_Movement>();
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
         dist = gameObject.GetComponent<RectTransform>().rect.width/2 * scale;
-        touch.phase = TouchPhase.Ended;
     }
 
     // Update is called once per frame
     void Update(){
         if(Input.touchCount>0){
-            //touch = Input.GetTouch(0);
             Touch[] touches = Input.touches;
-            float width = Screen.width/2+50f;
-            foreach(Touch _touch in touches){
-                if(_touch.position.x>width) continue;
-                touch = _touch;
+            if(id==-111){
+                foreach(Touch _touch in touches){
+                    float longs = (_touch.position-center).magnitude - (dist);
+                    if(longs<=0){
+                        touch = _touch;
+                        id = _touch.fingerId; 
+                        break;
+                    }
+                }
             }
-
+            else {
+                foreach(Touch _touch in touches){
+                    if(_touch.fingerId==id) touch = _touch;
+                }
+            }
             dest=touch.position - new Vector2(center.x,center.y);
             if(dest.magnitude>dist){
                 dest = Vector3.ClampMagnitude(dest,dist);
@@ -68,6 +76,7 @@ public class Button_Move : MonoBehaviour{
             case TouchPhase.Ended:
                 pm.stickPressed = false;
                 //pa.buttonUp=0;
+                id=-111;
                 Debug.Log("Touch Ended");
                 stick.localPosition = original;
                 break;
