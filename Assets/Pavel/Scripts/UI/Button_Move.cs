@@ -9,8 +9,6 @@ int id=-111;
 Vector2 original;
 Vector2 center;
 [SerializeField] GameObject player;
-//[SerializeField] GameObject firepoint;
-//Player_Attack pa;
 Player_Movement pm;
 Transform stick;
 Vector2 dest;
@@ -28,7 +26,6 @@ bool enough;
         stick = transform.GetChild(0);
         original = stick.localPosition;
         center = transform.position;
-        //pa = firepoint.GetComponent<Player_Attack>();
         pm = player.GetComponent<Player_Movement>();
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
         dist = gameObject.GetComponent<RectTransform>().rect.width/2 * scale;
@@ -71,13 +68,11 @@ bool enough;
                     break;
                 case TouchPhase.Canceled:
                     pm.stickPressed = false;
-                    //pa.buttonUp=0;
                     Debug.Log("Touch Canceled");
                     stick.localPosition = original;
                     break;
                 case TouchPhase.Ended:
                     pm.stickPressed = false;
-                    //pa.buttonUp=0;
                     id=-111;
                     Debug.Log("Touch Ended");
                     stick.localPosition = original;
@@ -96,19 +91,7 @@ bool enough;
         enough = (local.x>40 || local.x<-40);
         dir = local.x>=0 ? 1 : -1;
 
-        if(enough){
-            if(angle<25 || angle>155){
-                //pa.buttonUp=0;
-            } else if((angle>=25 || angle<=155) && local.y>0){
-                //pa.buttonUp=2;
-            } //else pa.buttonUp = 0;
-            pm.direction.x = dir * (power-40) * 0.01f;
-        }
-        else{
-            pm.direction.x=0f;
-            if(local.y>25){
-                //pa.buttonUp=1;
-            } //else pa.buttonUp=0;
-        }
-    }
+        if(enough) pm.direction.x = dir * (power-40) * 0.01f;
+        else pm.direction.x=0f;    
+    } 
 }
