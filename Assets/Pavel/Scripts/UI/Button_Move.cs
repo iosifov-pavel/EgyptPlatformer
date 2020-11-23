@@ -52,34 +52,35 @@ public class Button_Move : MonoBehaviour{
                     if(_touch.fingerId==id) touch = _touch;
                 }
             }
-            dest=touch.position - new Vector2(center.x,center.y);
-            if(dest.magnitude>dist){
-                dest = Vector3.ClampMagnitude(dest,dist);
-            }
-               
-            switch(touch.phase){
-            case TouchPhase.Began:
-                Debug.Log("Touch Began");
-                pm.stickPressed = true;
-                Action();
-                break;
-            case TouchPhase.Moved:
-                Debug.Log("Touch Moved");
-                Action();
-                break;
-            case TouchPhase.Canceled:
-                pm.stickPressed = false;
-                //pa.buttonUp=0;
-                Debug.Log("Touch Canceled");
-                stick.localPosition = original;
-                break;
-            case TouchPhase.Ended:
-                pm.stickPressed = false;
-                //pa.buttonUp=0;
-                id=-111;
-                Debug.Log("Touch Ended");
-                stick.localPosition = original;
-                break;
+            if(id!=-111){
+                dest=touch.position - new Vector2(center.x,center.y);
+                if(dest.magnitude>dist){
+                    dest = Vector3.ClampMagnitude(dest,dist);
+                }
+                switch(touch.phase){
+                case TouchPhase.Began:
+                    Debug.Log("Touch Began");
+                    pm.stickPressed = true;
+                    Action();
+                    break;
+                case TouchPhase.Moved:
+                    Debug.Log("Touch Moved");
+                    Action();
+                    break;
+                case TouchPhase.Canceled:
+                    pm.stickPressed = false;
+                    //pa.buttonUp=0;
+                    Debug.Log("Touch Canceled");
+                    stick.localPosition = original;
+                    break;
+                case TouchPhase.Ended:
+                    pm.stickPressed = false;
+                    //pa.buttonUp=0;
+                    id=-111;
+                    Debug.Log("Touch Ended");
+                    stick.localPosition = original;
+                    break;
+                }
             }
         }
     }

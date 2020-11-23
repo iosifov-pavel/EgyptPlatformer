@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Player_Bullet : MonoBehaviour{
 public float speed = 7f;
+Vector2 player_scale;
 public int dmg = 1;
 private float lifetime = 0.8f;
 float angle = 0;
 bool rotated = false;
 int direction = 1;
 SpriteRenderer sprt;
+Quaternion rot;
   // Start is called before the first frame update
    void Start (){
       sprt = GetComponent<SpriteRenderer>();
     }
     private void Update() {
-        Quaternion rot = Quaternion.Euler(0,0,angle*direction);
+     // if(player_scale.x<0) rot = Quaternion.Euler(0,0,180-angle*direction);
+     // else 
+        rot = Quaternion.Euler(0,0,angle*direction);
         transform.rotation = rot;
         Color newc = sprt.color;
         newc.a=1;
@@ -39,12 +43,9 @@ SpriteRenderer sprt;
      
     }
 
-    public void GetPosition (Vector3 pstn, float _angle, int dir_rot)
+    public void GetPosition (float _angle, int dir_rot)
     {
       angle = _angle;
-      Vector3 pos = transform.localScale;
-      pos.x *= Mathf.Sign(pstn.x);
-      transform.localScale = pos;
       direction=dir_rot;
     }
 }
