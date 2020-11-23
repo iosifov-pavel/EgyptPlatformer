@@ -4,16 +4,17 @@ using UnityEngine.EventSystems;
  
 public class Button_Attack : MonoBehaviour{
 
-    Touch touch;
-    int id=-111;
-    Transform stick;
-    Vector2 original;
-    Vector2 center;
-    Vector2 point;
-    [SerializeField] private GameObject aplayer;
-    Player_Attack pa;
-    float scale;
-    float dist;
+Touch touch;
+int id=-111;
+Transform stick;
+Vector2 original;
+Vector2 center;
+Vector2 point;
+[SerializeField] private GameObject aplayer;
+Player_Attack pa;
+float scale;
+float dist;
+float razbros;
 
     private void Start() {
         pa = aplayer.GetComponent<Player_Attack>();
@@ -21,7 +22,8 @@ public class Button_Attack : MonoBehaviour{
         original = stick.localPosition;
         center = transform.position;
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
-        dist = (gameObject.GetComponent<RectTransform>().rect.width -55)/2 * scale;
+        dist = (gameObject.GetComponent<RectTransform>().rect.width - 180)/2 * scale;
+        razbros = (gameObject.GetComponent<RectTransform>().rect.width - 20)/2 * scale;
     }
 
     private void Update() {
@@ -29,7 +31,7 @@ public class Button_Attack : MonoBehaviour{
             Touch[] touches = Input.touches;
                 if(id==-111){
                     foreach(Touch _touch in touches){
-                        float longs = (_touch.position-center).magnitude - (dist);
+                        float longs = (_touch.position-center).magnitude - (razbros);
                         if(longs<=0){
                             touch = _touch;
                             id = _touch.fingerId; 
@@ -50,7 +52,6 @@ public class Button_Attack : MonoBehaviour{
                 case TouchPhase.Began:
                     Debug.Log("Touch Began");
                     Stick();
-                    pa.buttonAttack=true;
                     break;
                 case TouchPhase.Moved:
                     Debug.Log("Touch Moved");
@@ -79,7 +80,9 @@ public class Button_Attack : MonoBehaviour{
         float angle = Vector3.Angle(Vector3.right,point);
         if(local.y>=0) pa.bUp=1;
         else pa.bUp=-1;
-        bool enough = (power>=15);
-        if(enough) pa.angle=angle;
+        bool enough = (power>=35);
+        if(enough)  pa.buttonAttack=true;
+        else pa.buttonAttack=false;
+        pa.angle=angle;
     }
 }

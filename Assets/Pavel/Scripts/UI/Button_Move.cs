@@ -4,24 +4,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Button_Move : MonoBehaviour{
-    Touch touch;
-    int id=-111;
-    Vector2 original;
-    Vector2 center;
-    [SerializeField] GameObject player;
-    //[SerializeField] GameObject firepoint;
-    //Player_Attack pa;
-    Player_Movement pm;
-    Transform stick;
-    Vector2 dest;
-    float scale;
-    float dist;
-            Vector2 local;
-            float angle;
-            float power;
-            float dir;
-            bool upside;
-            bool enough;
+Touch touch;
+int id=-111;
+Vector2 original;
+Vector2 center;
+[SerializeField] GameObject player;
+//[SerializeField] GameObject firepoint;
+//Player_Attack pa;
+Player_Movement pm;
+Transform stick;
+Vector2 dest;
+float scale;
+float dist;
+float razbros;
+Vector2 local;
+float angle;
+float power;
+float dir;
+bool upside;
+bool enough;
     // Start is called before the first frame update
     void Start(){
         stick = transform.GetChild(0);
@@ -31,6 +32,7 @@ public class Button_Move : MonoBehaviour{
         pm = player.GetComponent<Player_Movement>();
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
         dist = gameObject.GetComponent<RectTransform>().rect.width/2 * scale;
+        razbros = (gameObject.GetComponent<RectTransform>().rect.width + 60)/2 * scale;
     }
 
     // Update is called once per frame
@@ -39,7 +41,7 @@ public class Button_Move : MonoBehaviour{
             Touch[] touches = Input.touches;
             if(id==-111){
                 foreach(Touch _touch in touches){
-                    float longs = (_touch.position-center).magnitude - (dist);
+                    float longs = (_touch.position-center).magnitude - (razbros);
                     if(longs<=0){
                         touch = _touch;
                         id = _touch.fingerId; 
