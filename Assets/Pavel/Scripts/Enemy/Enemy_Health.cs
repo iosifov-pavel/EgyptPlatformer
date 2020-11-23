@@ -10,7 +10,7 @@ public class Enemy_Health : MonoBehaviour
     Color original;
     SpriteRenderer sprite;
     float time=0.3f;
-    float time_invincible=0.2f;
+    //float time_invincible=0.2f;
     // Start is called before the first frame update
     void Start(){
         sprite=GetComponent<SpriteRenderer>();

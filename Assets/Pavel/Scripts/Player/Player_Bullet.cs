@@ -8,7 +8,6 @@ Vector2 player_scale;
 public int dmg = 1;
 private float lifetime = 0.8f;
 float angle = 0;
-bool rotated = false;
 int direction = 1;
 SpriteRenderer sprt;
 Quaternion rot;
