@@ -21,6 +21,7 @@ float power;
 float dir;
 bool upside;
 bool enough;
+bool jump_in_progress = false;
     // Start is called before the first frame update
     void Start(){
         stick = transform.GetChild(0);
@@ -87,11 +88,28 @@ bool enough;
         local = stick.localPosition;
         power = local.magnitude;
         angle = Vector3.Angle(Vector3.right,dest);
-        upside = (local.y>40);
+        upside = (local.y>55);
         enough = (local.x>40 || local.x<-40);
         dir = local.x>=0 ? 1 : -1;
 
-        if(enough) pm.direction.x = dir * (power-40) * 0.01f;
-        else pm.direction.x=0f;    
+        if(enough) pm.direction.x = dir * (power-40) * 0.02f;
+        else pm.direction.x=0f;
+        if(upside){
+            if(!jump_in_progress){
+                jump_in_progress=true;
+                StartCoroutine(delay());
+            }
+        }
+        else{
+            jump_in_progress=false;
+            StopAllCoroutines();
+            pm.buttonJump=false;
+        } 
+    }
+
+    IEnumerator delay(){
+        pm.buttonJump = true;
+        yield return new WaitForSeconds(0.18f);
+        pm.buttonJump = false;
     } 
 }
