@@ -8,8 +8,8 @@ public class Button_Move : MonoBehaviour{
     Vector2 original;
     Vector3 center;
     [SerializeField] GameObject player;
-    [SerializeField] GameObject firepoint;
-    Player_Attack pa;
+    //[SerializeField] GameObject firepoint;
+    //Player_Attack pa;
     Player_Movement pm;
     Transform stick;
     Vector3 dest;
@@ -26,7 +26,7 @@ public class Button_Move : MonoBehaviour{
         stick = transform.GetChild(0);
         original = stick.localPosition;
         center = transform.position;
-        pa = firepoint.GetComponent<Player_Attack>();
+        //pa = firepoint.GetComponent<Player_Attack>();
         pm = player.GetComponent<Player_Movement>();
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
         dist = gameObject.GetComponent<RectTransform>().rect.width/2 * scale;
@@ -61,13 +61,13 @@ public class Button_Move : MonoBehaviour{
                 break;
             case TouchPhase.Canceled:
                 pm.stickPressed = false;
-                pa.buttonUp=0;
+                //pa.buttonUp=0;
                 Debug.Log("Touch Canceled");
                 stick.localPosition = original;
                 break;
             case TouchPhase.Ended:
                 pm.stickPressed = false;
-                pa.buttonUp=0;
+                //pa.buttonUp=0;
                 Debug.Log("Touch Ended");
                 stick.localPosition = original;
                 break;
@@ -86,17 +86,17 @@ public class Button_Move : MonoBehaviour{
 
         if(enough){
             if(angle<25 || angle>155){
-                pa.buttonUp=0;
+                //pa.buttonUp=0;
             } else if((angle>=25 || angle<=155) && local.y>0){
-                pa.buttonUp=2;
-            } else pa.buttonUp = 0;
+                //pa.buttonUp=2;
+            } //else pa.buttonUp = 0;
             pm.direction.x = dir * (power-40) * 0.01f;
         }
         else{
             pm.direction.x=0f;
             if(local.y>25){
-                pa.buttonUp=1;
-            } else pa.buttonUp=0;
+                //pa.buttonUp=1;
+            } //else pa.buttonUp=0;
         }
     }
 }

@@ -2,33 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Bullet : MonoBehaviour
-{
- public float speed = 7f;
-  public int dmg = 1;
-  public float dir = 1;
-  private float lifetime = 0.8f;
-  int up = 0;
-  bool rotated = false;
-  SpriteRenderer sprt;
-    // Start is called before the first frame update
-     void Start ()
-  {
-    sprt = GetComponent<SpriteRenderer>();
-  }
+public class Player_Bullet : MonoBehaviour{
+public float speed = 7f;
+public int dmg = 1;
+public float dir = 1;
+private float lifetime = 0.8f;
+float angle = 0;
+bool rotated = false;
+int direction = 1;
+SpriteRenderer sprt;
+  // Start is called before the first frame update
+   void Start (){
+      sprt = GetComponent<SpriteRenderer>();
+    }
     private void Update() {
-        if(!rotated){
-          if(up==0){
-           // transform.Rotate(0,0,90*dir*up);
-            rotated=true;
-          } else if(up==2){
-            transform.Rotate(0,0,30*dir);
-            rotated=true;
-          } else {
-            transform.Rotate(0,0,90*dir);
-            rotated=true;
-          }
-        }
+        Quaternion rot = Quaternion.Euler(0,0,angle*direction);
+        transform.rotation = rot;
         Color newc = sprt.color;
         newc.a=1;
         sprt.color=newc;
@@ -51,12 +40,13 @@ public class Player_Bullet : MonoBehaviour
      
     }
 
-    public void GetPosition (Vector3 pstn, int _up)
+    public void GetPosition (Vector3 pstn, float _angle, int dir_rot)
     {
-        up = _up;
+      angle = _angle;
       Vector3 pos = transform.localScale;
       pos.x *= Mathf.Sign(pstn.x);
       dir = 1*Mathf.Sign(pstn.x);
       transform.localScale = pos;
+      direction=dir_rot;
     }
 }

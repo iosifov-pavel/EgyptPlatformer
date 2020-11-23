@@ -14,7 +14,8 @@ public class Player_Attack : MonoBehaviour
    Vector3 forward, upward;
    Player_Animation pa;
    public bool buttonAttack=false;
-   public int buttonUp=0;
+   public int bUp=1;
+   public float angle;
 
     void Start() {
         parent = transform.parent.gameObject;
@@ -25,23 +26,24 @@ public class Player_Attack : MonoBehaviour
     }
 
    void Update (){   
-      if(buttonUp==2||buttonUp==1){
-         transform.localPosition = upward;
-      } 
-      else transform.localPosition = forward;
+      //if(buttonUp==2||buttonUp==1){
+      //   transform.localPosition = upward;
+      //} 
+      //else 
+      transform.localPosition = forward;
 
       if (buttonAttack && canAttack){
          isAttacking=true;
-         Shoot(buttonUp);
+         Shoot(angle);
          StartCoroutine(AtackTime());
       }
       pa.setBoolAnimation("Up", up);
       pa.setBoolAnimation("Attack", isAttacking);
    }
 
-   public void Shoot(int up_){
+   public void Shoot(float angle_){
         GameObject b = Instantiate(bullet,transform.position, transform.rotation) as GameObject;
-        b.GetComponent<Player_Bullet>().GetPosition(partran.localScale, up_);  
+        b.GetComponent<Player_Bullet>().GetPosition(partran.localScale, angle_, bUp);  
    }
 
    IEnumerator AtackTime(){

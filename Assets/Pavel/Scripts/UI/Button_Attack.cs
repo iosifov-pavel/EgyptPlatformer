@@ -2,27 +2,86 @@
 using System.Collections;
 using UnityEngine.EventSystems;
  
-public class Button_Attack : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
- 
-public bool buttonPressed = false;
-[SerializeField] private GameObject player;
-Player_Attack pa;
+public class Button_Attack : MonoBehaviour{
 
-private void Start() {
-    pa = player.GetComponent<Player_Attack>();
-}
- 
-public void OnPointerDown(PointerEventData eventData){
-     if(!buttonPressed){
-     buttonPressed = true;
-     pa.buttonAttack = true;
-     Debug.Log("A pressed");
-     }
-}
- 
-public void OnPointerUp(PointerEventData eventData){
-    buttonPressed = false;
-    pa.buttonAttack = false;
-    Debug.Log("A released");
-}
+    Touch touch;
+    int id=-111;
+    bool touch_exist=false;
+    Transform stick;
+    Vector2 original;
+    Vector2 center;
+    Vector2 point;
+    public bool buttonPressed = false;
+    [SerializeField] private GameObject aplayer;
+    Player_Attack pa;
+    float scale;
+    float dist;
+
+    private void Start() {
+        pa = aplayer.GetComponent<Player_Attack>();
+        stick = transform.GetChild(0);
+        original = stick.localPosition;
+        center = transform.position;
+        scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
+        dist = (gameObject.GetComponent<RectTransform>().rect.width -55)/2 * scale;
+    }
+
+    private void Update() {
+        if(Input.touchCount>0){
+            Touch[] touches = Input.touches;
+                if(id==-111){
+                    foreach(Touch _touch in touches){
+                        float longs = (_touch.position-center).magnitude - (dist);
+                        if(longs<=0){
+                            touch = _touch;
+                            id = _touch.fingerId; 
+                            break;
+                        }
+                    }
+                } else {
+                    foreach(Touch _touch in touches){
+                        if(_touch.fingerId==id) touch = _touch;
+                    }
+                }
+            if(id!=-111){
+                point=touch.position - center;
+                if(point.magnitude>dist){
+                    point = Vector2.ClampMagnitude(point,dist);
+                }
+                switch(touch.phase){
+                case TouchPhase.Began:
+                    Debug.Log("Touch Began");
+                    Stick();
+                    pa.buttonAttack=true;
+                    break;
+                case TouchPhase.Moved:
+                    Debug.Log("Touch Moved");
+                    Stick();
+                    break;
+                case TouchPhase.Canceled:
+                    Debug.Log("Touch Canceled");
+                    stick.localPosition = original;
+                    break;
+                case TouchPhase.Ended:
+                    id=-111;
+                    pa.buttonAttack=false;
+                    pa.angle=0;
+                    Debug.Log("Touch Ended");
+                    stick.localPosition = original;
+                    break;
+                }
+            }
+        }
+    }
+
+    private void Stick(){
+        stick.position=center+point;
+        Vector2 local = stick.localPosition;
+        float power = local.magnitude;
+        float angle = Vector3.Angle(Vector3.right,point);
+        if(local.y>=0) pa.bUp=1;
+        else pa.bUp=-1;
+        bool enough = (power>=10);
+        if(enough) pa.angle=angle;
+    }
 }
