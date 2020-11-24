@@ -11,6 +11,7 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     Transform child;
     [SerializeField] Color on;
     [SerializeField] Color off;
+    MonoBehaviour child_script;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
         child = transform.GetChild(2);
         lamp_sprite = lamp.GetComponent<SpriteRenderer>();
         lamp_sprite.color = condition ? on : off;
+        child_script = child.GetComponent<MonoBehaviour>();
     }
 
     // Update is called once per frame
