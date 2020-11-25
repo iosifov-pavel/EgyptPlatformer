@@ -8,6 +8,7 @@ public class Player_Movement : MonoBehaviour
     private float speed = 140f;
     private float maxSpeed = 3f;
     public Vector2 direction;
+    Vector2 move;
     public float  otherSource = 0;
     private float jump_force = 4.8f;
     private float jump_time = 0f;
@@ -76,6 +77,7 @@ public class Player_Movement : MonoBehaviour
         PreMove();
         Horizontal();
         Vertical();
+        Move();
         CustomPhysics();
         PostMove();
         }
@@ -89,11 +91,12 @@ public class Player_Movement : MonoBehaviour
         //rb.AddForce(move, ForceMode2D.Impulse);
 
 
-        Vector2 move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
-        if (Mathf.Abs(move.x) > maxSpeed) {
-            move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
-        }
-        rb.velocity= new Vector2(move.x + maxSpeed*otherSource/100,move.y);
+        move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
+        //if (Mathf.Abs(move.x) > maxSpeed) {
+        //    move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
+        //}
+        //rb.velocity= new Vector2(move.x + maxSpeed*otherSource/100,move.y);
+        //rb.velocity+=move;
 
         //Vector2 move = new Vector2(direction.x*Time.deltaTime*speed - rb.velocity.x+maxSpeed*otherSource/100, 0 );
         //rb.AddForce(move,ForceMode2D.Impulse);
@@ -117,6 +120,11 @@ public class Player_Movement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
         }
+    }
+
+    void Move(){
+        rb.MovePosition((Vector2)transform.position+move);
+        //rb.velocity=new Vector2(0,rb.velocity.y);
     }
 
     void CheckGround(){  
