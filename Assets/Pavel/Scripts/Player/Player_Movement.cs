@@ -92,10 +92,10 @@ public class Player_Movement : MonoBehaviour
 
 
         move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
-        //if (Mathf.Abs(move.x) > maxSpeed) {
-        //    move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
-        //}
-        //rb.velocity= new Vector2(move.x + maxSpeed*otherSource/100,move.y);
+        if (Mathf.Abs(move.x) > maxSpeed) {
+            move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
+        }
+        rb.velocity= new Vector2(move.x + maxSpeed*otherSource/100,move.y);
         //rb.velocity+=move;
 
         //Vector2 move = new Vector2(direction.x*Time.deltaTime*speed - rb.velocity.x+maxSpeed*otherSource/100, 0 );
@@ -123,7 +123,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Move(){
-        rb.MovePosition((Vector2)transform.position+move);
+       // rb.MovePosition((Vector2)transform.position+move);
         //rb.velocity=new Vector2(0,rb.velocity.y);
     }
 
