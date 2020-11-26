@@ -5,11 +5,13 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
     Player_Health ph;
-    private float speed = 140f;
+    private float speed = 72f;
     private float maxSpeed = 3f;
     public Vector2 direction;
     Vector2 move;
-    public float  otherSource = 0;
+    List<string> source_names = new List<string>();
+    List<Vector2> sources = new List<Vector2>();
+    List<int> source_times = new List<int>();
     private float jump_force = 4.8f;
     private float jump_time = 0f;
     private float jump_max = 0.18f;
@@ -26,6 +28,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] PhysicsMaterial2D zero;
     public bool buttonJump = false;
     public bool stickPressed = false;
+    public bool blocked = false;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -73,11 +76,11 @@ public class Player_Movement : MonoBehaviour
             CustomPhysics();
             return;
         } 
-        if(!ph.isDamaged){
+        if(!blocked){
         PreMove();
         Horizontal();
         Vertical();
-        Move();
+        AdditionalMove();
         CustomPhysics();
         PostMove();
         }
@@ -85,24 +88,11 @@ public class Player_Movement : MonoBehaviour
 
     void Horizontal(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
-
-       
-        //Vector2 move = new Vector2((direction.x + 1.1f*otherSource/100)*Time.deltaTime*speed, 0);
-        //rb.AddForce(move, ForceMode2D.Impulse);
-
-
         move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
+        rb.velocity = move;
         if (Mathf.Abs(move.x) > maxSpeed) {
             move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
-        rb.velocity= new Vector2(move.x + maxSpeed*otherSource/100,move.y);
-        //rb.velocity+=move;
-
-        //Vector2 move = new Vector2(direction.x*Time.deltaTime*speed - rb.velocity.x+maxSpeed*otherSource/100, 0 );
-        //rb.AddForce(move,ForceMode2D.Impulse);
-
-        //Vector2 move = new Vector2(direction.x*Time.deltaTime*speed - rb.velocity.x+maxSpeed*otherSource/100, 0 );
-        //rb.velocity+=move;
 
         anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
         anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
@@ -122,10 +112,28 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
-    void Move(){
-       // rb.MovePosition((Vector2)transform.position+move);
-        //rb.velocity=new Vector2(0,rb.velocity.y);
+    void AdditionalMove(){
+        Vector2 summary=Vector2.zero;
+        if(source_names.Count<=0) return;
+        foreach(string name in source_names){
+            int i = source_names.IndexOf(name);
+            if(source_times[i]==-1) summary+=sources[i];
+            if(source_times[i]>0){
+                summary+=sources[i];
+                source_times[i]--;
+            }
+            if(source_times[i]==0){
+                source_names.RemoveAt(i);
+                sources.RemoveAt(i);
+                source_times.RemoveAt(i); 
+            }
+        }
+        rb.velocity+=summary;
     }
+
+    //public void AddForces(Vector2 force){
+    //    rb.velocity+=force;
+    //}
 
     void CheckGround(){  
     Collider2D[] hits = new Collider2D[10];
@@ -160,10 +168,9 @@ public class Player_Movement : MonoBehaviour
             } 
             rb.gravityScale = gravity;
             rb.drag=1f;
-            if(directionchanged || needtostop){               
-               // rb.velocity = new Vector2(0,rb.velocity.y);
-               if(otherSource!=0){}
-               else rb.drag=125f;
+            if(directionchanged || !stickPressed || needtostop){
+                //if(sources.Count==0) return;
+                //rb.drag=125f;
             }
         } else {
             rb.gravityScale = gravity;
@@ -186,5 +193,38 @@ public class Player_Movement : MonoBehaviour
     }
 
     void PostMove(){
+        if(onSlope && direction.x==0){
+            //rb.velocity = new Vector2(rb.velocity.x,0);
+            //rb.drag=225;
+        } 
+    }
+
+    public void SetOtherSource(string name, Vector2 source, int seconds){
+        source_names.Add(name);
+        sources.Add(source);
+        source_times.Add(seconds);
+    }
+
+    public void ResetOtherSource(string name){
+        if(sources.Count==0) return;
+        int i =  source_names.IndexOf(name);
+        source_names.RemoveAt(i);
+        sources.RemoveAt(i);
+        source_times.RemoveAt(i);
+    }
+
+    public void BlockMovement(float time){
+        StartCoroutine(Block(time));
+    }
+
+    public void unBlock(){
+        blocked=false;
+        StopAllCoroutines();
+    }
+
+    IEnumerator Block(float time){
+        blocked = true;
+        yield return new WaitForSeconds(time);
+        blocked = false;
     }
 }
