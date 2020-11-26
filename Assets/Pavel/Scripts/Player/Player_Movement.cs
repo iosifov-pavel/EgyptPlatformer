@@ -47,7 +47,6 @@ public class Player_Movement : MonoBehaviour
     void Update(){
         if(stickPressed){
         } else direction = new Vector2(0, 0);
-        
         anima.setDirection(direction.x);
         CheckGround();
 
@@ -75,7 +74,8 @@ public class Player_Movement : MonoBehaviour
         if(ph.dead){
             CustomPhysics();
             return;
-        } 
+        }
+        GetInput(); 
         if(!blocked){
         PreMove();
         Horizontal();
@@ -86,9 +86,12 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
-    void Horizontal(){
+    void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
         move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
+    }
+
+    void Horizontal(){
         rb.velocity = move;
         if (Mathf.Abs(move.x) > maxSpeed) {
             move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
