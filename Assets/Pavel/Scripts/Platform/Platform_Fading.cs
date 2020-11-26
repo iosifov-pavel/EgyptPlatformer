@@ -9,11 +9,6 @@ public class Platform_Fading : MonoBehaviour
     private float reverse = 1.5f;
     bool canfade = true;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
 
 

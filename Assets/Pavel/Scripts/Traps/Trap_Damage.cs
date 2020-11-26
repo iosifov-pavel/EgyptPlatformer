@@ -10,10 +10,7 @@ public class Trap_Damage : MonoBehaviour
     Rigidbody2D rb;
     Transform tr;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
     // Update is called once per frame
 
     private void OnCollisionEnter2D(Collision2D other) {
