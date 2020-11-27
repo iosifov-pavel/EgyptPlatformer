@@ -19,8 +19,12 @@ Vector2 local;
 float angle;
 float power;
 float dir;
-bool upside;
+bool upside=true;
 bool enough;
+float last_y;
+float delta_jump=0;
+float cumulative_jump=0;
+float cumulative_reset=0;
 bool jump_in_progress = false;
     // Start is called before the first frame update
     void Start(){
@@ -61,6 +65,10 @@ bool jump_in_progress = false;
                 case TouchPhase.Began:
                     Debug.Log("Touch Began");
                     pm.stickPressed = true;
+                    cumulative_reset=0;
+                    cumulative_jump=0;
+                    last_y=0;
+                    delta_jump=0;
                     Action();
                     break;
                 case TouchPhase.Moved:
@@ -75,6 +83,10 @@ bool jump_in_progress = false;
                 case TouchPhase.Ended:
                     pm.stickPressed = false;
                     id=-111;
+                    cumulative_reset=0;
+                    cumulative_jump=0;
+                    last_y=0;
+                    delta_jump=0;
                     Debug.Log("Touch Ended");
                     stick.localPosition = original;
                     break;
@@ -88,28 +100,38 @@ bool jump_in_progress = false;
         local = stick.localPosition;
         power = local.magnitude;
         angle = Vector3.Angle(Vector3.right,dest);
-        upside = (local.y>55);
         enough = (local.x>40 || local.x<-40);
         dir = local.x>=0 ? 1 : -1;
-
         if(enough) pm.direction.x = dir * (power-40) * 0.02f;
         else pm.direction.x=0f;
-        if(upside){
-            if(!jump_in_progress){
-                jump_in_progress=true;
-                StartCoroutine(delay());
-            }
+
+        delta_jump=(local.y-last_y);
+        if(delta_jump>=0){
+            cumulative_jump+=delta_jump;
+            cumulative_reset=0;
+        } else {
+            cumulative_jump=0;
+            cumulative_reset+=delta_jump;
         }
-        else{
-            jump_in_progress=false;
-            StopAllCoroutines();
-            pm.buttonJump=false;
+        last_y=local.y;
+        if(cumulative_jump>60 && pm.jump_count>0 && pm.jump_time<0 && pm.CanJump){
+            //pm.buttonJump=true;
+            pm.jump_count--;
+            pm.jump_time=pm.jump_max;
+            cumulative_reset=0;
+            cumulative_jump=0;
+            delta_jump=0;
+            pm.CanJump=false;
+            //upside=true;
+            //jump_in_progress=false;
+        }  
+        if(cumulative_reset<-10f){
+            //pm.buttonJump=false;
+            pm.jump_time = -1;
+            cumulative_reset=0;
+            cumulative_jump=0;
+            delta_jump=0;
+            pm.CanJump=true;
         } 
     }
-
-    IEnumerator delay(){
-        pm.buttonJump = true;
-        yield return new WaitForSeconds(0.18f);
-        pm.buttonJump = false;
-    } 
 }

@@ -9,10 +9,7 @@ public class Traps_Shoot : MonoBehaviour
     bool can_attack = true;
     float wait = 1.5f;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()

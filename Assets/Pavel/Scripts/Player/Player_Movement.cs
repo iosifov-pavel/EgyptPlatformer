@@ -5,16 +5,23 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
     Player_Health ph;
-    private float speed = 140f;
+    private float speed = 72f;
     private float maxSpeed = 3f;
     public Vector2 direction;
-    public float  otherSource = 0;
-    private float jump_force = 4.8f;
-    private float jump_time = 0f;
-    private float jump_max = 0.18f;
-    public bool isGrounded = true;
+    Vector2 move;
+    List<string> source_names = new List<string>();
+    List<Vector2> sources = new List<Vector2>();
+    List<int> source_times = new List<int>();
+    bool isJumping;
+    private float jump_force = 4.2f;
+    public float jump_time;
+    public float jump_max = 0.18f;
+    public int jump_count;
+
+    private int max_jump_count;
+    public bool isGrounded;
     public bool onSlope = false;
-    bool CanJump = false;
+    public bool CanJump;
     private float gravity = 2.2f;
     private float slopeangle;
     Rigidbody2D rb;
@@ -27,6 +34,8 @@ public class Player_Movement : MonoBehaviour
     public bool stickPressed = false;
 
     public GameObject speeds;
+    public bool blocked = false;
+    bool lastcheck;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -37,71 +46,51 @@ public class Player_Movement : MonoBehaviour
         checkground = tran.GetChild(1).gameObject.GetComponent<BoxCollider2D>();
         anima = GetComponent<Player_Animation>();
         normal = rb.sharedMaterial;
-       // OnSlope.friction=400000f;
-       // OnSlope.bounciness=0f;
+        max_jump_count=3;
+        jump_time=-1;
+        jump_count=max_jump_count;
+        jump_max = 0.18f;
     }
 
     // Update is called once per frame
     void Update(){
         if(stickPressed){
         } else direction = new Vector2(0, 0);
-        
         anima.setDirection(direction.x);
         CheckGround();
 
      //   if(Mathf.Abs(direction.x)>0 && isGrounded) GetComponent<Player_Sounds>().PlaySteps(true);
       //  else GetComponent<Player_Sounds>().PlaySteps(false);
 
-        anima.setBoolAnimation("Ground", isGrounded);
-        if(isGrounded && buttonJump){
-        //    GetComponent<Player_Sounds>().PlaySound("jump");
-            jump_time=jump_max;
-            CanJump=true;
-        }
-        if(buttonJump && CanJump){
-            jump_time-=Time.deltaTime;
-            if(jump_time<=0) CanJump=false;
-        }
-        if(!buttonJump){
-            jump_time=-1;
-            CanJump=false;
-        }
-        
+        anima.setBoolAnimation("Ground", isGrounded);   
     }
 
     private void FixedUpdate() {
         if(ph.dead){
             CustomPhysics();
             return;
-        } 
-        if(!ph.isDamaged){
+        }
+        GetInput(); 
+        if(!blocked){
         PreMove();
         Horizontal();
         Vertical();
+        AdditionalMove();
         CustomPhysics();
         PostMove();
         }
     }
 
-    void Horizontal(){
+    void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
+        move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
+    }
 
-       
-        //Vector2 move = new Vector2((direction.x + 1.1f*otherSource/100)*Time.deltaTime*speed, 0);
-        //rb.AddForce(move, ForceMode2D.Impulse);
-
-
-        Vector2 move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
+    void Horizontal(){
+        rb.velocity = move;
         if (Mathf.Abs(move.x) > maxSpeed) {
             move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
-        rb.velocity= new Vector2(move.x + maxSpeed*otherSource/100,move.y);
-
-        //Vector2 move = new Vector2(direction.x*Time.deltaTime*speed - rb.velocity.x+maxSpeed*otherSource/100, 0 );
-        //rb.AddForce(move,ForceMode2D.Impulse);
-
-        //Vector2 move = new Vector2(direction.x*Time.deltaTime*speed - rb.velocity.x+maxSpeed*otherSource/100, 0 );
-        //rb.velocity+=move;
 
         anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
         anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
@@ -113,12 +102,33 @@ public class Player_Movement : MonoBehaviour
 
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
-        if(jump_time>=0 && CanJump){    
+        if(jump_time>=0){    
             rb.drag=2f;
+            isJumping=true;
+            jump_time-=Time.deltaTime;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
         }
+    }
+
+    void AdditionalMove(){
+        Vector2 summary=Vector2.zero;
+        if(source_names.Count<=0) return;
+        foreach(string name in source_names){
+            int i = source_names.IndexOf(name);
+            if(source_times[i]==-1) summary+=sources[i];
+            if(source_times[i]>0){
+                summary+=sources[i];
+                source_times[i]--;
+            }
+            if(source_times[i]==0){
+                source_names.RemoveAt(i);
+                sources.RemoveAt(i);
+                source_times.RemoveAt(i); 
+            }
+        }
+        rb.velocity+=summary;
     }
 
     void CheckGround(){  
@@ -126,7 +136,12 @@ public class Player_Movement : MonoBehaviour
         Physics2D.OverlapCollider(checkground, new ContactFilter2D(),hits);
         foreach(Collider2D hit in hits){
             if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){
+                jump_time=-1;
                 isGrounded=true;
+                lastcheck=true;
+                isJumping=false;
+                CanJump=true;
+                jump_count = max_jump_count;
                 slopeangle = Vector2.Angle(transform.up, hit.transform.up);
                 if(slopeangle>=3f) onSlope=true;
                 else onSlope = false;
@@ -135,6 +150,10 @@ public class Player_Movement : MonoBehaviour
         }
         onSlope = false;
         isGrounded=false;
+        if(!isJumping && !isGrounded && lastcheck){
+            lastcheck=false;
+            jump_count--;
+        }
     }
 
     void Flip(){
@@ -154,10 +173,9 @@ public class Player_Movement : MonoBehaviour
             } 
             rb.gravityScale = gravity;
             rb.drag=1f;
-            if(directionchanged || needtostop){               
-               // rb.velocity = new Vector2(0,rb.velocity.y);
-               if(otherSource!=0){}
-               else rb.drag=125f;
+            if(directionchanged || !stickPressed || needtostop){
+                //if(sources.Count==0) return;
+                //rb.drag=125f;
             }
         } else {
             rb.gravityScale = gravity;
@@ -180,6 +198,39 @@ public class Player_Movement : MonoBehaviour
     }
 
     void PostMove(){
+        if(onSlope && direction.x==0){
+            //rb.velocity = new Vector2(rb.velocity.x,0);
+            //rb.drag=225;
+        } 
+    }
+
+    public void SetOtherSource(string name, Vector2 source, int seconds){
+        source_names.Add(name);
+        sources.Add(source);
+        source_times.Add(seconds);
+    }
+
+    public void ResetOtherSource(string name){
+        if(sources.Count==0) return;
+        int i =  source_names.IndexOf(name);
+        source_names.RemoveAt(i);
+        sources.RemoveAt(i);
+        source_times.RemoveAt(i);
+    }
+
+    public void BlockMovement(float time){
+        StartCoroutine(Block(time));
+    }
+
+    public void unBlock(){
+        blocked=false;
+        StopAllCoroutines();
+    }
+
+    IEnumerator Block(float time){
+        blocked = true;
+        yield return new WaitForSeconds(time);
+        blocked = false;
     }
 
 

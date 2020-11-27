@@ -7,11 +7,6 @@ public class Instant_Death : MonoBehaviour
     int damage = -100;
     Player_Health ph;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
 
 
