@@ -114,7 +114,7 @@ bool jump_in_progress = false;
             cumulative_reset+=delta_jump;
         }
         last_y=local.y;
-        if(cumulative_jump>50 && pm.jump_count>0 && pm.jump_time<0 && pm.CanJump){
+        if(cumulative_jump>55 && pm.jump_count>0 && pm.jump_time<0 && pm.CanJump){
             //pm.buttonJump=true;
             pm.jump_count--;
             pm.jump_time=pm.jump_max;
@@ -125,7 +125,7 @@ bool jump_in_progress = false;
             //upside=true;
             //jump_in_progress=false;
         }  
-        if(cumulative_reset<-4f){
+        if(cumulative_reset<-10f){
             //pm.buttonJump=false;
             pm.jump_time = -1;
             cumulative_reset=0;
