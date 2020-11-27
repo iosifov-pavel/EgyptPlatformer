@@ -12,12 +12,16 @@ public class Player_Movement : MonoBehaviour
     List<string> source_names = new List<string>();
     List<Vector2> sources = new List<Vector2>();
     List<int> source_times = new List<int>();
-    private float jump_force = 4.8f;
-    private float jump_time = 0f;
-    private float jump_max = 0.18f;
+    bool isJumping = false;
+    private float jump_force = 4.2f;
+    public float jump_time = -1f;
+    public float jump_max = 0.18f;
+    public int jump_count=1;
+
+    private int max_jump_count=2;
     public bool isGrounded = true;
     public bool onSlope = false;
-    bool CanJump = false;
+    public bool CanJump = true;
     private float gravity = 2.2f;
     private float slopeangle;
     Rigidbody2D rb;
@@ -29,6 +33,7 @@ public class Player_Movement : MonoBehaviour
     public bool buttonJump = false;
     public bool stickPressed = false;
     public bool blocked = false;
+    bool lastcheck = true;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -39,6 +44,8 @@ public class Player_Movement : MonoBehaviour
         checkground = tran.GetChild(1).gameObject.GetComponent<BoxCollider2D>();
         anima = GetComponent<Player_Animation>();
         normal = rb.sharedMaterial;
+        jump_time=-1;
+        jump_count=max_jump_count;
        // OnSlope.friction=400000f;
        // OnSlope.bounciness=0f;
     }
@@ -54,19 +61,21 @@ public class Player_Movement : MonoBehaviour
       //  else GetComponent<Player_Sounds>().PlaySteps(false);
 
         anima.setBoolAnimation("Ground", isGrounded);
-        if(isGrounded && buttonJump){
-        //    GetComponent<Player_Sounds>().PlaySound("jump");
-            jump_time=jump_max;
-            CanJump=true;
+        if(jump_time>0){
         }
-        if(buttonJump && CanJump){
-            jump_time-=Time.deltaTime;
-            if(jump_time<=0) CanJump=false;
-        }
-        if(!buttonJump){
-            jump_time=-1;
-            CanJump=false;
-        }
+        //if(jump_count>0 && buttonJump){
+        ////    GetComponent<Player_Sounds>().PlaySound("jump");
+        //    //jump_time=jump_max;
+        //    CanJump=true;
+        //}
+        //if(buttonJump && CanJump){
+        //    jump_time-=Time.deltaTime;
+        //    if(jump_time<=0) CanJump=false;
+        //}
+        //if(!buttonJump){
+        //    jump_time=-1;
+        //    CanJump=false;
+        //}
         
     }
 
@@ -107,8 +116,10 @@ public class Player_Movement : MonoBehaviour
 
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
-        if(jump_time>=0 && CanJump){    
+        if(jump_time>=0){    
             rb.drag=2f;
+            isJumping=true;
+            jump_time-=Time.deltaTime;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
@@ -144,6 +155,11 @@ public class Player_Movement : MonoBehaviour
         foreach(Collider2D hit in hits){
             if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){
                 isGrounded=true;
+                lastcheck=true;
+                isJumping=false;
+                CanJump=true;
+                jump_count = max_jump_count;
+                jump_time=-1;
                 slopeangle = Vector2.Angle(transform.up, hit.transform.up);
                 if(slopeangle>=3f) onSlope=true;
                 else onSlope = false;
@@ -152,6 +168,10 @@ public class Player_Movement : MonoBehaviour
         }
         onSlope = false;
         isGrounded=false;
+        if(!isJumping && !isGrounded && lastcheck){
+            lastcheck=false;
+            jump_count--;
+        }
     }
 
     void Flip(){

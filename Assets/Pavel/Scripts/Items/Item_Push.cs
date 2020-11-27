@@ -25,6 +25,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
     {
         CheckContact();
         if(on){
+            pm.blocked=true;
             Vector2 diff = transform.position-player.transform.position;
             float dif = Mathf.Abs(diff.magnitude);
             if(!pm.isGrounded || ph.isDamaged || ph.dead || dif>distance+0.06f){
