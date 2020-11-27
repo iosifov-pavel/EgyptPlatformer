@@ -46,6 +46,7 @@ public class Player_Movement : MonoBehaviour
         normal = rb.sharedMaterial;
         jump_time=-1;
         jump_count=max_jump_count;
+        jump_max = 0.18f;
        // OnSlope.friction=400000f;
        // OnSlope.bounciness=0f;
     }

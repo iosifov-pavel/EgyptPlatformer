@@ -114,7 +114,7 @@ bool jump_in_progress = false;
             cumulative_reset+=delta_jump;
         }
         last_y=local.y;
-        if(cumulative_jump>55 && pm.jump_count>0 && pm.jump_time<0 && pm.CanJump){
+        if(cumulative_jump>60 && pm.jump_count>0 && pm.jump_time<0 && pm.CanJump){
             //pm.buttonJump=true;
             pm.jump_count--;
             pm.jump_time=pm.jump_max;
