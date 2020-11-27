@@ -19,13 +19,12 @@ Vector2 local;
 float angle;
 float power;
 float dir;
-bool upside=true;
 bool enough;
+bool enogh_y;
 float last_y;
 float delta_jump=0;
 float cumulative_jump=0;
 float cumulative_reset=0;
-bool jump_in_progress = false;
     // Start is called before the first frame update
     void Start(){
         stick = transform.GetChild(0);
@@ -74,6 +73,7 @@ bool jump_in_progress = false;
                 case TouchPhase.Moved:
                     Debug.Log("Touch Moved");
                     Action();
+                    Vertical();
                     break;
                 case TouchPhase.Canceled:
                     pm.stickPressed = false;
@@ -100,38 +100,25 @@ bool jump_in_progress = false;
         local = stick.localPosition;
         power = local.magnitude;
         angle = Vector3.Angle(Vector3.right,dest);
-        enough = (local.x>40 || local.x<-40);
+        enough = (Mathf.Abs(local.x)>40);
+        enogh_y = (Mathf.Abs(local.y)>40);
         dir = local.x>=0 ? 1 : -1;
         if(enough) pm.direction.x = dir * (power-40) * 0.02f;
         else pm.direction.x=0f;
+        if(enogh_y) pm.direction.y = dir * (power-40) * 0.02f;
+        else pm.direction.y=0f;
+    }
 
+    private void Vertical(){
         delta_jump=(local.y-last_y);
-        if(delta_jump>=0){
-            cumulative_jump+=delta_jump;
-            cumulative_reset=0;
-        } else {
-            cumulative_jump=0;
-            cumulative_reset+=delta_jump;
+        if(delta_jump>0){
+            pm.stick_delta= new Vector2(delta_jump,0);
+        } else if(delta_jump<0) {
+            pm.stick_delta= new Vector2(0,Mathf.Abs(delta_jump));
+        }
+        else{
+           pm.stick_delta= new Vector2(0,0); 
         }
         last_y=local.y;
-        if(cumulative_jump>60 && pm.jump_count>0 && pm.jump_time<0 && pm.CanJump){
-            //pm.buttonJump=true;
-            pm.jump_count--;
-            pm.jump_time=pm.jump_max;
-            cumulative_reset=0;
-            cumulative_jump=0;
-            delta_jump=0;
-            pm.CanJump=false;
-            //upside=true;
-            //jump_in_progress=false;
-        }  
-        if(cumulative_reset<-10f){
-            //pm.buttonJump=false;
-            pm.jump_time = -1;
-            cumulative_reset=0;
-            cumulative_jump=0;
-            delta_jump=0;
-            pm.CanJump=true;
-        } 
     }
 }

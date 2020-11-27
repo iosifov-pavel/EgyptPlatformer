@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 167686310}
   - component: {fileID: 167686312}
   - component: {fileID: 167686311}
+  - component: {fileID: 167686313}
   m_Layer: 0
   m_Name: LevelControl
   m_TagString: Untagged
@@ -562,9 +563,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167686309}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd81e839949f4c547bdcb60a586ed6bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 1387262184}
+--- !u!114 &167686313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167686309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82567f7db801cb4a9eb04e4a84f96f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 1387262184}
@@ -6313,12 +6327,12 @@ PrefabInstance:
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6
+      value: -3.03
       objectReference: {fileID: 0}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.24
+      value: 4.21
       objectReference: {fileID: 0}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
