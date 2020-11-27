@@ -9,6 +9,17 @@ public class Level_Controller : MonoBehaviour
 
     int coins = 0;
 
+    public Image [] hearts;
+    public Sprite isLife, nonLife;
+
+    Player_Health player;
+
+    public GameObject WinScreen;
+    public GameObject lul;
+
+    public GameObject DeathScreen;
+    
+
     
     // Start is called before the first frame update
     void Start()
@@ -17,10 +28,16 @@ public class Level_Controller : MonoBehaviour
     }
 
     // Update is called once per frame
-/*   void Update()
+   void Update()
     {
-        
-    }*/
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if(player.GetHP() > i)
+                hearts[i].sprite = isLife;
+            else 
+                hearts[i].sprite = nonLife;
+        }
+    }
 
 
     public void GetCoin(int i)
@@ -28,4 +45,22 @@ public class Level_Controller : MonoBehaviour
         coins += i;
         score.text = coins.ToString();
     }
+
+    public void Win ()
+    {
+        Time.timeScale = 0f;
+        WinScreen.SetActive(true);
+    }
+
+    public void Hek ()
+    {
+        lul.SetActive(true);
+    }
+
+    public void Lose ()
+    {
+        Time.timeScale = 0f;
+        DeathScreen.SetActive(true);
+    }
+    
 }

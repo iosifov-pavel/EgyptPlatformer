@@ -10,6 +10,8 @@ public class Player_Health : MonoBehaviour
     public bool superman = false;
     public bool dead = false;
     Player_Animation anima;
+
+    public GameObject infinity;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,5 +59,50 @@ public class Player_Health : MonoBehaviour
         gameObject.layer=9;
         superman=false;
         player.color = Color.white;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision) 
+    {
+        if (collision.gameObject.tag == "Heart")
+        {
+            Destroy(collision.gameObject);
+           ChangeHP(1);
+           
+        }
+
+        if (collision.gameObject.tag == "infinity"){
+            Destroy(collision.gameObject);
+            StartCoroutine(NoHit());
+        }
+    }
+
+    IEnumerator NoHit ()
+    {
+        isDamaged = false;
+        infinity.GetComponent<SpriteRenderer>().color = new Color (1f,1f,1f,1f);
+        print("DMG taken off");
+        yield return new WaitForSeconds(5f);
+        isDamaged = true;
+        StartCoroutine(invis(infinity.GetComponent<SpriteRenderer>(), 0.02f));
+        yield return new WaitForSeconds(1f);
+        print("DMG taken on");
+    }
+
+
+    IEnumerator invis(SpriteRenderer spr, float time)
+    
+    {
+        spr.color = new Color(1f,1f,1f, spr.color.a - time*2);
+        yield return new WaitForSeconds(time);
+        if(spr.color.a > 0){
+            StartCoroutine(invis(spr, time));
+        }
+    }
+
+
+    public int GetHP()
+    {
+        return hp;
     }
 }
