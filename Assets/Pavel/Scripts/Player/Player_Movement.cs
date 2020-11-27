@@ -25,6 +25,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] PhysicsMaterial2D zero;
     public bool buttonJump = false;
     public bool stickPressed = false;
+
+    public GameObject speeds;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -179,4 +181,56 @@ public class Player_Movement : MonoBehaviour
 
     void PostMove(){
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.tag == "speeds"){
+            Destroy(collision.gameObject);
+            StartCoroutine(speedUp());
+        }
+    }
+    IEnumerator speedUp()
+    {
+        speed = speed*2;
+        speeds.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+        print("Speed UP");
+        yield return new WaitForSeconds(9f);
+        StartCoroutine(invis(speeds.GetComponent<SpriteRenderer>(), 0.02f));
+        yield return new WaitForSeconds(1f);
+        speed = speed /2;
+        print("Speed Normal");
+    }
+
+
+
+    IEnumerator invis(SpriteRenderer spr, float time)
+    
+    {
+        spr.color = new Color(1f,1f,1f, spr.color.a - time*2);
+        yield return new WaitForSeconds(time);
+        if(spr.color.a > 0){
+            StartCoroutine(invis(spr, time));
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision) {
+        
+        if (collision.gameObject.tag == "Ladder"){
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            transform.Translate(Vector3.up * Input.GetAxis("Vertical") * speed * 0.5f * Time.deltaTime);
+
+            
+        }
+    }
+
+        private void OnTriggerExit2D(Collider2D collision) 
+    {
+          if (collision.gameObject.tag == "Ladder")    
+          {
+              
+              rb.bodyType = RigidbodyType2D.Dynamic;
+          }
+    }
 }
+
+

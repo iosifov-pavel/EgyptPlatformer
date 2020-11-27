@@ -6,6 +6,7 @@ public class Platform_Fading : MonoBehaviour
 {
 
     private float fade_time = 1.5f;
+
     private float reverse = 1.5f;
     bool canfade = true;
     // Start is called before the first frame update
