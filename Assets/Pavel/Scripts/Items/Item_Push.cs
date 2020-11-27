@@ -7,9 +7,10 @@ public class Item_Push : MonoBehaviour, IIntercatable
     // Start is called before the first frame update
     GameObject player;
     Player_Movement pm;
-    float speed = 1f;
+    float speed = 0.5f;
     bool on = false;
     Rigidbody2D rb2;
+    Rigidbody2D  playerrb;
     void Start()
     {
         rb2 = GetComponent<Rigidbody2D>();
@@ -20,9 +21,14 @@ public class Item_Push : MonoBehaviour, IIntercatable
     void Update()
     {
         if(on){
+            
+            
             Vector2 step = new Vector3(pm.direction.x * speed * Time.deltaTime,0);
             //transform.Translate(step);
-            rb2.MovePosition((Vector2)transform.position+step);
+            rb2.MovePosition((Vector2)rb2.position+step);
+            playerrb.MovePosition((Vector2)playerrb.position+step);
+            //rb2=playerrb;
+            //rb2.velocity=step;
         }
     }
 
@@ -32,6 +38,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
             rb2.isKinematic=false;
             player=_player;
             pm=player.GetComponent<Player_Movement>();
+            playerrb = player.GetComponent<Rigidbody2D>();
             pm.blocked = true;
             player.transform.parent = transform;
         } else{
