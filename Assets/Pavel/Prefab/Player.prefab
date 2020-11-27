@@ -47,7 +47,8 @@ MonoBehaviour:
   canAttack: 1
   isAttacking: 0
   buttonAttack: 0
-  buttonUp: 0
+  bUp: 1
+  angle: 0
 --- !u!1 &163872710274123331
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,9 +622,9 @@ GameObject:
   - component: {fileID: 6682345822877321770}
   - component: {fileID: 6075208117721305409}
   - component: {fileID: 3054850153860100432}
-  - component: {fileID: 8695835490076837661}
   - component: {fileID: 2712096648531622252}
   - component: {fileID: 4797522030648575714}
+  - component: {fileID: 7371577357488217339}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -718,25 +719,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   right: {fileID: -2311659948842064771, guid: 1efc0a63857205d4d803b599a343ad67, type: 3}
   stand: {fileID: -6287787046888575383, guid: 1efc0a63857205d4d803b599a343ad67, type: 3}
---- !u!114 &8695835490076837661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7403318961397528494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aeb6bd272fb5b644b55894f0f859f2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0}
-  otherSource: 0
-  isGrounded: 1
-  onSlope: 0
-  zero: {fileID: 0}
-  buttonJump: 0
-  stickPressed: 0
 --- !u!70 &2712096648531622252
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -779,6 +761,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1.72}
   m_EdgeRadius: 0
+--- !u!114 &7371577357488217339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403318961397528494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aeb6bd272fb5b644b55894f0f859f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0}
+  jump_time: -1
+  jump_max: 0.18
+  jump_count: 1
+  isGrounded: 1
+  onSlope: 0
+  CanJump: 1
+  zero: {fileID: 0}
+  buttonJump: 0
+  stickPressed: 0
+  blocked: 0
 --- !u!1 &7799212350935918774
 GameObject:
   m_ObjectHideFlags: 0
