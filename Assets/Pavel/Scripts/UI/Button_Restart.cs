@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Button_Restart : MonoBehaviour
 { 
-  public Button_Pause level;
+  //public Button_Pause level;
   public void RestartGame ()
   {
           
