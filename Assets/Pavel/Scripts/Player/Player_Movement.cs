@@ -15,9 +15,9 @@ public class Player_Movement : MonoBehaviour
     List<Vector2> sources = new List<Vector2>();
     List<int> source_times = new List<int>();
     //--------------------------
-    float jump_force = 4f;
+    float jump_force = 5f;
     float jump_time = -111f;
-    float jump_time_max = 0.2f;
+    float jump_time_max = 0.16f;
     int jump_count = 2;
     int jumps = 0;
     float enough_for_jump = 80;
@@ -80,11 +80,13 @@ public class Player_Movement : MonoBehaviour
         if(isJumping) verical.x=0;
         if(verical.x>enough_for_jump){
             if(!isJumping && jumps<jump_count){
+                 
                 can_jump=true;
                 jumps++;
             }
             verical.x=0;
             verical.y=0;
+            if(jumps==2&& jump_time==-111) jump_time=jump_time_max-0.08f;
             if(jump_time==-111) jump_time=jump_time_max;
         }
 
@@ -147,7 +149,7 @@ public class Player_Movement : MonoBehaviour
             rb.drag=2f;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            if(jumps==2 && !isFalling) rb.AddForce(Vector3.up * (jump_force-1f), ForceMode2D.Impulse);
+            if(jumps==2 && !isFalling) rb.AddForce(Vector3.up * (jump_force), ForceMode2D.Impulse);
             else rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
         }
     }
