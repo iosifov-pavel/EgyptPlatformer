@@ -32,10 +32,10 @@ public class Level_Controller : MonoBehaviour
     {
         for (int i = 0; i < hearts.Length; i++)
         {
-            if(player.GetHP() > i)
-                hearts[i].sprite = isLife;
-            else 
-                hearts[i].sprite = nonLife;
+            //if(player.GetHP() > i)
+            //    hearts[i].sprite = isLife;
+            //else 
+            //    hearts[i].sprite = nonLife;
         }
     }
 
