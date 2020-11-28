@@ -8,10 +8,11 @@ public class Button_Restart : MonoBehaviour
   //public Button_Pause level;
   public void RestartGame ()
   {
-          
+          Time.timeScale = 1f;
           Scene scene = SceneManager.GetActiveScene();
           SceneManager.LoadScene(scene.name);
           //level.PauseOff();
+          
           
   }
 }
