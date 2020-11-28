@@ -6,20 +6,29 @@ public class Enemy_Ground_Patroling : MonoBehaviour
 {
     int dir = 1;
     float speed = 2f;
-    Vector3 checkground;
-    Vector3 checkwall;
+    Vector2 checkground;
+    Vector2 checkwall;
+    float width;
+    float height;
     LayerMask mask;
+    BoxCollider2D box;
+    bool stop=false;
     // Start is called before the first frame update
     void Start(){
         LayerMask m1 = LayerMask.GetMask("Ground");
         LayerMask m2 = LayerMask.GetMask("Traps");
         mask = m1 | m2;
+
+        box = GetComponent<BoxCollider2D>();
+        width = box.size.x / 2;
+        height = box.size.y / 2;
     }
 
     // Update is called once per frame
     void Update(){
         Check();
-        Move();
+        if(!stop) Move();
+        
     }
 
     void Check(){
@@ -36,29 +45,43 @@ public class Enemy_Ground_Patroling : MonoBehaviour
 
     void changeDirection(){
         if(dir==1){
-            transform.eulerAngles = new Vector3(0,180,0);
+            Vector3 thisScale = transform.localScale;
+            thisScale.x *= -1;
+            transform.localScale = thisScale;
             dir=-1;
         } else {
-            transform.eulerAngles = new Vector3(0,0,0);
+            Vector3 thisScale = transform.localScale;
+            thisScale.x *= -1;
+            transform.localScale = thisScale;
             dir=1;
         }
     }
 
     RaycastHit2D CheckGround(){    
-        checkground = transform.position;
-        checkground.x+=0.33f*dir;
+        checkground =new Vector2(transform.position.x + width*dir*transform.localScale.x, transform.position.y);
+        checkground.x+=0.15f*dir;
         RaycastHit2D hit;
-        hit =  Physics2D.Raycast(checkground,Vector3.down, 0.2f,mask);
-        Debug.DrawRay(checkground,Vector3.down*0.2f,Color.red,0.02f);
+        hit =  Physics2D.Raycast(checkground,Vector3.down, height*transform.localScale.y+0.2f,mask);
+        Debug.DrawRay(checkground,Vector3.down*(height*transform.localScale.y+0.2f),Color.red,0.02f);
         return hit;   
     }
 
     RaycastHit2D CheckWall(){   
-        checkwall = transform.position;
-        checkwall.x+=0.33f*dir;
+        checkwall = new Vector2(transform.position.x + width*dir*transform.localScale.x, transform.position.y);
+        checkwall.x+=0.15f*dir;
         RaycastHit2D hit;
         hit =  Physics2D.Raycast(checkwall,new Vector2(dir,0), 0.1f,mask);
         Debug.DrawRay(checkwall,new Vector2(dir,0)*0.1f,Color.yellow,0.02f);
         return hit;   
+    }
+
+    public void StopIt(float time){
+        StartCoroutine(stops(time));
+    }
+
+    IEnumerator stops(float t){
+        stop=true;
+        yield return new WaitForSeconds(t);
+        stop = false;
     }
 }

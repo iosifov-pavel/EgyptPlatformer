@@ -8,13 +8,12 @@ public class Enemy_Health : MonoBehaviour
     bool dead = false;
     bool is_damaged;
     Color original;
-    SpriteRenderer sprite;
+    SpriteRenderer[] sprites;
     float time=0.3f;
-    //float time_invincible=0.2f;
     // Start is called before the first frame update
     void Start(){
-        sprite=GetComponent<SpriteRenderer>();
-        original=sprite.color;
+        sprites=GetComponentsInChildren<SpriteRenderer>();
+        original=sprites[0].color;
     }
 
     // Update is called once per frame
@@ -35,9 +34,13 @@ public class Enemy_Health : MonoBehaviour
 
     IEnumerator ReactToDamage(){
         is_damaged=true;
-        sprite.color=Color.red;
+        foreach(SpriteRenderer s in sprites){
+            s.color=Color.red;
+        }
         yield return new WaitForSeconds(time);
-        sprite.color=original;
+        foreach(SpriteRenderer s in sprites){
+            s.color=original;
+        }
         is_damaged=false;
     }
 }

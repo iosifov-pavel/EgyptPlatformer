@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class Button_Menu : MonoBehaviour
+public class Enemy_Range_Attack : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,11 +14,5 @@ public class Button_Menu : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void OpenScene(int index)
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(index);
     }
 }
