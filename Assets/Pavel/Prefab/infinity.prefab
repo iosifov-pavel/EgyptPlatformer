@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2248291301260780930}
   - component: {fileID: 2248291301260780931}
   - component: {fileID: 2248291301260780928}
-  - component: {fileID: 2248291301260780933}
+  - component: {fileID: 2902847046050877714}
   m_Layer: 0
   m_Name: infinity
   m_TagString: infinity
@@ -109,7 +109,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.23350787, y: 0.29643476}
   m_EdgeRadius: 0
---- !u!114 &2248291301260780933
+--- !u!114 &2902847046050877714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,12 +118,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2248291301260780929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a63af3ed24261145bf85e432b6fbfca, type: 3}
+  m_Script: {fileID: 11500000, guid: 89983fc20ac0e3f4fa2572199fc1dc44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  infinity: {fileID: 0}
-  speeds: {fileID: 0}
-  coinValue: 0
-  text: {fileID: 0}
-  score: 0

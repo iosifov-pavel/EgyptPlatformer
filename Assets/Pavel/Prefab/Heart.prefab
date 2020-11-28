@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 695964329532489503}
   - component: {fileID: 695964329532489500}
   - component: {fileID: 695964329532489501}
-  - component: {fileID: 695964329532489502}
+  - component: {fileID: 4049977614097925161}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Heart
@@ -99,8 +99,8 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.036304116}
   serializedVersion: 2
-  m_Radius: 0.14337689
---- !u!114 &695964329532489502
+  m_Radius: 0.9403509
+--- !u!114 &4049977614097925161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,12 +109,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 695964329532489498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a63af3ed24261145bf85e432b6fbfca, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ea728e6b83a4b54c889a9ffc5b41cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  infinity: {fileID: 0}
-  speeds: {fileID: 0}
-  coinValue: 0
-  text: {fileID: 0}
-  score: 0

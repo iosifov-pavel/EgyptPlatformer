@@ -5,8 +5,9 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
 
-    private float speed = 72f;
-    private float maxSpeed = 3f;
+    private float speed = 100f;
+    public float multiplier = 1.5f;
+    [SerializeField] private float maxSpeed = 3f;
     public Vector2 direction;
     Vector2 move;
     public Vector2 stick_delta;
@@ -87,7 +88,7 @@ public class Player_Movement : MonoBehaviour
             verical.x=0;
             verical.y=0;
             if(jumps==2&& jump_time==-111) jump_time=jump_time_max-0.08f;
-            if(jump_time==-111) jump_time=jump_time_max;
+            else if(jump_time==-111) jump_time=jump_time_max;
         }
 
         if(can_jump){
@@ -128,11 +129,10 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Horizontal(){
-        rb.velocity = move;
         if (Mathf.Abs(move.x) > maxSpeed) {
             move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
-
+        rb.velocity = move;
         anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
         anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
 
@@ -170,6 +170,7 @@ public class Player_Movement : MonoBehaviour
                 source_times.RemoveAt(i); 
             }
         }
+        rb.velocity*=multiplier;
         rb.velocity+=summary;
     }
 
@@ -275,54 +276,62 @@ public class Player_Movement : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "speeds"){
-            Destroy(collision.gameObject);
-            StartCoroutine(speedUp());
-        }
+    //private void OnTriggerEnter2D(Collider2D collision) {
+    //    if (collision.gameObject.tag == "speeds"){
+    //        Destroy(collision.gameObject);
+    //        StartCoroutine(speedUp());
+    //    }
+    //}
+    //IEnumerator speedUp()
+    //{
+    //    speed = speed*2;
+    //    speeds.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+    //    print("Speed UP");
+    //    yield return new WaitForSeconds(9f);
+    //    StartCoroutine(invis(speeds.GetComponent<SpriteRenderer>(), 0.02f));
+    //    yield return new WaitForSeconds(1f);
+    //    speed = speed /2;
+    //    print("Speed Normal");
+    //}
+
+
+
+    //IEnumerator invis(SpriteRenderer spr, float time)
+    //{
+    //    spr.color = new Color(1f,1f,1f, spr.color.a - time*2);
+    //    yield return new WaitForSeconds(time);
+    //    if(spr.color.a > 0){
+    //        StartCoroutine(invis(spr, time));
+    //    }
+    //}
+
+    public void Speed_Up(float time){
+        StartCoroutine(speedup(time));
     }
-    IEnumerator speedUp()
-    {
-        speed = speed*2;
-        speeds.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
-        print("Speed UP");
-        yield return new WaitForSeconds(9f);
-        StartCoroutine(invis(speeds.GetComponent<SpriteRenderer>(), 0.02f));
-        yield return new WaitForSeconds(1f);
-        speed = speed /2;
-        print("Speed Normal");
-    }
-
-
-
-    IEnumerator invis(SpriteRenderer spr, float time)
-    
-    {
-        spr.color = new Color(1f,1f,1f, spr.color.a - time*2);
-        yield return new WaitForSeconds(time);
-        if(spr.color.a > 0){
-            StartCoroutine(invis(spr, time));
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision) {
-        
-        if (collision.gameObject.tag == "Ladder"){
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            transform.Translate(Vector3.up * Input.GetAxis("Vertical") * speed * 0.5f * Time.deltaTime);
-
-            
-        }
+    IEnumerator speedup(float t){
+        maxSpeed = 5;
+        yield return new WaitForSeconds(t);
+        maxSpeed = 3;
     }
 
-        private void OnTriggerExit2D(Collider2D collision) 
-    {
-          if (collision.gameObject.tag == "Ladder")    
-          {
-              
-              rb.bodyType = RigidbodyType2D.Dynamic;
-          }
-    }
+    //private void OnTriggerStay2D(Collider2D collision) {
+    //    
+    //    if (collision.gameObject.tag == "Ladder"){
+    //        rb.bodyType = RigidbodyType2D.Kinematic;
+    //        transform.Translate(Vector3.up * Input.GetAxis("Vertical") * speed * 0.5f * Time.deltaTime);
+//
+    //        
+    //    }
+    //}
+//
+    //    private void OnTriggerExit2D(Collider2D collision) 
+    //{
+    //      if (collision.gameObject.tag == "Ladder")    
+    //      {
+    //          
+    //          rb.bodyType = RigidbodyType2D.Dynamic;
+    //      }
+    //}
 }
 
 
