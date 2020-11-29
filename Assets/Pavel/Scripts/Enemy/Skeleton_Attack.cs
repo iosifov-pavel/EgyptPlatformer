@@ -24,7 +24,7 @@ public class Skeleton_Attack : MonoBehaviour
     float far = 1.5f;
     float far_far = 4;
     Animator animator;
-    float time =1;
+    float time = 1f;
     bool stop=false;
     bool has_copy=false;
     void Start()
