@@ -21,8 +21,8 @@ public class Skeleton_Attack : MonoBehaviour
     float near = 0.5f;
     bool canAttcak;
     bool canThrow;
-    float far = 1;
-    float far_far = 3;
+    float far = 1.5f;
+    float far_far = 4;
     Animator animator;
     float time =1;
     bool stop=false;
@@ -90,15 +90,16 @@ public class Skeleton_Attack : MonoBehaviour
 
     public void Fly(){
         spear_copy.GetComponent<Rigidbody2D>().velocity = Vector2.right * dir * speed;
+        spear_copy.transform.parent = null;
     }
 
     IEnumerator throws(){
         canThrow = true;
-        stop=true;
+        has_copy= true;
         animator.SetBool("Throw",canThrow);
         yield return new WaitForSeconds(time);
         canThrow = false;
-        stop=false;
+        has_copy = false;
         animator.SetBool("Throw",canThrow);
     }
 }
