@@ -37,9 +37,9 @@ public class Enemy_Damage : MonoBehaviour
         if(isDamaged) return;
             if(other.tag=="Player"){
             ph = other.GetComponent<Player_Health>();
+            if(ph.superman || ph.dead) return;
             player_Movement = other.GetComponent<Player_Movement>();
             player_Movement.BlockMovement(0.25f);
-            if(ph.superman || ph.dead) return;
             rb = other.GetComponent<Rigidbody2D>();
             float y=0;
             if(rb.velocity.y>0.1) y=1;
