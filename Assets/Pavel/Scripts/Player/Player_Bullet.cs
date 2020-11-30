@@ -34,7 +34,11 @@ Quaternion rot;
     {
       Debug.Log(hitInfo.name);
       if (hitInfo.name == "Player" || hitInfo.name == "GroundCheck") return;
-      else if(hitInfo.tag == "Shield" || hitInfo.tag=="Ground") Destroy(gameObject);
+      else if(hitInfo.tag=="Ground") Destroy(gameObject);
+      else if(hitInfo.tag == "Shield"){
+          hitInfo.gameObject.GetComponent<Shield_Block>().ReduceDurab();
+          Destroy(gameObject);
+      }
       else if(hitInfo.tag == "Enemy"){
           Enemy_Health enemy = hitInfo.GetComponent<Enemy_Health>();
           enemy.TakeDamage(dmg);

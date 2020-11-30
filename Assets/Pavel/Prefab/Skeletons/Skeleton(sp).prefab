@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 7558952788484858813}
   - component: {fileID: 5595651474649865545}
   - component: {fileID: 5595651474649865544}
+  - component: {fileID: 2251988256328990439}
   m_Layer: 11
   m_Name: Spear_idle
   m_TagString: Untagged
@@ -300,6 +301,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDamaged: 0
+--- !u!114 &2251988256328990439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3274888663535589575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd780ce0b3a33b42b79b3cbdcf4fe7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3443617072656279235
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +330,7 @@ GameObject:
   - component: {fileID: 1160952515916859904}
   - component: {fileID: 3443617072656279233}
   m_Layer: 11
-  m_Name: Skeleton
+  m_Name: Skeleton(sp)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

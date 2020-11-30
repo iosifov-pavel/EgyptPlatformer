@@ -5,7 +5,6 @@ using UnityEngine;
 public class Skeleton_throw : MonoBehaviour
 {
     Enemy_Ray_Eyes eyes;
-    Skeleton_Block skeleton_Block;
     int count = 0;
     int dir;
     float speed = 4;
@@ -28,10 +27,6 @@ public class Skeleton_throw : MonoBehaviour
         egp = GetComponent<Enemy_Ground_Patroling>();
         distance = 666;
         animator = GetComponent<Animator>();
-
-        if(TryGetComponent(out Skeleton_Block skeleton_Block)){
-            canB = 1;
-        }
     }
 
     // Update is called once per frame
@@ -48,7 +43,7 @@ public class Skeleton_throw : MonoBehaviour
             //StopAllCoroutines();
         }
         if(distance>far && distance<=far_far){
-            if(!has_copy && canB!=2){
+            if(!has_copy){
                 StopAllCoroutines();
                 StartCoroutine(throws());
                 count++;
@@ -86,9 +81,4 @@ public class Skeleton_throw : MonoBehaviour
         }
         else has_copy = false;
     }
-
-    public void Interupt(){
-        StopAllCoroutines();
-    }
-
 }

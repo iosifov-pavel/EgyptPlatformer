@@ -7,7 +7,6 @@ public class Skeleton_Attack : MonoBehaviour
     // Start is called before the first frame update
     //LayerMask player = LayerMask.GetMask("Player");
     Enemy_Ray_Eyes eyes;
-    Skeleton_Block skeleton_Block;
     int dir;
     Enemy_Ground_Patroling egp;
     Transform player;
@@ -26,10 +25,6 @@ public class Skeleton_Attack : MonoBehaviour
         egp = GetComponent<Enemy_Ground_Patroling>();
         distance = 666;
         animator = GetComponent<Animator>();
-
-        if(TryGetComponent(out Skeleton_Block skeleton_Block)){
-            canB = 1;
-        }
     }
 
     // Update is called once per frame
@@ -44,7 +39,7 @@ public class Skeleton_Attack : MonoBehaviour
         if(distance==666) return;
         if(distance<=far){
             if(distance<=near){
-                if(!stop && canB!=2){
+                if(!stop){
                 StopAllCoroutines();
                 StartCoroutine(stopps());
                 egp.StopIt(time);

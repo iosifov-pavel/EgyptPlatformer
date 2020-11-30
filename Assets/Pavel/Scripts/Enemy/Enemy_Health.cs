@@ -19,6 +19,7 @@ public class Enemy_Health : MonoBehaviour
     // Update is called once per frame
 
     public void TakeDamage(int damage){
+        //sprites=GetComponentsInChildren<SpriteRenderer>();
         if(is_damaged) return;
         health-=damage;
         StartCoroutine(ReactToDamage());
