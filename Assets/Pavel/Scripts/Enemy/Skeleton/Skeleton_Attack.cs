@@ -13,9 +13,7 @@ public class Skeleton_Attack : MonoBehaviour
     float distance;
     float near = 0.5f;
     bool canAttcak;
-    public int canB=0;
     float far = 2f;
-    float far_far = 4;
     Animator animator;
     float time = 1.5f;
     public bool stop=false;

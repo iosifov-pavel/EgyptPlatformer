@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spear : MonoBehaviour
 {
-    float lifetime = 8f;
+    float lifetime = 5f;
     RigidbodyType2D rb;
     // Start is called before the first frame update
     void Start()

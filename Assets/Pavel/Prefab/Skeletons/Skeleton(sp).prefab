@@ -249,7 +249,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3274888663535589575}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
@@ -461,7 +461,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 3443617073189282330}
   spear2: {fileID: 3274888663535589575}
-  canB: 0
   has_copy: 0
 --- !u!1 &3443617072876478502
 GameObject:

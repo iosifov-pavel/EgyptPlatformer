@@ -15,7 +15,6 @@ public class Skeleton_throw : MonoBehaviour
     Transform player;
     float distance;
     bool canThrow;
-    public int canB=0;
     float far = 2f;
     float far_far = 4f;
     Animator animator;
