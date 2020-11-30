@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy_Ground_Patroling : MonoBehaviour
 {
+    [SerializeField] GameObject legs;
+    Animator legs_anim;
     int dir = 1;
     float speed = 2f;
     Vector2 checkground;
@@ -15,6 +17,7 @@ public class Enemy_Ground_Patroling : MonoBehaviour
     bool stop=false;
     // Start is called before the first frame update
     void Start(){
+        legs_anim = legs.GetComponent<Animator>();
         LayerMask m1 = LayerMask.GetMask("Ground");
         LayerMask m2 = LayerMask.GetMask("Traps");
         mask = m1 | m2;
@@ -27,6 +30,7 @@ public class Enemy_Ground_Patroling : MonoBehaviour
     // Update is called once per frame
     void Update(){
         Check();
+        legs_anim.SetBool("Walk", !stop);
         if(!stop) Move();
         
     }
@@ -83,5 +87,10 @@ public class Enemy_Ground_Patroling : MonoBehaviour
         stop=true;
         yield return new WaitForSeconds(t);
         stop = false;
+    }
+
+    public void CanGo(){
+        StopAllCoroutines();
+        stop=false;
     }
 }
