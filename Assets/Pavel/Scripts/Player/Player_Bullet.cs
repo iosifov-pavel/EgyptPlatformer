@@ -34,13 +34,12 @@ Quaternion rot;
     {
       Debug.Log(hitInfo.name);
       if (hitInfo.name == "Player" || hitInfo.name == "GroundCheck") return;
-      else if(hitInfo.tag == "Shield") Destroy(gameObject);
+      else if(hitInfo.tag == "Shield" || hitInfo.tag=="Ground") Destroy(gameObject);
       else if(hitInfo.tag == "Enemy"){
           Enemy_Health enemy = hitInfo.GetComponent<Enemy_Health>();
           enemy.TakeDamage(dmg);
           Destroy(gameObject);
-        } else Destroy(gameObject);
-     
+        } 
     }
 
     public void GetPosition (float _angle, int dir_rot)

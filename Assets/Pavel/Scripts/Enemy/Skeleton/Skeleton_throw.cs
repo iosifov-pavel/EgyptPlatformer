@@ -79,10 +79,10 @@ public class Skeleton_throw : MonoBehaviour
         yield return new WaitForSeconds(time);
         canThrow = false;
         animator.SetBool("Throw",canThrow);
-        if(count==2) {
+        if(count>=2) {
             yield return new WaitForSeconds(0.3f);
-            has_copy=false;
             count=0;
+            has_copy=false;
         }
         else has_copy = false;
     }
