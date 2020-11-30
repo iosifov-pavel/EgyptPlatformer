@@ -1052,7 +1052,7 @@ GameObject:
   - component: {fileID: 5767909785218093119}
   - component: {fileID: 3488377157811725177}
   m_Layer: 11
-  m_Name: Skeleton(Sw,sp,sh) 1
+  m_Name: Skeleton(Sw,sh)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,6 +1162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d187fef8d18c6c488e6b435fbc2fcc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sword: {fileID: 6484571753625132678}
   stop: 0
 --- !u!95 &5767909785218093119
 Animator:
