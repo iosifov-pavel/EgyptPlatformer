@@ -5,16 +5,19 @@ using UnityEngine;
 public class Spear : MonoBehaviour
 {
     float lifetime = 8f;
+    RigidbodyType2D rb;
     // Start is called before the first frame update
     void Start()
-    {
-        
+    { 
+        rb = RigidbodyType2D.Kinematic;
     }
 
     // Update is called once per frame
     void Update()
     {
-        lifetime-=Time.deltaTime;
+        if(GetComponent<Rigidbody2D>().bodyType==rb){
+            lifetime-=Time.deltaTime;
+        }
         if(lifetime<=0){
             Destroy(gameObject);
         }
@@ -22,7 +25,7 @@ public class Spear : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Ground"){
-            other.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 }

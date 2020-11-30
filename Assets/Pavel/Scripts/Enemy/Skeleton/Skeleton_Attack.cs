@@ -57,8 +57,4 @@ public class Skeleton_Attack : MonoBehaviour
         canAttcak=false;
         animator.SetBool("Attack",canAttcak);
     }
-
-    public void Interupt(){
-        StopAllCoroutines();
-    }
 }

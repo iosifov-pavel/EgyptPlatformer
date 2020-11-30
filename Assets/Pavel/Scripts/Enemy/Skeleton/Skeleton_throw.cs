@@ -54,6 +54,8 @@ public class Skeleton_throw : MonoBehaviour
 
      public void Throw(){
         spear_copy = Instantiate(spear2) as GameObject;
+        Rigidbody2D rb = spear_copy.GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
         spear_copy.transform.parent = body.transform;
         spear_copy.transform.localPosition = spear2.transform.localPosition;
         spear_copy.transform.localRotation = spear2.transform.localRotation;
