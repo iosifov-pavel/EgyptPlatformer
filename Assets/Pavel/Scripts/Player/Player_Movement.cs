@@ -31,6 +31,8 @@ public class Player_Movement : MonoBehaviour
     bool can_jump=false;
     public Vector2 verical;
     float inertia=0;
+    float last_velocity=0;
+    bool air_direction_change=false;
     //-------------------------------
     public bool onSlope = false;
     private float slopeangle;
@@ -146,6 +148,7 @@ public class Player_Movement : MonoBehaviour
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(can_jump){
+            air_direction_change=false;
             isJumping=true;  
             rb.drag=2f;
             anima.setBoolAnimation("Ground",false);
@@ -188,6 +191,8 @@ public class Player_Movement : MonoBehaviour
                 jump_time=-111;
                 jumps=0;
                 inertia=0;
+                last_velocity=0;
+                air_direction_change=false;
                 slopeangle = Vector2.Angle(transform.up, hit.transform.up);
                 if(slopeangle>=3f) onSlope=true;
                 else onSlope = false;
@@ -233,8 +238,15 @@ public class Player_Movement : MonoBehaviour
             if(direction.x==0){
                 rb.velocity +=new Vector2(inertia,0); 
             }
+            if(Mathf.Sign(last_velocity) != Mathf.Sign(rb.velocity.x)){
+                air_direction_change=true;
+            }
+            if(air_direction_change) rb.velocity*=new Vector2(0.8f,1);
         }
-        inertia = rb.velocity.x*0.95f;
+        //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
+        //else
+        inertia = rb.velocity.x*0.9f;
+        last_velocity = rb.velocity.x;
     }
 
     void PreMove(){
