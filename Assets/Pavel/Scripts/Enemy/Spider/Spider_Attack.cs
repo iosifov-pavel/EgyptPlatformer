@@ -5,7 +5,6 @@ using UnityEngine;
 public class Spider_Attack : MonoBehaviour
 {
     // Start is called before the first frame update
-    //[SerializeField] SpriteRenderer web;
     LineRenderer web;
     [SerializeField]  Transform point;
     Vector2 original_point;
@@ -20,8 +19,7 @@ public class Spider_Attack : MonoBehaviour
     LayerMask player2;
     LayerMask p, ground;
     bool down=false,up=false,isDown=false, isUp=true;
-    void Start()
-    {
+    void Start(){
         original_point = point.position;
         ray=Vector2.down;
         ray2=Vector2.down;
@@ -38,8 +36,7 @@ public class Spider_Attack : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {   
+    void Update(){   
         Spider_Sense();
         if(down) Jump();
         if(up) Back();   
@@ -82,7 +79,6 @@ public class Spider_Attack : MonoBehaviour
             down = false;
             up=false;
             isDown=false;
-            //Flip();
         }
         float step = speed_up*Time.deltaTime;
         transform.Translate(Vector3.up*step);
@@ -94,12 +90,11 @@ public class Spider_Attack : MonoBehaviour
         yield return new WaitForSeconds(time);
         up = true;
         isDown = false;
-        //Flip();
     }
 
-    void Flip(){
-        Vector3 thisScale = transform.localScale;
-        thisScale.y *= -1;
-        transform.localScale = thisScale;
-    }
+    //void Flip(){
+    //    Vector3 thisScale = transform.localScale;
+    //    thisScale.y *= -1;
+    //    transform.localScale = thisScale;
+    //}
 }
