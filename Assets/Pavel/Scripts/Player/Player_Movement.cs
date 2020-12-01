@@ -34,8 +34,14 @@ public class Player_Movement : MonoBehaviour
     float last_velocity=0;
     bool air_direction_change=false;
     //-------------------------------
+    RaycastHit2D hit1,hit2;
+    BoxCollider2D box;
+    float offset;
+    float height;
+    Vector2 ray;
     public bool onSlope = false;
     private float slopeangle;
+    LayerMask ground;
     //----------------------------
     Rigidbody2D rb;
     Player_Health ph;
@@ -61,6 +67,11 @@ public class Player_Movement : MonoBehaviour
         normal = rb.sharedMaterial;
         verical=Vector2.zero;
         lastcheck=isGrounded;
+        ray = Vector2.down;
+        box = GetComponent<BoxCollider2D>();
+        offset = box.size.x/4 * transform.localScale.x;
+        height = box.size.y/2 * transform.localScale.y;
+        ground = LayerMask.GetMask("Ground");
     }
 
     // Update is called once per frame
@@ -75,6 +86,7 @@ public class Player_Movement : MonoBehaviour
         //if(rb.velocity.y<0 && !isJumping && !isGrounded) isFalling=true;
         anima.setDirection(direction.x);
         CheckGround();
+        DeepCheckGround();
         //inertia = rb.velocity.x;
         //Jump();
 
@@ -208,6 +220,15 @@ public class Player_Movement : MonoBehaviour
             jumps++;
         }
         lastcheck=check;
+    }
+
+    void DeepCheckGround(){
+        Vector2 pos,pos2;
+            pos = (Vector2)transform.position + new Vector2(-offset,-height);
+            pos2 = (Vector2)transform.position + new Vector2(offset,-height);
+
+            hit1 = Physics2D.Raycast(pos,ray,5f,ground);
+            hit2 = Physics2D.Raycast(pos2,ray,5f,ground);
     }
 
     void Flip(){
