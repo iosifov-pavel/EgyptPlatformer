@@ -30,6 +30,7 @@ public class Player_Movement : MonoBehaviour
     private float gravity = 2.2f;
     bool can_jump=false;
     public Vector2 verical;
+    float inertia=0;
     //-------------------------------
     public bool onSlope = false;
     private float slopeangle;
@@ -72,6 +73,7 @@ public class Player_Movement : MonoBehaviour
         //if(rb.velocity.y<0 && !isJumping && !isGrounded) isFalling=true;
         anima.setDirection(direction.x);
         CheckGround();
+        //inertia = rb.velocity.x;
         //Jump();
 
         anima.setBoolAnimation("Ground", isGrounded);   
@@ -145,7 +147,6 @@ public class Player_Movement : MonoBehaviour
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(can_jump){
             isJumping=true;  
-            //Debbuger.Print("Jump");  
             rb.drag=2f;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -186,6 +187,7 @@ public class Player_Movement : MonoBehaviour
                 isFalling=false;
                 jump_time=-111;
                 jumps=0;
+                inertia=0;
                 slopeangle = Vector2.Angle(transform.up, hit.transform.up);
                 if(slopeangle>=3f) onSlope=true;
                 else onSlope = false;
@@ -228,7 +230,11 @@ public class Player_Movement : MonoBehaviour
                 return;
             }
             rb.drag=2f;
+            if(direction.x==0){
+                rb.velocity +=new Vector2(inertia,0); 
+            }
         }
+        inertia = rb.velocity.x*0.95f;
     }
 
     void PreMove(){
@@ -244,6 +250,10 @@ public class Player_Movement : MonoBehaviour
     void PostMove(){
         if(onSlope && direction.x==0){
         } 
+        //inertia=rb.velocity.x;
+        //if(rb.velocity.y<=0 && Mathf.Abs(direction.x)<0.3f){
+        //    rb.velocity +=new Vector2(inertia,0); 
+        //}
     }
 
     public void SetOtherSource(string name, Vector2 source, int seconds){
