@@ -84,7 +84,7 @@ public class Player_Movement : MonoBehaviour
              verical = new Vector2(0,0);
         }
         verical+=stick_delta;
-        anima.setDirection(direction.x);
+        if(!blocked) anima.setDirection(direction.x);
         CheckGround();
         DeepCheckGround();
         anima.setBoolAnimation("Ground", isGrounded);
@@ -117,6 +117,10 @@ public class Player_Movement : MonoBehaviour
             can_jump=false;
             jump_time=-111;
         }
+    }
+
+    public void ResetJumpCount(){
+        jump_count--;
     }
 
     private void FixedUpdate() {
