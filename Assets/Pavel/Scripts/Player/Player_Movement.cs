@@ -7,7 +7,7 @@ public class Player_Movement : MonoBehaviour
 
     private float speed = 100f;
     public float multiplier = 1f;
-    [SerializeField] private float maxSpeed = 3f;
+    [SerializeField] private float maxSpeed = 2.8f;
     public Vector2 direction;
     Vector2 move;
     public Vector2 stick_delta;
@@ -273,7 +273,7 @@ public class Player_Movement : MonoBehaviour
         }
         //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
         //else
-        inertia = rb.velocity.x*0.9f;
+        inertia = rb.velocity.x*0.92f;
         last_velocity = rb.velocity.x;
     }
 
@@ -348,5 +348,3 @@ public class Player_Movement : MonoBehaviour
         maxSpeed = 3;
     }
 }
-
-
