@@ -6,10 +6,11 @@ public class Sticky_Wall : MonoBehaviour
 {
     // Start is called before the first frame update
     Player_Movement player_Movement;
-    Vector2 player_input;
+    public Vector2 player_input;
+    Vector2 pre_push;
     Rigidbody2D rb_player;
     GameObject player;
-    bool contact = false;
+    bool contact = false, ready = false;
     float time = 0.2f;
     void Start()
     {
@@ -21,8 +22,16 @@ public class Sticky_Wall : MonoBehaviour
     {
         if(contact) time-=Time.deltaTime;
         if(contact && time<=0){
-            player_input = player_Movement.direction;
+            ready = true;
         }
+        if(ready){
+            player_input = player_Movement.direction;
+            if(Mathf.Abs(player_input.x)>1.8f || Mathf.Abs(player_input.x)>1.8f){
+
+            }
+
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
