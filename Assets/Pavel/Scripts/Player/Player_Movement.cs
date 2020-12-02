@@ -6,11 +6,12 @@ public class Player_Movement : MonoBehaviour
 {
 
     private float speed = 100f;
-    public float multiplier = 1.5f;
+    public float multiplier = 1f;
     [SerializeField] private float maxSpeed = 3f;
     public Vector2 direction;
     Vector2 move;
     public Vector2 stick_delta;
+    public int facing=0;
     //---------------------------
     List<string> source_names = new List<string>();
     List<Vector2> sources = new List<Vector2>();
@@ -40,7 +41,7 @@ public class Player_Movement : MonoBehaviour
     float height;
     Vector2 ray;
     public bool onSlope = false;
-    private float slopeangle;
+    public float[] slopeangle = new float[2];
     LayerMask ground;
     //----------------------------
     Rigidbody2D rb;
@@ -50,10 +51,10 @@ public class Player_Movement : MonoBehaviour
     Player_Animation anima;
     PhysicsMaterial2D normal;
     [SerializeField] PhysicsMaterial2D zero;
+    [SerializeField] PhysicsMaterial2D slope;
+    [SerializeField] PhysicsMaterial2D stop_material;
     //--------------------------------------
     public bool stickPressed = false;
-
-    public GameObject speeds;
     public bool blocked = false;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
@@ -69,7 +70,7 @@ public class Player_Movement : MonoBehaviour
         lastcheck=isGrounded;
         ray = Vector2.down;
         box = GetComponent<BoxCollider2D>();
-        offset = box.size.x/4 * transform.localScale.x;
+        offset = box.size.x/2 * transform.localScale.x;
         height = box.size.y/2 * transform.localScale.y;
         ground = LayerMask.GetMask("Ground");
     }
@@ -83,14 +84,10 @@ public class Player_Movement : MonoBehaviour
              verical = new Vector2(0,0);
         }
         verical+=stick_delta;
-        //if(rb.velocity.y<0 && !isJumping && !isGrounded) isFalling=true;
         anima.setDirection(direction.x);
         CheckGround();
         DeepCheckGround();
-        //inertia = rb.velocity.x;
-        //Jump();
-
-        anima.setBoolAnimation("Ground", isGrounded);   
+        anima.setBoolAnimation("Ground", isGrounded);
     }
 
     void Jump(){
@@ -141,6 +138,8 @@ public class Player_Movement : MonoBehaviour
 
     void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
+        if(direction.x==0) facing=0;
+        else facing = (int)Mathf.Sign(direction.x);
         move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
     }
 
@@ -205,13 +204,9 @@ public class Player_Movement : MonoBehaviour
                 inertia=0;
                 last_velocity=0;
                 air_direction_change=false;
-                slopeangle = Vector2.Angle(transform.up, hit.transform.up);
-                if(slopeangle>=3f) onSlope=true;
-                else onSlope = false;
                 break;
             }
             check = false;
-            onSlope = false;
             isGrounded=false;
         }
         if(!isJumping && lastcheck && !check){
@@ -227,8 +222,20 @@ public class Player_Movement : MonoBehaviour
             pos = (Vector2)transform.position + new Vector2(-offset,-height);
             pos2 = (Vector2)transform.position + new Vector2(offset,-height);
 
-            hit1 = Physics2D.Raycast(pos,ray,5f,ground);
-            hit2 = Physics2D.Raycast(pos2,ray,5f,ground);
+            hit1 = Physics2D.Raycast(pos,ray,0.3f,ground);
+            hit2 = Physics2D.Raycast(pos2,ray,0.3f,ground);
+            if(hit1.collider==null && hit2.collider==null){
+                onSlope=false;
+                return;
+            }
+            float diff = Mathf.Abs(hit1.distance-hit2.distance);
+            slopeangle[0] = Mathf.Sign(hit1.normal.x) * Vector2.Angle(transform.up, hit1.normal);
+            slopeangle[1] = Mathf.Sign(hit2.normal.x) * Vector2.Angle(transform.up, hit2.normal);
+
+            if(diff<0.2f && (Mathf.Abs(slopeangle[0])>3 || Mathf.Abs(slopeangle[1])>3) ){
+                onSlope=true;
+            }
+            else onSlope = false;
     }
 
     void Flip(){
@@ -271,17 +278,27 @@ public class Player_Movement : MonoBehaviour
     }
 
     void PreMove(){
-        if(onSlope && direction.x == 0 || transform.parent!=null){
-            rb.sharedMaterial = null;
-            }
-        else if(!isGrounded){
+        if(onSlope){
+            if(facing!=0) rb.sharedMaterial=slope;
+            else rb.sharedMaterial = stop_material; 
+        }
+         else if(!isGrounded){
             rb.sharedMaterial = zero;
         }
         else rb.sharedMaterial = normal;
     }
 
     void PostMove(){
-        if(onSlope && direction.x==0){
+        if(onSlope){
+            if(facing==1){
+                
+            }
+            else if(facing==-1){
+                
+            }
+            else {
+                //rb.sharedMaterial=slope;
+            }
         } 
         //inertia=rb.velocity.x;
         //if(rb.velocity.y<=0 && Mathf.Abs(direction.x)<0.3f){
