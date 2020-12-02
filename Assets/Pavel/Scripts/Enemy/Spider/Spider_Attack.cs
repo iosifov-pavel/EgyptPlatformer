@@ -11,7 +11,7 @@ public class Spider_Attack : MonoBehaviour
     Vector3 web_point;
     Vector2 ray,ray2;
     float speed_up=2f;
-    float speed_down=3f;
+    float speed_down=4f;
     float time = 0.5f;
     RaycastHit2D hit,hit2;
     Vector3 original;
