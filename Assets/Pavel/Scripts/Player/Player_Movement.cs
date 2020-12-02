@@ -279,8 +279,24 @@ public class Player_Movement : MonoBehaviour
 
     void PreMove(){
         if(onSlope){
-            if(facing!=0) rb.sharedMaterial=slope;
-            else rb.sharedMaterial = stop_material; 
+            if(facing==1){
+                if(Mathf.Abs(slopeangle[1])>50){
+
+                }
+                else rb.sharedMaterial=slope;
+            }
+            else if(facing==-1){
+                if(Mathf.Abs(slopeangle[0])>50){
+                    
+                }
+                else rb.sharedMaterial=slope;
+            }
+            else {
+                if(Mathf.Abs(slopeangle[1])>50 || Mathf.Abs(slopeangle[0])>50){
+                    rb.sharedMaterial = normal;
+                }
+                else rb.sharedMaterial=stop_material;
+            }
         }
          else if(!isGrounded){
             rb.sharedMaterial = zero;
@@ -290,20 +306,8 @@ public class Player_Movement : MonoBehaviour
 
     void PostMove(){
         if(onSlope){
-            if(facing==1){
-                
-            }
-            else if(facing==-1){
-                
-            }
-            else {
-                //rb.sharedMaterial=slope;
-            }
+
         } 
-        //inertia=rb.velocity.x;
-        //if(rb.velocity.y<=0 && Mathf.Abs(direction.x)<0.3f){
-        //    rb.velocity +=new Vector2(inertia,0); 
-        //}
     }
 
     public void SetOtherSource(string name, Vector2 source, int seconds){
