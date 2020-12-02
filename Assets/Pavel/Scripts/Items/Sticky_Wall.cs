@@ -14,7 +14,7 @@ public class Sticky_Wall : MonoBehaviour
     float time = 0.2f;
     void Start()
     {
-
+        pre_push=Vector2.right;
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class Sticky_Wall : MonoBehaviour
         if(ready){
             player_input = player_Movement.direction;
             if(Mathf.Abs(player_input.x)>1.8f || Mathf.Abs(player_input.x)>1.8f){
-
+                //if(player.x)
             }
 
         }

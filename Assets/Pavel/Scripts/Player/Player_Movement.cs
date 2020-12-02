@@ -120,7 +120,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     public void ResetJumpCount(){
-        jump_count--;
+        jump_count=1;
     }
 
     private void FixedUpdate() {
