@@ -10,7 +10,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float maxSpeed = 2.8f;
     public Vector2 direction;
     Vector2 move;
-    public Vector2 stick_delta;
+    public Vector2 stick_delta_y,stick_delta_x;
     public int facing=0;
     //---------------------------
     List<string> source_names = new List<string>();
@@ -30,7 +30,7 @@ public class Player_Movement : MonoBehaviour
     bool lastcheck=false;
     private float gravity = 2.2f;
     bool can_jump=false;
-    public Vector2 verical;
+    public Vector2 verical,horizontal;
     float inertia=0;
     float last_velocity=0;
     bool air_direction_change=false;
@@ -80,10 +80,14 @@ public class Player_Movement : MonoBehaviour
         if(stickPressed){
         } else {
              direction = new Vector2(0, 0);
-             stick_delta = new Vector2(0,0);
+             stick_delta_x = new Vector2(0,0);
+             stick_delta_y = new Vector2(0,0);
+             horizontal = new Vector2(0,0); 
              verical = new Vector2(0,0);
         }
-        verical+=stick_delta;
+        verical+=stick_delta_y;
+        horizontal+=stick_delta_x;
+        if(horizontal.magnitude>300) horizontal = new Vector2(0,0);
         if(!blocked) anima.setDirection(direction.x);
         CheckGround();
         DeepCheckGround();
