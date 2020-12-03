@@ -29,14 +29,31 @@ public class Sticky_Wall : MonoBehaviour
         }
         if(ready){
             x=new Vector2(player_Movement.hor,player_Movement.ver);
-            if(x.y<-40) Fall();
+            float angle = Vector2.Angle(pre_push,x);
+            if(angle>90) return;
+            else{
+                if(x.magnitude>110){
+                    if(x.y<-100) Fall();
+                    else Jump();
+                }
+            }
 
         }
 
     }
 
     void Fall(){
-        x=Vector2.zero;
+        timer=0;
+        ready=false;
+        contact=false;
+        rb_player.bodyType = RigidbodyType2D.Dynamic;
+        player.transform.parent = null;
+        player_Movement.blocked=false;
+        StartCoroutine(Delay());
+    }
+
+    void Jump(){
+        
         timer=0;
         ready=false;
         contact=false;
@@ -74,6 +91,7 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     IEnumerator Delay(){
+        x=Vector2.zero;
         delay=true;
         yield return new WaitForSeconds(delay_time);
         delay=false;
