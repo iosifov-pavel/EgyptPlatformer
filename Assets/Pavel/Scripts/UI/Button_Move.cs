@@ -128,14 +128,7 @@ float cumulative_reset=0;
            pm.stick_delta_y= new Vector2(0,0); 
         }
 
-        if(delta_move>0){
-            pm.stick_delta_x= new Vector2(0,delta_move);
-        } else if(delta_move<0) {
-            pm.stick_delta_x= new Vector2(Mathf.Abs(delta_move),0);
-        }
-        else{
-           pm.stick_delta_x= new Vector2(0,0); 
-        }
+        pm.stick_delta= new Vector2(delta_move,delta_jump);
         last_y=local.y;
         last_x=local.x;
     }

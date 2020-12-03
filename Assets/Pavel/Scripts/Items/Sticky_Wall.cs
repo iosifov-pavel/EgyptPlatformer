@@ -6,12 +6,12 @@ public class Sticky_Wall : MonoBehaviour
 {
     // Start is called before the first frame update
     Player_Movement player_Movement;
-    public Vector2 player_input;
+    public Vector2 x,y;
     Vector2 pre_push;
     Rigidbody2D rb_player;
     GameObject player;
-    bool contact = false, ready = false;
-    float time = 0.2f;
+    bool contact = false, ready = false, delay=false;
+    float ready_time = 0.3f, delay_time=0.5f, timer=0;
     void Start()
     {
         pre_push=transform.right;
@@ -20,23 +20,36 @@ public class Sticky_Wall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(delay || !contact) return;
         pre_push=transform.right;
-        if(contact) time-=Time.deltaTime;
-        if(contact && time<=0){
+        if(contact) timer+=Time.deltaTime;
+        if(contact && timer>=ready_time && !ready){
             ready = true;
+            x=Vector2.zero;
         }
         if(ready){
-            player_input = player_Movement.horizontal;
-            if(Mathf.Abs(player_input.x)>1.8f || Mathf.Abs(player_input.x)>1.8f){
-                //if(player.x)
-            }
+            x=new Vector2(player_Movement.hor,player_Movement.ver);
+            if(x.y<-40) Fall();
 
         }
 
     }
 
+    void Fall(){
+        x=Vector2.zero;
+        timer=0;
+        ready=false;
+        contact=false;
+        rb_player.bodyType = RigidbodyType2D.Dynamic;
+        player.transform.parent = null;
+        player_Movement.blocked=false;
+        StartCoroutine(Delay());
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
+        if(delay) return;
         if(other.gameObject.tag=="GrabWall"){
+            x=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
             player_Movement = player.GetComponent<Player_Movement>();
             rb_player = player.GetComponent<Rigidbody2D>();
@@ -58,5 +71,11 @@ public class Sticky_Wall : MonoBehaviour
         if(other.gameObject.tag=="GrabWall"){
 
         }
+    }
+
+    IEnumerator Delay(){
+        delay=true;
+        yield return new WaitForSeconds(delay_time);
+        delay=false;
     }
 }

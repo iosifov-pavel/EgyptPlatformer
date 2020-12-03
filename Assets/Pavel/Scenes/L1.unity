@@ -51413,7 +51413,7 @@ GameObject:
   - component: {fileID: 1032532725}
   m_Layer: 0
   m_Name: Sticky_Wall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51520,7 +51520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad9835037fa19f4691c0875fc3aed53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_input: {x: 0, y: 0}
+  x: {x: 0, y: 0}
+  y: {x: 0, y: 0}
 --- !u!1001 &1035200711
 PrefabInstance:
   m_ObjectHideFlags: 0
