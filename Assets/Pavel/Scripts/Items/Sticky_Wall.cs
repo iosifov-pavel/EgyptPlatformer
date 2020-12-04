@@ -33,7 +33,7 @@ public class Sticky_Wall : MonoBehaviour
             if(angle>95) return;
             else{
                 if(x.magnitude>110){
-                    if(x.y<-100) Fall();
+                    if(x.y<-90) Fall();
                     else Jump();
                 }
             }
