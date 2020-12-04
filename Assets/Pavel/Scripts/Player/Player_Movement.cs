@@ -87,7 +87,7 @@ public class Player_Movement : MonoBehaviour
              ver = 0;
              verical = new Vector2(0,0);
         }
-        verical+=stick_delta_y;
+        if(!blocked) verical+=stick_delta_y;
         hor+=stick_delta.x;
         ver+=stick_delta.y;
         if(Mathf.Abs(hor)>160) hor = 0;

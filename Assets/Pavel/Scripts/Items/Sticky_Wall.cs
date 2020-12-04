@@ -54,6 +54,7 @@ public class Sticky_Wall : MonoBehaviour
         timer=0;
         ready=false;
         contact=false;
+        //player_Movement.verical.x=x.y/2;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
         player.transform.parent = null;
         rb_player.AddForce(x.normalized*11, ForceMode2D.Impulse);
@@ -74,6 +75,8 @@ public class Sticky_Wall : MonoBehaviour
             player_Movement.ResetJumpCount();
             player_Movement.blocked=true;
             contact = true;
+            player_Movement.verical=Vector2.zero;
+            player_Movement.isJumping=false;
         }
     }
 
