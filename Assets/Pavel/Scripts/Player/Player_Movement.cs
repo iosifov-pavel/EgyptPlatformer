@@ -23,7 +23,7 @@ public class Player_Movement : MonoBehaviour
     int jump_count = 2;
     int jumps = 0;
     float enough_for_jump = 80;
-    float enough_for_reset = 40;
+    float enough_for_reset = 20;
     public bool isFalling=false;
     public bool isGrounded=true;
     public bool isJumping=false;

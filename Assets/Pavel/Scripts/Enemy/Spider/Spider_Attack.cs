@@ -8,6 +8,7 @@ public class Spider_Attack : MonoBehaviour
     LineRenderer web;
     [SerializeField]  Transform point;
     Vector2 original_point;
+    float distance;
     Vector3 web_point;
     Vector2 ray,ray2;
     float speed_up=2f;
@@ -21,6 +22,7 @@ public class Spider_Attack : MonoBehaviour
     bool down=false,up=false,isDown=false, isUp=true;
     void Start(){
         original_point = point.position;
+        distance =Mathf.Abs(original_point.y-transform.position.y);
         ray=Vector2.down;
         ray2=Vector2.down;
         player = LayerMask.GetMask("Player");
@@ -50,8 +52,8 @@ public class Spider_Attack : MonoBehaviour
             pos = (Vector2)transform.position + new Vector2(0.1f,0);
             pos2 = (Vector2)transform.position - new Vector2(0.1f,0);
 
-            hit = Physics2D.Raycast(pos,ray,5f,p);
-            hit2 = Physics2D.Raycast(pos2,ray2,5f,p);
+            hit = Physics2D.Raycast(pos,ray,distance,p);
+            hit2 = Physics2D.Raycast(pos2,ray2,distance,p);
             if(hit.collider!=null && hit.collider.gameObject.tag=="Player" || hit2.collider!=null && hit2.collider.gameObject.tag=="Player"){
                 down=true;
                 up=false;
