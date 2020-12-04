@@ -54,7 +54,7 @@ public class Sticky_Wall : MonoBehaviour
         timer=0;
         ready=false;
         contact=false;
-        //player_Movement.verical.x=x.y/2;
+        player_Movement.verical=new Vector2(40,20);
         rb_player.bodyType = RigidbodyType2D.Dynamic;
         player.transform.parent = null;
         rb_player.AddForce(x.normalized*11, ForceMode2D.Impulse);

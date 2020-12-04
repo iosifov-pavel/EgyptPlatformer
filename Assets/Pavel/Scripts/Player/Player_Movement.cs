@@ -90,10 +90,8 @@ public class Player_Movement : MonoBehaviour
         if(!blocked) verical+=stick_delta_y;
         hor+=stick_delta.x;
         ver+=stick_delta.y;
-        if(Mathf.Abs(hor)>160) hor = 0;
-        if(Mathf.Abs(ver)>160) ver=0;
-        //if(verical.x>81) verical.x=0;
-        //if(verical.y>41) verical.y=0;
+        //if(Mathf.Abs(hor)>160) hor = 0;
+        //if(Mathf.Abs(ver)>160) ver=0;
         if(!blocked) anima.setDirection(direction.x);
         CheckGround();
         DeepCheckGround();
