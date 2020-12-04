@@ -26,6 +26,7 @@ public class Skeleton_throw : MonoBehaviour
         egp = GetComponent<Enemy_Ground_Patroling>();
         distance = 666;
         animator = GetComponent<Animator>();
+        spear2.GetComponent<BoxCollider2D>().enabled=false;
     }
 
     // Update is called once per frame
@@ -53,6 +54,7 @@ public class Skeleton_throw : MonoBehaviour
 
      public void Throw(){
         spear_copy = Instantiate(spear2) as GameObject;
+        spear_copy.GetComponent<BoxCollider2D>().enabled=true;
         Rigidbody2D rb = spear_copy.GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
         spear_copy.transform.parent = body.transform;
