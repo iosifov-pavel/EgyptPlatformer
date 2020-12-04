@@ -287,7 +287,7 @@ public class Player_Movement : MonoBehaviour
         }
         //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
         //else
-        inertia = rb.velocity.x*0.92f;
+        inertia = rb.velocity.x*0.922f;
         last_velocity = rb.velocity.x;
     }
 
