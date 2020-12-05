@@ -332,6 +332,14 @@ public class Player_Movement : MonoBehaviour
     //          rb.bodyType = RigidbodyType2D.Dynamic;
     //      }
     //}
+
+    public void below()
+    {   
+       
+        jump_force= jump_force/2;
+        maxSpeed = maxSpeed/2;
+        }
+    
 }
 
 
