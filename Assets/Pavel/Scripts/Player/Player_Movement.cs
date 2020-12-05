@@ -285,7 +285,7 @@ public class Player_Movement : MonoBehaviour
         }
         //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
         //else
-        inertia = rb.velocity.x*0.9f;
+        inertia = rb.velocity.x*0.90f;
         last_velocity = rb.velocity.x;
     }
 
@@ -293,7 +293,7 @@ public class Player_Movement : MonoBehaviour
         if(onSlope){
             if(facing==1){
                 if(Mathf.Abs(slopeangle[1])>50){
-
+                    
                 }
                 else rb.sharedMaterial=slope;
             }

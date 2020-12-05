@@ -49,8 +49,8 @@ public class Spider_Attack : MonoBehaviour
     void Spider_Sense(){
         if(isUp){
             Vector2 pos,pos2;
-            pos = (Vector2)transform.position + new Vector2(0.1f,0);
-            pos2 = (Vector2)transform.position - new Vector2(0.1f,0);
+            pos = (Vector2)transform.position + new Vector2(0.12f,0);
+            pos2 = (Vector2)transform.position - new Vector2(0.12f,0);
 
             hit = Physics2D.Raycast(pos,ray,distance,p);
             hit2 = Physics2D.Raycast(pos2,ray2,distance,p);

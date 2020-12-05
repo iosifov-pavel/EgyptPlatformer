@@ -92,7 +92,6 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     IEnumerator Delay(){
-        
         x=Vector2.zero;
         delay=true;
         yield return new WaitForSeconds(delay_time);
