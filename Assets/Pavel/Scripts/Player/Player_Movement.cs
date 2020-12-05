@@ -386,7 +386,5 @@ public class Player_Movement : MonoBehaviour
         maxSpeed = maxSpeed/2;
         }
     
-}
-
 
 }
