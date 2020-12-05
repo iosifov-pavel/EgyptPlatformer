@@ -6,11 +6,12 @@ public class Player_Movement : MonoBehaviour
 {
 
     private float speed = 100f;
-    public float multiplier = 1.5f;
-    [SerializeField] private float maxSpeed = 3f;
+    public float multiplier = 1f;
+    [SerializeField] private float maxSpeed = 2.8f;
     public Vector2 direction;
     Vector2 move;
-    public Vector2 stick_delta;
+    public Vector2 stick_delta_y,stick_delta;
+    public int facing=0;
     //---------------------------
     List<string> source_names = new List<string>();
     List<Vector2> sources = new List<Vector2>();
@@ -22,7 +23,7 @@ public class Player_Movement : MonoBehaviour
     int jump_count = 2;
     int jumps = 0;
     float enough_for_jump = 80;
-    float enough_for_reset = 40;
+    float enough_for_reset = 20;
     public bool isFalling=false;
     public bool isGrounded=true;
     public bool isJumping=false;
@@ -30,9 +31,19 @@ public class Player_Movement : MonoBehaviour
     private float gravity = 2.2f;
     bool can_jump=false;
     public Vector2 verical;
+    public float hor,ver;
+    float inertia=0;
+    float last_velocity=0;
+    bool air_direction_change=false;
     //-------------------------------
+    RaycastHit2D hit1,hit2;
+    BoxCollider2D box;
+    float offset;
+    float height;
+    Vector2 ray;
     public bool onSlope = false;
-    private float slopeangle;
+    public float[] slopeangle = new float[2];
+    LayerMask ground;
     //----------------------------
     Rigidbody2D rb;
     Player_Health ph;
@@ -41,10 +52,10 @@ public class Player_Movement : MonoBehaviour
     Player_Animation anima;
     PhysicsMaterial2D normal;
     [SerializeField] PhysicsMaterial2D zero;
+    [SerializeField] PhysicsMaterial2D slope;
+    [SerializeField] PhysicsMaterial2D stop_material;
     //--------------------------------------
     public bool stickPressed = false;
-
-    public GameObject speeds;
     public bool blocked = false;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
@@ -58,6 +69,11 @@ public class Player_Movement : MonoBehaviour
         normal = rb.sharedMaterial;
         verical=Vector2.zero;
         lastcheck=isGrounded;
+        ray = Vector2.down;
+        box = GetComponent<BoxCollider2D>();
+        offset = box.size.x/2 * transform.localScale.x;
+        height = box.size.y/2 * transform.localScale.y;
+        ground = LayerMask.GetMask("Ground");
     }
 
     // Update is called once per frame
@@ -66,15 +82,20 @@ public class Player_Movement : MonoBehaviour
         } else {
              direction = new Vector2(0, 0);
              stick_delta = new Vector2(0,0);
+             stick_delta_y = new Vector2(0,0);
+             hor = 0; 
+             ver = 0;
              verical = new Vector2(0,0);
         }
-        verical+=stick_delta;
-        //if(rb.velocity.y<0 && !isJumping && !isGrounded) isFalling=true;
-        anima.setDirection(direction.x);
+        if(!blocked) verical+=stick_delta_y;
+        hor+=stick_delta.x;
+        ver+=stick_delta.y;
+        //if(Mathf.Abs(hor)>160) hor = 0;
+        //if(Mathf.Abs(ver)>160) ver=0;
+        if(!blocked) anima.setDirection(direction.x);
         CheckGround();
-        //Jump();
-
-        anima.setBoolAnimation("Ground", isGrounded);   
+        DeepCheckGround();
+        anima.setBoolAnimation("Ground", isGrounded);
     }
 
     void Jump(){
@@ -106,6 +127,10 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
+    public void ResetJumpCount(){
+        jumps=1;
+    }
+
     private void FixedUpdate() {
         if(ph.dead){
             CustomPhysics();
@@ -125,6 +150,8 @@ public class Player_Movement : MonoBehaviour
 
     void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
+        if(direction.x==0) facing=0;
+        else facing = (int)Mathf.Sign(direction.x);
         move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
     }
 
@@ -144,8 +171,8 @@ public class Player_Movement : MonoBehaviour
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(can_jump){
+            air_direction_change=false;
             isJumping=true;  
-            //Debbuger.Print("Jump");  
             rb.drag=2f;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -186,13 +213,12 @@ public class Player_Movement : MonoBehaviour
                 isFalling=false;
                 jump_time=-111;
                 jumps=0;
-                slopeangle = Vector2.Angle(transform.up, hit.transform.up);
-                if(slopeangle>=3f) onSlope=true;
-                else onSlope = false;
+                inertia=0;
+                last_velocity=0;
+                air_direction_change=false;
                 break;
             }
             check = false;
-            onSlope = false;
             isGrounded=false;
         }
         if(!isJumping && lastcheck && !check){
@@ -201,6 +227,27 @@ public class Player_Movement : MonoBehaviour
             jumps++;
         }
         lastcheck=check;
+    }
+
+    void DeepCheckGround(){
+        Vector2 pos,pos2;
+            pos = (Vector2)transform.position + new Vector2(-offset,-height);
+            pos2 = (Vector2)transform.position + new Vector2(offset,-height);
+
+            hit1 = Physics2D.Raycast(pos,ray,0.3f,ground);
+            hit2 = Physics2D.Raycast(pos2,ray,0.3f,ground);
+            if(hit1.collider==null && hit2.collider==null){
+                onSlope=false;
+                return;
+            }
+            float diff = Mathf.Abs(hit1.distance-hit2.distance);
+            slopeangle[0] = Mathf.Sign(hit1.normal.x) * Vector2.Angle(transform.up, hit1.normal);
+            slopeangle[1] = Mathf.Sign(hit2.normal.x) * Vector2.Angle(transform.up, hit2.normal);
+
+            if(diff<0.2f && (Mathf.Abs(slopeangle[0])>3 || Mathf.Abs(slopeangle[1])>3) ){
+                onSlope=true;
+            }
+            else onSlope = false;
     }
 
     void Flip(){
@@ -228,21 +275,50 @@ public class Player_Movement : MonoBehaviour
                 return;
             }
             rb.drag=2f;
+            if(direction.x==0){
+                rb.velocity +=new Vector2(inertia,0); 
+            }
+            if(Mathf.Sign(last_velocity) != Mathf.Sign(rb.velocity.x)){
+                air_direction_change=true;
+            }
+            if(air_direction_change) rb.velocity*=new Vector2(0.8f,1);
         }
+        //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
+        //else
+        inertia = rb.velocity.x*0.9f;
+        last_velocity = rb.velocity.x;
     }
 
     void PreMove(){
-        if(onSlope && direction.x == 0 || transform.parent!=null){
-            rb.sharedMaterial = null;
+        if(onSlope){
+            if(facing==1){
+                if(Mathf.Abs(slopeangle[1])>50){
+
+                }
+                else rb.sharedMaterial=slope;
             }
-        else if(!isGrounded){
+            else if(facing==-1){
+                if(Mathf.Abs(slopeangle[0])>50){
+                    
+                }
+                else rb.sharedMaterial=slope;
+            }
+            else {
+                if(Mathf.Abs(slopeangle[1])>50 || Mathf.Abs(slopeangle[0])>50){
+                    rb.sharedMaterial = normal;
+                }
+                else rb.sharedMaterial=stop_material;
+            }
+        }
+         else if(!isGrounded){
             rb.sharedMaterial = zero;
         }
         else rb.sharedMaterial = normal;
     }
 
     void PostMove(){
-        if(onSlope && direction.x==0){
+        if(onSlope){
+
         } 
     }
 
@@ -274,36 +350,6 @@ public class Player_Movement : MonoBehaviour
         yield return new WaitForSeconds(time);
         blocked = false;
     }
-
-
-    //private void OnTriggerEnter2D(Collider2D collision) {
-    //    if (collision.gameObject.tag == "speeds"){
-    //        Destroy(collision.gameObject);
-    //        StartCoroutine(speedUp());
-    //    }
-    //}
-    //IEnumerator speedUp()
-    //{
-    //    speed = speed*2;
-    //    speeds.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
-    //    print("Speed UP");
-    //    yield return new WaitForSeconds(9f);
-    //    StartCoroutine(invis(speeds.GetComponent<SpriteRenderer>(), 0.02f));
-    //    yield return new WaitForSeconds(1f);
-    //    speed = speed /2;
-    //    print("Speed Normal");
-    //}
-
-
-
-    //IEnumerator invis(SpriteRenderer spr, float time)
-    //{
-    //    spr.color = new Color(1f,1f,1f, spr.color.a - time*2);
-    //    yield return new WaitForSeconds(time);
-    //    if(spr.color.a > 0){
-    //        StartCoroutine(invis(spr, time));
-    //    }
-    //}
 
     public void Speed_Up(float time){
         StartCoroutine(speedup(time));
@@ -343,3 +389,4 @@ public class Player_Movement : MonoBehaviour
 }
 
 
+}

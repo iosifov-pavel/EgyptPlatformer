@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Trap_Bullet : MonoBehaviour
 {
-    Transform parent;
+    //Transform parent;
     float speed = 6;
     float life_time = 2;
     Vector3 move;
+    Vector3 vector;
     // Start is called before the first frame update
     void Start()
     {
-        parent = transform.parent;
+        //parent = transform.parent;
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class Trap_Bullet : MonoBehaviour
     {
         life_time-=Time.deltaTime;
         if(life_time<=0) Destroy(gameObject);
-        move = parent.transform.right * speed * Time.deltaTime;
+        move = vector * speed * Time.deltaTime;
         transform.position+=move;
     }
 
@@ -27,5 +28,9 @@ public class Trap_Bullet : MonoBehaviour
        if(other.gameObject.tag=="Ground") {
             Destroy(gameObject);
         } 
+    }
+
+    public void GetDirection(Vector3 v){
+        vector=v;
     }
 }

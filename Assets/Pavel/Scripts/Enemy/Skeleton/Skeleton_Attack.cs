@@ -7,15 +7,15 @@ public class Skeleton_Attack : MonoBehaviour
     // Start is called before the first frame update
     //LayerMask player = LayerMask.GetMask("Player");
     Enemy_Ray_Eyes eyes;
+    [SerializeField] GameObject sword;
+    BoxCollider2D sword_box;
     int dir;
     Enemy_Ground_Patroling egp;
     Transform player;
     float distance;
     float near = 0.5f;
     bool canAttcak;
-    public int canB=0;
     float far = 2f;
-    float far_far = 4;
     Animator animator;
     float time = 1.5f;
     public bool stop=false;
@@ -25,6 +25,8 @@ public class Skeleton_Attack : MonoBehaviour
         egp = GetComponent<Enemy_Ground_Patroling>();
         distance = 666;
         animator = GetComponent<Animator>();
+        sword_box = sword.GetComponent<BoxCollider2D>();
+        sword_box.enabled=false;
     }
 
     // Update is called once per frame
@@ -56,5 +58,13 @@ public class Skeleton_Attack : MonoBehaviour
         stop=false;
         canAttcak=false;
         animator.SetBool("Attack",canAttcak);
+    }
+
+    public void SwordIsReady(){
+        sword_box.enabled=true;
+    }
+
+    public void swordOff(){
+        sword_box.enabled=false;
     }
 }

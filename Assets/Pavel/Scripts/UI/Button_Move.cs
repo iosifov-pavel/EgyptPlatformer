@@ -22,7 +22,9 @@ float dir;
 bool enough;
 bool enogh_y;
 float last_y;
+float last_x;
 float delta_jump=0;
+float delta_move=0;
 float cumulative_jump=0;
 float cumulative_reset=0;
     // Start is called before the first frame update
@@ -68,12 +70,14 @@ float cumulative_reset=0;
                     cumulative_jump=0;
                     last_y=0;
                     delta_jump=0;
+                    last_x=0;
+                    delta_move=0;
                     Action();
                     break;
                 case TouchPhase.Moved:
                     Debug.Log("Touch Moved");
                     Action();
-                    Vertical();
+                    Axis();
                     break;
                 case TouchPhase.Canceled:
                     pm.stickPressed = false;
@@ -86,6 +90,8 @@ float cumulative_reset=0;
                     cumulative_reset=0;
                     cumulative_jump=0;
                     last_y=0;
+                    last_x=0;
+                    delta_move=0;
                     delta_jump=0;
                     Debug.Log("Touch Ended");
                     stick.localPosition = original;
@@ -109,16 +115,21 @@ float cumulative_reset=0;
         else pm.direction.y=0f;
     }
 
-    private void Vertical(){
+    private void Axis(){
         delta_jump=(local.y-last_y);
+        delta_move=(local.x-last_x);
+
         if(delta_jump>0){
-            pm.stick_delta= new Vector2(delta_jump,0);
+            pm.stick_delta_y= new Vector2(delta_jump,0);
         } else if(delta_jump<0) {
-            pm.stick_delta= new Vector2(0,Mathf.Abs(delta_jump));
+            pm.stick_delta_y= new Vector2(0,Mathf.Abs(delta_jump));
         }
         else{
-           pm.stick_delta= new Vector2(0,0); 
+           pm.stick_delta_y= new Vector2(0,0); 
         }
+
+        pm.stick_delta= new Vector2(delta_move,delta_jump);
         last_y=local.y;
+        last_x=local.x;
     }
 }

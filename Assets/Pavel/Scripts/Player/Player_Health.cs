@@ -11,7 +11,6 @@ public class Player_Health : MonoBehaviour
     public bool dead = false;
     Player_Animation anima;
 
-    public GameObject infinity;
     // Start is called before the first frame update
     void Start()
     {
