@@ -34,7 +34,7 @@ public class Spider_Attack : MonoBehaviour
         web = GetComponent<LineRenderer>();
         web.positionCount = 2;
         web.SetPosition(0, web_point);
-        web.SetPosition(1,original);
+        web.SetPosition(1, original);
     }
 
     // Update is called once per frame
