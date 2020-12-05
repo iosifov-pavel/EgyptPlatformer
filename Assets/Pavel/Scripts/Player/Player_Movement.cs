@@ -359,4 +359,32 @@ public class Player_Movement : MonoBehaviour
         yield return new WaitForSeconds(t);
         maxSpeed = 3;
     }
+
+    //private void OnTriggerStay2D(Collider2D collision) {
+    //    
+    //    if (collision.gameObject.tag == "Ladder"){
+    //        rb.bodyType = RigidbodyType2D.Kinematic;
+    //        transform.Translate(Vector3.up * Input.GetAxis("Vertical") * speed * 0.5f * Time.deltaTime);
+//
+    //        
+    //    }
+    //}
+//
+    //    private void OnTriggerExit2D(Collider2D collision) 
+    //{
+    //      if (collision.gameObject.tag == "Ladder")    
+    //      {
+    //          
+    //          rb.bodyType = RigidbodyType2D.Dynamic;
+    //      }
+    //}
+
+    public void below()
+    {   
+       
+        jump_force= jump_force/2;
+        maxSpeed = maxSpeed/2;
+        }
+    
+
 }

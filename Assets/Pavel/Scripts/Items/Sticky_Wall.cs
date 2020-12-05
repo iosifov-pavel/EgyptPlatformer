@@ -6,7 +6,7 @@ public class Sticky_Wall : MonoBehaviour
 {
     // Start is called before the first frame update
     Player_Movement player_Movement;
-    public Vector2 x,y;
+    public Vector2 x;
     Vector2 pre_push;
     Rigidbody2D rb_player;
     GameObject player;
