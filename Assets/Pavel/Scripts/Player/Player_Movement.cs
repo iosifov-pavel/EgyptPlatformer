@@ -22,8 +22,8 @@ public class Player_Movement : MonoBehaviour
     float jump_time_max = 0.16f;
     int jump_count = 2;
     int jumps = 0;
-    float enough_for_jump = 80;
-    float enough_for_reset = 20;
+    float enough_for_jump = 75;
+    float enough_for_reset = 15;
     public bool isFalling=false;
     public bool isGrounded=true;
     public bool isJumping=false;
