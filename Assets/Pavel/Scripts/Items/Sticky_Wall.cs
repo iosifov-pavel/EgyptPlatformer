@@ -51,14 +51,16 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     void Jump(){
+        player_Movement.jump_time = -111f;
+        player_Movement.can_jump=false;
         timer=0;
         ready=false;
         contact=false;
-        player_Movement.verical=new Vector2(50,10);
-        rb_player.bodyType = RigidbodyType2D.Dynamic;
         player.transform.parent = null;
+        rb_player.bodyType = RigidbodyType2D.Dynamic;
         rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
         player_Movement.blocked=false;
+        player_Movement.verical=new Vector2(50,10);
         StartCoroutine(Delay());
     }
 

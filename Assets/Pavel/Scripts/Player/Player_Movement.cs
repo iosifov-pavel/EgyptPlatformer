@@ -18,7 +18,7 @@ public class Player_Movement : MonoBehaviour
     List<int> source_times = new List<int>();
     //--------------------------
     float jump_force = 5f;
-    float jump_time = -111f;
+    public float jump_time = -111f;
     float jump_time_max = 0.16f;
     int jump_count = 2;
     int jumps = 0;
@@ -29,7 +29,7 @@ public class Player_Movement : MonoBehaviour
     public bool isJumping=false;
     bool lastcheck=false;
     private float gravity = 2.2f;
-    bool can_jump=false;
+    public bool can_jump=false;
     public Vector2 verical;
     public float hor,ver;
     float inertia=0;
@@ -102,7 +102,6 @@ public class Player_Movement : MonoBehaviour
         if(isJumping) verical.x=0;
         if(verical.x>enough_for_jump){
             if(!isJumping && jumps<jump_count){
-                 
                 can_jump=true;
                 jumps++;
             }
