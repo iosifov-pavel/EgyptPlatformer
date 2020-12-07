@@ -22,7 +22,7 @@ float razbros;
         original = stick.localPosition;
         center = transform.position;
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
-        dist = (gameObject.GetComponent<RectTransform>().rect.width - 180)/2 * scale;
+        dist = (gameObject.GetComponent<RectTransform>().rect.width - 120)/2 * scale;
         razbros = (gameObject.GetComponent<RectTransform>().rect.width - 20)/2 * scale;
     }
 
@@ -80,7 +80,7 @@ float razbros;
         float angle = Vector3.Angle(Vector3.right,point);
         if(local.y>=0) pa.bUp=1;
         else pa.bUp=-1;
-        bool enough = (power>=35);
+        bool enough = (power>=30);
         if(enough)  pa.buttonAttack=true;
         else pa.buttonAttack=false;
         pa.angle=angle;

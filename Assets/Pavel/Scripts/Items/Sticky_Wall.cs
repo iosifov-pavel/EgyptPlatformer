@@ -42,7 +42,7 @@ public class Sticky_Wall : MonoBehaviour
 
     void Fall(){
         player_Movement.jump_time = -111f;
-        player_Movement.can_jump=false;
+        //player_Movement.can_jump=false;
         timer=0;
         ready=false;
         contact=false;
@@ -55,7 +55,7 @@ public class Sticky_Wall : MonoBehaviour
 
     void Jump(){
         player_Movement.jump_time = -111f;
-        player_Movement.can_jump=false;
+        //player_Movement.can_jump=false;
         timer=0;
         ready=false;
         contact=false;

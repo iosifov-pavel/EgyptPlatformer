@@ -20,16 +20,13 @@ public class Player_Movement : MonoBehaviour
     float jump_force = 5f;
     public float jump_time = -111f;
     float jump_time_max = 0.16f;
-    int jump_count = 2;
-    int jumps = 0;
-    float enough_for_jump = 75;
-    float enough_for_reset = 15;
-    public bool isFalling=false;
-    public bool isGrounded=true;
-    public bool isJumping=false, reset=false;
-    bool lastcheck=false;
+    int jump_max = 2;
+     public int jumps;
+    //float enough_for_jump = 75;
+    //float enough_for_reset = 15;
+    public bool isJumping=false, reset=false, buttonJump=false;
     private float gravity = 2.2f;
-    public bool can_jump=false;
+    bool can_jump=false;
     public Vector2 verical;
     public float hor,ver;
     float inertia=0;
@@ -38,6 +35,9 @@ public class Player_Movement : MonoBehaviour
     //-------------------------------
     RaycastHit2D hit1,hit2;
     BoxCollider2D box;
+    bool lastcheck=false;
+    public bool isFalling=false;
+    public bool isGrounded=true;
     float offset;
     float height;
     Vector2 ray;
@@ -60,6 +60,7 @@ public class Player_Movement : MonoBehaviour
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
+        jumps=0;
         rb = GetComponent<Rigidbody2D>();
         rb.drag=1f;
         tran = GetComponent<Transform>();
@@ -67,7 +68,7 @@ public class Player_Movement : MonoBehaviour
         checkground = tran.GetChild(1).gameObject.GetComponent<BoxCollider2D>();
         anima = GetComponent<Player_Animation>();
         normal = rb.sharedMaterial;
-        verical=Vector2.zero;
+        //verical=Vector2.zero;
         lastcheck=isGrounded;
         ray = Vector2.down;
         box = GetComponent<BoxCollider2D>();
@@ -82,14 +83,15 @@ public class Player_Movement : MonoBehaviour
         } else {
              direction = new Vector2(0, 0);
              stick_delta = new Vector2(0,0);
-             stick_delta_y = new Vector2(0,0);
+             //stick_delta_y = new Vector2(0,0);
              hor = 0; 
              ver = 0;
-             verical = new Vector2(0,0);
+             //verical = new Vector2(0,0);
         }
-        if(!blocked) verical+=stick_delta_y;
         hor+=stick_delta.x;
         ver+=stick_delta.y;
+        Jump2();
+        //if(!blocked) verical+=stick_delta_y;
         //if(Mathf.Abs(hor)>160) hor = 0;
         //if(Mathf.Abs(ver)>160) ver=0;
         if(!blocked) anima.setDirection(direction.x);
@@ -97,34 +99,41 @@ public class Player_Movement : MonoBehaviour
         DeepCheckGround();
         anima.setBoolAnimation("Ground", isGrounded);
     }
+    void Jump2(){
+        if(buttonJump && jumps<jump_max){
+            can_jump=true;
+            //jumps++;
+        }
+        else can_jump=false;
+    }
 
     void Jump(){
-        if(isJumping) verical.x=0;
-        if(verical.x>enough_for_jump){
-            if(!isJumping && jumps<jump_count){
-                can_jump=true;
-                jumps++;
-                reset=false;
-            }
-            verical.x=0;
-            verical.y=0;
-            if(jumps==2&& jump_time==-111) jump_time=jump_time_max-0.08f;
-            else if(jump_time==-111) jump_time=jump_time_max;
-        }
-
-        if(can_jump){
-           if(jump_time>=0) jump_time-=Time.deltaTime;
-           else if(jump_time<0) can_jump=false;
-        }
-
-        if(verical.y>enough_for_reset && !reset && !isGrounded){
-            verical.x=50;
-            verical.y=0;
-            isJumping=false;
-            reset=true;
-            can_jump=false;
-            jump_time=-111;
-        }
+        //if(isJumping) verical.x=0;
+        //if(verical.x>enough_for_jump){
+        //    if(!isJumping && jumps<jump_count){
+        //        can_jump=true;
+        //        jumps++;
+        //        reset=false;
+        //    }
+        //    verical.x=0;
+        //    verical.y=0;
+        //    if(jumps==2&& jump_time==-111) jump_time=jump_time_max-0.08f;
+        //    else if(jump_time==-111) jump_time=jump_time_max;
+        //}
+//
+        //if(can_jump){
+        //   if(jump_time>=0) jump_time-=Time.deltaTime;
+        //   else if(jump_time<0) can_jump=false;
+        //}
+//
+        //if(verical.y>enough_for_reset && !reset && !isGrounded){
+        //    verical.x=50;
+        //    verical.y=0;
+        //    isJumping=false;
+        //    reset=true;
+        //    can_jump=false;
+        //    jump_time=-111;
+        //}
     }
 
     public void ResetJumpCount(){
