@@ -22,9 +22,7 @@ public class Player_Movement : MonoBehaviour
     public float jump_time_max = 0.16f;
     int jump_max = 2;
     public int jumps;
-    //float enough_for_jump = 75;
-    //float enough_for_reset = 15;
-    public bool isJumping=false, jump_block=false, buttonJump=false, need_reset=false;
+    public bool isJumping=false, jump_block=false, buttonJump=false;
     private float gravity = 2.2f;
     public bool can_jump=false;
     public Vector2 verical;
@@ -68,7 +66,6 @@ public class Player_Movement : MonoBehaviour
         checkground = tran.GetChild(1).gameObject.GetComponent<BoxCollider2D>();
         anima = GetComponent<Player_Animation>();
         normal = rb.sharedMaterial;
-        //verical=Vector2.zero;
         lastcheck=isGrounded;
         ray = Vector2.down;
         box = GetComponent<BoxCollider2D>();
@@ -90,7 +87,6 @@ public class Player_Movement : MonoBehaviour
         }
         hor+=stick_delta.x;
         ver+=stick_delta.y;
-        if(!jump_block)Jump2();
         //if(!blocked) verical+=stick_delta_y;
         //if(Mathf.Abs(hor)>160) hor = 0;
         //if(Mathf.Abs(ver)>160) ver=0;
@@ -98,24 +94,6 @@ public class Player_Movement : MonoBehaviour
         CheckGround();
         DeepCheckGround();
         anima.setBoolAnimation("Ground", isGrounded);
-    }
-    void Jump2(){
-        if(isGrounded){
-            if(buttonJump){
-                can_jump=true;
-            }
-        }
-        else{
-
-        }
-        //if(!need_reset && buttonJump){
-        //    jumps++;
-        //    need_reset=true;
-        //}
-        //if(buttonJump && jumps<=jump_max){
-        //    can_jump=true;
-        //}
-        //else can_jump=false;
     }
 
     void Jump(){
@@ -189,6 +167,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Vertical(){
+        if(jump_block) return;
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(buttonJump && jumps<2){
             air_direction_change=false;
@@ -230,8 +209,6 @@ public class Player_Movement : MonoBehaviour
                 isGrounded=true;
                 check=true;
                 isJumping=false;
-                need_reset=false;
-                jump_time=-111;
                 jumps=0;
                 inertia=0;
                 last_velocity=0;

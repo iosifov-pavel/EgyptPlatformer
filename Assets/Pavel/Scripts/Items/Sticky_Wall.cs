@@ -41,13 +41,10 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     void Fall(){
-        //player_Movement.jump_time = -111f;
-        //player_Movement.can_jump=false;
         player_Movement.jumps=0;
         timer=0;
         ready=false;
         contact=false;
-        //player_Movement.reset=false;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
         player.transform.parent = null;
         player_Movement.blocked=false;
@@ -55,18 +52,14 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     void Jump(){
-        //player_Movement.jump_time = -111f;
-        //player_Movement.can_jump=false;
         timer=0;
         player_Movement.jumps=0;
         ready=false;
         contact=false;
         player.transform.parent = null;
-        //player_Movement.reset=false;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
         rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
         player_Movement.blocked=false;
-        player_Movement.verical=new Vector2(50,10);
         StartCoroutine(Delay());
     }
 
@@ -84,7 +77,6 @@ public class Sticky_Wall : MonoBehaviour
             player_Movement.blocked=true;
             player_Movement.jump_block=true;
             contact = true;
-            player_Movement.can_jump=false;
             player_Movement.verical=Vector2.zero;
             player_Movement.isJumping=false;
         }
@@ -104,7 +96,7 @@ public class Sticky_Wall : MonoBehaviour
     IEnumerator Delay(){
         x=Vector2.zero;
         delay=true;
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.25f);
         player_Movement.jump_block=false;
         yield return new WaitForSeconds(delay_time);
         delay=false;
