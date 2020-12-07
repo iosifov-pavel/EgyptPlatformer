@@ -41,9 +41,12 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     void Fall(){
+        player_Movement.jump_time = -111f;
+        player_Movement.can_jump=false;
         timer=0;
         ready=false;
         contact=false;
+        player_Movement.reset=false;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
         player.transform.parent = null;
         player_Movement.blocked=false;
@@ -57,6 +60,7 @@ public class Sticky_Wall : MonoBehaviour
         ready=false;
         contact=false;
         player.transform.parent = null;
+        player_Movement.reset=false;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
         rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
         player_Movement.blocked=false;
