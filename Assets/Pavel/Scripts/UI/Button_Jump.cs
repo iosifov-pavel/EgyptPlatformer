@@ -15,7 +15,7 @@ private void Start() {
 public void OnPointerDown(PointerEventData eventData){
      if(!buttonPressed){
      buttonPressed = true;
-     pm.jumps++;
+     //pm.jumps++;
      StartCoroutine(delay());
      Debug.Log("J pressed");
      }
@@ -24,12 +24,14 @@ public void OnPointerDown(PointerEventData eventData){
 public void OnPointerUp(PointerEventData eventData){
     buttonPressed = false;
     pm.buttonJump = false;
+    pm.need_reset = false;
+    pm.jumps++;
     Debug.Log("J released");
 }
 
 IEnumerator delay(){
     pm.buttonJump = true;
-    yield return new WaitForSeconds(0.16f);
+    yield return new WaitForSeconds(pm.jump_time_max);
     pm.buttonJump = false;
 }
 }

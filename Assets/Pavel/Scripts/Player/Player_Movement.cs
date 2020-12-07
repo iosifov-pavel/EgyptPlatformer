@@ -18,15 +18,15 @@ public class Player_Movement : MonoBehaviour
     List<int> source_times = new List<int>();
     //--------------------------
     float jump_force = 5f;
-    public float jump_time = -111f;
-    float jump_time_max = 0.16f;
+    float jump_time = -111f;
+    public float jump_time_max = 0.16f;
     int jump_max = 2;
-     public int jumps;
+    public int jumps;
     //float enough_for_jump = 75;
     //float enough_for_reset = 15;
-    public bool isJumping=false, reset=false, buttonJump=false;
+    public bool isJumping=false, jump_block=false, buttonJump=false, need_reset=false;
     private float gravity = 2.2f;
-    bool can_jump=false;
+    public bool can_jump=false;
     public Vector2 verical;
     public float hor,ver;
     float inertia=0;
@@ -90,7 +90,7 @@ public class Player_Movement : MonoBehaviour
         }
         hor+=stick_delta.x;
         ver+=stick_delta.y;
-        Jump2();
+        if(!jump_block)Jump2();
         //if(!blocked) verical+=stick_delta_y;
         //if(Mathf.Abs(hor)>160) hor = 0;
         //if(Mathf.Abs(ver)>160) ver=0;
@@ -100,11 +100,22 @@ public class Player_Movement : MonoBehaviour
         anima.setBoolAnimation("Ground", isGrounded);
     }
     void Jump2(){
-        if(buttonJump && jumps<jump_max){
-            can_jump=true;
-            //jumps++;
+        if(isGrounded){
+            if(buttonJump){
+                can_jump=true;
+            }
         }
-        else can_jump=false;
+        else{
+
+        }
+        //if(!need_reset && buttonJump){
+        //    jumps++;
+        //    need_reset=true;
+        //}
+        //if(buttonJump && jumps<=jump_max){
+        //    can_jump=true;
+        //}
+        //else can_jump=false;
     }
 
     void Jump(){
@@ -179,13 +190,13 @@ public class Player_Movement : MonoBehaviour
 
     void Vertical(){
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
-        if(can_jump){
+        if(buttonJump && jumps<2){
             air_direction_change=false;
             isJumping=true;  
             rb.drag=2f;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            if(jumps==2 && !isFalling) rb.AddForce(Vector3.up * (jump_force), ForceMode2D.Impulse);
+            if(jumps==2) rb.AddForce(Vector3.up * (jump_force), ForceMode2D.Impulse);
             else rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
         }
     }
@@ -219,7 +230,7 @@ public class Player_Movement : MonoBehaviour
                 isGrounded=true;
                 check=true;
                 isJumping=false;
-                isFalling=false;
+                need_reset=false;
                 jump_time=-111;
                 jumps=0;
                 inertia=0;
@@ -232,8 +243,7 @@ public class Player_Movement : MonoBehaviour
         }
         if(!isJumping && lastcheck && !check){
             lastcheck=false;
-            isFalling=true;
-            jumps++;
+            jumps=1;
         }
         lastcheck=check;
     }
@@ -331,10 +341,10 @@ public class Player_Movement : MonoBehaviour
         } 
     }
 
-    public void SetOtherSource(string name, Vector2 source, int seconds){
+    public void SetOtherSource(string name, Vector2 source, int frames){
         source_names.Add(name);
         sources.Add(source);
-        source_times.Add(seconds);
+        source_times.Add(frames);
     }
 
     public void ResetOtherSource(string name){
