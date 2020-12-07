@@ -27,8 +27,8 @@ public class Spider_Attack : MonoBehaviour
         ray2=Vector2.down;
         player = LayerMask.GetMask("Player");
         player2 = LayerMask.GetMask("Damaged");
-        ground = LayerMask.GetMask("Ground");
-        p = player | player2 | ground;
+        //ground = LayerMask.GetMask("Ground");
+        p = player | player2; //| ground;
         original=transform.position;
         web_point = original + new Vector3(0,0.5f,0);
         web = GetComponent<LineRenderer>();
