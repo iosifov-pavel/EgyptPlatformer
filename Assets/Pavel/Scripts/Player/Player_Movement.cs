@@ -26,7 +26,7 @@ public class Player_Movement : MonoBehaviour
     float enough_for_reset = 15;
     public bool isFalling=false;
     public bool isGrounded=true;
-    public bool isJumping=false;
+    public bool isJumping=false, reset=false;
     bool lastcheck=false;
     private float gravity = 2.2f;
     public bool can_jump=false;
@@ -104,6 +104,7 @@ public class Player_Movement : MonoBehaviour
             if(!isJumping && jumps<jump_count){
                 can_jump=true;
                 jumps++;
+                reset=false;
             }
             verical.x=0;
             verical.y=0;
@@ -116,11 +117,11 @@ public class Player_Movement : MonoBehaviour
            else if(jump_time<0) can_jump=false;
         }
 
-        if(verical.y>enough_for_reset){
-            verical.x=0;
+        if(verical.y>enough_for_reset && !reset && !isGrounded){
+            verical.x=50;
             verical.y=0;
             isJumping=false;
-            //isFalling=false;
+            reset=true;
             can_jump=false;
             jump_time=-111;
         }
