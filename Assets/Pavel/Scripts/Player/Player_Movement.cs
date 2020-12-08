@@ -24,7 +24,7 @@ public class Player_Movement : MonoBehaviour
     public int jumps;
     public bool isJumping=false, jump_block=false, buttonJump=false;
     private float gravity = 2.2f;
-    public bool can_jump=false;
+    public bool cant_jump=false;
     public Vector2 verical;
     public float hor,ver;
     float inertia=0;
@@ -167,7 +167,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Vertical(){
-        if(jump_block) return;
+        if(jump_block || cant_jump) return;
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(buttonJump && jumps<2){
             air_direction_change=false;
@@ -209,6 +209,7 @@ public class Player_Movement : MonoBehaviour
                 isGrounded=true;
                 check=true;
                 isJumping=false;
+                cant_jump = false;
                 jumps=0;
                 inertia=0;
                 last_velocity=0;

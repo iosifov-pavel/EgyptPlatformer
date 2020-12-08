@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 3448354547715330359}
   m_Layer: 9
   m_Name: GrabCeiling
-  m_TagString: GrabWall
+  m_TagString: GrabCeiling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,7 +231,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.60115266}
@@ -913,7 +913,7 @@ MonoBehaviour:
   isJumping: 0
   jump_block: 0
   buttonJump: 0
-  can_jump: 0
+  cant_jump: 0
   verical: {x: 0, y: 0}
   hor: 0
   ver: 0

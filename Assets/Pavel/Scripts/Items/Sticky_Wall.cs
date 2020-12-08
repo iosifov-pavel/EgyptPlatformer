@@ -30,14 +30,10 @@ public class Sticky_Wall : MonoBehaviour
         if(ready){
             x=new Vector2(player_Movement.hor,player_Movement.ver);
             float angle = Vector2.Angle(pre_push,x);
-            //if(angle>95) return;
-            //else{
                 if(player_Movement.buttonJump && x.magnitude<=40 || player_Movement.buttonJump && x.y<=-90) Fall();
                 else if(x.magnitude>=110){
                     if(player_Movement.buttonJump) Jump();
                 } 
-                
-            //}
         }
     }
 
@@ -67,7 +63,7 @@ public class Sticky_Wall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(delay) return;
-        if(other.gameObject.tag=="GrabWall"){
+        if(other.gameObject.tag=="GrabWall" || other.gameObject.tag=="GrabCeiling"){
             x=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
             player_Movement = player.GetComponent<Player_Movement>();
@@ -100,7 +96,7 @@ public class Sticky_Wall : MonoBehaviour
         delay=true;
         yield return new WaitForSeconds(0.25f);
         player_Movement.jump_block=false;
-        yield return new WaitForSeconds(delay_time);
+        yield return new WaitForSeconds(delay_time-0.25f);
         delay=false;
     }
 }
