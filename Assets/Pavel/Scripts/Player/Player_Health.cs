@@ -17,6 +17,8 @@ public class Player_Health : MonoBehaviour
     GameObject Lives;
     int lives =3;
     Text lives_count;
+    GameObject LooseScreen;
+    GameObject DeathScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,8 @@ public class Player_Health : MonoBehaviour
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
         lives_count.text=lives.ToString();
+        LooseScreen = UI.transform.GetChild(4).gameObject;
+        DeathScreen = UI.transform.GetChild(5).gameObject;
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
@@ -44,6 +48,8 @@ public class Player_Health : MonoBehaviour
         transform.position = lastCheckPoint;
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.white;
+        Time.timeScale = 1f;
+        LooseScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -67,6 +73,14 @@ public class Player_Health : MonoBehaviour
         dead = true;
         //Game_Manager.PlayerDead();
         lives--;
+        if(lives==0){
+            Time.timeScale = 0f;
+            DeathScreen.SetActive(true);
+        }
+        else {
+            Time.timeScale = 0f;
+            LooseScreen.SetActive(true);
+        }
         lives_count.text = lives.ToString();
         StopAllCoroutines();
         anima.setBoolAnimation("Dead",dead);
