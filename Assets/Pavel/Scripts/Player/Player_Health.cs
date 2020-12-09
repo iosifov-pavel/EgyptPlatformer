@@ -32,6 +32,7 @@ public class Player_Health : MonoBehaviour
     }
 
     public void SetCheckPoint(Transform newcp, int id){
+        if(last_id>id) return;
         lastCheckPoint=newcp.position;
         last_id = id;
     }

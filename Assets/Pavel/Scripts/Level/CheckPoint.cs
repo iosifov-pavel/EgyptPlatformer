@@ -6,10 +6,11 @@ public class CheckPoint : MonoBehaviour
 {
     // Start is called before the first frame update
     bool active = false;
+    SpriteRenderer sprite;
     [SerializeField] int id;
     void Start()
     {
-        
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -21,6 +22,7 @@ public class CheckPoint : MonoBehaviour
         if(active) return;
         if(other.gameObject.tag=="Player"){
             active=true;
+            sprite.color = Color.blue;
             other.gameObject.GetComponent<Player_Health>().SetCheckPoint(transform,id);
         }
     }
