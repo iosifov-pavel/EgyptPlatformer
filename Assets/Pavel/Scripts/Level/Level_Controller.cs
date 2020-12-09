@@ -52,10 +52,6 @@ public class Level_Controller : MonoBehaviour
         WinScreen.SetActive(true);
     }
 
-    public void Hek ()
-    {
-        lul.SetActive(true);
-    }
 
     public void Lose ()
     {
