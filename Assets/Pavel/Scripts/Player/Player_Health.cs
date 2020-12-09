@@ -22,7 +22,6 @@ public class Player_Health : MonoBehaviour
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
         lives_count.text=Game_Manager.lives.ToString();
-        //DontDestroyOnLoad(gameObject);
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
@@ -42,7 +41,6 @@ public class Player_Health : MonoBehaviour
              Death();
              return;
         }
-    //    GetComponent<Player_Sounds>().PlaySound("damage");
         StartCoroutine(damageIndication());
     }
 
@@ -52,7 +50,6 @@ public class Player_Health : MonoBehaviour
         lives_count.text = Game_Manager.lives.ToString();
         StopAllCoroutines();
         anima.setBoolAnimation("Dead",dead);
-//        GetComponent<Player_Sounds>().PlaySound("death");
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.red;
     }
