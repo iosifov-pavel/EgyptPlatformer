@@ -199,9 +199,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7618643434872908477}
   - component: {fileID: 7842540896160745319}
+  - component: {fileID: 3448354547715330359}
   m_Layer: 9
   m_Name: GrabCeiling
-  m_TagString: GrabWall
+  m_TagString: GrabCeiling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,7 +231,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.60115266}
@@ -246,6 +247,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22258228, y: 0.14019138}
   m_EdgeRadius: 0
+--- !u!114 &3448354547715330359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791068308911367146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b08804089af1444a43102543b2e1e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1532280384283261713
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +752,7 @@ GameObject:
   - component: {fileID: 2712096648531622252}
   - component: {fileID: 4797522030648575714}
   - component: {fileID: 7371577357488217339}
+  - component: {fileID: 1105762041907822609}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -895,12 +909,17 @@ MonoBehaviour:
   stick_delta_y: {x: 0, y: 0}
   stick_delta: {x: 0, y: 0}
   facing: 0
-  isFalling: 0
-  isGrounded: 1
+  jump_time_max: 0.16
+  jumps: 0
   isJumping: 0
+  jump_block: 0
+  buttonJump: 0
+  cant_jump: 0
   verical: {x: 0, y: 0}
   hor: 0
   ver: 0
+  isFalling: 0
+  isGrounded: 1
   onSlope: 0
   slopeangle:
   - 0
@@ -910,6 +929,18 @@ MonoBehaviour:
   stop_material: {fileID: 6200000, guid: 39547844f9229ca4f96386a9c867bdcf, type: 2}
   stickPressed: 0
   blocked: 0
+--- !u!114 &1105762041907822609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403318961397528494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a564970bf5027e148a09c511cfa9876d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7799212350935918774
 GameObject:
   m_ObjectHideFlags: 0

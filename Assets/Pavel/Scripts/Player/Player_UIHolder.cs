@@ -1,26 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class Button_Menu : MonoBehaviour
+public class Player_UIHolder : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] GameObject UI_Holder;
+    private GameObject UI;
     void Start()
     {
-        
+        UI = UI_Holder;
+    }
+
+    public GameObject getUI(){
+        return UI;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void OpenScene(int index)
-    {
-        Time.timeScale = 1f;
-        Game_Manager.lives=3;
-        SceneManager.LoadScene(index);
     }
 }

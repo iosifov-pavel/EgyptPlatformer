@@ -27,8 +27,8 @@ public class Spider_Attack : MonoBehaviour
         ray2=Vector2.down;
         player = LayerMask.GetMask("Player");
         player2 = LayerMask.GetMask("Damaged");
-        ground = LayerMask.GetMask("Ground");
-        p = player | player2 | ground;
+        //ground = LayerMask.GetMask("Ground");
+        p = player | player2; //| ground;
         original=transform.position;
         web_point = original + new Vector3(0,0.5f,0);
         web = GetComponent<LineRenderer>();
@@ -49,8 +49,8 @@ public class Spider_Attack : MonoBehaviour
     void Spider_Sense(){
         if(isUp){
             Vector2 pos,pos2;
-            pos = (Vector2)transform.position + new Vector2(0.1f,0);
-            pos2 = (Vector2)transform.position - new Vector2(0.1f,0);
+            pos = (Vector2)transform.position + new Vector2(0.12f,0);
+            pos2 = (Vector2)transform.position - new Vector2(0.12f,0);
 
             hit = Physics2D.Raycast(pos,ray,distance,p);
             hit2 = Physics2D.Raycast(pos2,ray2,distance,p);

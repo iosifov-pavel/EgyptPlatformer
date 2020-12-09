@@ -11,7 +11,7 @@ public class Sticky_Wall : MonoBehaviour
     Rigidbody2D rb_player;
     GameObject player;
     bool contact = false, ready = false, delay=false;
-    float ready_time = 0.3f, delay_time=0.5f, timer=0;
+    float ready_time = 0.2f, delay_time=0.5f, timer=0;
     void Start()
     {
         pre_push=transform.right;
@@ -30,17 +30,15 @@ public class Sticky_Wall : MonoBehaviour
         if(ready){
             x=new Vector2(player_Movement.hor,player_Movement.ver);
             float angle = Vector2.Angle(pre_push,x);
-            if(angle>95) return;
-            else{
-                if(x.magnitude>110){
-                    if(x.y<-90) Fall();
-                    else Jump();
-                }
-            }
+                if(player_Movement.buttonJump && x.magnitude<=40 || player_Movement.buttonJump && x.y<=-90) Fall();
+                else if(x.magnitude>=110){
+                    if(player_Movement.buttonJump) Jump();
+                } 
         }
     }
 
     void Fall(){
+        player_Movement.jumps=0;
         timer=0;
         ready=false;
         contact=false;
@@ -52,19 +50,20 @@ public class Sticky_Wall : MonoBehaviour
 
     void Jump(){
         timer=0;
+        player_Movement.jumps=0;
         ready=false;
         contact=false;
-        player_Movement.verical=new Vector2(50,10);
-        rb_player.bodyType = RigidbodyType2D.Dynamic;
         player.transform.parent = null;
-        rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
+        rb_player.bodyType = RigidbodyType2D.Dynamic;
+        if(x.y<=0) rb_player.AddForce(x.normalized*4, ForceMode2D.Impulse);
+        else rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
         player_Movement.blocked=false;
         StartCoroutine(Delay());
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(delay) return;
-        if(other.gameObject.tag=="GrabWall"){
+        if(other.gameObject.tag=="GrabWall" || other.gameObject.tag=="GrabCeiling"){
             x=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
             player_Movement = player.GetComponent<Player_Movement>();
@@ -74,6 +73,7 @@ public class Sticky_Wall : MonoBehaviour
             player.transform.parent = transform;
             player_Movement.ResetJumpCount();
             player_Movement.blocked=true;
+            player_Movement.jump_block=true;
             contact = true;
             player_Movement.verical=Vector2.zero;
             player_Movement.isJumping=false;
@@ -92,10 +92,11 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     IEnumerator Delay(){
-        
         x=Vector2.zero;
         delay=true;
-        yield return new WaitForSeconds(delay_time);
+        yield return new WaitForSeconds(0.25f);
+        player_Movement.jump_block=false;
+        yield return new WaitForSeconds(delay_time-0.25f);
         delay=false;
     }
 }

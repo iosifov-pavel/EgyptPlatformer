@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bonus_Health : MonoBehaviour
 {
     // Start is called before the first frame update
+    Player_Health player_Health;
     void Start()
     {
         
@@ -20,7 +21,9 @@ public class Bonus_Health : MonoBehaviour
     {
         if (player.gameObject.tag == "Player")
         {
-            player.GetComponent<Player_Health>().ChangeHP(1);
+            player_Health = player.gameObject.GetComponent<Player_Health>();
+            if(player_Health.CheckHP()) return;
+            player_Health.ChangeHP(1);
             Destroy(gameObject);
         }
     }
