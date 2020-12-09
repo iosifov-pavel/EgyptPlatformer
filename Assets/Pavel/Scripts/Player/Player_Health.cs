@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Player_Health : MonoBehaviour
 {
+    Vector3 lastCheckPoint;
+    int last_id=0;
     public int hp;
     int MAXhp = 3;
     public bool isDamaged = false;
@@ -13,18 +15,39 @@ public class Player_Health : MonoBehaviour
     Player_Animation anima;
     GameObject UI;
     GameObject Lives;
+    int lives =3;
     Text lives_count;
 
     // Start is called before the first frame update
     void Start()
     {
-        UI = GetComponent<Player_UIHolder>().getUI();
+         UI = GetComponent<Player_UIHolder>().getUI();
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
-        lives_count.text=Game_Manager.lives.ToString();
+        lives_count.text=lives.ToString();
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
+        lastCheckPoint = transform.position;
+    }
+
+    void Update() {
+        //if(Input.GetKey(KeyCode.Space)){
+        //    Debug.Log("1");
+        //    Resurrect();
+        //}
+    }
+
+    public void SetCheckPoint(Transform newcp, int id){
+        lastCheckPoint=newcp.position;
+        last_id = id;
+    }
+
+    void Resurrect(){
+        hp=MAXhp;
+        dead=false;
+        anima.setBoolAnimation("Dead",dead);
+        transform.position = lastCheckPoint;
     }
 
     // Update is called once per frame
@@ -46,8 +69,9 @@ public class Player_Health : MonoBehaviour
 
     public void Death(){
         dead = true;
-        Game_Manager.PlayerDead();
-        lives_count.text = Game_Manager.lives.ToString();
+        //Game_Manager.PlayerDead();
+        lives--;
+        lives_count.text = lives.ToString();
         StopAllCoroutines();
         anima.setBoolAnimation("Dead",dead);
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
