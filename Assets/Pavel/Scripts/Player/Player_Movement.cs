@@ -55,6 +55,8 @@ public class Player_Movement : MonoBehaviour
     //--------------------------------------
     public bool stickPressed = false;
     public bool blocked = false;
+    
+    public int lives;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -76,6 +78,7 @@ public class Player_Movement : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+        lives=Game_Manager.lives;
         if(stickPressed){
         } else {
              direction = new Vector2(0, 0);

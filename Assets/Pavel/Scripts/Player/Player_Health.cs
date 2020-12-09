@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Player_Health : MonoBehaviour
 {
-    int hp;
+    public int hp;
     int MAXhp = 3;
-    int lives = 3;
     public bool isDamaged = false;
     public bool superman = false;
     public bool dead = false;
@@ -15,7 +14,7 @@ public class Player_Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
@@ -41,10 +40,7 @@ public class Player_Health : MonoBehaviour
 
     public void Death(){
         dead = true;
-        lives--;
-        if(lives==0){
-            //Game Over
-        }
+        Game_Manager.PlayerDead();
         StopAllCoroutines();
         anima.setBoolAnimation("Dead",dead);
 //        GetComponent<Player_Sounds>().PlaySound("death");
