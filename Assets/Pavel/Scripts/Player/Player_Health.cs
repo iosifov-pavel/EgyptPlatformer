@@ -13,6 +13,7 @@ public class Player_Health : MonoBehaviour
     public bool superman = false;
     public bool dead = false;
     Player_Animation anima;
+    Player_Movement pm;
     GameObject UI;
     GameObject Lives;
     int lives =3;
@@ -24,6 +25,7 @@ public class Player_Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //DontDestroyOnLoad(gameObject);
         UI = GetComponent<Player_UIHolder>().getUI();
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
@@ -34,6 +36,7 @@ public class Player_Health : MonoBehaviour
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
+        pm = GetComponent<Player_Movement>();
         lastCheckPoint = transform.position;
     }
 
@@ -44,6 +47,7 @@ public class Player_Health : MonoBehaviour
     }
 
     public void Resurrect(){
+        pm.BlockMovement(0.4f);
         hp=MAXhp;
         dead=false;
         anima.setBoolAnimation("Dead",dead);
@@ -122,5 +126,6 @@ public class Player_Health : MonoBehaviour
 
     public void MaxHPPlus(){
         MAXhp++;
+        hp = MAXhp;
     }
 }
