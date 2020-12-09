@@ -355,7 +355,7 @@ public class Player_Movement : MonoBehaviour
         StartCoroutine(speedup(time));
     }
     IEnumerator speedup(float t){
-        maxSpeed = 5;
+        maxSpeed = 4;
         yield return new WaitForSeconds(t);
         maxSpeed = 3;
     }
