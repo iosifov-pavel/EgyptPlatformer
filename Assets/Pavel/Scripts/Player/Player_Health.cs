@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Health : MonoBehaviour
 {
@@ -10,10 +11,17 @@ public class Player_Health : MonoBehaviour
     public bool superman = false;
     public bool dead = false;
     Player_Animation anima;
+    GameObject UI;
+    GameObject Lives;
+    Text lives_count;
 
     // Start is called before the first frame update
     void Start()
     {
+        UI = GetComponent<Player_UIHolder>().getUI();
+        Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
+        lives_count = Lives.GetComponent<Text>();
+        lives_count.text=Game_Manager.lives.ToString();
         //DontDestroyOnLoad(gameObject);
         dead=false;
         hp=MAXhp;
@@ -41,6 +49,7 @@ public class Player_Health : MonoBehaviour
     public void Death(){
         dead = true;
         Game_Manager.PlayerDead();
+        lives_count.text = Game_Manager.lives.ToString();
         StopAllCoroutines();
         anima.setBoolAnimation("Dead",dead);
 //        GetComponent<Player_Sounds>().PlaySound("death");

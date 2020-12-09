@@ -20,6 +20,7 @@ public class Button_Menu : MonoBehaviour
     public void OpenScene(int index)
     {
         Time.timeScale = 1f;
+        Game_Manager.lives=3;
         SceneManager.LoadScene(index);
     }
 }
