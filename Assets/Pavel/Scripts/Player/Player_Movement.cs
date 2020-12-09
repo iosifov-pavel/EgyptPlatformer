@@ -379,12 +379,11 @@ public class Player_Movement : MonoBehaviour
     //      }
     //}
 
-    public void below()
-    {   
-       
-        jump_force= jump_force/2;
-        maxSpeed = maxSpeed/2;
-        }
+    public void multylow(float low)
+    {       
+        jump_force= jump_force*low;
+        maxSpeed = maxSpeed*low;
+    }
     
 
 }
