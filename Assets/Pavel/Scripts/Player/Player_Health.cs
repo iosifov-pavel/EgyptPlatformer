@@ -20,7 +20,10 @@ public class Player_Health : MonoBehaviour
     }
 
     // Update is called once per frame
-
+    public bool CheckHP(){
+        if(hp==MAXhp) return true;
+        else return false;
+    }
 
     public void ChangeHP(int source){
         if(superman || dead) return;
