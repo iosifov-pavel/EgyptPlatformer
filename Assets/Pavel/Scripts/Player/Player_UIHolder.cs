@@ -6,10 +6,14 @@ public class Player_UIHolder : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] GameObject UI_Holder;
-    public GameObject UI;
+    private GameObject UI;
     void Start()
     {
         UI = UI_Holder;
+    }
+
+    public GameObject getUI(){
+        return UI;
     }
 
     // Update is called once per frame
