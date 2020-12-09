@@ -21,7 +21,7 @@ public class Player_Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         UI = GetComponent<Player_UIHolder>().getUI();
+        UI = GetComponent<Player_UIHolder>().getUI();
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
         lives_count.text=lives.ToString();
@@ -31,23 +31,18 @@ public class Player_Health : MonoBehaviour
         lastCheckPoint = transform.position;
     }
 
-    void Update() {
-        //if(Input.GetKey(KeyCode.Space)){
-        //    Debug.Log("1");
-        //    Resurrect();
-        //}
-    }
-
     public void SetCheckPoint(Transform newcp, int id){
         lastCheckPoint=newcp.position;
         last_id = id;
     }
 
-    void Resurrect(){
+    public void Resurrect(){
         hp=MAXhp;
         dead=false;
         anima.setBoolAnimation("Dead",dead);
         transform.position = lastCheckPoint;
+        SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
+        player.color = Color.white;
     }
 
     // Update is called once per frame

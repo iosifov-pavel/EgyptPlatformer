@@ -6,7 +6,7 @@ public class CheckPoint : MonoBehaviour
 {
     // Start is called before the first frame update
     bool active = false;
-    int id = 1;
+    [SerializeField] int id;
     void Start()
     {
         
