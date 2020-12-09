@@ -119,4 +119,8 @@ public class Player_Health : MonoBehaviour
         yield return new WaitForSeconds(t);
         superman = false;
     }
+
+    public void MaxHPPlus(){
+        MAXhp++;
+    }
 }
