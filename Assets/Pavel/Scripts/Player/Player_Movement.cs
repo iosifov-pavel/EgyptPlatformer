@@ -78,7 +78,7 @@ public class Player_Movement : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        lives=Game_Manager.lives;
+        //lives=Game_Manager.lives;
         if(stickPressed){
         } else {
              direction = new Vector2(0, 0);

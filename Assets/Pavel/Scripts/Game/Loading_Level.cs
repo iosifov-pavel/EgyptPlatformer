@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Button_Menu : MonoBehaviour
+public class Loading_Level : MonoBehaviour
 {
+    [SerializeField] string level_to_load;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +18,7 @@ public class Button_Menu : MonoBehaviour
         
     }
 
-    public void OpenScene(int index)
-    {
-        Time.timeScale = 1f;
-        //Game_Manager.lives=3;
-        SceneManager.LoadScene(index);
+    public void LoadLevel(){
+        SceneManager.LoadScene(level_to_load, LoadSceneMode.Single);
     }
 }
