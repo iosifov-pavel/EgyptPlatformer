@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class Manager_Game : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Manager_Game : MonoBehaviour
     }
     void Start()
     {
+        FirstStart();
         DontDestroyOnLoad(gameObject);
         game_info = new Game();
     }
@@ -85,7 +87,20 @@ public class Manager_Game : MonoBehaviour
         sr.WriteLine(s);
         sr.Close();
         fs.Close();
+    }
+
+    void FirstStart(){
+        string saveName = "/save"+".dat";
+        string playerDataPath = Application.persistentDataPath +"/Save";
+        string file = playerDataPath+saveName;
+        int count = SceneManager.sceneCountInBuildSettings;
+        if(count<=0) return;
+        for(int i =1;i<12;){
+            string s= string.Format("S{0}",i);
+            SceneManager.LoadScene(s, LoadSceneMode.Single);
         }
+        
+    }
 }
 
 
