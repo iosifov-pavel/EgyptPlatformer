@@ -9,6 +9,7 @@ public class Manager_Game : MonoBehaviour
     // Start is called before the first frame update
     public Game game_info;
     private Section active;
+    public bool notfirst=false;
 
     private void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
@@ -19,9 +20,9 @@ public class Manager_Game : MonoBehaviour
     }
     void Start()
     {
-        FirstStart();
         DontDestroyOnLoad(gameObject);
         game_info = new Game();
+        FirstStart();
     }
 
     // Update is called once per frame
@@ -31,38 +32,38 @@ public class Manager_Game : MonoBehaviour
     }
 
     public void updateData(Section info){
-        bool alredy_exist= false;
-        active = info;
-        if(game_info.sections.Count>0){
-            foreach (Section s in game_info.sections)
-            {
-                if(info.name == s.name) {
-                    updateSection(info,s);
-                    alredy_exist=true;
-                }
-            }
-        }
-        if(alredy_exist) return;
-        else {
-            game_info.sections.Add(active);
-            SaveAsJSON();
-        }
+        //bool alredy_exist= false;
+        //active = info;
+        //if(game_info.sections.Count>0){
+        //    foreach (Section s in game_info.sections)
+        //    {
+        //        if(info.name == s.name) {
+        //            updateSection(info,s);
+        //            alredy_exist=true;
+        //        }
+        //    }
+        //}
+        //if(alredy_exist) return;
+        //else {
+        //    game_info.sections.Add(active);
+        //    SaveAsJSON();
+        //}
     }
 
     void updateSection(Section olds, Section news){
-        if(olds.levels.Count==news.levels.Count){
-            foreach(Level n in news.levels){
-                bool already_exist = false;
-                foreach(Level o in olds.levels){
-                    if(o.name==n.name){
-                        updateLevel();
-                        already_exist=true;
-                    }
-                }
-                if(already_exist) continue;
-                //else game_info.sections;
-            }
-        }
+        //if(olds.levels.Count==news.levels.Count){
+        //    foreach(Level n in news.levels){
+        //        bool already_exist = false;
+        //        foreach(Level o in olds.levels){
+        //            if(o.name==n.name){
+        //                updateLevel();
+        //                already_exist=true;
+        //            }
+        //        }
+        //        if(already_exist) continue;
+        //        //else game_info.sections;
+        //    }
+        //}
     }
 
     void updateLevel(){
@@ -95,11 +96,20 @@ public class Manager_Game : MonoBehaviour
         string file = playerDataPath+saveName;
         int count = SceneManager.sceneCountInBuildSettings;
         if(count<=0) return;
-        for(int i =1;i<12;){
+        for(int i =1;i<12;i++){
             string s= string.Format("S{0}",i);
-            SceneManager.LoadScene(s, LoadSceneMode.Single);
+            //SceneManager.LoadScene(s, LoadSceneMode.Additive);
+            Scene scene = SceneManager.GetSceneByName(s);
+            SceneManager.LoadScene(scene.name, LoadSceneMode.Additive);
+            SceneManager.SetActiveScene(scene);
         }
-        
+        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+        float a =1;
+        a++;
+    }
+
+    public void getSection(Section sc){
+        game_info.sections.Add(sc);
     }
 }
 

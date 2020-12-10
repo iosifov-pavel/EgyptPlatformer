@@ -23,29 +23,33 @@ public class Manager_Section : MonoBehaviour
     }
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         name_sc = SceneManager.GetActiveScene().name;
         section = new Section(id, name_sc);
         manager_g = GameObject.FindGameObjectWithTag("GameManager");
         manager_game = manager_g.GetComponent<Manager_Game>();
+        FirstStart();
+    }
+
+    void FirstStart(){
+        manager_game.getSection(section);
     }
 
     public void getActiveLevelInfo(Level info){
-        bool alredy_exist= false;
-        active = info;
-        if(section.levels.Count>0){
-            foreach (Level l in section.levels)
-            {
-                if(info.name == l.name) alredy_exist = true;
-            }
-        }
-        if(alredy_exist) return;
-        else{
-            section.levels.Add(active);
-            manager_game.updateData(section);
-            //string json = JsonUtility.ToJson(section, true);
-            //Debug.Log("Saving as JSON: " + json);
-        } 
+       //bool alredy_exist= false;
+       //active = info;
+       //if(section.levels.Count>0){
+       //    foreach (Level l in section.levels)
+       //    {
+       //        if(info.name == l.name) alredy_exist = true;
+       //    }
+       //}
+       //if(alredy_exist) return;
+       //else{
+       //    section.levels.Add(active);
+       //    manager_game.updateData(section);
+       //    //string json = JsonUtility.ToJson(section, true);
+       //    //Debug.Log("Saving as JSON: " + json);
+       //} 
     }
 
     // Update is called once per frame
