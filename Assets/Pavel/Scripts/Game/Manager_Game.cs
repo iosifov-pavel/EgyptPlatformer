@@ -49,20 +49,22 @@ public class Manager_Game : MonoBehaviour
 
     void updateSection(Section olds, Section news){
         if(olds.levels.Count==news.levels.Count){
-            foreach(Level o in olds.levels){
+            foreach(Level n in news.levels){
                 bool already_exist = false;
-                foreach(Level n in news.levels){
+                foreach(Level o in olds.levels){
                     if(o.name==n.name){
                         updateLevel();
                         already_exist=true;
                     }
                 }
+                if(already_exist) continue;
+                //else game_info.sections;
             }
         }
     }
 
     void updateLevel(){
-        
+
     }
 
     public void SaveAsJSON(){
