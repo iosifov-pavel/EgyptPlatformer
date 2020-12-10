@@ -27,6 +27,8 @@ public class Manager_Game : MonoBehaviour
     }
 }
 
+
+[System.Serializable]
 public class Game{
     public List<Section> game;
 
