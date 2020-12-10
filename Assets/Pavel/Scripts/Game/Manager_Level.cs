@@ -23,6 +23,7 @@ public class Manager_Level : MonoBehaviour
 public class Level{
     public int id;
     public bool complete;
+    public bool blocked;
     public float time;
     public int score;
     public string name;
@@ -30,6 +31,7 @@ public class Level{
     public Level(int i){
         id = i;
         complete = false;
+        blocked = false;
         time = 0;
         score=0;
         name = "default";

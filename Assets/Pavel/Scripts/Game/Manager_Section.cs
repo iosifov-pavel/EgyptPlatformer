@@ -7,6 +7,8 @@ public class Manager_Section : MonoBehaviour
     // Start is called before the first frame update
     Section section;
     [SerializeField] int id;
+    [SerializeField] Sprite blocked, open, complete;
+    
     private void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("SectionManager");
         if (objs.Length > 1){
