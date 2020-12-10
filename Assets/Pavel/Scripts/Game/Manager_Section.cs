@@ -43,6 +43,8 @@ public class Manager_Section : MonoBehaviour
         else{
             section.levels.Add(active);
             manager_game.updateData(section);
+            //string json = JsonUtility.ToJson(section, true);
+            //Debug.Log("Saving as JSON: " + json);
         } 
     }
 
@@ -55,6 +57,7 @@ public class Manager_Section : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public class Section{
     public List<Level> levels;
     public string name="sec_def";

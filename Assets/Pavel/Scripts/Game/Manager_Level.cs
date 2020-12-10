@@ -19,6 +19,8 @@ public class Manager_Level : MonoBehaviour
         ms = GameObject.FindGameObjectWithTag("SectionManager");
         manager_Section = ms.GetComponent<Manager_Section>();
         manager_Section.getActiveLevelInfo(info);
+        //string json = JsonUtility.ToJson(info, true);
+        //Debug.Log("Saving as JSON: " + json);
     }
 
     // Update is called once per frame
@@ -32,6 +34,7 @@ public class Manager_Level : MonoBehaviour
     //}
 }
 
+[System.Serializable]
 public class Level{
     public int id;
     public bool complete;
