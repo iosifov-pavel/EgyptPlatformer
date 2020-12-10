@@ -6,6 +6,7 @@ public class Manager_Game : MonoBehaviour
 {
     // Start is called before the first frame update
     Game game_info;
+    Section active;
 
     private void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
@@ -25,14 +26,27 @@ public class Manager_Game : MonoBehaviour
     {
         
     }
+
+    public void updateData(Section info){
+        bool alredy_exist= false;
+        active = info;
+        if(game_info.sections.Count>0){
+            foreach (Section s in game_info.sections)
+            {
+                if(info.name == s.name) alredy_exist = true;
+            }
+        }
+        if(alredy_exist) return;
+        else game_info.sections.Add(active);
+    }
 }
 
 
 [System.Serializable]
 public class Game{
-    public List<Section> game;
+    public List<Section> sections;
 
     public Game(){
-        game = new List<Section>();
+        sections = new List<Section>();
     }
 }

@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 public class Manager_Section : MonoBehaviour
 {
     // Start is called before the first frame update
-    Section section;
+    public Section section;
+    Level active;
+    string name_sc;
     [SerializeField] int id;
     [SerializeField] Sprite blocked, open, complete;
+    Manager_Game manager_game;
+    GameObject manager_g;
 
     private void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("SectionManager");
@@ -20,7 +24,26 @@ public class Manager_Section : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        section = new Section(id);
+        name_sc = SceneManager.GetActiveScene().name;
+        section = new Section(id, name_sc);
+        manager_g = GameObject.FindGameObjectWithTag("GameManager");
+        manager_game = manager_g.GetComponent<Manager_Game>();
+    }
+
+    public void getActiveLevelInfo(Level info){
+        bool alredy_exist= false;
+        active = info;
+        if(section.levels.Count>0){
+            foreach (Level l in section.levels)
+            {
+                if(info.name == l.name) alredy_exist = true;
+            }
+        }
+        if(alredy_exist) return;
+        else{
+            section.levels.Add(active);
+            manager_game.updateData(section);
+        } 
     }
 
     // Update is called once per frame
@@ -33,14 +56,14 @@ public class Manager_Section : MonoBehaviour
 }
 
 public class Section{
-    public List<Level> section;
-    string name;
-    int section_id;
-    bool complete;
-    public Section(int id){
+    public List<Level> levels;
+    public string name="sec_def";
+    public int section_id;
+    public bool complete;
+    public Section(int id, string s){
         section_id = id;
-        name="sec_def";
-        section = new List<Level>();
+        name=s;
+        levels = new List<Level>();
         complete = false;
     }
 }

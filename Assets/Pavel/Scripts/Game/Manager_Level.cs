@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class Manager_Level : MonoBehaviour
 {
     [SerializeField] int level_id;
+    GameObject ms;
+    Manager_Section manager_Section;
     public Level info;
     string name_lvl;
 
@@ -14,6 +16,9 @@ public class Manager_Level : MonoBehaviour
     {
         name_lvl = SceneManager.GetActiveScene().name;
         info = new Level(level_id,name_lvl);
+        ms = GameObject.FindGameObjectWithTag("SectionManager");
+        manager_Section = ms.GetComponent<Manager_Section>();
+        manager_Section.getActiveLevelInfo(info);
     }
 
     // Update is called once per frame
@@ -21,6 +26,10 @@ public class Manager_Level : MonoBehaviour
     {
         
     }
+
+    //public Level get_level_info(){
+    //    return info;
+    //}
 }
 
 public class Level{
