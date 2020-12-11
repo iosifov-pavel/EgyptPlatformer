@@ -10,7 +10,7 @@ public class Player_Interact : MonoBehaviour
    // public bool interact = false;
     // Start is called before the first frame update
     private void Start() {
-        UI = transform.parent.gameObject.GetComponent<Player_UIHolder>().getUI();
+        UI = transform.parent.gameObject.GetComponent<Player_InfoHolder>().getUI();
         button = UI.transform.GetChild(1).GetChild(3).gameObject;
     }
 

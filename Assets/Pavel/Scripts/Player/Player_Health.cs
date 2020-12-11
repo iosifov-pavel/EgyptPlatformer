@@ -26,7 +26,7 @@ public class Player_Health : MonoBehaviour
     void Start()
     {
         //DontDestroyOnLoad(gameObject);
-        UI = GetComponent<Player_UIHolder>().getUI();
+        UI = GetComponent<Player_InfoHolder>().getUI();
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
         lives_count.text=lives.ToString();

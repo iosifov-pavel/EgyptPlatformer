@@ -54112,6 +54112,11 @@ PrefabInstance:
       propertyPath: UI_Holder
       value: 
       objectReference: {fileID: 1150719890}
+    - target: {fileID: 1105762041907822609, guid: 0855f7da149412f49ab9a4a9aef7b129,
+        type: 3}
+      propertyPath: LevelManager_Holder
+      value: 
+      objectReference: {fileID: 167686309}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59493,14 +59498,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level_id: 1
   section_id: 1
-  info:
+  level:
     id: 0
     complete: 0
     blocked: 0
     time: 0
     score: 0
+    deaths: 0
     name: 
-  name_lvl: 1L1
 --- !u!1001 &1279277385433106177
 PrefabInstance:
   m_ObjectHideFlags: 0

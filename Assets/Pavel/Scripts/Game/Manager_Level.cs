@@ -10,7 +10,7 @@ public class Manager_Level : MonoBehaviour
     GameObject ms,mg;
     Manager_Section manager_Section;
     Manager_Game manager_Game;
-    public Level info;
+    public Level level;
     //[SerializeField] string name_lvl;
 
     // Start is called before the first frame update
@@ -20,6 +20,7 @@ public class Manager_Level : MonoBehaviour
         mg = GameObject.FindGameObjectWithTag("GameManager");
         manager_Section = ms.GetComponent<Manager_Section>();
         manager_Game = mg.GetComponent<Manager_Game>();
+        level = manager_Section.section.levels[level_id-1];
     }
 
     //void FirstStart(){
