@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Manager_Game : MonoBehaviour
 {
-
+    string saveName;
+    string playerDataPath;
+    string file;
     // Start is called before the first frame update
     public Game game_info;
     private Section active;
@@ -21,8 +23,16 @@ public class Manager_Game : MonoBehaviour
     }
     void Start()
     {
+        saveName = "/save"+".dat";
+        playerDataPath = Application.persistentDataPath +"/Save";
+        file = playerDataPath+saveName;
         DontDestroyOnLoad(gameObject);
-        game_info = new Game();
+        if(!PlayerPrefs.HasKey("Preload") || !File.Exists(file)){
+            game_info = new Game();
+        }
+        else{
+            LoadFromFile();
+        }
     }
 
     // Update is called once per frame
@@ -77,17 +87,31 @@ public class Manager_Game : MonoBehaviour
     }
 
     public void SaveToFile(string s){
-        string saveName = "/save"+".dat";
-        string playerDataPath = Application.persistentDataPath +"/Save";
-        string file = playerDataPath+saveName;
         if(!File.Exists(playerDataPath)){
             Directory.CreateDirectory(playerDataPath);
+        }
+        if(!File.Exists(file)){
+            File.Create(file).Close();
         }
         FileStream fs = new FileStream(file,FileMode.OpenOrCreate, FileAccess.ReadWrite);
         StreamWriter sr = new StreamWriter(fs);
         sr.WriteLine(s);
         sr.Close();
         fs.Close();
+    }
+
+    void LoadFromFile(){
+        if(!File.Exists(file)){
+            File.Create(file);
+            Debug.Log("Sorry");
+            return;
+        }
+        FileStream fs = new FileStream(file,FileMode.Open, FileAccess.Read);
+        StreamReader sr = new StreamReader(fs);
+        string json = sr.ReadToEnd();
+        sr.Close();
+        fs.Close();
+        game_info = JsonUtility.FromJson<Game>(json);
     }
 }
 

@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Game_Preload : MonoBehaviour
 {
+    string saveName;
+    string playerDataPath;
+    string file;
     Manager_Game manager;
     int first_index=1, second_index=1;
     Scene scene;
@@ -15,8 +18,11 @@ public class Game_Preload : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        saveName = "/save"+".dat";
+        playerDataPath = Application.persistentDataPath +"/Save";
+        file = playerDataPath+saveName;
         manager= GetComponent<Manager_Game>();
-        if(!PlayerPrefs.HasKey("Preload")){
+        if(!PlayerPrefs.HasKey("Preload") || !File.Exists(file)){
             PlayerPrefs.SetInt("Preload",1);
             Loading();
         }
