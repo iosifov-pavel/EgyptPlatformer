@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEngine.SceneManagement;
 
 public class Game_Preload : MonoBehaviour
 {
@@ -11,10 +10,6 @@ public class Game_Preload : MonoBehaviour
     string file;
     Manager_Game manager;
     int first_index=1, second_index=1;
-    Scene scene;
-    //public bool scenesIsloaded = false, sceneIsLoading=false;
-    //public bool levelIsLoading=false, levelIsLoaded=false;
-    public bool first=true,second=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,62 +40,14 @@ public class Game_Preload : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         //if(first) FirstStep();
-         //if(second) SecondStep();
+
     }
-
-    //void FirstStep(){
-    //    int count = SceneManager.sceneCountInBuildSettings;
-    //    if(count<=0) return;
-    //    if(!sceneIsLoading){
-    //        string s= string.Format("S{0}",first_index);
-    //        SceneManager.LoadScene(s, LoadSceneMode.Single);
-    //        scene = SceneManager.GetSceneByName(s);
-    //        sceneIsLoading=true;
-    //    }
-    //    if(scene.isLoaded && sceneIsLoading && scenesIsloaded){
-    //        first_index++;
-    //        sceneIsLoading=false;
-    //        scenesIsloaded=false;
-    //    }
-    //    if(first_index==12){
-    //        first_index=1;
-    //        first=false;
-    //        second=true;
-    //        sceneIsLoading=false;
-    //        scenesIsloaded=false;
-    //    }
-    //}
-
-    //void SecondStep(){
-    //    if(!sceneIsLoading){
-    //        string s= string.Format("{0}L{1}",first_index,second_index);
-    //        SceneManager.LoadScene(s, LoadSceneMode.Additive);
-    //        scene = SceneManager.GetSceneByName(s);
-    //        if(!scene.IsValid()) {
-    //            first_index++;
-    //            second_index=1;
-    //            return;
-    //        }
-    //        sceneIsLoading=true;
-    //    }
-    //    if(sceneIsLoading && scenesIsloaded){
-    //        second_index++;
-    //        sceneIsLoading=false;
-    //        scenesIsloaded=false;
-    //    }
-    //    if(first_index==12){
-    //        first=false;
-    //        second=false;
-    //    }
-    //}
 }
 
 
 [System.Serializable]
 public class Game{
     public List<Section> sections;
-
     public Game(){
         sections = new List<Section>();
     }
@@ -132,6 +79,7 @@ public class Level{
     public float time;
     public int score;
     public int deaths;
+    public int coins;
     public string name="default";
 
     public Level(int i,string s){
@@ -140,6 +88,7 @@ public class Level{
         blocked = true;
         time = 0;
         score=0;
+        coins = 0;
         deaths = 0;
         name = s;
     }

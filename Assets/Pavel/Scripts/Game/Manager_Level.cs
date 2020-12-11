@@ -11,7 +11,6 @@ public class Manager_Level : MonoBehaviour
     Manager_Section manager_Section;
     Manager_Game manager_Game;
     public Level level;
-    //[SerializeField] string name_lvl;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +22,6 @@ public class Manager_Level : MonoBehaviour
         level = manager_Section.section.levels[level_id-1];
     }
 
-    //void FirstStart(){
-    //    manager.getLevel(info, section_id);
-    //    
-    //}
 
     // Update is called once per frame
     void Update()
