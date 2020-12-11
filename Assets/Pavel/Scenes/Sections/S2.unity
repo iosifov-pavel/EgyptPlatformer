@@ -458,10 +458,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f0c8a6a7eda2a4dbfed3c596fc3b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  section:
+    levels: []
+    name: 
+    section_id: 0
+    complete: 0
   id: 2
   blocked: {fileID: 0}
   open: {fileID: 0}
   complete: {fileID: 0}
+  sec_name: S2
 --- !u!114 &1793328575692866230
 MonoBehaviour:
   m_ObjectHideFlags: 0

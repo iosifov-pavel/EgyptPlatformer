@@ -6,49 +6,32 @@ using UnityEngine.SceneManagement;
 public class Manager_Level : MonoBehaviour
 {
     [SerializeField] int level_id;
-    GameObject ms;
+    [SerializeField] int section_id;
+    GameObject ms,mg;
     Manager_Section manager_Section;
+    Manager_Game manager_Game;
     public Level info;
-    string name_lvl;
+    //[SerializeField] string name_lvl;
 
     // Start is called before the first frame update
     void Start()
     {
-        name_lvl = SceneManager.GetActiveScene().name;
-        info = new Level(level_id,name_lvl);
         ms = GameObject.FindGameObjectWithTag("SectionManager");
+        mg = GameObject.FindGameObjectWithTag("GameManager");
         manager_Section = ms.GetComponent<Manager_Section>();
-        manager_Section.getActiveLevelInfo(info);
-        //string json = JsonUtility.ToJson(info, true);
-        //Debug.Log("Saving as JSON: " + json);
+        manager_Game = mg.GetComponent<Manager_Game>();
     }
+
+    //void FirstStart(){
+    //    manager.getLevel(info, section_id);
+    //    
+    //}
 
     // Update is called once per frame
     void Update()
     {
         
     }
-
-    //public Level get_level_info(){
-    //    return info;
-    //}
 }
 
-[System.Serializable]
-public class Level{
-    public int id;
-    public bool complete;
-    public bool blocked;
-    public float time;
-    public int score;
-    public string name="default";
 
-    public Level(int i,string s){
-        id = i;
-        complete = false;
-        blocked = false;
-        time = 0;
-        score=0;
-        name = s;
-    }
-}

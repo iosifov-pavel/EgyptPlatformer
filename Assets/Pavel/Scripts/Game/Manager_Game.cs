@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Manager_Game : MonoBehaviour
 {
+
     // Start is called before the first frame update
     public Game game_info;
     private Section active;
@@ -22,13 +23,12 @@ public class Manager_Game : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         game_info = new Game();
-        FirstStart();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void updateData(Section info){
@@ -89,36 +89,7 @@ public class Manager_Game : MonoBehaviour
         sr.Close();
         fs.Close();
     }
-
-    void FirstStart(){
-        string saveName = "/save"+".dat";
-        string playerDataPath = Application.persistentDataPath +"/Save";
-        string file = playerDataPath+saveName;
-        int count = SceneManager.sceneCountInBuildSettings;
-        if(count<=0) return;
-        for(int i =1;i<12;i++){
-            string s= string.Format("S{0}",i);
-            //SceneManager.LoadScene(s, LoadSceneMode.Additive);
-            Scene scene = SceneManager.GetSceneByName(s);
-            SceneManager.LoadScene(scene.name, LoadSceneMode.Additive);
-            SceneManager.SetActiveScene(scene);
-        }
-        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
-        float a =1;
-        a++;
-    }
-
-    public void getSection(Section sc){
-        game_info.sections.Add(sc);
-    }
 }
 
 
-[System.Serializable]
-public class Game{
-    public List<Section> sections;
 
-    public Game(){
-        sections = new List<Section>();
-    }
-}

@@ -199,6 +199,16 @@ PrefabInstance:
       propertyPath: level_id
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1468563672222252096, guid: 5197165bcf57ec942bdbe2e2e80e0894,
+        type: 3}
+      propertyPath: name_lvl
+      value: 1L2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1468563672222252096, guid: 5197165bcf57ec942bdbe2e2e80e0894,
+        type: 3}
+      propertyPath: section_id
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5197165bcf57ec942bdbe2e2e80e0894, type: 3}
 --- !u!4 &24310314 stripped
@@ -376,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level_id: 1
+  section_id: 0
   info:
     id: 0
     complete: 0
@@ -383,6 +394,7 @@ MonoBehaviour:
     time: 0
     score: 0
     name: 
+  name_lvl: 
 --- !u!1001 &80108653
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,11 +8,10 @@ public class Manager_Section : MonoBehaviour
     // Start is called before the first frame update
     public Section section;
     Level active;
-    string name_sc;
-    [SerializeField] int id;
+    [SerializeField] public int id;
     [SerializeField] Sprite blocked, open, complete;
     Manager_Game manager_game;
-    GameObject manager_g;
+    GameObject mg;
 
     private void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("SectionManager");
@@ -23,16 +22,16 @@ public class Manager_Section : MonoBehaviour
     }
     void Start()
     {
-        name_sc = SceneManager.GetActiveScene().name;
-        section = new Section(id, name_sc);
-        manager_g = GameObject.FindGameObjectWithTag("GameManager");
-        manager_game = manager_g.GetComponent<Manager_Game>();
-        FirstStart();
+        //section = new Section(id, sec_name);
+        mg = GameObject.FindGameObjectWithTag("GameManager");
+        manager_game = mg.GetComponent<Manager_Game>();
+        //FirstStart();
     }
 
-    void FirstStart(){
-        manager_game.getSection(section);
-    }
+    //void FirstStart(){
+    //    manager_g.GetComponent<Game_Preload>().getSection(section);
+    //    Destroy(this.gameObject);
+    //}
 
     public void getActiveLevelInfo(Level info){
        //bool alredy_exist= false;
@@ -61,16 +60,4 @@ public class Manager_Section : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public class Section{
-    public List<Level> levels;
-    public string name="sec_def";
-    public int section_id;
-    public bool complete;
-    public Section(int id, string s){
-        section_id = id;
-        name=s;
-        levels = new List<Level>();
-        complete = false;
-    }
-}
+
