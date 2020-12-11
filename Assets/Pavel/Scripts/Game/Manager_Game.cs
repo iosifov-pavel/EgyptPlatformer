@@ -88,9 +88,11 @@ public class Manager_Game : MonoBehaviour
 
     public void SaveToFile(string s){
         if(!File.Exists(playerDataPath)){
+            Debug.Log("Create Directory");
             Directory.CreateDirectory(playerDataPath);
         }
         if(!File.Exists(file)){
+            Debug.Log("Create File");
             File.Create(file).Close();
         }
         FileStream fs = new FileStream(file,FileMode.OpenOrCreate, FileAccess.ReadWrite);
@@ -102,8 +104,8 @@ public class Manager_Game : MonoBehaviour
 
     void LoadFromFile(){
         if(!File.Exists(file)){
-            File.Create(file);
-            Debug.Log("Sorry");
+            GetComponent<Game_Preload>().Loading();
+            Debug.Log("Sorry, Load from Blank");
             return;
         }
         FileStream fs = new FileStream(file,FileMode.Open, FileAccess.Read);

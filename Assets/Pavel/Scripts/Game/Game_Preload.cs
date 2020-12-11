@@ -28,7 +28,7 @@ public class Game_Preload : MonoBehaviour
         }
     }
 
-    void Loading(){
+    public void Loading(){
         for(first_index=1;first_index<=11;first_index++){
             string sn = string.Format("S{0}",first_index);
             manager.game_info.sections.Add(new Section(first_index,sn));
