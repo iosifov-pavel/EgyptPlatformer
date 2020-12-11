@@ -25,6 +25,7 @@ public class Manager_Section : MonoBehaviour
         //section = new Section(id, sec_name);
         mg = GameObject.FindGameObjectWithTag("GameManager");
         manager_game = mg.GetComponent<Manager_Game>();
+        section = manager_game.game_info.sections[id-1];
         //FirstStart();
     }
 

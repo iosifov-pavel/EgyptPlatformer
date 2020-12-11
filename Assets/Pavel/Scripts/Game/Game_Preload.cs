@@ -37,7 +37,7 @@ public class Game_Preload : MonoBehaviour
                 manager.game_info.sections[first_index-1].levels.Add(new Level(second_index,sl));
             }
         }
-        manager.SaveAsJSON();
+        manager.SaveToFile();
     }
 
     // Update is called once per frame
