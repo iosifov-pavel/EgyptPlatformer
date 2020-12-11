@@ -12,7 +12,7 @@ public class Player_GetCoin : MonoBehaviour
     int coins=0;
     // Start is called before the first frame update
     private void Start() {
-        UI = transform.parent.gameObject.GetComponent<Player_UIHolder>().getUI();
+        UI = transform.parent.gameObject.GetComponent<Player_InfoHolder>().getUI();
         score = UI.transform.GetChild(1).GetChild(4).GetChild(0).gameObject;
         score_text = score.GetComponent<Text>();
     }

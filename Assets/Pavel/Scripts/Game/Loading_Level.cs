@@ -1,24 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Player_UIHolder : MonoBehaviour
+public class Loading_Level : MonoBehaviour
 {
+    [SerializeField] string level_to_load;
+
     // Start is called before the first frame update
-    [SerializeField] GameObject UI_Holder;
-    private GameObject UI;
     void Start()
     {
-        UI = UI_Holder;
-    }
-
-    public GameObject getUI(){
-        return UI;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void LoadLevel(){
+        SceneManager.LoadScene(level_to_load, LoadSceneMode.Single);
     }
 }
