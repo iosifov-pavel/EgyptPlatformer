@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_Sand : MonoBehaviour
 {    
-    BoxCollider2D [] Colliders;
+    BoxCollider2D [] Colliders=new BoxCollider2D[2];
 
     BoxCollider2D BC2d,trgBC2d;
 
@@ -22,22 +22,21 @@ public class Enemy_Sand : MonoBehaviour
     float y,size;
 
     Vector2 offs, ornl;
+
+    float moveY;
     // Start is called before the first frame update
     void Start()
     {   
         Colliders = GetComponents<BoxCollider2D>();
-        if(Colliders[0].isTrigger == true){
-            trgBC2d = Colliders[0];
-            BC2d = Colliders[1];
+        foreach(BoxCollider2D b in Colliders){
+            if (b.isTrigger){}
+            else BC2d = b;
         }
-        else
-        {
-            trgBC2d = Colliders[1];
-            BC2d = Colliders[0];
-        }
-        BC2d = GetComponent<BoxCollider2D>();
-        ornl=BC2d.size;
-        trgBC2d = GetComponent<BoxCollider2D>();
+        //BC2d = GetComponent<BoxCollider2D>();
+       // ornl=BC2d.size;
+        ornl=BC2d.offset;
+        moveY = (BC2d.size.y*transform.localScale.y)*1.5f;
+        //trgBC2d = GetComponent<BoxCollider2D>();
 
     }
 
@@ -46,23 +45,26 @@ public class Enemy_Sand : MonoBehaviour
     {
         if(enough) return;
         if(con){
-            size=BC2d.size.y;
-            size*=0.9991f;
-            if(size<=0.4f) enough = true;
-            float div = Mathf.Abs(BC2d.size.y - size);
-            BC2d.size= new Vector2(BC2d.size.x,size);
-            offs=new Vector2(0,div/2);
-            BC2d.offset-=offs;
+            BC2d.offset= Vector2.MoveTowards(BC2d.offset,new Vector2(BC2d.offset.x,-moveY),1*Time.deltaTime);
+          // size=BC2d.size.y;
+          // size*=0.999f;
+          // if(size<=0.4f) enough = true;
+          // float div = Mathf.Abs(BC2d.size.y - size);
+          // BC2d.size= new Vector2(BC2d.size.x,size);
+          // //offs=new Vector2(0,div/2);
+          // offs= Vector2.Lerp(ornl,new Vector2(0,div/2),0.3f);
+          // BC2d.offset-=offs;
             }
         else {
-            if(ornl.y <= BC2d.size.y) return;
-            size=BC2d.size.y;
-            size*=1.009f;
-            enough = false;
-            float div = Mathf.Abs(BC2d.size.y - size);
-            BC2d.size= new Vector2(BC2d.size.x,size);
-            offs=new Vector2(0,div/2);
-            BC2d.offset+=offs;
+           if(ornl.y <= BC2d.offset.y) return;
+          //  size=BC2d.size.y;
+          //  size*=1.009f;
+          //  enough = false;
+          //  float div = Mathf.Abs(BC2d.size.y - size);
+          //  BC2d.size= new Vector2(BC2d.size.x,size);
+          //  //offs=new Vector2(0,div/2);
+          //  offs= Vector2.Lerp(offs,new Vector2(0,div/2),0.3f);
+          //  BC2d.offset+=offs;
         }
 
         
@@ -100,6 +102,7 @@ public class Enemy_Sand : MonoBehaviour
 
         if(other.gameObject.tag == "Player" && other.GetType()==typeof(CapsuleCollider2D))
         {
+
             con = true;
             //other.gameObject.GetComponent<Player_Movement>().multylow(0.5f);
             //pm.GetComponent<Player_Movement>().multylow(0.5f);
@@ -124,7 +127,7 @@ public class Enemy_Sand : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             if(vk) return;
-           StartCoroutine(zader());
+           //StartCoroutine(zader());
             //other.gameObject.GetComponent<Player_Movement>().multylow(2f);
             //Debug.Log("multylow true");
 
