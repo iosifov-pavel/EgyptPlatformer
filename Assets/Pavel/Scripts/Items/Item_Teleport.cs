@@ -28,7 +28,7 @@ public class Item_Teleport : MonoBehaviour,IIntercatable
 
     IEnumerator Teleport (GameObject player)
     {   
-        yield return new WaitForSeconds (1);
+        yield return new WaitForSeconds (0.3f);
         player.transform.position = new Vector2(Door.transform.position.x, Door.transform.position.y);
     }
 
