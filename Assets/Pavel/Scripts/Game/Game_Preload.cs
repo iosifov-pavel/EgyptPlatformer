@@ -16,7 +16,10 @@ public class Game_Preload : MonoBehaviour
     void Start()
     {
         manager= GetComponent<Manager_Game>();
-        Loading();
+        if(!PlayerPrefs.HasKey("Preload")){
+            PlayerPrefs.SetInt("Preload",1);
+            Loading();
+        }
     }
 
     void Loading(){
@@ -98,15 +101,17 @@ public class Game{
 
 [System.Serializable]
 public class Section{
-    public List<Level> levels;
     public string name="sec_def";
     public int section_id;
     public bool complete;
+    public bool blocked;
+    public List<Level> levels;
     public Section(int id, string s){
         section_id = id;
         name=s;
         levels = new List<Level>();
         complete = false;
+        blocked=true;
     }
 }
 
@@ -118,14 +123,16 @@ public class Level{
     public bool blocked;
     public float time;
     public int score;
+    public int deaths;
     public string name="default";
 
     public Level(int i,string s){
         id = i;
         complete = false;
-        blocked = false;
+        blocked = true;
         time = 0;
         score=0;
+        deaths = 0;
         name = s;
     }
 }
