@@ -21,12 +21,14 @@ public class Player_Health : MonoBehaviour
     GameObject LooseScreen;
     GameObject DeathScreen;
     GameObject Playing_UI;
+    GameObject LM;
 
     // Start is called before the first frame update
     void Start()
     {
         //DontDestroyOnLoad(gameObject);
         UI = GetComponent<Player_InfoHolder>().getUI();
+        LM = GetComponent<Player_InfoHolder>().getLM();
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
         lives_count.text=lives.ToString();
@@ -80,6 +82,7 @@ public class Player_Health : MonoBehaviour
         dead = true;
         //Game_Manager.PlayerDead();
         lives--;
+        LM.GetComponent<Manager_Level>().level.deaths++;
         if(lives==0){
             Time.timeScale = 0f;
             Playing_UI.SetActive(false);
