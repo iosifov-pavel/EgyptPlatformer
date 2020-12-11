@@ -37,6 +37,7 @@ public class Game_Preload : MonoBehaviour
                 manager.game_info.sections[first_index-1].levels.Add(new Level(second_index,sl));
             }
         }
+        manager.game_info.sections[0].levels[0].blocked=false;
         manager.SaveToFile();
     }
 
