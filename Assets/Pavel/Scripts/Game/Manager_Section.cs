@@ -7,9 +7,11 @@ public class Manager_Section : MonoBehaviour
 {
     // Start is called before the first frame update
     public Section section;
+    List<GameObject> levels = new List<GameObject>();
     Level active;
     [SerializeField] public int id;
     [SerializeField] Sprite blocked, open, complete;
+    [SerializeField] GameObject sectionUI;
     Manager_Game manager_game;
     GameObject mg;
 
@@ -27,6 +29,19 @@ public class Manager_Section : MonoBehaviour
         manager_game = mg.GetComponent<Manager_Game>();
         section = manager_game.game_info.sections[id-1];
         //FirstStart();
+        UpdateUI();
+    }
+
+    void UpdateUI(){
+        Transform[] childs = sectionUI.GetComponentsInChildren<Transform>();
+        foreach(Transform child in childs){
+            if(child.gameObject.tag=="Level"){
+                levels.Add(child.gameObject);
+            }
+        }
+        foreach(GameObject lvl in levels){
+            
+        }
     }
 
     //void FirstStart(){

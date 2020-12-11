@@ -43,9 +43,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f0c8a6a7eda2a4dbfed3c596fc3b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  section:
+    name: 
+    section_id: 0
+    complete: 0
+    blocked: 0
+    levels: []
   id: 1
   blocked: {fileID: -6404173691400150841, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68,
     type: 3}
   open: {fileID: -5342720849334808088, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
   complete: {fileID: -8499963796156444331, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68,
+    type: 3}
+  sectionUI: {fileID: 4912071556892226817, guid: e1d6ebe7f1e062e498b6fef78ba4e845,
     type: 3}

@@ -451,17 +451,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   section:
-    levels: []
     name: 
     section_id: 0
     complete: 0
+    blocked: 0
+    levels: []
   id: 1
   blocked: {fileID: -6404173691400150841, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68,
     type: 3}
   open: {fileID: -5342720849334808088, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
   complete: {fileID: -8499963796156444331, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68,
     type: 3}
-  sec_name: S1
+  sectionUI: {fileID: 1891042805}
 --- !u!4 &648414425
 Transform:
   m_ObjectHideFlags: 0
@@ -1259,7 +1260,7 @@ GameObject:
   - component: {fileID: 2326892896545814741}
   m_Layer: 5
   m_Name: L2
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1292,7 +1293,7 @@ GameObject:
   - component: {fileID: 4595245110958434752}
   m_Layer: 5
   m_Name: L5
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1437,7 +1438,7 @@ GameObject:
   - component: {fileID: 4711929058869960560}
   m_Layer: 5
   m_Name: L4
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1747,7 +1748,7 @@ GameObject:
   - component: {fileID: 6373610338287324718}
   m_Layer: 5
   m_Name: L1
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1780,7 +1781,7 @@ GameObject:
   - component: {fileID: 6685595676228426680}
   m_Layer: 5
   m_Name: L3
-  m_TagString: Untagged
+  m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
