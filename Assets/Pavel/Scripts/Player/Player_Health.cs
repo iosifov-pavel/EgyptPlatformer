@@ -52,7 +52,6 @@ public class Player_Health : MonoBehaviour
 
     public void Resurrect(){
         pm.BlockMovement(0.4f);
-        reset_Playing_UI.ResetInput();
         pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         hp=MAXhp;
         dead=false;
@@ -63,6 +62,7 @@ public class Player_Health : MonoBehaviour
         player.color = Color.white;
         Time.timeScale = 1f;
         Playing_UI.SetActive(true);
+        reset_Playing_UI.ResetInput();
         LooseScreen.SetActive(false);
     }
 
@@ -98,11 +98,13 @@ public class Player_Health : MonoBehaviour
         LM.level.deaths++;
         if(lives==0){
             Time.timeScale = 0f;
+            reset_Playing_UI.ResetInput();
             Playing_UI.SetActive(false);
             DeathScreen.SetActive(true);
         }
         else {
             Time.timeScale = 0f;
+            reset_Playing_UI.ResetInput();
             Playing_UI.SetActive(false);
             LooseScreen.SetActive(true);
         }

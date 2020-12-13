@@ -86,7 +86,10 @@ float razbros;
         pa.angle=angle;
     }
 
-    public void ResetTouch(){
-        touch.phase = TouchPhase.Ended;
+    public void ResetTouch(){id=-111;
+        pa.buttonAttack=false;
+        pa.angle=0;
+        Debug.Log("Touch Ended");
+        stick.localPosition = original;
     }
 }
