@@ -132,4 +132,8 @@ float cumulative_reset=0;
         last_y=local.y;
         last_x=local.x;
     }
+
+    public void ResetTouch(){
+        touch.phase = TouchPhase.Ended;
+    }
 }

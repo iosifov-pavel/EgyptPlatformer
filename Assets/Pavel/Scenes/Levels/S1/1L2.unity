@@ -400,6 +400,7 @@ MonoBehaviour:
     time: 0
     score: 0
     deaths: 0
+    coins: 0
     name: 
 --- !u!1001 &80108653
 PrefabInstance:
@@ -1764,7 +1765,7 @@ Transform:
   - {fileID: 1062817074}
   - {fileID: 1499383660}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &326506738
 PrefabInstance:
@@ -52569,12 +52570,12 @@ PrefabInstance:
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.91
+      value: -9.31
       objectReference: {fileID: 0}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.26
+      value: -0.87
       objectReference: {fileID: 0}
     - target: {fileID: 4581868425169406051, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}

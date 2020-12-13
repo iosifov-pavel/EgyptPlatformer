@@ -85,4 +85,8 @@ float razbros;
         else pa.buttonAttack=false;
         pa.angle=angle;
     }
+
+    public void ResetTouch(){
+        touch.phase = TouchPhase.Ended;
+    }
 }

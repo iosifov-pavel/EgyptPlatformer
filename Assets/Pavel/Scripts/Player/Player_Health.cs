@@ -22,6 +22,7 @@ public class Player_Health : MonoBehaviour
     GameObject DeathScreen;
     GameObject Playing_UI;
     Manager_Level LM;
+    Reset_Playing_UI reset_Playing_UI;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class Player_Health : MonoBehaviour
         LooseScreen = UI.transform.GetChild(4).gameObject;
         DeathScreen = UI.transform.GetChild(5).gameObject;
         Playing_UI = UI.transform.GetChild(1).gameObject;
+        reset_Playing_UI = Playing_UI.GetComponent<Reset_Playing_UI>();
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
@@ -50,6 +52,8 @@ public class Player_Health : MonoBehaviour
 
     public void Resurrect(){
         pm.BlockMovement(0.4f);
+        reset_Playing_UI.ResetInput();
+        pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         hp=MAXhp;
         dead=false;
         StopAllCoroutines();

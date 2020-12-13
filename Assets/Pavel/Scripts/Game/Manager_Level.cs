@@ -11,6 +11,7 @@ public class Manager_Level : MonoBehaviour
     Manager_Section manager_Section;
     Manager_Game manager_Game;
     public Level level;
+    
 
     // Start is called before the first frame update
     void Start()
