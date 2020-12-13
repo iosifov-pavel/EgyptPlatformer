@@ -1519,7 +1519,7 @@ GameObject:
   - component: {fileID: 6038880224611605913}
   - component: {fileID: 7802908928634897412}
   m_Layer: 5
-  m_Name: ButtonQuit
+  m_Name: ButtonToMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1542,7 +1542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -180}
+  m_AnchoredPosition: {x: 401.1, y: -102.1}
   m_SizeDelta: {x: 280, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1198996941615807788
@@ -2922,7 +2922,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: QUIT
+  m_Text: Back to map
 --- !u!1 &7340309958300315083
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,7 +4532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -105}
+  m_AnchoredPosition: {x: 401.2, y: -172.1}
   m_SizeDelta: {x: 280, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8772881802122033416

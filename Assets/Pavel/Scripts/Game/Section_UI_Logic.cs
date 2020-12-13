@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Section_UI_Logic : MonoBehaviour
 {
-    [SerializeField] GameObject SM_;
+    //[SerializeField] GameObject SM_;
     Manager_Section SM;
     
     [SerializeField] Sprite blocked, open, complete;
@@ -14,7 +14,7 @@ public class Section_UI_Logic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SM = SM_.GetComponent<Manager_Section>();
+        SM = GameObject.FindGameObjectWithTag("SectionManager").GetComponent<Manager_Section>();
         
         UpdateUI();
     }
