@@ -14,7 +14,9 @@ public class Finish : MonoBehaviour
         {
             LM = other.gameObject.GetComponent<Player_InfoHolder>().getLM();
             LM.level.complete = true;
-            LM.L_update();
+            if(LM.level.time==0) LM.level.time = LM.time;
+            else if(LM.level.time>LM.time) LM.level.time = LM.time;
+            LM.L_complete();
             rvru.Win();
         }
     }
