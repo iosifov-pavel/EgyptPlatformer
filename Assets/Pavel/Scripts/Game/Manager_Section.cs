@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Manager_Section : MonoBehaviour
 {
     // Start is called before the first frame update
 
     public Section section;
-    List<Image> levels = new List<Image>();
     Level active;
     [SerializeField] public int id;
-    [SerializeField] Sprite blocked, open, complete;
-    [SerializeField] GameObject sectionUI;
     Manager_Game manager_game;
     GameObject mg;
 
@@ -31,31 +27,11 @@ public class Manager_Section : MonoBehaviour
         manager_game = mg.GetComponent<Manager_Game>();
         section = manager_game.game_info.sections[id-1];
         //FirstStart();
-        UpdateUI();
     }
 
-    void UpdateUI(){
-        Transform[] childs = sectionUI.GetComponentsInChildren<Transform>();
-        foreach(Transform child in childs){
-            if(child.gameObject.tag=="Level"){
-                levels.Add(child.GetComponent<Image>());
-            }
-        }
-        foreach(Image lvl in levels){
-            int i = levels.IndexOf(lvl);
-            if(section.levels[i].complete){
-                lvl.sprite = complete;
-                lvl.GetComponent<Button>().interactable=true;
-            }
-            else if(section.levels[i].blocked){
-                lvl.sprite = blocked;
-                lvl.GetComponent<Button>().interactable=false;
-            }
-            else{
-                lvl.sprite = open;
-                lvl.GetComponent<Button>().interactable=true;
-            }
-        }
+    public void S_update(int lvl_id){
+        section.levels[lvl_id].blocked=false;
+        manager_game.SaveToFile();
     }
 
 

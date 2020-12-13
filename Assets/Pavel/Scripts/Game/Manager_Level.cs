@@ -22,6 +22,10 @@ public class Manager_Level : MonoBehaviour
         level = manager_Section.section.levels[level_id-1];
     }
 
+    public void L_update(){
+        manager_Section.S_update(level_id);
+    }
+
 
     // Update is called once per frame
     void Update()
