@@ -96,6 +96,11 @@ public class Player_Health : MonoBehaviour
         lives--;
         lives_count.text = lives.ToString();
         LM.level.deaths++;
+        StartCoroutine(Dekay());
+    }
+
+    IEnumerator Dekay(){
+        yield return new WaitForSeconds(1);
         if(lives==0){
             Time.timeScale = 0f;
             reset_Playing_UI.ResetInput();
