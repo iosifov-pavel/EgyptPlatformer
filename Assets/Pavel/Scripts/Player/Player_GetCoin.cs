@@ -15,6 +15,7 @@ public class Player_GetCoin : MonoBehaviour
         UI = transform.parent.gameObject.GetComponent<Player_InfoHolder>().getUI();
         score = UI.transform.GetChild(1).GetChild(4).GetChild(0).gameObject;
         score_text = score.GetComponent<Text>();
+        score_text.text = coins.ToString();
     }
 
     // Update is called once per frame
