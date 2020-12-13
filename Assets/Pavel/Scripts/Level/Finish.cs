@@ -14,7 +14,7 @@ public class Finish : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             LM = other.gameObject.GetComponent<Player_InfoHolder>().getLM();
-            player_GetCoin = other.gameObject.GetComponent<Player_GetCoin>();
+            player_GetCoin = other.gameObject.transform.GetChild(3).gameObject.GetComponent<Player_GetCoin>();
             LM.level.complete = true;
             if(LM.level.time==0) LM.level.time = LM.time;
             else if(LM.level.time>LM.time) LM.level.time = LM.time;
