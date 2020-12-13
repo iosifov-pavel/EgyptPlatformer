@@ -52,7 +52,8 @@ public class Player_Health : MonoBehaviour
         pm.BlockMovement(0.4f);
         hp=MAXhp;
         dead=false;
-        anima.setBoolAnimation("Dead",dead);
+        StopAllCoroutines();
+        anima.setBoolAnimation("Dead",false);
         transform.position = lastCheckPoint;
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.white;
@@ -78,10 +79,18 @@ public class Player_Health : MonoBehaviour
         StartCoroutine(damageIndication());
     }
 
+    public void Heal(){
+        hp++;
+    }
+
     public void Death(){
         dead = true;
-        //Game_Manager.PlayerDead();
+        StopAllCoroutines();
+        anima.setBoolAnimation("Dead",dead);
+        SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
+        player.color = Color.red;
         lives--;
+        lives_count.text = lives.ToString();
         LM.level.deaths++;
         if(lives==0){
             Time.timeScale = 0f;
@@ -93,11 +102,6 @@ public class Player_Health : MonoBehaviour
             Playing_UI.SetActive(false);
             LooseScreen.SetActive(true);
         }
-        lives_count.text = lives.ToString();
-        StopAllCoroutines();
-        anima.setBoolAnimation("Dead",dead);
-        SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
-        player.color = Color.red;
     }
 
     private IEnumerator damageIndication()
