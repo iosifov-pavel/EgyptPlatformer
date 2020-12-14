@@ -54,6 +54,7 @@ public class Player_Health : MonoBehaviour
         pm.BlockMovement(0.4f);
         pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         hp=MAXhp;
+        UI_HP.Recreate();
         dead=false;
         StopAllCoroutines();
         anima.setBoolAnimation("Dead",false);
@@ -95,6 +96,7 @@ public class Player_Health : MonoBehaviour
         anima.setBoolAnimation("Dead",dead);
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.red;
+        UI_HP.Dead();
         lives--;
         lives_count.text = lives.ToString();
         LM.level.deaths++;
