@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Section_UI_Logic : MonoBehaviour
 {
     //[SerializeField] GameObject SM_;
-    Manager_Section SM;
+    [SerializeField] GameObject Sec_UI;
+    Manager_Section M_Sec;
     
     [SerializeField] Sprite blocked, open, complete;
     
@@ -14,8 +15,9 @@ public class Section_UI_Logic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SM = GameObject.FindGameObjectWithTag("SectionManager").GetComponent<Manager_Section>();
-        
+        //SM = GameObject.FindGameObjectWithTag("SectionManager").GetComponent<Manager_Section>();
+        //Sec_UI = 
+        M_Sec = GetComponent<Manager_Section>();
         UpdateUI();
     }
 
@@ -25,7 +27,7 @@ public class Section_UI_Logic : MonoBehaviour
         
     }
         void UpdateUI(){
-        Transform[] childs = GetComponentsInChildren<Transform>();
+        Transform[] childs = Sec_UI.GetComponentsInChildren<Transform>();
         foreach(Transform child in childs){
             if(child.gameObject.tag=="Level"){
                 levels.Add(child.GetComponent<Image>());
@@ -33,11 +35,11 @@ public class Section_UI_Logic : MonoBehaviour
         }
         foreach(Image lvl in levels){
             int i = levels.IndexOf(lvl);
-            if(SM.section.levels[i].complete){
+            if(M_Sec.section.levels[i].complete){
                 lvl.sprite = complete;
                 lvl.GetComponent<Button>().interactable=true;
             }
-            else if(SM.section.levels[i].blocked){
+            else if(M_Sec.section.levels[i].blocked){
                 lvl.sprite = blocked;
                 lvl.GetComponent<Button>().interactable=false;
             }
