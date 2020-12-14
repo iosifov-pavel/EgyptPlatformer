@@ -14,7 +14,7 @@ public class UI_HP : MonoBehaviour
     float offset;
     int last_hp,max,curr;
     [SerializeField] Sprite heart_full,heart_empty;
-    static bool damaged = false;
+    static bool damaged = false, maxhpinc = false, healed=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +63,14 @@ public class UI_HP : MonoBehaviour
 
     public static void Damaged(){
         damaged = true;
+    }
+
+    public static void MaxHPInc(){
+        maxhpinc = true;
+    }
+
+    public static void Heal(){
+        healed = true;
     }
 
     
