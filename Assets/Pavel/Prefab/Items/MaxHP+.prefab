@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2987111886240619459}
   - component: {fileID: 7348707507525529539}
+  - component: {fileID: 5707433894354128829}
   m_Layer: 0
   m_Name: MaxHP+
   m_TagString: Untagged
@@ -82,3 +83,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5707433894354128829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323679497117686238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd63e7c04c131554aa12f6d36e104fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
