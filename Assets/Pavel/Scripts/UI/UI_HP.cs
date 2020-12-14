@@ -22,7 +22,7 @@ public class UI_HP : MonoBehaviour
         last_hp=player_Health.hp;
         curr=last_hp;
         max = player_Health.MAXhp;
-        offset = 160/max;
+        offset = 180/max;
         CreateUI();
     }
 
@@ -58,6 +58,28 @@ public class UI_HP : MonoBehaviour
                 }
             }
             damaged=false;
+        }
+        if(maxhpinc){
+            hearts.Reverse();
+            GameObject h = Instantiate(heart) as GameObject;
+            h.name = string.Format("Heart{0}",hearts.Count+1);
+            h.GetComponent<Image>().sprite = heart_full;
+            h.transform.parent = gameObject.transform;
+            h.transform.localPosition = orig;
+            orig+=new Vector3(offset,0,1);
+            hearts.Add(h);
+            states.Add(true);
+        }
+        if(healed){
+            foreach(GameObject heart in hearts){
+                int i = hearts.IndexOf(heart);
+                if(!states[i]){
+                    states[i]=true;
+                    heart.GetComponent<Image>().sprite = heart_full;
+                    break;
+                }
+            }
+            healed=false;
         }
     }
 

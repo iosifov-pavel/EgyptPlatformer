@@ -86,6 +86,7 @@ public class Player_Health : MonoBehaviour
 
     public void Heal(){
         hp++;
+        UI_HP.Heal();
     }
 
     public void Death(){
@@ -147,5 +148,6 @@ public class Player_Health : MonoBehaviour
     public void MaxHPPlus(){
         MAXhp++;
         hp++;
+        UI_HP.MaxHPInc();
     }
 }
