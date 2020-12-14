@@ -69,6 +69,7 @@ public class UI_HP : MonoBehaviour
             orig+=new Vector3(offset,0,1);
             hearts.Add(h);
             states.Add(true);
+            hearts.Reverse();
         }
         if(healed){
             foreach(GameObject heart in hearts){
