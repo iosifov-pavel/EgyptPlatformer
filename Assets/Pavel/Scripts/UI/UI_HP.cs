@@ -69,6 +69,7 @@ public class UI_HP : MonoBehaviour
             Heart hg =new Heart(h);
             hearts.Add(hg);
             hearts.Reverse();
+            maxhpinc=false;
         }
         if(healed){
             foreach(Heart h in hearts){
