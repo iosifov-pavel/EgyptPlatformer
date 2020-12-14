@@ -1325,9 +1325,9 @@ Transform:
   - {fileID: 1364070896}
   - {fileID: 512287018}
   - {fileID: 1375604849}
+  - {fileID: 1408214834}
   - {fileID: 1059507556}
   - {fileID: 1450131748}
-  - {fileID: 1408214834}
   - {fileID: 1444388365}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -11928,6 +11928,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1019891603882634045, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 18230605}
     - target: {fileID: 2074324319572392987, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
       propertyPath: m_AnchoredPosition.x

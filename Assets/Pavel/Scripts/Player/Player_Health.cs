@@ -8,7 +8,7 @@ public class Player_Health : MonoBehaviour
     Vector3 lastCheckPoint;
     int last_id=0;
     public int hp;
-    int MAXhp = 3;
+    public int MAXhp = 3;
     public bool isDamaged = false;
     public bool superman = false;
     public bool dead = false;
@@ -75,6 +75,7 @@ public class Player_Health : MonoBehaviour
     public void ChangeHP(int source){
         if(superman || dead) return;
         hp+=source;
+        UI_HP.Damaged();
         Debug.Log("Health " + hp);
         if(hp<=0){
              Death();
