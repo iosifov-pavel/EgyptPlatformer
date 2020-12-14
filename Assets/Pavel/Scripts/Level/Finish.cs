@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Finish : MonoBehaviour
 {   
-    public Level_Controller rvru;
+    //public Level_Controller rvru;
     Player_GetCoin player_GetCoin;
     
     Manager_Level LM;
@@ -20,9 +20,9 @@ public class Finish : MonoBehaviour
             LM.level.complete = true;
             if(LM.level.time==0) LM.level.time = LM.time;
             else if(LM.level.time>LM.time) LM.level.time = LM.time;
-            if(LM.level.score==0) LM.level.score = player_GetCoin.coins;
-            else if(LM.level.score<player_GetCoin.coins) LM.level.score = player_GetCoin.coins;
-            LM.L_complete();
+            if(LM.level.coins==0) LM.level.coins = player_GetCoin.coins;
+            else if(LM.level.coins<player_GetCoin.coins) LM.level.coins = player_GetCoin.coins;
+            //LM.L_complete();
             Time.timeScale=0;
             UI_win.SetActive(true);
         }

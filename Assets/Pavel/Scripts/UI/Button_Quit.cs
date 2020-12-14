@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Button_Quit : MonoBehaviour
 {
-    Manager_Section manager_Section;
+    Manager_Level manager_Level;
     public void RageQuit()
     {
-        manager_Section = GameObject.FindGameObjectWithTag("SectionManager").GetComponent<Manager_Section>();
-        string name = string.Format("S{0}",manager_Section.section.section_id);
+        manager_Level = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<Manager_Level>();
+        string name = string.Format("S{0}",manager_Level.section_id);
         //Application.Quit();
         Debug.Log("Back to Map");
         SceneManager.LoadScene(name);

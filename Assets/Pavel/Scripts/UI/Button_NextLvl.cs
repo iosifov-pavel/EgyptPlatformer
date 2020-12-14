@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Button_NextLvl : MonoBehaviour
 {
-    Manager_Section manager_Section;
+    Manager_Level manager_Level;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +21,8 @@ public class Button_NextLvl : MonoBehaviour
     public void Nexturu()
     {
         Time.timeScale = 1f;
-        manager_Section = GameObject.FindGameObjectWithTag("SectionManager").GetComponent<Manager_Section>();
-        string name = string.Format("S{0}",manager_Section.section.section_id);
+        manager_Level = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<Manager_Level>();
+        string name = string.Format("S{0}",manager_Level.section_id);
         SceneManager.LoadScene(name);
     }
 
