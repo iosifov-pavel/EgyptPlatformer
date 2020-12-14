@@ -7,8 +7,7 @@ public class UI_HP : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] GameObject heart;
-    List<GameObject> hearts = new List<GameObject>();
-    List<bool> states = new List<bool>();
+    List<Heart> hearts = new List<Heart>();
     Player_Health player_Health;
     Vector3 orig = Vector3.zero;
     float offset;
@@ -34,13 +33,13 @@ public class UI_HP : MonoBehaviour
             h.transform.parent = gameObject.transform;
             h.transform.localPosition = orig;
             orig+=new Vector3(offset,0,1);
-            hearts.Add(h);
-            states.Add(true);
+            Heart hg =new Heart(h);
+            hearts.Add(hg);
         }
         hearts.Reverse();
-        foreach(GameObject heart in hearts){
-            int i = hearts.IndexOf(heart);
-            heart.transform.SetSiblingIndex(i);
+        foreach(Heart h in hearts){
+            int i = hearts.IndexOf(h);
+            h.heart.transform.SetSiblingIndex(i);
         }
         //hearts.Reverse();
     }
@@ -49,11 +48,11 @@ public class UI_HP : MonoBehaviour
     void Update()
     {
         if(damaged){
-            foreach(GameObject heart in hearts){
-                int i = hearts.IndexOf(heart);
-                if(states[i]){
-                    states[i]=false;
-                    heart.GetComponent<Image>().sprite = heart_empty;
+            foreach(Heart h in hearts){
+                int i = hearts.IndexOf(h);
+                if(h.full){
+                    h.full=false;
+                    h.heart.GetComponent<Image>().sprite = heart_empty;
                     break;
                 }
             }
@@ -67,16 +66,16 @@ public class UI_HP : MonoBehaviour
             h.transform.parent = gameObject.transform;
             h.transform.localPosition = orig;
             orig+=new Vector3(offset,0,1);
-            hearts.Add(h);
-            states.Add(true);
+            Heart hg =new Heart(h);
+            hearts.Add(hg);
             hearts.Reverse();
         }
         if(healed){
-            foreach(GameObject heart in hearts){
-                int i = hearts.IndexOf(heart);
-                if(!states[i]){
-                    states[i]=true;
-                    heart.GetComponent<Image>().sprite = heart_full;
+            foreach(Heart h in hearts){
+                int i = hearts.IndexOf(h);
+                if(!h.full){
+                    h.full=true;
+                    h.heart.GetComponent<Image>().sprite = heart_full;
                     break;
                 }
             }
@@ -97,4 +96,13 @@ public class UI_HP : MonoBehaviour
     }
 
     
+}
+public class Heart{
+    public bool full;
+    public GameObject heart;
+
+    public Heart(GameObject h){
+        heart=h;
+        full=true;
+    }
 }
