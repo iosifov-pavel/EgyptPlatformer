@@ -145,6 +145,6 @@ public class Player_Health : MonoBehaviour
 
     public void MaxHPPlus(){
         MAXhp++;
-        hp = MAXhp;
+        hp++;
     }
 }
