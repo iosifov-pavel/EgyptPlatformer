@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2987111886240619459}
   - component: {fileID: 7348707507525529539}
   - component: {fileID: 5707433894354128829}
+  - component: {fileID: 3737762565166668870}
   m_Layer: 0
   m_Name: MaxHP+
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6323679497117686238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3406987, y: 1.885573, z: 30.741135}
+  m_LocalPosition: {x: -4.372, y: 1.885573, z: 30.741135}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,3 +96,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd63e7c04c131554aa12f6d36e104fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3737762565166668870
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6323679497117686238}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
