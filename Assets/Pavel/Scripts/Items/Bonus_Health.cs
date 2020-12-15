@@ -23,7 +23,7 @@ public class Bonus_Health : MonoBehaviour
         {
             player_Health = player.gameObject.GetComponent<Player_Health>();
             if(player_Health.CheckHP()) return;
-            player_Health.ChangeHP(1);
+            player_Health.Heal();
             Destroy(gameObject);
         }
     }

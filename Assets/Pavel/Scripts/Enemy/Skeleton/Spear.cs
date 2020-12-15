@@ -26,6 +26,7 @@ public class Spear : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Ground"){
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            gameObject.GetComponent<BoxCollider2D>().enabled=false;
         }
     }
 }

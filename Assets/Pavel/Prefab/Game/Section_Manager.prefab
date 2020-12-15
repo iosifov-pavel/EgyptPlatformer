@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8382755061790095943}
   - component: {fileID: 8382755061790095942}
+  - component: {fileID: 4106319000542744601}
   m_Layer: 0
   m_Name: Section_Manager
   m_TagString: SectionManager
@@ -50,10 +51,32 @@ MonoBehaviour:
     blocked: 0
     levels: []
   id: 1
-  blocked: {fileID: -6404173691400150841, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68,
+--- !u!114 &4106319000542744601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382755061790095945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57bf1c45b0b6e4f499f5f24e7c42887d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sec_UI: {fileID: 0}
+  blocked: {fileID: 6094401324578360655, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  open: {fileID: -6404173691400150841, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  complete: {fileID: -5342720849334808088, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68,
     type: 3}
-  open: {fileID: -5342720849334808088, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
-  complete: {fileID: -8499963796156444331, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68,
-    type: 3}
-  sectionUI: {fileID: 4912071556892226817, guid: e1d6ebe7f1e062e498b6fef78ba4e845,
-    type: 3}
+  locked: {fileID: -8499963796156444331, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  numbers:
+  - {fileID: -696493078030614803, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: -3121679051597619849, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: 3555010356422123276, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: 2846253174218930349, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: -3030180320411269647, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: 1800973940135025350, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: 1116711434999908459, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: -7140869071343215969, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: 8403866383633467557, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}
+  - {fileID: -3683354451493596583, guid: 8bb3066d8f55a4b4ca6e25dfc1472f68, type: 3}

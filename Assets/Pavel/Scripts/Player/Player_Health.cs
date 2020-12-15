@@ -8,7 +8,7 @@ public class Player_Health : MonoBehaviour
     Vector3 lastCheckPoint;
     int last_id=0;
     public int hp;
-    int MAXhp = 3;
+    public int MAXhp = 3;
     public bool isDamaged = false;
     public bool superman = false;
     public bool dead = false;
@@ -16,23 +16,27 @@ public class Player_Health : MonoBehaviour
     Player_Movement pm;
     GameObject UI;
     GameObject Lives;
-    int lives =3;
+    public int lives =3;
     Text lives_count;
     GameObject LooseScreen;
     GameObject DeathScreen;
     GameObject Playing_UI;
+    Manager_Level LM;
+    Reset_Playing_UI reset_Playing_UI;
 
     // Start is called before the first frame update
     void Start()
     {
         //DontDestroyOnLoad(gameObject);
         UI = GetComponent<Player_InfoHolder>().getUI();
+        LM = GetComponent<Player_InfoHolder>().getLM();
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
         lives_count.text=lives.ToString();
         LooseScreen = UI.transform.GetChild(4).gameObject;
         DeathScreen = UI.transform.GetChild(5).gameObject;
         Playing_UI = UI.transform.GetChild(1).gameObject;
+        reset_Playing_UI = Playing_UI.GetComponent<Reset_Playing_UI>();
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
@@ -48,14 +52,18 @@ public class Player_Health : MonoBehaviour
 
     public void Resurrect(){
         pm.BlockMovement(0.4f);
+        pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         hp=MAXhp;
+        UI_HP.Recreate();
         dead=false;
-        anima.setBoolAnimation("Dead",dead);
+        StopAllCoroutines();
+        anima.setBoolAnimation("Dead",false);
         transform.position = lastCheckPoint;
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.white;
         Time.timeScale = 1f;
         Playing_UI.SetActive(true);
+        reset_Playing_UI.ResetInput();
         LooseScreen.SetActive(false);
     }
 
@@ -68,6 +76,7 @@ public class Player_Health : MonoBehaviour
     public void ChangeHP(int source){
         if(superman || dead) return;
         hp+=source;
+        UI_HP.Damaged();
         Debug.Log("Health " + hp);
         if(hp<=0){
              Death();
@@ -76,25 +85,39 @@ public class Player_Health : MonoBehaviour
         StartCoroutine(damageIndication());
     }
 
+    public void Heal(){
+        hp++;
+        UI_HP.Heal();
+    }
+
     public void Death(){
         dead = true;
-        //Game_Manager.PlayerDead();
+        StopAllCoroutines();
+        anima.setBoolAnimation("Dead",dead);
+        SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
+        player.color = Color.red;
+        UI_HP.Dead();
         lives--;
+        lives_count.text = lives.ToString();
+        LM.level.deaths++;
+        LM.Save();
+        StartCoroutine(Dekay());
+    }
+
+    IEnumerator Dekay(){
+        yield return new WaitForSeconds(1);
         if(lives==0){
             Time.timeScale = 0f;
+            reset_Playing_UI.ResetInput();
             Playing_UI.SetActive(false);
             DeathScreen.SetActive(true);
         }
         else {
             Time.timeScale = 0f;
+            reset_Playing_UI.ResetInput();
             Playing_UI.SetActive(false);
             LooseScreen.SetActive(true);
         }
-        lives_count.text = lives.ToString();
-        StopAllCoroutines();
-        anima.setBoolAnimation("Dead",dead);
-        SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
-        player.color = Color.red;
     }
 
     private IEnumerator damageIndication()
@@ -126,6 +149,9 @@ public class Player_Health : MonoBehaviour
 
     public void MaxHPPlus(){
         MAXhp++;
-        hp = MAXhp;
+        hp++;
+        UI_HP.MaxHPInc();
     }
 }
+
+
