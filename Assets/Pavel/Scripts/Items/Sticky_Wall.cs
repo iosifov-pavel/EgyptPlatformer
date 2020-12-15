@@ -56,8 +56,8 @@ public class Sticky_Wall : MonoBehaviour
         player.transform.parent = null;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
         //rb_player.AddForce(x.normalized*(10+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
-        if(x.y<=10) rb_player.AddForce(x.normalized*(4+((x.magnitude-50)*2/100)), ForceMode2D.Impulse);
-        else rb_player.AddForce(x.normalized*(10+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
+        if(x.y<=10) rb_player.AddForce(x.normalized*(4+((x.magnitude-50)*4/100)), ForceMode2D.Impulse);
+        else rb_player.AddForce(x.normalized*(8+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
         //else rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
         player_Movement.blocked=false;
         StartCoroutine(Delay());
