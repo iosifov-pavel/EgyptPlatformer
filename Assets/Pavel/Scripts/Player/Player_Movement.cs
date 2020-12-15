@@ -5,7 +5,11 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
 
+    public bool inWind = false;
+    public GameObject windZone;
     private float speed = 100f;
+
+    float mass;
     public float multiplier = 1f;
     [SerializeField] private float maxSpeed = 2.8f;
     public Vector2 direction;
@@ -74,6 +78,7 @@ public class Player_Movement : MonoBehaviour
         offset = box.size.x/2 * transform.localScale.x;
         height = box.size.y/2 * transform.localScale.y;
         ground = LayerMask.GetMask("Ground");
+        mass= GetComponent<Rigidbody2D>().mass;
     }
 
     // Update is called once per frame
@@ -146,6 +151,11 @@ public class Player_Movement : MonoBehaviour
         AdditionalMove();
         CustomPhysics();
         PostMove();
+        }
+
+        if(inWind)
+        {
+           rb.AddForce(windZone.GetComponent<Enemy_Wind_Local>().diraction*windZone.GetComponent<Enemy_Wind_Local>().strength);
         }
     }
 
@@ -383,7 +393,27 @@ public class Player_Movement : MonoBehaviour
     {       
         jump_force= jump_force*low;
         maxSpeed = maxSpeed*low;
+        //mass=mass*100;
+        
     }
     
+    
 
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.gameObject.tag == "windArea")
+        {   
+            //other.gameObject.GetComponent<Player_Movement>().GetRb();
+            windZone=other.gameObject;
+            inWind = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) 
+    {
+        if(other.gameObject.tag == "windArea")
+        {   
+            inWind = false;
+        }   
+    }
 }

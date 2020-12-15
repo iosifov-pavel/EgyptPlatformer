@@ -23,6 +23,8 @@ public class Enemy_Sand : MonoBehaviour
 
     Vector2 offs, ornl;
 
+   //[SerializeField]private Vector3 velocity;
+
     float moveY;
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,7 @@ public class Enemy_Sand : MonoBehaviour
         //BC2d = GetComponent<BoxCollider2D>();
        // ornl=BC2d.size;
         ornl=BC2d.offset;
-        moveY = (BC2d.size.y*transform.localScale.y)*1.5f;
+        //moveY = (BC2d.size.y*transform.localScale.y)*1.5f;
         //trgBC2d = GetComponent<BoxCollider2D>();
 
     }
@@ -45,7 +47,7 @@ public class Enemy_Sand : MonoBehaviour
     {
         if(enough) return;
         if(con){
-            BC2d.offset= Vector2.MoveTowards(BC2d.offset,new Vector2(BC2d.offset.x,-moveY),1*Time.deltaTime);
+          //  BC2d.offset= Vector2.MoveTowards(BC2d.offset,new Vector2(BC2d.offset.x,-moveY),1*Time.deltaTime);
           // size=BC2d.size.y;
           // size*=0.999f;
           // if(size<=0.4f) enough = true;
@@ -72,49 +74,66 @@ public class Enemy_Sand : MonoBehaviour
     
     }
 
+ //   private void FixedUpdate() {
+ //       
+ //       if(moving)
+ //       {
+ //           transform.position+=(velocity*Time.deltaTime);
+ //       }
+ //   }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Player" && other.GetType()==typeof(CapsuleCollider2D))
-        {
-            other.gameObject.GetComponent<Player_Movement>().multylow(0.5f);
-            //pm.GetComponent<Player_Movement>().multylow(0.5f);
-            Debug.Log("multylow true");
-        }
 
-
-        if(other.gameObject.tag == "GrabCeiling")
-        {
-            other.gameObject.transform.parent.gameObject.GetComponent<Player_Health>().ChangeHP(-99);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag == "Player" && other.GetType()==typeof(CapsuleCollider2D))
-        {
-            other.gameObject.GetComponent<Player_Movement>().multylow(2f);
-            //pm.GetComponent<Player_Movement>().multylow(0.5f);
-            Debug.Log("multylow false");
-        }
-    }
+ //   private void OnTriggerEnter2D(Collider2D other) {
+ //       if(other.gameObject.tag == "Player" && other.GetType()==typeof(CapsuleCollider2D))
+ //       {   
+ //           moving = true;
+ //           other.gameObject.GetComponent<Player_Movement>().multylow(0.5f);
+ //           //pm.GetComponent<Player_Movement>().multylow(0.5f);
+ //           Debug.Log("multylow true");
+ //       }
+//
+//
+ //       if(other.gameObject.tag == "GrabCeiling")
+ //       {
+ //           other.gameObject.transform.parent.gameObject.GetComponent<Player_Health>().ChangeHP(-99);
+ //       }
+ //   }
+//
+ //   private void OnTriggerExit2D(Collider2D other) {
+ //       if(other.gameObject.tag == "Player" && other.GetType()==typeof(CapsuleCollider2D))
+ //       {
+ //           moving = false;
+ //           other.gameObject.GetComponent<Player_Movement>().multylow(2f);
+ //           //pm.GetComponent<Player_Movement>().multylow(0.5f);
+ //           Debug.Log("multylow false");
+ //       }
+ //   }
 
 
     private void OnCollisionEnter2D(Collision2D other) {
 
-        if(other.gameObject.tag == "Player" && other.GetType()==typeof(CapsuleCollider2D))
-        {
+        
+           if(other.gameObject.tag == "Player" && other.GetType()==typeof(CapsuleCollider2D))
+       {   
+           moving = true;       
+           con = true;
+           other.gameObject.GetComponent<Player_Movement>().multylow(0.5f);
+           //pm.GetComponent<Player_Movement>().multylow(0.5f);
+           Debug.Log("multylow true");
+       }
 
-            con = true;
-            //other.gameObject.GetComponent<Player_Movement>().multylow(0.5f);
-            //pm.GetComponent<Player_Movement>().multylow(0.5f);
-           // Debug.Log("multylow true");
-        }
+        if(other.gameObject.tag == "GrabCeiling")
+          {
+              other.gameObject.transform.parent.gameObject.GetComponent<Player_Health>().ChangeHP(-99);
+          }
         
     }
 
     private void OnCollisionStay2D(Collision2D other) {
 
         if(other.gameObject.tag == "Player" )
-        {   
+        {  
+            moving = true; 
             if(vk) return;
             con = true;
            
@@ -124,21 +143,20 @@ public class Enemy_Sand : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other) 
     {
-        if(other.gameObject.tag == "Player")
-        {
-            if(vk) return;
-           //StartCoroutine(zader());
-            //other.gameObject.GetComponent<Player_Movement>().multylow(2f);
-            //Debug.Log("multylow true");
-
-        }
+        if(other.gameObject.tag == "Player" && other.GetType()==typeof(CapsuleCollider2D))
+       {
+           moving = false;
+           other.gameObject.GetComponent<Player_Movement>().multylow(2f);
+           //pm.GetComponent<Player_Movement>().multylow(0.5f);
+           Debug.Log("multylow false");
+       }
     }
 
 
     IEnumerator zader()
     {   
         vk=true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         con = false;
         vk=false;
     }
