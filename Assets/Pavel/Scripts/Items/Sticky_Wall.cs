@@ -31,7 +31,7 @@ public class Sticky_Wall : MonoBehaviour
             x=new Vector2(player_Movement.hor,player_Movement.ver);
             float angle = Vector2.Angle(pre_push,x);
                 if(player_Movement.buttonJump && x.magnitude<=40 || player_Movement.buttonJump && x.y<=-100) Fall();
-                else if(x.magnitude>=80){
+                else if(x.magnitude>=75){
                     if(player_Movement.buttonJump) Jump();
                 } 
         }
