@@ -30,8 +30,8 @@ public class Sticky_Wall : MonoBehaviour
         if(ready){
             x=new Vector2(player_Movement.hor,player_Movement.ver);
             float angle = Vector2.Angle(pre_push,x);
-                if(player_Movement.buttonJump && x.magnitude<=40 || player_Movement.buttonJump && x.y<=-100) Fall();
-                else if(x.magnitude>=75){
+                if(player_Movement.buttonJump && x.magnitude<=50) Fall();
+                else if(x.magnitude>50){
                     if(player_Movement.buttonJump) Jump();
                 } 
         }
@@ -55,8 +55,10 @@ public class Sticky_Wall : MonoBehaviour
         contact=false;
         player.transform.parent = null;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
-        if(x.y<=0) rb_player.AddForce(x.normalized*4, ForceMode2D.Impulse);
-        else rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
+        //rb_player.AddForce(x.normalized*(10+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
+        if(x.y<=10) rb_player.AddForce(x.normalized*(4+((x.magnitude-50)*2/100)), ForceMode2D.Impulse);
+        else rb_player.AddForce(x.normalized*(10+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
+        //else rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
         player_Movement.blocked=false;
         StartCoroutine(Delay());
     }
