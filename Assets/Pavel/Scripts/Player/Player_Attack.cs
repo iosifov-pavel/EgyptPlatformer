@@ -21,7 +21,7 @@ public int kills=0;
 static bool killed=false;
 
    void Start() {
-      LM = gameObject.GetComponent<Player_InfoHolder>().getLM();
+      LM = transform.parent.gameObject.GetComponent<Player_InfoHolder>().getLM();
       parent = transform.parent.gameObject;
       partran = parent.GetComponent<Transform>();
       forward = new Vector3(transform.localPosition.x+0.15f,transform.localPosition.y,transform.localPosition.z);        upward = new Vector3(transform.localPosition.x,transform.localPosition.y+0.3f,transform.localPosition.z);
