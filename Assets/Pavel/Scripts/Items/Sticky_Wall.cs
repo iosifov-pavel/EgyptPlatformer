@@ -56,10 +56,14 @@ public class Sticky_Wall : MonoBehaviour
         player.transform.parent = null;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
         //rb_player.AddForce(x.normalized*(10+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
-        if(x.y<=10) rb_player.AddForce(x.normalized*(4+((x.magnitude-50)*4/100)), ForceMode2D.Impulse);
-        else rb_player.AddForce(x.normalized*(8+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
+        //if(x.y<=10) rb_player.AddForce(x.normalized*(4+((x.magnitude-50)*4/100)), ForceMode2D.Impulse);
+        //else rb_player.AddForce(x.normalized*(8+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
         //else rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
-        player_Movement.blocked=false;
+        //Vector2 horiz = new Vector2(x.x,0).normalized;
+        //Vector2 vert = new Vector2(0,x.y).normalized;
+        x=x.normalized;
+        if(x.y>-0.3f) rb_player.AddForce(new Vector2(x.x*5,x.y*10), ForceMode2D.Impulse);
+        else rb_player.AddForce(new Vector2(x.x*3,x.y*3), ForceMode2D.Impulse);
         StartCoroutine(Delay());
     }
 
@@ -96,7 +100,9 @@ public class Sticky_Wall : MonoBehaviour
     IEnumerator Delay(){
         x=Vector2.zero;
         delay=true;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.20f);
+        player_Movement.blocked=false;
+        yield return new WaitForSeconds(0.05f);
         player_Movement.jump_block=false;
         yield return new WaitForSeconds(delay_time-0.25f);
         delay=false;

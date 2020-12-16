@@ -29,5 +29,6 @@ public class Player_Animation : MonoBehaviour
     public void setDirection(float dir){
         if(Mathf.Abs(dir)<0.2) head.sprite = stand;
         else head.sprite = right;
+        //else head.sprite = 
     }
 }

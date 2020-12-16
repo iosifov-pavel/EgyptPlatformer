@@ -83,54 +83,25 @@ public class Player_Movement : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        //lives=Game_Manager.lives;
         if(stickPressed){
         } else {
              direction = new Vector2(0, 0);
              stick_delta = new Vector2(0,0);
-             //stick_delta_y = new Vector2(0,0);
              hor = 0; 
              ver = 0;
-             //verical = new Vector2(0,0);
         }
         hor+=stick_delta.x;
         ver+=stick_delta.y;
-        //if(!blocked) verical+=stick_delta_y;
-        //if(Mathf.Abs(hor)>160) hor = 0;
-        //if(Mathf.Abs(ver)>160) ver=0;
-        if(!blocked) anima.setDirection(direction.x);
+        anima.setDirection(rb.velocity.x);
         CheckGround();
         DeepCheckGround();
+        
+        if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
+            Flip();
+        }
         anima.setBoolAnimation("Ground", isGrounded);
-    }
-
-    void Jump(){
-        //if(isJumping) verical.x=0;
-        //if(verical.x>enough_for_jump){
-        //    if(!isJumping && jumps<jump_count){
-        //        can_jump=true;
-        //        jumps++;
-        //        reset=false;
-        //    }
-        //    verical.x=0;
-        //    verical.y=0;
-        //    if(jumps==2&& jump_time==-111) jump_time=jump_time_max-0.08f;
-        //    else if(jump_time==-111) jump_time=jump_time_max;
-        //}
-//
-        //if(can_jump){
-        //   if(jump_time>=0) jump_time-=Time.deltaTime;
-        //   else if(jump_time<0) can_jump=false;
-        //}
-//
-        //if(verical.y>enough_for_reset && !reset && !isGrounded){
-        //    verical.x=50;
-        //    verical.y=0;
-        //    isJumping=false;
-        //    reset=true;
-        //    can_jump=false;
-        //    jump_time=-111;
-        //}
+        anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
+        anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
     }
 
     public void ResetJumpCount(){
@@ -146,7 +117,6 @@ public class Player_Movement : MonoBehaviour
         if(!blocked){
         PreMove();
         Horizontal();
-        Jump();
         Vertical();
         AdditionalMove();
         CustomPhysics();
@@ -171,12 +141,6 @@ public class Player_Movement : MonoBehaviour
             move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
         rb.velocity = move;
-        anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
-        anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
-
-        if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
-            Flip();
-        }
     }
 
     void Vertical(){
@@ -295,7 +259,7 @@ public class Player_Movement : MonoBehaviour
         }
         //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
         //else
-        inertia = rb.velocity.x*0.90f;
+        inertia = rb.velocity.x*0.92f;
         last_velocity = rb.velocity.x;
     }
 
