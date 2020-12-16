@@ -45,7 +45,18 @@ public class Open_Level : MonoBehaviour
         Text lvl_name_t = lvl_name.GetComponent<Text>();
         lvl_name_t.text = level.name;
         Text stats_t = stats.GetComponent<Text>();
-        stats_t.text = "AAA";
+        float msc,tmp;
+        int s,m;
+        msc = level.time;
+        tmp=msc;
+        s=(int)tmp;
+        m=s/60;
+        msc = (int)(100*(tmp-s));
+        string time = string.Format("{0}:{1}.{2}", m,s-m*60,msc);
+        stats_t.text = "Best Time: " + time + "\n" +
+        "Total deaths: " + level.deaths + "\n" +
+        "Coins: " + level.coins + "\n" +
+         "Score: " + level.score + "\n";
 
         //SceneManager.LoadScene(level_to_load, LoadSceneMode.Single);
     }

@@ -79,6 +79,7 @@ public class Level{
     public float time;
     public int score;
     public int deaths;
+    public int enemy_killed;
     public int coins;
     public string name="default";
 
@@ -90,6 +91,7 @@ public class Level{
         score=0;
         coins = 0;
         deaths = 0;
+        enemy_killed=0;
         name = s;
     }
 }
