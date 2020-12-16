@@ -7,6 +7,7 @@ public class Section_UI_Logic : MonoBehaviour
 {
     //[SerializeField] GameObject SM_;
     [SerializeField] GameObject Sec_UI;
+    GameObject statWindow;
     Manager_Section M_Sec;
     Section section;
     
@@ -33,6 +34,9 @@ public class Section_UI_Logic : MonoBehaviour
         foreach(Transform child in childs){
             if(child.gameObject.tag=="Level"){
                 levels.Add(child);
+            }
+            if(child.gameObject.tag=="StatsWindow"){
+                statWindow = child.gameObject;
             }
         }
         foreach(Transform lvl in levels){

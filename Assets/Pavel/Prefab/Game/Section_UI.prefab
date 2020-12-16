@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 214840258133377221}
   - component: {fileID: 214840258133377222}
   - component: {fileID: 214840258133377220}
-  - component: {fileID: 214840258133377227}
+  - component: {fileID: 4870608345428570898}
   m_Layer: 5
   m_Name: L2
   m_TagString: Level
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 214840258133377227}
+      - m_Target: {fileID: 4870608345428570898}
         m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
@@ -132,7 +132,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &214840258133377227
+--- !u!114 &4870608345428570898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,10 +141,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 214840258133377216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971ad4c44089fcf4fa8d6887be809a18, type: 3}
+  m_Script: {fileID: 11500000, guid: 51e2d02396589d241aa201c8011b26d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_to_load: 1L2
+  level_to_load: 2
 --- !u!1 &1110174978462456938
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 2122351860190237136}
   - component: {fileID: 2122351860190237139}
   - component: {fileID: 2122351860190237137}
-  - component: {fileID: 2122351860190237150}
+  - component: {fileID: 431942278557497808}
   m_Layer: 5
   m_Name: L5
   m_TagString: Level
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2122351860190237150}
+      - m_Target: {fileID: 431942278557497808}
         m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
@@ -433,7 +433,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2122351860190237150
+--- !u!114 &431942278557497808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -442,10 +442,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2122351860190237141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971ad4c44089fcf4fa8d6887be809a18, type: 3}
+  m_Script: {fileID: 11500000, guid: 51e2d02396589d241aa201c8011b26d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_to_load: 1L5
+  level_to_load: 5
 --- !u!1 &2499934097639022754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1315,7 @@ GameObject:
   - component: {fileID: 5546378642276388325}
   - component: {fileID: 953229119725605938}
   m_Layer: 5
-  m_Name: Level stats
+  m_Name: LStats
   m_TagString: StatsWindow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1511,6 +1511,7 @@ GameObject:
   - component: {fileID: 2135648992248808022}
   - component: {fileID: 4690988541201322078}
   - component: {fileID: 7841933023550251191}
+  - component: {fileID: 3813954743396496282}
   m_Layer: 5
   m_Name: Close
   m_TagString: Untagged
@@ -1575,6 +1576,49 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3813954743396496282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017004112422892921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 7841933023550251191}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5947610180636609099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,7 +1762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971ad4c44089fcf4fa8d6887be809a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_to_load: Map
+  level_to_load: 0
 --- !u!1 &7193847650851530597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1775,7 @@ GameObject:
   - component: {fileID: 7193847650851530592}
   - component: {fileID: 7193847650851530595}
   - component: {fileID: 7193847650851530593}
-  - component: {fileID: 7193847650851530606}
+  - component: {fileID: 1987006084140870082}
   m_Layer: 5
   m_Name: L4
   m_TagString: Level
@@ -1840,7 +1884,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7193847650851530606}
+      - m_Target: {fileID: 1987006084140870082}
         m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
@@ -1851,7 +1895,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7193847650851530606
+--- !u!114 &1987006084140870082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1860,10 +1904,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7193847650851530597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971ad4c44089fcf4fa8d6887be809a18, type: 3}
+  m_Script: {fileID: 11500000, guid: 51e2d02396589d241aa201c8011b26d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_to_load: 1L4
+  level_to_load: 4
 --- !u!1 &7393401917996755432
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,7 +2064,7 @@ GameObject:
   - component: {fileID: 8845650228345304638}
   - component: {fileID: 8845650228345304637}
   - component: {fileID: 8845650228345304639}
-  - component: {fileID: 8845650228345304624}
+  - component: {fileID: 5715375415549786423}
   m_Layer: 5
   m_Name: L1
   m_TagString: Level
@@ -2129,7 +2173,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8845650228345304624}
+      - m_Target: {fileID: 5715375415549786423}
         m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
@@ -2140,7 +2184,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8845650228345304624
+--- !u!114 &5715375415549786423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2149,10 +2193,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8845650228345304635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971ad4c44089fcf4fa8d6887be809a18, type: 3}
+  m_Script: {fileID: 11500000, guid: 51e2d02396589d241aa201c8011b26d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_to_load: 1L1
+  level_to_load: 1
 --- !u!1 &9113470394059973549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,7 +2209,7 @@ GameObject:
   - component: {fileID: 9113470394059973544}
   - component: {fileID: 9113470394059973547}
   - component: {fileID: 9113470394059973545}
-  - component: {fileID: 9113470394059973542}
+  - component: {fileID: 968688562058550034}
   m_Layer: 5
   m_Name: L3
   m_TagString: Level
@@ -2274,7 +2318,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9113470394059973542}
+      - m_Target: {fileID: 968688562058550034}
         m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
@@ -2285,7 +2329,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &9113470394059973542
+--- !u!114 &968688562058550034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2294,7 +2338,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9113470394059973549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971ad4c44089fcf4fa8d6887be809a18, type: 3}
+  m_Script: {fileID: 11500000, guid: 51e2d02396589d241aa201c8011b26d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_to_load: 1L3
+  level_to_load: 3
