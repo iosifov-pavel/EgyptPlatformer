@@ -358,36 +358,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 53717051}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &57841473 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 657356374210665923, guid: b4cb5ec1fc03ebc4d95ee309c1ad2a79,
-    type: 3}
-  m_PrefabInstance: {fileID: 1315365397}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &57841475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57841473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67568a60809e7f04990f006448120066, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level_id: 1
-  section_id: 0
-  level:
-    id: 0
-    complete: 0
-    blocked: 0
-    time: 0
-    score: 0
-    deaths: 0
-    coins: 0
-    name: 
-  time: 0
 --- !u!1001 &80108653
 PrefabInstance:
   m_ObjectHideFlags: 0
