@@ -19,9 +19,6 @@ public class UI_HP : MonoBehaviour
     {
         dmg=0;
         player_Health = player.GetComponent<Player_Health>();
-        last_hp=player_Health.hp;
-        max = player_Health.MAXhp;
-        offset = 180/max;
         create=true;
     }
 
