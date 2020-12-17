@@ -9,7 +9,7 @@ public class Manager_Level : MonoBehaviour
     [SerializeField] public int section_id;
     GameObject ms,mg;
     //Manager_Section manager_Section;
-    Manager_Game manager_Game;
+    public Manager_Game manager_Game;
     public Level level;
     public float time=0;
     public int kills=0;

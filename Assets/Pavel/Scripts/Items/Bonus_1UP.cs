@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bonus_1UP : MonoBehaviour
 {
     // Start is called before the first frame update
-    Player_Health player_Health;
+    //Player_Health player_Health;
+    Manager_Level level;
     void Start()
     {
         
@@ -21,9 +22,8 @@ public class Bonus_1UP : MonoBehaviour
     {
         if (player.gameObject.tag == "Player")
         {
-            player_Health = player.gameObject.GetComponent<Player_Health>();
-            //if(player_Health.CheckHP()) return;
-            player_Health.lives++;
+            level = player.gameObject.GetComponent<Player_InfoHolder>().getLM();
+            level.manager_Game.game_info.Lives++;
             Destroy(gameObject);
         }
     }
