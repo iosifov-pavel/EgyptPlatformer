@@ -2627,6 +2627,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1269860910}
+    - target: {fileID: 8772881801357670470, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8772881801910002267, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
       propertyPath: m_Name
@@ -19702,10 +19707,10 @@ Transform:
   - {fileID: 1858772238}
   - {fileID: 874351149}
   - {fileID: 7279551484232556949}
+  - {fileID: 7279551484619671287}
   - {fileID: 938624169}
   - {fileID: 30842303}
   - {fileID: 24293729}
-  - {fileID: 7279551484619671287}
   - {fileID: 1031584826}
   - {fileID: 402110800}
   - {fileID: 1099344690}
@@ -19720,8 +19725,8 @@ Transform:
   - {fileID: 2131817963}
   - {fileID: 1812600933}
   - {fileID: 484794845}
-  - {fileID: 555756255}
   - {fileID: 1542566564}
+  - {fileID: 555756255}
   - {fileID: 1334701380}
   - {fileID: 1806184462}
   - {fileID: 446087704}
@@ -21380,7 +21385,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2061078425}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &7279551484851629381
 Transform:
