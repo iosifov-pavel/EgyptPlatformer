@@ -19,9 +19,9 @@ public class Finish : MonoBehaviour
             UI_win = other.gameObject.GetComponent<Player_InfoHolder>().getUI().transform.GetChild(3).gameObject;
             //player_GetCoin = other.gameObject.transform.GetChild(3).gameObject.GetComponent<Player_GetCoin>();
             //player_Attack = other.gameObject.GetComponent<Player_Attack>();
-            LM.level.complete = true;
             //--------------------------
-            if(LM.level.death_per_run==0) LM.level.death_per_run = LM.death;
+            if(LM.level.death_per_run==0 && !LM.level.complete) LM.level.death_per_run = LM.death;
+            else if(LM.level.death_per_run==0) LM.level.death_per_run=0;
             else if(LM.level.death_per_run>LM.death) LM.level.death_per_run = LM.death;
             //--------------------------
             if(LM.level.time==0) LM.level.time = LM.time;
@@ -37,7 +37,9 @@ public class Finish : MonoBehaviour
             if(LM.level.score==0 && score>=0) LM.level.score = score;
             if(LM.level.score<score) LM.level.score = score;
             //LM.L_complete();
+            LM.level.complete = true;
             Time.timeScale=0;
+            LM.Save();
             UI_win.SetActive(true);
         }
     }

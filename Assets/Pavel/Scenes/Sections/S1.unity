@@ -312,6 +312,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Section_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2642776164165511454, guid: e1d6ebe7f1e062e498b6fef78ba4e845,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5947610180636609088, guid: e1d6ebe7f1e062e498b6fef78ba4e845,
         type: 3}
       propertyPath: level_to_load
@@ -326,25 +331,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1301721108}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1301721110 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8845650228345304635, guid: e1d6ebe7f1e062e498b6fef78ba4e845,
-    type: 3}
-  m_PrefabInstance: {fileID: 1301721108}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1301721111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301721110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e2d02396589d241aa201c8011b26d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level_to_load: 1
 --- !u!1 &1536570741
 GameObject:
   m_ObjectHideFlags: 0
