@@ -54,8 +54,8 @@ public class Open_Level : MonoBehaviour
         msc = (int)(100*(tmp-s));
         string time = string.Format("{0}:{1}.{2}", m,s-m*60,msc);
         string death_stat;
-        if(level.death_per_run==-1) death_stat = "Try Level";
-        else death_stat = level.death_per_run.ToString();
+        if(level.complete) death_stat = level.death_per_run.ToString();
+        else death_stat = "First - try Level";
         stats_t.text = "Best Time: " + time + "\n" +
         //---------------------------------
         "Total deaths: " + level.total_deaths + "\n" +

@@ -91,7 +91,7 @@ public class Level{
         time = 0;
         score=0;
         coins = 0;
-        death_per_run = -1;
+        death_per_run = 0;
         total_deaths = 0;
         enemy_killed=0;
         name = s;

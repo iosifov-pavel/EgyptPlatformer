@@ -21,7 +21,7 @@ public class Finish : MonoBehaviour
             //player_Attack = other.gameObject.GetComponent<Player_Attack>();
             LM.level.complete = true;
             //--------------------------
-            if(LM.level.death_per_run==-1) LM.level.death_per_run = LM.death;
+            if(LM.level.death_per_run==0) LM.level.death_per_run = LM.death;
             else if(LM.level.death_per_run>LM.death) LM.level.death_per_run = LM.death;
             //--------------------------
             if(LM.level.time==0) LM.level.time = LM.time;
