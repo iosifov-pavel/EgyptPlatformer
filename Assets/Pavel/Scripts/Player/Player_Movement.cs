@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
 
-    public bool inWind = false;
-    public GameObject windZone;
+   // public bool inWind = false;
+   // public GameObject windZone;
     private float speed = 100f;
 
     float mass;
@@ -153,10 +153,10 @@ public class Player_Movement : MonoBehaviour
         PostMove();
         }
 
-        if(inWind)
-        {
-           rb.AddForce(windZone.GetComponent<Enemy_Wind_Local>().diraction*windZone.GetComponent<Enemy_Wind_Local>().strength);
-        }
+     //  if(inWind)
+     //  {
+     //     rb.AddForce(windZone.GetComponent<Enemy_Wind_Local>().diraction*windZone.GetComponent<Enemy_Wind_Local>().strength);
+     //  }
     }
 
     void GetInput(){
@@ -397,23 +397,27 @@ public class Player_Movement : MonoBehaviour
         
     }
     
-    
+    public Rigidbody2D GetRb ()
+    {   
+        return rb;
 
-    private void OnTriggerEnter2D(Collider2D other) 
-    {
-        if(other.gameObject.tag == "windArea")
-        {   
-            //other.gameObject.GetComponent<Player_Movement>().GetRb();
-            windZone=other.gameObject;
-            inWind = true;
-        }
     }
 
-    private void OnTriggerExit2D(Collider2D other) 
-    {
-        if(other.gameObject.tag == "windArea")
-        {   
-            inWind = false;
-        }   
-    }
+  //  private void OnTriggerEnter2D(Collider2D other) 
+  //  {
+  //      if(other.gameObject.tag == "windArea")
+  //      {   
+  //          //other.gameObject.GetComponent<Player_Movement>().GetRb();
+  //          windZone=other.gameObject;
+  //          inWind = true;
+  //      }
+  //  }
+//
+  //  private void OnTriggerExit2D(Collider2D other) 
+  //  {
+  //      if(other.gameObject.tag == "windArea")
+  //      {   
+  //          inWind = false;
+  //      }   
+  //  }
 }
