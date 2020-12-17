@@ -153,6 +153,11 @@ public class Player_Health : MonoBehaviour
         hp++;
         UI_HP.MaxHPInc();
     }
+
+    public void OneUp(){
+        LM.manager_Game.game_info.Lives++;
+        lives_count.text=LM.manager_Game.game_info.Lives.ToString();
+    }
 }
 
 
