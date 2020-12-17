@@ -110,7 +110,7 @@ public class Player_Health : MonoBehaviour
             Time.timeScale = 0f;
             reset_Playing_UI.ResetInput();
             Playing_UI.SetActive(false);
-            LM.manager_Game.game_info.Lives=3;
+            LM.manager_Game.game_info.Lives=4;
             DeathScreen.SetActive(true);
         }
         else {

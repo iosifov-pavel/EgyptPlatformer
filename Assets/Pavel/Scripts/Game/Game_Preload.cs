@@ -50,7 +50,7 @@ public class Game{
     public int Lives;
     public List<Section> sections;
     public Game(){
-        Lives = 3;
+        Lives = 4;
         sections = new List<Section>();
     }
 }
