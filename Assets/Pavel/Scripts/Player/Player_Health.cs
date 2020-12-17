@@ -99,7 +99,7 @@ public class Player_Health : MonoBehaviour
         UI_HP.Dead();
         lives--;
         lives_count.text = lives.ToString();
-        LM.level.deaths++;
+        Manager_Level.PlayerIsDead();
         LM.Save();
         StartCoroutine(Dekay());
     }

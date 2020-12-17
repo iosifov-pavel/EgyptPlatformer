@@ -78,7 +78,8 @@ public class Level{
     public bool blocked;
     public float time;
     public int score;
-    public int deaths;
+    public int total_deaths;
+    public int death_per_run;
     public int enemy_killed;
     public int coins;
     public string name="default";
@@ -90,7 +91,8 @@ public class Level{
         time = 0;
         score=0;
         coins = 0;
-        deaths = 0;
+        death_per_run = -1;
+        total_deaths = 0;
         enemy_killed=0;
         name = s;
     }

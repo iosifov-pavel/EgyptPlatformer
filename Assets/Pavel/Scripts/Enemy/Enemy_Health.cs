@@ -29,7 +29,7 @@ public class Enemy_Health : MonoBehaviour
     }
 
     public void Death(){
-        Player_Attack.EnemyWasKilled();
+        Manager_Level.EnemyWasKilled();
         Destroy(this.gameObject);
     }
 

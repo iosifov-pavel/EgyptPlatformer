@@ -54,9 +54,11 @@ public class Open_Level : MonoBehaviour
         msc = (int)(100*(tmp-s));
         string time = string.Format("{0}:{1}.{2}", m,s-m*60,msc);
         stats_t.text = "Best Time: " + time + "\n" +
-        "Total deaths: " + level.deaths + "\n" +
+        "Total deaths: " + level.total_deaths + "\n" +
+        "Min death per run: " + level.death_per_run + "\n" +
         "Coins: " + level.coins + "\n" +
-         "Score: " + level.score + "\n";
+        "Enemy killed: " + level.enemy_killed + "\n" +
+        "Score: " + level.score + "\n";
 
         //SceneManager.LoadScene(level_to_load, LoadSceneMode.Single);
     }

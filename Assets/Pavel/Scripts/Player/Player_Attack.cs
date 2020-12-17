@@ -17,8 +17,8 @@ public bool buttonAttack=false;
 public int bUp=1;
 public float angle;
 Manager_Level LM;
-public int kills=0;
-static bool killed=false;
+//public int kills=0;
+//static bool killed=false;
 
    void Start() {
       LM = transform.parent.gameObject.GetComponent<Player_InfoHolder>().getLM();
@@ -37,10 +37,10 @@ static bool killed=false;
       pa.setBoolAnimation("Up", up);
       pa.setBoolAnimation("Attack", isAttacking);
 
-      if(killed){
-         kills++;
-         killed=false;
-      } 
+      //if(killed){
+      //   kills++;
+      //   killed=false;
+      //} 
    }
    public void Shoot(float angle_){
       GameObject b = Instantiate(bullet,transform.position, transform.rotation) as GameObject;
@@ -54,7 +54,7 @@ static bool killed=false;
       up=false;
    }
 
-   public static void EnemyWasKilled(){
-      killed=true;
-   }
+   //public static void EnemyWasKilled(){
+   //   killed=true;
+   //}
 }

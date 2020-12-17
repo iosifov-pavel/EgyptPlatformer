@@ -23,7 +23,9 @@ public class Player_GetCoin : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
      {
         if (collision.gameObject.tag == "Coin"){
-            coins+=collision.gameObject.GetComponent<Item_Coins>().getValue();
+            int v = collision.gameObject.GetComponent<Item_Coins>().getValue();
+            coins+=v;
+            Manager_Level.GetCoin(v);
             score_text.text = coins.ToString();
             Destroy(collision.gameObject);
         }
