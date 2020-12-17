@@ -51,7 +51,7 @@ public class Manager_Level : MonoBehaviour
         int minutes = seconds/60;
         //string g = string.Format("{0:0.00}",time);
         string t = $"{minutes}:{seconds-60*minutes}.{time - 1*seconds}";
-        Debug.Log(t);
+        //Debug.Log(t);
 
         if(killed){
             kills++;
