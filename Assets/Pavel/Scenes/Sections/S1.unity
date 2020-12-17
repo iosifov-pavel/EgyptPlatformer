@@ -312,7 +312,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Section_UI
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2642776164165511454, guid: e1d6ebe7f1e062e498b6fef78ba4e845,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947610180636609088, guid: e1d6ebe7f1e062e498b6fef78ba4e845,
+        type: 3}
+      propertyPath: level_to_load
+      value: Map
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8845650228345304624, guid: e1d6ebe7f1e062e498b6fef78ba4e845, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e1d6ebe7f1e062e498b6fef78ba4e845, type: 3}
 --- !u!1 &1301721109 stripped
 GameObject:

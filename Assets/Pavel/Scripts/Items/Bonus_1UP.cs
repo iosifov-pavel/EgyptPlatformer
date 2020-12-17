@@ -6,6 +6,8 @@ public class Bonus_1UP : MonoBehaviour
 {
     // Start is called before the first frame update
     Player_Health player_Health;
+    bool yes=false;
+    //Manager_Level level;
     void Start()
     {
         
@@ -18,12 +20,12 @@ public class Bonus_1UP : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D player) 
-    {
+    {   
+        if(yes) return;
         if (player.gameObject.tag == "Player")
         {
-            player_Health = player.gameObject.GetComponent<Player_Health>();
-            //if(player_Health.CheckHP()) return;
-            player_Health.lives++;
+            yes = true;
+            player.gameObject.GetComponent<Player_Health>().OneUp();
             Destroy(gameObject);
         }
     }

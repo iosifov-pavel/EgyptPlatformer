@@ -86,7 +86,8 @@ float razbros;
         pa.angle=angle;
     }
 
-    public void ResetTouch(){id=-111;
+    public void ResetTouch(){
+        id=-111;
         pa.buttonAttack=false;
         pa.angle=0;
         Debug.Log("Touch Ended");

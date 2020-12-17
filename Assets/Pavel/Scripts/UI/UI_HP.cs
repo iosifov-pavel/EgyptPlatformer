@@ -11,7 +11,7 @@ public class UI_HP : MonoBehaviour
     Player_Health player_Health;
     Vector3 orig = Vector3.zero;
     float offset;
-    int last_hp,max,dmg;
+    int max,dmg;
     [SerializeField] Sprite heart_full,heart_empty;
     static bool damaged = false, maxhpinc = false, healed=false, dead=false,create=false;
     // Start is called before the first frame update
@@ -19,9 +19,6 @@ public class UI_HP : MonoBehaviour
     {
         dmg=0;
         player_Health = player.GetComponent<Player_Health>();
-        last_hp=player_Health.hp;
-        max = player_Health.MAXhp;
-        offset = 180/max;
         create=true;
     }
 

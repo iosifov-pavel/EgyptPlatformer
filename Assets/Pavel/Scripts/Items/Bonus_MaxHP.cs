@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bonus_MaxHP : MonoBehaviour
 {
     // Start is called before the first frame update
-    Player_Health player_Health;
+    bool yes=false;
     void Start()
     {
         
@@ -19,11 +19,11 @@ public class Bonus_MaxHP : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D player) 
     {
+        if(yes) return;
         if (player.gameObject.tag == "Player")
         {
-            player_Health = player.gameObject.GetComponent<Player_Health>();
-            //if(player_Health.CheckHP()) return;
-            player_Health.MaxHPPlus();
+            yes = true;
+            player.gameObject.GetComponent<Player_Health>().MaxHPPlus();
             Destroy(gameObject);
         }
     }

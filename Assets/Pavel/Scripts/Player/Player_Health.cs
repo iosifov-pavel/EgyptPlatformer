@@ -16,7 +16,7 @@ public class Player_Health : MonoBehaviour
     Player_Movement pm;
     GameObject UI;
     GameObject Lives;
-    public int lives =3;
+    //public int lives =3;
     Text lives_count;
     GameObject LooseScreen;
     GameObject DeathScreen;
@@ -32,7 +32,7 @@ public class Player_Health : MonoBehaviour
         LM = GetComponent<Player_InfoHolder>().getLM();
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
-        lives_count.text=lives.ToString();
+        lives_count.text=LM.manager_Game.game_info.Lives.ToString();
         LooseScreen = UI.transform.GetChild(4).gameObject;
         DeathScreen = UI.transform.GetChild(5).gameObject;
         Playing_UI = UI.transform.GetChild(1).gameObject;
@@ -97,19 +97,20 @@ public class Player_Health : MonoBehaviour
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.red;
         UI_HP.Dead();
-        lives--;
-        lives_count.text = lives.ToString();
-        LM.level.deaths++;
+        LM.manager_Game.game_info.Lives--;
+        lives_count.text = LM.manager_Game.game_info.Lives.ToString();
+        Manager_Level.PlayerIsDead();
         LM.Save();
         StartCoroutine(Dekay());
     }
 
     IEnumerator Dekay(){
         yield return new WaitForSeconds(1);
-        if(lives==0){
+        if(LM.manager_Game.game_info.Lives==0){
             Time.timeScale = 0f;
             reset_Playing_UI.ResetInput();
             Playing_UI.SetActive(false);
+            LM.manager_Game.game_info.Lives=4;
             DeathScreen.SetActive(true);
         }
         else {
@@ -151,6 +152,11 @@ public class Player_Health : MonoBehaviour
         MAXhp++;
         hp++;
         UI_HP.MaxHPInc();
+    }
+
+    public void OneUp(){
+        LM.manager_Game.game_info.Lives++;
+        lives_count.text=LM.manager_Game.game_info.Lives.ToString();
     }
 }
 

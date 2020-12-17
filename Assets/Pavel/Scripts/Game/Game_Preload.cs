@@ -24,6 +24,7 @@ public class Game_Preload : MonoBehaviour
     }
 
     public void Loading(){
+        manager.game_info = new Game();
         for(first_index=1;first_index<=11;first_index++){
             string sn = string.Format("S{0}",first_index);
             manager.game_info.sections.Add(new Section(first_index,sn));
@@ -47,8 +48,10 @@ public class Game_Preload : MonoBehaviour
 
 [System.Serializable]
 public class Game{
+    public int Lives;
     public List<Section> sections;
     public Game(){
+        Lives = 4;
         sections = new List<Section>();
     }
 }
@@ -78,7 +81,9 @@ public class Level{
     public bool blocked;
     public float time;
     public int score;
-    public int deaths;
+    public int total_deaths;
+    public int death_per_run;
+    public int enemy_killed;
     public int coins;
     public string name="default";
 
@@ -89,7 +94,9 @@ public class Level{
         time = 0;
         score=0;
         coins = 0;
-        deaths = 0;
+        death_per_run = 0;
+        total_deaths = 0;
+        enemy_killed=0;
         name = s;
     }
 }
