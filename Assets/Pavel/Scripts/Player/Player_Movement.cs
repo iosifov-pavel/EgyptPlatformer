@@ -11,6 +11,7 @@ public class Player_Movement : MonoBehaviour
 
     float mass;
     public float multiplier = 1f;
+    float multi_timer=0;
     [SerializeField] private float maxSpeed = 2.8f;
     public Vector2 direction;
     Vector2 move;
@@ -60,7 +61,6 @@ public class Player_Movement : MonoBehaviour
     public bool stickPressed = false;
     public bool blocked = false;
     
-    public int lives;
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
@@ -158,8 +158,11 @@ public class Player_Movement : MonoBehaviour
     }
 
     void AdditionalMove(){
-        Vector2 summary=Vector2.zero;
+        if(multi_timer<=0) multiplier=1;
+        if(multi_timer>0) multi_timer-=Time.deltaTime;
+        rb.velocity*=multiplier;
         if(source_names.Count<=0) return;
+        Vector2 summary=Vector2.zero;
         foreach(string name in source_names){
             int i = source_names.IndexOf(name);
             if(source_times[i]==-1) summary+=sources[i];
@@ -173,7 +176,6 @@ public class Player_Movement : MonoBehaviour
                 source_times.RemoveAt(i); 
             }
         }
-        rb.velocity*=multiplier;
         rb.velocity+=summary;
     }
 
@@ -332,6 +334,11 @@ public class Player_Movement : MonoBehaviour
         maxSpeed = 4;
         yield return new WaitForSeconds(t);
         maxSpeed = 3;
+    }
+
+    public void SetMultiplier(float multi, float time){
+        multiplier=multi;
+        multi_timer = time;
     }
 
     //private void OnTriggerStay2D(Collider2D collision) {
