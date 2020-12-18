@@ -31,9 +31,12 @@ public class Enemy_Way_Point : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(body==null) Destroy(gameObject);
         step = speed*Time.deltaTime;
         if(stop) return;
+        if(body==null){
+            stop=true;
+            Destroy(gameObject);
+        }
         delta_x = body.transform.position.x - curr_x;
         if(delta_x>=0){
             Vector3 scalenew = body.transform.localScale;
