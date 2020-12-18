@@ -34,6 +34,7 @@ Quaternion rot;
     {
       Debug.Log(hitInfo.name);
       if (hitInfo.name == "Player" || hitInfo.name == "GroundCheck") return;
+      else if(hitInfo.tag=="Ground" && lifetime>=0.6f) return;
       else if(hitInfo.tag=="Ground") Destroy(gameObject);
       else if(hitInfo.tag == "Shield"){
           hitInfo.gameObject.GetComponent<Shield_Block>().ReduceDurab();
