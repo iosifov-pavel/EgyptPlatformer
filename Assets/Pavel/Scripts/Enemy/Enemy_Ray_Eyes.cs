@@ -39,7 +39,7 @@ public class Enemy_Ray_Eyes : MonoBehaviour
 
     public Transform Check(){
         if(hit.collider!=null){
-            return hit.collider.transform.root;
+            return hit.collider.transform.root.GetChild(0);
         }
         else return null;
     }

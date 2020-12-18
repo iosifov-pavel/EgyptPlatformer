@@ -48,10 +48,10 @@ public class Game_Preload : MonoBehaviour
 
 [System.Serializable]
 public class Game{
-    public int Lives;
+    //public int Lives;
     public List<Section> sections;
     public Game(){
-        Lives = 4;
+        //Lives = 4;
         sections = new List<Section>();
     }
 }
