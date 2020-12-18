@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1988887230948460696}
   - component: {fileID: 1988887230948460697}
   - component: {fileID: 5989467829338799369}
+  - component: {fileID: 2450053868605304037}
   m_Layer: 0
   m_Name: LittleBlackCat
   m_TagString: Untagged
@@ -97,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebde7cad92d5464fbd81786a452e003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 10
+  dead: 0
 --- !u!114 &1988887230948460697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +139,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7104276, y: 0.67111015}
   m_EdgeRadius: 0
+--- !u!114 &2450053868605304037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988887230948460698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83565ea202ee581428e4fda9d3e9edc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1452154809208185705
 PrefabInstance:
   m_ObjectHideFlags: 0

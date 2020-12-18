@@ -160,7 +160,10 @@ public class Player_Movement : MonoBehaviour
     void AdditionalMove(){
         if(multi_timer<=0) multiplier=1;
         if(multi_timer>0) multi_timer-=Time.deltaTime;
-        rb.velocity*=multiplier;
+        //rb.velocity*=multiplier;
+        Vector2 new_v = rb.velocity;
+        new_v.x*=multiplier;
+        rb.velocity=new_v;
         if(source_names.Count<=0) return;
         Vector2 summary=Vector2.zero;
         foreach(string name in source_names){

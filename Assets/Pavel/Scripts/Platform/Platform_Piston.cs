@@ -7,27 +7,27 @@ public class Platform_Piston : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] float time = 0.5f;
     [SerializeField] float speed = 1;
-    [SerializeField] float height = 1;
+    [SerializeField] float height = 1, widht=0;
     [SerializeField] bool up=false, down = true;
     Vector3 original, isup;
     float timer=0;
     float step;
     void Start()
     {
-        step = speed * Time.deltaTime;
         if(up){
-            original = transform.position - new Vector3(0,height,0);
+            original = transform.position - new Vector3(widht,height,0);
             isup = transform.position;
         }
         else{
             original = transform.position;
-            isup = transform.position + new Vector3(0,height,0);
+            isup = transform.position + new Vector3(widht,height,0);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        step = speed * Time.deltaTime;
         if(down){
             transform.position = Vector3.MoveTowards(transform.position,isup,step);
             if(transform.position==isup){
@@ -57,20 +57,20 @@ public class Platform_Piston : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-    if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(transform);
+    if(other.gameObject.tag=="GroundCheck"){
+            other.gameObject.transform.parent.SetParent(transform);
         } 
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(transform);
+        if(other.gameObject.tag=="GroundCheck"){
+            other.gameObject.transform.parent.SetParent(transform);
         } 
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(null);
+        if(other.gameObject.tag=="GroundCheck"){
+            other.gameObject.transform.parent.SetParent(null);
         }
     }
 }

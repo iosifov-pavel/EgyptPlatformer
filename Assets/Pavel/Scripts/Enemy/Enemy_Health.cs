@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_Health : MonoBehaviour
 {
     public int health = 1;
-    bool dead = false;
+    public bool dead = false;
     bool is_damaged;
     Color original;
     SpriteRenderer[] sprites;

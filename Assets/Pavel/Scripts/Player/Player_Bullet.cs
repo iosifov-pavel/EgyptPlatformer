@@ -11,6 +11,7 @@ float angle = 0;
 int direction = 1;
 SpriteRenderer sprt;
 Quaternion rot;
+public GameObject player;
   // Start is called before the first frame update
    void Start (){
       sprt = GetComponent<SpriteRenderer>();
@@ -34,7 +35,7 @@ Quaternion rot;
     {
       Debug.Log(hitInfo.name);
       if (hitInfo.name == "Player" || hitInfo.name == "GroundCheck") return;
-      else if(hitInfo.tag=="Ground" && lifetime>=0.6f) return;
+      else if(hitInfo.tag=="Ground" && lifetime>=0.7f) return;
       else if(hitInfo.tag=="Ground") Destroy(gameObject);
       else if(hitInfo.tag == "Shield"){
           hitInfo.gameObject.GetComponent<Shield_Block>().ReduceDurab();
@@ -47,8 +48,9 @@ Quaternion rot;
         } 
     }
 
-    public void GetPosition (float _angle, int dir_rot)
+    public void GetPosition (float _angle, int dir_rot, GameObject p)
     {
+      player = p;
       angle = _angle;
       direction=dir_rot;
     }

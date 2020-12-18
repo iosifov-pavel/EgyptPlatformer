@@ -20,14 +20,14 @@ public class Player_CheckCeiling : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Ground"){
-            rb.velocity = new Vector2(rb.velocity.x,0);
+            //rb.velocity = new Vector2(rb.velocity.x,0);
             player_Movement.cant_jump=true;
         }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Ground"){
-            rb.velocity = new Vector2(rb.velocity.x,0);
+           // rb.velocity = new Vector2(rb.velocity.x,0);
             //player_Movement.buttonJump=false;
         }
     }
