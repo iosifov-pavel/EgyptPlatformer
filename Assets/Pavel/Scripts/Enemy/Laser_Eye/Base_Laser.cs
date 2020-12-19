@@ -13,6 +13,7 @@ public class Base_Laser : MonoBehaviour
     Vector3 l_pos;
     float dist;
     LineRenderer line;
+    [SerializeField] float range=20;
     //Vector2 dir;
     void Start()
     {
@@ -34,7 +35,7 @@ public class Base_Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hit2D = Physics2D.Raycast(transform.position,transform.right*-1,20f,ground);
+        hit2D = Physics2D.Raycast(transform.position,transform.right*-1,range,ground);
         if(hit2D.collider!=null){
             end = hit2D.point;
             line.SetPosition(1,end);
