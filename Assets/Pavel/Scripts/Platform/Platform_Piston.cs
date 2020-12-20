@@ -7,20 +7,20 @@ public class Platform_Piston : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] float time = 0.5f;
     [SerializeField] float speed = 1;
-    [SerializeField] float height = 1, widht=0;
-    [SerializeField] bool up=false, down = true;
+    [SerializeField] float height = 1;
+    [SerializeField] bool up=false;
     Vector3 original, isup;
     float timer=0;
     float step;
     void Start()
     {
         if(up){
-            original = transform.position - new Vector3(widht,height,0);
+            original = transform.position - transform.up*height;
             isup = transform.position;
         }
         else{
             original = transform.position;
-            isup = transform.position + new Vector3(widht,height,0);
+            isup = transform.position + transform.up*height;
         }
     }
 
@@ -28,7 +28,7 @@ public class Platform_Piston : MonoBehaviour
     void Update()
     {
         step = speed * Time.deltaTime;
-        if(down){
+        if(!up){
             transform.position = Vector3.MoveTowards(transform.position,isup,step);
             if(transform.position==isup){
                 StartCoroutine(ChangeState());
@@ -46,11 +46,9 @@ public class Platform_Piston : MonoBehaviour
         yield return new WaitForSeconds(time);
         if(up){
             up=false;
-            down=true;
         }
-        else if(down){
+        else if(!up){
             up=true;
-            down=false;
         }
         StopAllCoroutines();
     }
