@@ -54,6 +54,7 @@ public class Base_Laser : MonoBehaviour
         float s = hit2D.distance / 0.3f;
         laser.transform.position=l_pos;
         size.size = new Vector2(s,line.endWidth/0.3f);
+        float a=1;
     }
 
     void ResetLaser(){
