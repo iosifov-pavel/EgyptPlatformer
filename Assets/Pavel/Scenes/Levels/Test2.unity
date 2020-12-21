@@ -405,10 +405,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1846481578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ea87312a263ac4d9fb9ec4f2eee683, type: 3}
+  m_Script: {fileID: 11500000, guid: 47d0d4cbd7f79be48bebb7f81c9a6da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   legs: {fileID: 0}
+  dir: 1
   speed: 4
 --- !u!61 &1846481583
 BoxCollider2D:
@@ -497,6 +498,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1879564662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2997553443883239449, guid: 5740f5cdacaf3d64fb5ac019c7e10600,
+    type: 3}
+  m_PrefabInstance: {fileID: 2997553444152093039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1879564666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879564662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d0d4cbd7f79be48bebb7f81c9a6da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  legs: {fileID: 0}
+  dir: -1
+  speed: 2
 --- !u!4 &27283831132826397
 Transform:
   m_ObjectHideFlags: 0
@@ -594,15 +616,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2997553443883239445, guid: 5740f5cdacaf3d64fb5ac019c7e10600,
+        type: 3}
+      propertyPath: dir
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2997553443883239446, guid: 5740f5cdacaf3d64fb5ac019c7e10600,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.46
+      value: -26.33
       objectReference: {fileID: 0}
     - target: {fileID: 2997553443883239446, guid: 5740f5cdacaf3d64fb5ac019c7e10600,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.16
+      value: 17.15
       objectReference: {fileID: 0}
     - target: {fileID: 2997553443883239446, guid: 5740f5cdacaf3d64fb5ac019c7e10600,
         type: 3}
@@ -659,7 +686,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lion
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2997553443883239445, guid: 5740f5cdacaf3d64fb5ac019c7e10600, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5740f5cdacaf3d64fb5ac019c7e10600, type: 3}
 --- !u!1 &3188268888042115000
 GameObject:

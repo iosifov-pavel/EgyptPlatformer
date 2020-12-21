@@ -6,7 +6,7 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
 {
     [SerializeField] GameObject legs;
     Animator legs_anim;
-    int dir = 1;
+    [SerializeField] int dir = 1;
     [SerializeField] public float speed = 2f;
     Vector2 checkground;
     Vector2 checkwall;
@@ -21,7 +21,7 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
         LayerMask m1 = LayerMask.GetMask("Ground");
         LayerMask m2 = LayerMask.GetMask("Traps");
         mask = m1 | m2;
-
+        transform.localScale = new Vector3 (transform.localScale.x*dir, transform.localScale.y, transform.localScale.z);
         box = GetComponent<BoxCollider2D>();
         width = box.size.x / 2 ; 
         height = box.size.y / 2 ;
