@@ -7,7 +7,7 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
     [SerializeField] GameObject legs;
     Animator legs_anim;
     int dir = 1;
-    float speed = 2f;
+    [SerializeField] public float speed = 2f;
     Vector2 checkground;
     Vector2 checkwall;
     float width;

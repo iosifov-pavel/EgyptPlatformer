@@ -13,6 +13,7 @@ public class Enemy_Ray_Eyes : MonoBehaviour
     LayerMask player;
     LayerMask player2;
     LayerMask p;
+    [SerializeField] float distance = 4f;
     void Start()
     {
         box = GetComponent<BoxCollider2D>();
@@ -33,8 +34,8 @@ public class Enemy_Ray_Eyes : MonoBehaviour
 
     void Ray(){
         eyes = transform.position;
-        hit =  Physics2D.Raycast(eyes,Vector3.right*dir, 4f,p);
-        Debug.DrawRay(eyes,Vector3.right*dir*4f,Color.red,0.02f);
+        hit =  Physics2D.Raycast(eyes,Vector3.right*dir, distance,p);
+        Debug.DrawRay(eyes,Vector3.right*dir*distance,Color.red,0.02f);
     }
 
     public Transform Check(){
