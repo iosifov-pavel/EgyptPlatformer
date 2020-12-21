@@ -27,4 +27,8 @@ public class Camera_Follow : MonoBehaviour
         position.z = transform.position.z;
         transform.position = Vector3.Lerp (transform.position, position, speed* Time.deltaTime);
     }
+
+    public void LockCamera(Transform newT){
+        target = newT;
+    }
 }
