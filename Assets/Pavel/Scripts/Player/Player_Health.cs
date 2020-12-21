@@ -45,6 +45,7 @@ public class Player_Health : MonoBehaviour
         lastCheckPoint = transform.position;
         if(LM.level.boss_stage){
             lives=2;
+            lives_count.text = lives.ToString();
         }
     }
 
