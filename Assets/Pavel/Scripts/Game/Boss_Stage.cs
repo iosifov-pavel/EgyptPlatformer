@@ -9,6 +9,7 @@ public class Boss_Stage : MonoBehaviour
     [SerializeField] GameObject cam;
     [SerializeField] float cam_size;
     [SerializeField] GameObject tile_block;
+    [SerializeField] GameObject Boss;
     Camera_Follow camera_Follow;
     Camera cam_cam;
     Manager_Level LM;
