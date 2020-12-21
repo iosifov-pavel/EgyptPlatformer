@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Panter : MonoBehaviour
+public class Grey_Cat : MonoBehaviour
 {
     Enemy_Ray_Eyes eyes;
     Enemy_Ground_Patroling1 egp;
