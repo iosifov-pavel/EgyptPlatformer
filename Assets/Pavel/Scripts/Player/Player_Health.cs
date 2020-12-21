@@ -43,6 +43,9 @@ public class Player_Health : MonoBehaviour
         anima = GetComponent<Player_Animation>();
         pm = GetComponent<Player_Movement>();
         lastCheckPoint = transform.position;
+        if(LM.level.boss_stage){
+            lives=2;
+        }
     }
 
     public void SetCheckPoint(Transform newcp, int id){
