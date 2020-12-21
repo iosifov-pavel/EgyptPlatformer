@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: 1731740487818298547
     second: Lion_1
+  - first:
+      213: 2606149985371514159
+    second: Lion_0
+  - first:
+      213: 5536822890493255908
+    second: Lion_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -168,7 +174,28 @@ TextureImporter:
       name: Lion_0
       rect:
         serializedVersion: 2
-        x: 40
+        x: 146
+        y: 42
+        width: 237
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f25657d8a97ea2420800000000000000
+      internalID: 2606149985371514159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lion_1
+      rect:
+        serializedVersion: 2
+        x: 450
         y: 177
         width: 90
         height: 70
@@ -179,29 +206,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c55812231fc120fe0800000000000000
-      internalID: -1224384326437599908
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lion_1
-      rect:
-        serializedVersion: 2
-        x: 197
-        y: 42
-        width: 330
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b4429b6cc0680810800000000000000
-      internalID: 1731740487818298547
+      spriteID: 4e02a14651fb6dc40800000000000000
+      internalID: 5536822890493255908
       vertices: []
       indices: 
       edges: []
