@@ -15,6 +15,7 @@ public class Boss_Stage : MonoBehaviour
     Manager_Level LM;
     CheckPoint checkPoint;
     Transform camera_lock;
+    public bool active = false;
     void Start()
     {
         LM = LevelM.GetComponent<Manager_Level>();
@@ -28,6 +29,7 @@ public class Boss_Stage : MonoBehaviour
     void Update()
     {
         if(checkPoint.active){
+            Boss.GetComponent<Boss_Health>().is_active=true;
             camera_Follow.LockCamera(camera_lock);
             cam_cam.orthographicSize = cam_size;
             tile_block.SetActive(true);
