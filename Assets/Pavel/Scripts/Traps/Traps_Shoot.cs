@@ -45,8 +45,8 @@ public class Traps_Shoot : MonoBehaviour
         bullet = Instantiate(prefab) as GameObject;
         trap_Bullet = bullet.GetComponent<Trap_Bullet>();
         bullet.transform.position = transform.position + new Vector3(0,0,1);
-        if(up) trap_Bullet.GetDirection(transform.up, speed);
-        else trap_Bullet.GetDirection(transform.right, speed);
+        if(up) trap_Bullet.GetDirection(transform.up * transform.localScale.y, speed);
+        else trap_Bullet.GetDirection(transform.right * transform.localScale.x, speed);
         yield return new WaitForSeconds(wait);
         can_attack = true;
     }
