@@ -5,7 +5,7 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     // Start is called before the first frame update
-    bool active = false;
+    public bool active = false;
     SpriteRenderer sprite;
     [SerializeField] int id;
     void Start()

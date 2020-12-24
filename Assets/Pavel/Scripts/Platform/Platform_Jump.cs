@@ -5,7 +5,7 @@ using UnityEngine;
 public class Platform_Jump : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    [SerializeField] float force=14;
     // Update is called once per frame
 
 
@@ -13,7 +13,7 @@ public class Platform_Jump : MonoBehaviour
         if(other.gameObject.tag=="GroundCheck"){
         Rigidbody2D rb = other.attachedRigidbody;
         rb.velocity = new Vector2(rb.velocity.x/4,0);
-        rb.AddForce(transform.up*14f, ForceMode2D.Impulse);
+        rb.AddForce(transform.up*force, ForceMode2D.Impulse);
         }
     }
 }

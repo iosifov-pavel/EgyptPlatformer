@@ -8,6 +8,8 @@ public class Manager_Level : MonoBehaviour
     [SerializeField] public int level_id;
     [SerializeField] public int section_id;
     GameObject ms,mg;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject CameraLock;
     //Manager_Section manager_Section;
     public Manager_Game manager_Game;
     public Level level;

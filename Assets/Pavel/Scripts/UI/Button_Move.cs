@@ -18,7 +18,7 @@ float razbros;
 Vector2 local;
 float angle;
 float power;
-float dir;
+float dir_x, dir_y;
 bool enough;
 bool enogh_y;
 float last_y;
@@ -108,10 +108,11 @@ float cumulative_reset=0;
         angle = Vector3.Angle(Vector3.right,dest);
         enough = (Mathf.Abs(local.x)>40);
         enogh_y = (Mathf.Abs(local.y)>40);
-        dir = local.x>=0 ? 1 : -1;
-        if(enough) pm.direction.x = dir * (power-40) * 0.02f;
+        dir_x = local.x>=0 ? 1 : -1;
+        dir_y = local.y>=0 ? 1 : -1;
+        if(enough) pm.direction.x = dir_x * (power-40) * 0.02f;
         else pm.direction.x=0f;
-        if(enogh_y) pm.direction.y = dir * (power-40) * 0.02f;
+        if(enogh_y) pm.direction.y = dir_y * (power-40) * 0.02f;
         else pm.direction.y=0f;
     }
 

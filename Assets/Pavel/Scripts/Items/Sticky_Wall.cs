@@ -6,12 +6,13 @@ public class Sticky_Wall : MonoBehaviour
 {
     // Start is called before the first frame update
     Player_Movement player_Movement;
+    Player_Health player_Health;
     public Vector2 x;
     Vector2 pre_push;
     Rigidbody2D rb_player;
     GameObject player;
     bool contact = false, ready = false, delay=false;
-    float ready_time = 0.2f, delay_time=0.5f, timer=0;
+    float ready_time = 0.25f, delay_time=0.6f, timer=0;
     void Start()
     {
         pre_push=transform.right;
@@ -30,7 +31,7 @@ public class Sticky_Wall : MonoBehaviour
         if(ready){
             x=new Vector2(player_Movement.hor,player_Movement.ver);
             float angle = Vector2.Angle(pre_push,x);
-                if(player_Movement.buttonJump && x.magnitude<=50) Fall();
+                if(player_Movement.buttonJump && x.magnitude<=50 || player_Health.isDamaged) Fall();
                 else if(x.magnitude>50){
                     if(player_Movement.buttonJump) Jump();
                 } 
@@ -55,12 +56,6 @@ public class Sticky_Wall : MonoBehaviour
         contact=false;
         player.transform.parent = null;
         rb_player.bodyType = RigidbodyType2D.Dynamic;
-        //rb_player.AddForce(x.normalized*(10+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
-        //if(x.y<=10) rb_player.AddForce(x.normalized*(4+((x.magnitude-50)*4/100)), ForceMode2D.Impulse);
-        //else rb_player.AddForce(x.normalized*(8+((x.magnitude-50)*4/100))  , ForceMode2D.Impulse);
-        //else rb_player.AddForce(x.normalized*9, ForceMode2D.Impulse);
-        //Vector2 horiz = new Vector2(x.x,0).normalized;
-        //Vector2 vert = new Vector2(0,x.y).normalized;
         x=x.normalized;
         if(x.y>-0.3f) rb_player.AddForce(new Vector2(x.x*5,x.y*10), ForceMode2D.Impulse);
         else rb_player.AddForce(new Vector2(x.x*3,x.y*3), ForceMode2D.Impulse);
@@ -73,6 +68,7 @@ public class Sticky_Wall : MonoBehaviour
             x=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
             player_Movement = player.GetComponent<Player_Movement>();
+            player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
             rb_player.velocity = Vector2.zero;
             rb_player.bodyType = RigidbodyType2D.Static;
@@ -92,8 +88,8 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag=="GrabWall"){
-
+        if(other.gameObject.tag=="GrabWall"|| other.gameObject.tag=="GrabCeiling"){
+            if(contact && ready) Fall();
         }
     }
 

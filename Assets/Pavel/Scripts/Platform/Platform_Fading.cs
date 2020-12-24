@@ -24,12 +24,14 @@ public class Platform_Fading : MonoBehaviour
        var render = GetComponent<MeshRenderer>();
        render.material.color = Color.green;
        yield return new WaitForSeconds(fade_time);
-       var colider = gameObject.GetComponent<BoxCollider2D>();
+       var colider = gameObject.GetComponents<BoxCollider2D>();
        render.enabled=false;
-       colider.enabled = false;
+       colider[0].enabled = false;
+       colider[1].enabled = false;
        yield return new WaitForSeconds(reverse);
        render.enabled=true;
-       colider.enabled = true;
+       colider[0].enabled = true;
+       colider[1].enabled = true;
        render.material.color = Color.red;
        canfade=true;
    } 
