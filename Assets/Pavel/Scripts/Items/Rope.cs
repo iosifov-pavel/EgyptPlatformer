@@ -12,7 +12,7 @@ public class Rope : MonoBehaviour
     Rigidbody2D rb_player;
     GameObject player;
     bool contact = false, ready = false, delay=false;
-    float ready_time = 0.2f, delay_time=0.5f, timer=0;
+    float ready_time = 0.25f, delay_time=0.6f, timer=0;
     [SerializeField] bool straight = true;
     Vector2 forward;
     float end_max,end_min;
@@ -81,7 +81,7 @@ public class Rope : MonoBehaviour
     }
 
      private void OnTriggerEnter2D(Collider2D other) {
-        if(delay) return;
+        if(delay || contact) return;
         if(other.gameObject.tag=="GrabWall" || other.gameObject.tag=="GrabCeiling"){
             if(!straight && other.gameObject.tag=="GrabWall") return;
             if(other.gameObject.tag=="GrabCeiling" && straight) return;
@@ -89,11 +89,13 @@ public class Rope : MonoBehaviour
             player = other.gameObject.transform.parent.gameObject;
             //player.transform.parent = transform;
             player_Movement = player.GetComponent<Player_Movement>();
+            if(!player_Movement.isJumping) return;
             player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
             rb_player.velocity = Vector2.zero;
             rb_player.bodyType = RigidbodyType2D.Static;
             player_Movement.ResetJumpCount();
+            player_Movement.inertia=0;
             player_Movement.blocked=true;
             player_Movement.jump_block=true;
             contact = true;
@@ -103,13 +105,32 @@ public class Rope : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag=="GrabWall"){
+        if(delay || contact) return;
+        if(other.gameObject.tag=="GrabWall" || other.gameObject.tag=="GrabCeiling"){
+            if(!straight && other.gameObject.tag=="GrabWall") return;
+            if(other.gameObject.tag=="GrabCeiling" && straight) return;
+            x=Vector2.zero;
+            player = other.gameObject.transform.parent.gameObject;
+            //player.transform.parent = transform;
+            player_Movement = player.GetComponent<Player_Movement>();
+            if(!player_Movement.isJumping) return;
+            player_Health = player.GetComponent<Player_Health>();
+            rb_player = player.GetComponent<Rigidbody2D>();
+            rb_player.velocity = Vector2.zero;
+            rb_player.bodyType = RigidbodyType2D.Static;
+            player_Movement.ResetJumpCount();
+            player_Movement.inertia=0;
+            player_Movement.blocked=true;
+            player_Movement.jump_block=true;
+            contact = true;
+            player_Movement.verical=Vector2.zero;
+            player_Movement.isJumping=false;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="GrabWall"|| other.gameObject.tag=="GrabCeiling"){
-            if(contact){
+            if(contact && ready){
                 x=Vector2.zero;
                 Jump();
             }

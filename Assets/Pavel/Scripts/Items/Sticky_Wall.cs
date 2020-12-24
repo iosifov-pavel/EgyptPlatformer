@@ -12,7 +12,7 @@ public class Sticky_Wall : MonoBehaviour
     Rigidbody2D rb_player;
     GameObject player;
     bool contact = false, ready = false, delay=false;
-    float ready_time = 0.2f, delay_time=0.5f, timer=0;
+    float ready_time = 0.25f, delay_time=0.6f, timer=0;
     void Start()
     {
         pre_push=transform.right;
@@ -89,7 +89,7 @@ public class Sticky_Wall : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="GrabWall"|| other.gameObject.tag=="GrabCeiling"){
-            if(contact) Fall();
+            if(contact && ready) Fall();
         }
     }
 

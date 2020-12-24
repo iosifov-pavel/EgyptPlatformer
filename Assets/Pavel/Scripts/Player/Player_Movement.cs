@@ -32,7 +32,7 @@ public class Player_Movement : MonoBehaviour
     public bool cant_jump=false;
     public Vector2 verical;
     public float hor,ver;
-    float inertia=0;
+    public float inertia=0;
     float last_velocity=0;
     bool air_direction_change=false;
     //-------------------------------
@@ -93,8 +93,8 @@ public class Player_Movement : MonoBehaviour
         hor+=stick_delta.x;
         ver+=stick_delta.y;
         anima.setDirection(rb.velocity.x);
-        CheckGround();
-        DeepCheckGround();
+        if(!blocked)CheckGround();
+        if(!blocked)DeepCheckGround();
         
         if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
@@ -264,7 +264,7 @@ public class Player_Movement : MonoBehaviour
         }
         //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
         //else
-        inertia = rb.velocity.x*0.92f;
+        inertia = rb.velocity.x*0.924f;
         last_velocity = rb.velocity.x;
     }
 
