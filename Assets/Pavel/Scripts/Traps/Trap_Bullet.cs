@@ -5,8 +5,8 @@ using UnityEngine;
 public class Trap_Bullet : MonoBehaviour
 {
     //Transform parent;
-    float speed = 6;
-    float life_time = 2;
+    [SerializeField] float life_time = 2;
+    float speed;
     Vector3 move;
     Vector3 vector;
     // Start is called before the first frame update
@@ -30,7 +30,8 @@ public class Trap_Bullet : MonoBehaviour
         } 
     }
 
-    public void GetDirection(Vector3 v){
+    public void GetDirection(Vector3 v, float s){
         vector=v;
+        speed = s;
     }
 }

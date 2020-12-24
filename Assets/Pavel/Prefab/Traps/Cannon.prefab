@@ -127,7 +127,9 @@ MonoBehaviour:
   prefab: {fileID: 7998500782491557271, guid: 14d5706a0b7f3ad42b0d5c16bc73d2bf, type: 3}
   idle: {fileID: -7331967094090213297, guid: d7c1c77063b454c4dbcb37fb7f0c0d72, type: 3}
   u_idle: {fileID: 5735738129519079201, guid: d7c1c77063b454c4dbcb37fb7f0c0d72, type: 3}
-  up: 1
+  speed: 6
+  up: 0
+  wait: 1
 --- !u!1 &7049700070780536662
 GameObject:
   m_ObjectHideFlags: 0
