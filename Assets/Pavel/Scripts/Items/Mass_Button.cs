@@ -6,16 +6,16 @@ public class Mass_Button : MonoBehaviour
 {
     // Start is called before the first frame update
     Transform sprite;
-    Vector2 position_off, position_on;
-    Vector2 phase;
+    Vector3 position_off, position_on;
+    Vector3 phase;
     bool on=false;
     float speed = 2;
     void Start()
     {
         sprite = transform.GetChild(0);
-        position_off = sprite.position;
+        position_off = sprite.localPosition;
         phase = GetComponent<BoxCollider2D>().bounds.extents;
-        position_on = new Vector2(position_off.x, position_off.y - phase.y);
+        position_on = new Vector3(position_off.x, position_off.y - phase.y*1.5f,5);
     }
 
     // Update is called once per frame
@@ -23,12 +23,12 @@ public class Mass_Button : MonoBehaviour
     {
         if(on){
             float step = speed*Time.deltaTime;
-            sprite.position = Vector2.MoveTowards(sprite.position,position_on,step);
+            sprite.localPosition = Vector2.MoveTowards(sprite.localPosition,position_on,step);
             //do something
         }
         else{
             float step = speed*Time.deltaTime;
-            sprite.position = Vector2.MoveTowards(sprite.position,position_off,step);
+            sprite.localPosition = Vector2.MoveTowards(sprite.localPosition,position_off,step);
             //undo something
         }
     }
