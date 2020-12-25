@@ -9,7 +9,7 @@ public class Mass_Button : MonoBehaviour
     Vector3 position_off, position_on;
     Vector3 phase;
     bool on=false;
-    float speed = 2;
+    float speed = 1;
     void Start()
     {
         sprite = transform.GetChild(0);
