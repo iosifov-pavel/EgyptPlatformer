@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 7618643434872908477}
   - component: {fileID: 7842540896160745319}
   - component: {fileID: 3448354547715330359}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: GrabCeiling
   m_TagString: GrabCeiling
   m_Icon: {fileID: 0}
@@ -921,6 +921,7 @@ MonoBehaviour:
   verical: {x: 0, y: 0}
   hor: 0
   ver: 0
+  inertia: 0
   isFalling: 0
   isGrounded: 1
   onSlope: 0
@@ -1357,7 +1358,7 @@ GameObject:
   - component: {fileID: 2449133037833260211}
   - component: {fileID: 597477601}
   - component: {fileID: 1140590507}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: CollectCoins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
