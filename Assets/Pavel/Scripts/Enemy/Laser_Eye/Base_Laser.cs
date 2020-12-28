@@ -8,6 +8,7 @@ public class Base_Laser : MonoBehaviour
     GameObject lasers;
     List<Laser> laser_list = new List<Laser>();
     LayerMask ground, player;
+    [SerializeField] bool neededWalls = true;
     [SerializeField] float range=20;
     [SerializeField] float rotate_speed=0;
     [SerializeField] int Lasers_count = 1;
@@ -19,11 +20,10 @@ public class Base_Laser : MonoBehaviour
     [SerializeField] float calm_time = 2;
     bool calm = true;
     float timer = 0;
-    [SerializeField] bool neededWalls = true;
     [SerializeField] bool seekPlayer = false;
     [SerializeField] float seekRadius = 20;
     [SerializeField] float seekRotationSpeed = 2;
-    Vector2 original;
+    Quaternion original;
 
     //Vector2 dir;
     void Start()
@@ -42,7 +42,7 @@ public class Base_Laser : MonoBehaviour
         lasers.transform.Rotate(new Vector3(0,0,first_ray_angle));
         if(seekPlayer){
             rotate_speed=0;
-            original = transform.right;
+            original = transform.rotation;
         }
     }
 
@@ -75,11 +75,10 @@ public class Base_Laser : MonoBehaviour
         Collider2D hit = Physics2D.OverlapCircle(transform.position,seekRadius,player);
         if(hit!=null){
             Vector2 dest = hit.gameObject.transform.position - transform.position;
-            transform.right = Vector2.Lerp(transform.right,dest,0.1f);
+            transform.right = Vector3.Slerp(transform.right, dest, 0.005f*seekRotationSpeed);
         }
         else{
-            Vector2 dest = original - (Vector2)transform.position;
-            transform.right = Vector2.Lerp(transform.right,dest,0.1f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, original, 0.005f*seekRotationSpeed);
         }
     }
 

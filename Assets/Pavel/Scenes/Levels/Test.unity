@@ -1391,7 +1391,7 @@ PrefabInstance:
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: neededWalls
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
@@ -1418,6 +1418,11 @@ PrefabInstance:
       propertyPath: seekPlayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
+        type: 3}
+      propertyPath: seekRadius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718493, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: m_Name
@@ -1426,12 +1431,12 @@ PrefabInstance:
     - target: {fileID: 2903988372183718495, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27
+      value: -34.1
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718495, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 51.6
+      value: 22.7
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718495, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
