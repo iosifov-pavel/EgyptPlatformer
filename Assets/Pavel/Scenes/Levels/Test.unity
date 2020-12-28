@@ -1373,6 +1373,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
+        type: 3}
+      propertyPath: Lasers_count
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
+        type: 3}
+      propertyPath: rays_period
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
+        type: 3}
+      propertyPath: rotate_speed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718493, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: m_Name
