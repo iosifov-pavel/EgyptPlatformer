@@ -1376,47 +1376,47 @@ PrefabInstance:
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: Lasers_count
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
-        type: 3}
-      propertyPath: rays_period
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
-        type: 3}
-      propertyPath: rotate_speed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
-        type: 3}
-      propertyPath: neededWalls
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
+      propertyPath: rays_period
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
+        type: 3}
+      propertyPath: rotate_speed
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
+        type: 3}
+      propertyPath: neededWalls
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
+        type: 3}
       propertyPath: range
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: constant
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: calm_time
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: attack_time
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: seekPlayer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718464, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
@@ -1431,12 +1431,12 @@ PrefabInstance:
     - target: {fileID: 2903988372183718495, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.54
+      value: -14.33
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718495, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.59
+      value: 29.37
       objectReference: {fileID: 0}
     - target: {fileID: 2903988372183718495, guid: 13421ff3952745a4e8f468ff82b30e1f,
         type: 3}
