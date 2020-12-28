@@ -46,7 +46,7 @@ public class Panter : MonoBehaviour
                 rb.mass=1;
                 rb.bodyType= RigidbodyType2D.Kinematic;
                 rb.velocity = Vector2.zero;
-                can_attack=true;
+                StartCoroutine(atackDelay());
                 is_jumping=false;
             }
         }
@@ -74,5 +74,10 @@ public class Panter : MonoBehaviour
         rb.AddForce(Vector2.up*jump_f, ForceMode2D.Impulse);
         can_attack=false;
         is_jumping=true;
+    }
+
+    IEnumerator atackDelay(){
+        yield return new WaitForSeconds(delay_attack);
+        can_attack=true;
     }
 }
