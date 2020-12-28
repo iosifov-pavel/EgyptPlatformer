@@ -88,7 +88,7 @@ public class Rope : MonoBehaviour
             x=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
             player_Movement = player.GetComponent<Player_Movement>();
-            if(!player_Movement.isJumping) return;
+            //if(!player_Movement.isJumping) return;
             player.transform.parent = transform;
             player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
@@ -113,7 +113,7 @@ public class Rope : MonoBehaviour
             player = other.gameObject.transform.parent.gameObject;
             //player.transform.parent = transform;
             player_Movement = player.GetComponent<Player_Movement>();
-            if(!player_Movement.isJumping) return;
+            //if(!player_Movement.isJumping) return;
             player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
             rb_player.velocity = Vector2.zero;
