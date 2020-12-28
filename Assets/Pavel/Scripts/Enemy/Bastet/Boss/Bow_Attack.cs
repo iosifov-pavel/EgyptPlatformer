@@ -8,6 +8,7 @@ public class Bow_Attack : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] GameObject arrow_p;
     Boss_Health boss_Health;
+    
     void Start()
     {
         boss_Health = GetComponent<Boss_Health>();
