@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9defefbef4f30624aa060749275dbe88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 8446175799290590029, guid: 4742054a5ae59384dbd62c6e45da07ce, type: 3}
+  bullet_p: {fileID: 0}
   canAttack: 1
   isAttacking: 0
   buttonAttack: 0
@@ -1360,7 +1360,7 @@ GameObject:
   - component: {fileID: 1140590507}
   m_Layer: 20
   m_Name: CollectCoins
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
