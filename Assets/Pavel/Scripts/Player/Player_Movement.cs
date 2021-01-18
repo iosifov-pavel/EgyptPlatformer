@@ -10,7 +10,7 @@ public class Player_Movement : MonoBehaviour
     private float speed = 100f;
 
     float mass;
-    public float multiplier = 1f;
+    public Vector2 multiplier = Vector2.one;
     float multi_timer=0;
     [SerializeField] private float maxSpeed = 2.8f;
     public Vector2 direction;
@@ -122,11 +122,6 @@ public class Player_Movement : MonoBehaviour
         CustomPhysics();
         PostMove();
         }
-
-     //  if(inWind)
-     //  {
-     //     rb.AddForce(windZone.GetComponent<Enemy_Wind_Local>().diraction*windZone.GetComponent<Enemy_Wind_Local>().strength);
-     //  }
     }
 
     void GetInput(){
@@ -158,11 +153,12 @@ public class Player_Movement : MonoBehaviour
     }
 
     void AdditionalMove(){
-        if(multi_timer<=0) multiplier=1;
         if(multi_timer>0) multi_timer-=Time.deltaTime;
-        //rb.velocity*=multiplier;
+        if(multi_timer==-111){}
+        else if(multi_timer<=0) multiplier=Vector2.one;
         Vector2 new_v = rb.velocity;
-        new_v.x*=multiplier;
+        new_v.x*=multiplier.x;
+        new_v.y*=multiplier.y;
         rb.velocity=new_v;
         if(source_names.Count<=0) return;
         Vector2 summary=Vector2.zero;
@@ -339,9 +335,13 @@ public class Player_Movement : MonoBehaviour
         maxSpeed = 3;
     }
 
-    public void SetMultiplier(float multi, float time){
+    public void SetMultiplier(Vector2 multi, float time){
         multiplier=multi;
         multi_timer = time;
+    }
+    public void ResetMultiplier(){
+        multiplier=Vector2.one;
+        multi_timer = 0;
     }
 
     //private void OnTriggerStay2D(Collider2D collision) {

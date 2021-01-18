@@ -23,7 +23,7 @@ public class Mosquite_Attack : MonoBehaviour
             pm = other.gameObject.GetComponent<Player_Movement>();
             ph = other.gameObject.GetComponent<Player_Health>();
             ph.ChangeHP(-1);
-            pm.SetMultiplier(0.4f,2.5f);
+            pm.SetMultiplier(new Vector2(0.4f,1),2.5f);
         }
     }
 }
