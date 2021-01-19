@@ -12,15 +12,17 @@ public class Platform_Piston : MonoBehaviour
     Vector3 original, isup;
     float timer=0;
     float step;
+    Transform leg;
     void Start()
     {
+        leg = transform.GetChild(0);
         if(up){
-            original = transform.position - transform.up*height;
+            original = transform.position - leg.transform.up*height;
             isup = transform.position;
         }
         else{
             original = transform.position;
-            isup = transform.position + transform.up*height;
+            isup = transform.position + leg.transform.up*height;
         }
     }
 
