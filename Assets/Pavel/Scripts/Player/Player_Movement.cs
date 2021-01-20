@@ -8,7 +8,7 @@ public class Player_Movement : MonoBehaviour
    // public bool inWind = false;
    // public GameObject windZone;
     private float speed = 100f;
-
+    float speed_multiplier =1;
     float mass;
     public Vector2 multiplier = Vector2.one;
     float multi_timer=0;
@@ -23,6 +23,7 @@ public class Player_Movement : MonoBehaviour
     List<int> source_times = new List<int>();
     //--------------------------
     float jump_force = 5f;
+    float jump_force_multiplier=1;
     float jump_time = -111f;
     public float jump_time_max = 0.16f;
     int jump_max = 2;
@@ -128,7 +129,7 @@ public class Player_Movement : MonoBehaviour
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
-        move = new Vector2((direction.x)*Time.deltaTime*speed, rb.velocity.y);
+        move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
     }
 
     void Horizontal(){
@@ -148,7 +149,7 @@ public class Player_Movement : MonoBehaviour
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             if(jumps==2) rb.AddForce(Vector3.up * (jump_force), ForceMode2D.Impulse);
-            else rb.AddForce(Vector3.up * jump_force, ForceMode2D.Impulse);
+            else rb.AddForce(Vector3.up * jump_force * jump_force_multiplier, ForceMode2D.Impulse);
         }
     }
 
@@ -365,10 +366,8 @@ public class Player_Movement : MonoBehaviour
 
     public void multylow(float low)
     {       
-        jump_force= jump_force*low;
-        maxSpeed = maxSpeed*low;
-        //mass=mass*100;
-        
+        speed_multiplier = low;
+        jump_force_multiplier = low;
     }
     
     public Rigidbody2D GetRb ()
