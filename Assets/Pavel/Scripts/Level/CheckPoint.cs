@@ -8,9 +8,14 @@ public class CheckPoint : MonoBehaviour
     public bool active = false;
     SpriteRenderer sprite;
     [SerializeField] int id;
+    [SerializeField] Sprite active_sprite;
+    [SerializeField] Sprite inactive_sprite;
+    Transform background;
     void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        background = transform.GetChild(0);
+        sprite = background.gameObject.GetComponent<SpriteRenderer>();
+        sprite.sprite = inactive_sprite;
     }
 
     // Update is called once per frame
@@ -22,7 +27,7 @@ public class CheckPoint : MonoBehaviour
         if(active) return;
         if(other.gameObject.tag=="Player"){
             active=true;
-            sprite.color = Color.blue;
+            sprite.sprite = active_sprite;
             other.gameObject.GetComponent<Player_Health>().SetCheckPoint(transform,id);
         }
     }

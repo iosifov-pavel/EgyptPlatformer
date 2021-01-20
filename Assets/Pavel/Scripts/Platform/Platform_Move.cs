@@ -4,44 +4,48 @@ using UnityEngine;
 
 public class Platform_Move : MonoBehaviour
 {
-    public Vector3 p1;
-    public Vector3 p2;
+    //public Vector3 p1;
+    [SerializeField] Vector3 move_point;
+    private Vector3 original,point;
     private float speed = 1f;
+    Transform platform;
 
     
     void OnDrawGizmos(){
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(p1, p2);
+        Gizmos.DrawLine(original, point);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.position=p1;
+        platform = transform.parent;
+        original = platform.transform.position;
+        point = original + move_point;
     }
 
     // Update is called once per frame
     void Update()
     {
         float step =  speed * Time.deltaTime; 
-        transform.position = Vector3.MoveTowards(transform.position, p2, step);
-        if(transform.position==p2){
-            Vector3 temp = p1;
-            p1 = p2;
-            p2 = temp;
+        platform.transform.position = Vector3.MoveTowards(platform.transform.position, point, step);
+        if(platform.transform.position==point){
+            Vector3 temp = original;
+            original = point;
+            point = temp;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
     if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(transform);
+            other.gameObject.transform.SetParent(platform);
         } 
     }
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(transform);
+            other.gameObject.transform.SetParent(platform);
         } 
     }
 

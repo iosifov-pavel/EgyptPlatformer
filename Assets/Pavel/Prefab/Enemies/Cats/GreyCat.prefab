@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   legs: {fileID: 0}
   dir: 1
-  speed: 3
+  speed: 2.8
 --- !u!114 &4266119034525016531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85a8a7b52812e84da725ddf2d9c6b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 7
+  distance: 6
 --- !u!50 &4266119034525016529
 Rigidbody2D:
   serializedVersion: 4

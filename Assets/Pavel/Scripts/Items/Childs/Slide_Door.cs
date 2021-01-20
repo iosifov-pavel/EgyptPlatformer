@@ -11,8 +11,8 @@ public class Slide_Door : MonoBehaviour, IChild
     // Start is called before the first frame update
     void Start()
     {
-        off = transform.localPosition;
-        on = new Vector2(2.2f,-1.85f);
+        off = transform.position;
+        on = (Vector2)transform.position + new Vector2(0,-1.85f);
     }
 
     // Update is called once per frame
@@ -21,13 +21,13 @@ public class Slide_Door : MonoBehaviour, IChild
         if(On){
             Done = false;
             float step =  speed * Time.deltaTime; 
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, on, step);
-            if((Vector2)transform.localPosition==on) Done = true;;
+            transform.position = Vector3.MoveTowards(transform.position, on, step);
+            if((Vector2)transform.position==on) Done = true;;
         } else {
             Done = false;
             float step =  speed * Time.deltaTime; 
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, off, step);
-            if((Vector2)transform.localPosition==off) Done = true;;
+            transform.position = Vector3.MoveTowards(transform.position, off, step);
+            if((Vector2)transform.position==off) Done = true;;
         }
         
     }
