@@ -25,7 +25,7 @@ public class CheckPoint : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(active) return;
-        if(other.gameObject.tag=="Player"){
+        if(other.gameObject.tag=="Player" && other.gameObject.layer==9 || other.gameObject.layer==10){
             active=true;
             sprite.sprite = active_sprite;
             other.gameObject.GetComponent<Player_Health>().SetCheckPoint(transform,id);
