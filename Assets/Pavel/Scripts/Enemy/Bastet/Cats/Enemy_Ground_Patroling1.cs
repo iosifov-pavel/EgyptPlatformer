@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy_Ground_Patroling1 : MonoBehaviour
 {
-    [SerializeField] GameObject legs;
     Animator legs_anim;
     [SerializeField] int dir = 1;
     [SerializeField] public float speed = 2f;
@@ -17,7 +16,6 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
     bool stop=false;
     // Start is called before the first frame update
     void Start(){
-        //legs_anim = legs.GetComponent<Animator>();
         LayerMask m1 = LayerMask.GetMask("Ground");
         LayerMask m2 = LayerMask.GetMask("Traps");
         mask = m1 | m2;
