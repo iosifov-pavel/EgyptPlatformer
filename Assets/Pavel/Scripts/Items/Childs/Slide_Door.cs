@@ -22,12 +22,12 @@ public class Slide_Door : MonoBehaviour, IChild
             Done = false;
             float step =  speed * Time.deltaTime; 
             transform.position = Vector3.MoveTowards(transform.position, on, step);
-            if((Vector2)transform.position==on) Done = true;;
+            if((Vector2)transform.position==on) Done = true;
         } else {
             Done = false;
             float step =  speed * Time.deltaTime; 
             transform.position = Vector3.MoveTowards(transform.position, off, step);
-            if((Vector2)transform.position==off) Done = true;;
+            if((Vector2)transform.position==off) Done = true;
         }
         
     }
