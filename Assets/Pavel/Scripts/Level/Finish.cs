@@ -15,6 +15,11 @@ public class Finish : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            FinishLevel(other.gameObject.transform);
+        }
+    }
+
+    public void FinishLevel(Transform other){
             LM = other.gameObject.GetComponent<Player_InfoHolder>().getLM();
             UI_win = other.gameObject.GetComponent<Player_InfoHolder>().getUI().transform.GetChild(3).gameObject;
             //player_GetCoin = other.gameObject.transform.GetChild(3).gameObject.GetComponent<Player_GetCoin>();
@@ -41,6 +46,5 @@ public class Finish : MonoBehaviour
             Time.timeScale=0;
             LM.Save();
             UI_win.SetActive(true);
-        }
     }
 }
