@@ -26,6 +26,7 @@ public class Manager_Section : MonoBehaviour
         mg = GameObject.FindGameObjectWithTag("GameManager");
         manager_game = mg.GetComponent<Manager_Game>();
         section = manager_game.game_info.sections[id-1];
+        section.levels[0].blocked=false;
         //FirstStart();
         S_update();
     }
@@ -35,10 +36,20 @@ public class Manager_Section : MonoBehaviour
         foreach(Level lvl in section.levels){
             if(lvl.complete){
                 int i = section.levels.IndexOf(lvl);
+                if(i == section.levels.Count-1) break;
                 if(section.levels[i+1].blocked){
                     section.levels[i+1].blocked=false;
                 }
             }
+        }
+        bool section_complete = true;
+        foreach(Level l in section.levels){
+            if(l.complete==false) section_complete = false;
+        }
+        section.complete = section_complete;
+        if(section.complete){
+            if(section.section_id == manager_game.game_info.sections.Count){}
+            else manager_game.game_info.sections[id].blocked=false;
         }
         manager_game.SaveToFile();
     }
