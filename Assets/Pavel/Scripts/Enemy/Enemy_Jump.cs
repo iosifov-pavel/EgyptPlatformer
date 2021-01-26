@@ -42,6 +42,7 @@ public class Enemy_Jump : MonoBehaviour
     }
 
     void CalculateJump(){
+        timer=0;
         dir = (int)Mathf.Sign(transform.localScale.x) * 1;
         distance_to_point = (point_to_jump.position.x + transform.position.x)/2;
         up = new Vector2(distance_to_point,transform.position.y + jumpHeight) - (Vector2)transform.position;
