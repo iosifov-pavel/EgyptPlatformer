@@ -87,12 +87,12 @@ public class Enemy_Jump : MonoBehaviour
 
     void CheckWall(){
         RaycastHit2D w1,w2;
-        Vector2 rayOrigin1 = (Vector2)transform.position + new Vector2(halfWidth,halfHeight-0.1f) * dir;
-        Vector2 rayOrigin2 = (Vector2)transform.position + new Vector2(halfWidth,-halfHeight+0.1f) * dir;
-        w1 = Physics2D.Raycast(rayOrigin1,Vector2.right * dir,0.05f,floor);
-        w2 = Physics2D.Raycast(rayOrigin2,Vector2.right * dir,0.05f,floor);
-        Debug.DrawLine(rayOrigin1,rayOrigin1 + new Vector2(0.05f,0) * dir);
-        Debug.DrawLine(rayOrigin2,rayOrigin2 + new Vector2(0.05f,0) * dir);
+        Vector2 rayOrigin1 = (Vector2)transform.position + new Vector2(halfWidth,halfHeight-0.15f) * dir;
+        Vector2 rayOrigin2 = (Vector2)transform.position + new Vector2(halfWidth,-halfHeight+0.15f) * dir;
+        w1 = Physics2D.Raycast(rayOrigin1,Vector2.right * dir,0.1f,floor);
+        w2 = Physics2D.Raycast(rayOrigin2,Vector2.right * dir,0.1f,floor);
+        Debug.DrawLine(rayOrigin1,rayOrigin1 + new Vector2(0.1f,0) * dir);
+        Debug.DrawLine(rayOrigin2,rayOrigin2 + new Vector2(0.1f,0) * dir);
         if(w1.collider!=null || w2.collider!=null && isJumping){
             hitWall = true;
             Vector2 new_vel = rb.velocity;
