@@ -8,11 +8,12 @@ public class Enemy_Jump : MonoBehaviour
     //[SerializeField] float jumpSpeed = 6f;
     [SerializeField] float jumpDelay = 1f;
     [SerializeField] float angle = 45;
+    [SerializeField] bool checkingWalls = false;
     Enemy_Ground_Patroling1 enemy_Ground_Patroling1;
     Transform point_to_jump;
     Rigidbody2D rb;
-    int dir = 1;
-    public bool isJumping = false, canJump = true;
+    public int dir = 1;
+    public bool isJumping = false, canJump = true, placeIsGood=false, hitWall = false,needToCheckGround=false;
     float halfHeight =0, halfWidth = 0;
     LayerMask floor;
     // Start is called before the first frame update
@@ -29,39 +30,47 @@ public class Enemy_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SeekForJump();
+        dir = (int)Mathf.Sign(transform.localScale.x) * 1;
+        if(checkingWalls)SeekForJump();
+        if(canJump) Jump();
         if(isJumping){
-           CheckGround(); 
+           if(needToCheckGround)CheckGround(); 
            CheckWall();
         }
     }
 
     void SeekForJump(){
-        if(Input.GetButtonDown("Jump") && canJump){
-            Jump();
-        } 
+        canJump=false;
     }
 
 
     void Jump(){
         rb.bodyType = RigidbodyType2D.Dynamic;
         float force = HardLines.GetForce(transform, point_to_jump, angle);
-        point_to_jump.Rotate(new Vector3(0,0,angle));
+        point_to_jump.Rotate(new Vector3(0,0,angle * dir));
         Vector2 move = point_to_jump.right;
-        point_to_jump.Rotate(new Vector3(0,0,-angle));
+        move = new Vector2 (move.x * dir, move.y);
+        point_to_jump.Rotate(new Vector3(0,0,-angle * dir));
         rb.AddForce(move*force,ForceMode2D.Impulse);
         isJumping = true;
         canJump = false;
+        StartCoroutine(checkTheGround());
     }
 
     void CheckGround(){
-        RaycastHit2D ground;
-        Vector2 rayOrigin = (Vector2)transform.position - new Vector2(0,halfHeight);
-        ground = Physics2D.Raycast(rayOrigin,Vector2.down,0.05f,floor);
-        Debug.DrawLine(rayOrigin,rayOrigin - new Vector2(0,0.05f));
-        if(ground.collider!=null && rb.velocity.y<=0){
+        RaycastHit2D g1,g2;
+        Vector2 rayOrigin1 = (Vector2)transform.position + new Vector2(halfWidth-0.05f,-halfHeight);
+        Vector2 rayOrigin2 = (Vector2)transform.position + new Vector2(-halfWidth+0.05f,-halfHeight);
+        g1 = Physics2D.Raycast(rayOrigin1,Vector2.down,0.05f,floor);
+        g2 = Physics2D.Raycast(rayOrigin2,Vector2.down,0.05f,floor);
+        Debug.DrawLine(rayOrigin1,rayOrigin1 - new Vector2(0,0.05f));
+        Debug.DrawLine(rayOrigin2,rayOrigin2 - new Vector2(0,0.05f));
+        if(g1.collider!=null || g2.collider!=null && rb.velocity.y<=0f){
             isJumping=false;
+            needToCheckGround = false;
+            hitWall=false;
             rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = Vector2.zero;
             StartCoroutine(jumpDelaying());
         }
     }
@@ -71,7 +80,27 @@ public class Enemy_Jump : MonoBehaviour
         canJump = true;
     }
 
-    void CheckWall(){
+    IEnumerator checkTheGround(){
+        yield return new WaitForSeconds(0.1f);
+        needToCheckGround = true;
+    }
 
+    void CheckWall(){
+        RaycastHit2D w1,w2;
+        Vector2 rayOrigin1 = (Vector2)transform.position + new Vector2(halfWidth,halfHeight-0.1f) * dir;
+        Vector2 rayOrigin2 = (Vector2)transform.position + new Vector2(halfWidth,-halfHeight+0.1f) * dir;
+        w1 = Physics2D.Raycast(rayOrigin1,Vector2.right * dir,0.05f,floor);
+        w2 = Physics2D.Raycast(rayOrigin2,Vector2.right * dir,0.05f,floor);
+        Debug.DrawLine(rayOrigin1,rayOrigin1 + new Vector2(0.05f,0) * dir);
+        Debug.DrawLine(rayOrigin2,rayOrigin2 + new Vector2(0.05f,0) * dir);
+        if(w1.collider!=null || w2.collider!=null && isJumping){
+            hitWall = true;
+            Vector2 new_vel = rb.velocity;
+            new_vel.x*=-1;
+            rb.velocity = new_vel;
+            Vector2 new_scale_x = transform.localScale;
+            new_scale_x.x *=-1;
+            transform.localScale = new_scale_x;
+        }       
     }
 }
