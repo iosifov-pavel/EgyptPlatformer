@@ -9,6 +9,8 @@ public class Enemy_Jump : MonoBehaviour
     [SerializeField] float jumpDelay = 1f;
     [SerializeField] float angle = 45;
     [SerializeField] bool checkingWalls = false;
+    [SerializeField] float jumpForce = 4f;
+    [SerializeField] Vector2 jumpDirection = Vector2.zero;
     Enemy_Ground_Patroling1 enemy_Ground_Patroling1;
     Transform point_to_jump;
     Rigidbody2D rb;
@@ -32,7 +34,7 @@ public class Enemy_Jump : MonoBehaviour
     {
         dir = (int)Mathf.Sign(transform.localScale.x) * 1;
         if(checkingWalls)SeekForJump();
-        if(canJump) Jump();
+        if(canJump) Jump2();
         if(isJumping){
            if(needToCheckGround)CheckGround(); 
            CheckWall();
@@ -52,6 +54,15 @@ public class Enemy_Jump : MonoBehaviour
         move = new Vector2 (move.x * dir, move.y);
         point_to_jump.Rotate(new Vector3(0,0,-angle * dir));
         rb.AddForce(move*force,ForceMode2D.Impulse);
+        isJumping = true;
+        canJump = false;
+        StartCoroutine(checkTheGround());
+    }
+
+    void Jump2(){
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        Vector2 move = new Vector2(jumpDirection.x*dir,jumpDirection.y);
+        rb.AddForce(move.normalized * jumpForce,ForceMode2D.Impulse);
         isJumping = true;
         canJump = false;
         StartCoroutine(checkTheGround());
