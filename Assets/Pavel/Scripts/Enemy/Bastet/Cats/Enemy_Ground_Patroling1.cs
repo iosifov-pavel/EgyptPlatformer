@@ -68,9 +68,9 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
         return hit;   
     }
 
-    RaycastHit2D CheckWall(){   
+    public RaycastHit2D CheckWall(){   
         checkwall = new Vector2(transform.position.x + width*dir, transform.position.y);
-        checkwall.x+=0.05f*dir;
+        checkwall.x+=0.01f*dir;
         RaycastHit2D hit;
         hit =  Physics2D.Raycast(checkwall,new Vector2(dir,0), 0.1f,mask);
         Debug.DrawRay(checkwall,new Vector2(dir,0)*0.1f,Color.yellow,0.02f);
