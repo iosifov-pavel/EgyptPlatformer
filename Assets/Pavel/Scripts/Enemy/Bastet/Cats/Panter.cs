@@ -80,4 +80,6 @@ public class Panter : MonoBehaviour
         yield return new WaitForSeconds(delay_attack);
         can_attack=true;
     }
+
+    
 }

@@ -17,6 +17,7 @@ public class Enemy_Jump : MonoBehaviour
     public int dir = 1;
     public bool isJumping = false, canJump = true, placeIsGood=false, hitWall = false,needToCheckGround=false;
     float halfHeight =0, halfWidth = 0;
+    Vector2 lastFrameVelocity= Vector2.zero;
     LayerMask floor;
     // Start is called before the first frame update
     void Start()
@@ -72,10 +73,10 @@ public class Enemy_Jump : MonoBehaviour
         RaycastHit2D g1,g2;
         Vector2 rayOrigin1 = (Vector2)transform.position + new Vector2(halfWidth-0.05f,-halfHeight);
         Vector2 rayOrigin2 = (Vector2)transform.position + new Vector2(-halfWidth+0.05f,-halfHeight);
-        g1 = Physics2D.Raycast(rayOrigin1,Vector2.down,0.05f,floor);
-        g2 = Physics2D.Raycast(rayOrigin2,Vector2.down,0.05f,floor);
-        Debug.DrawLine(rayOrigin1,rayOrigin1 - new Vector2(0,0.05f));
-        Debug.DrawLine(rayOrigin2,rayOrigin2 - new Vector2(0,0.05f));
+        g1 = Physics2D.Raycast(rayOrigin1,Vector2.down,0.14f,floor);
+        g2 = Physics2D.Raycast(rayOrigin2,Vector2.down,0.14f,floor);
+        Debug.DrawLine(rayOrigin1,rayOrigin1 - new Vector2(0,0.14f));
+        Debug.DrawLine(rayOrigin2,rayOrigin2 - new Vector2(0,0.14f));
         if(g1.collider!=null || g2.collider!=null && rb.velocity.y<=0f){
             isJumping=false;
             needToCheckGround = false;
@@ -100,18 +101,22 @@ public class Enemy_Jump : MonoBehaviour
         RaycastHit2D w1,w2;
         Vector2 rayOrigin1 = (Vector2)transform.position + new Vector2(halfWidth,halfHeight-0.15f) * dir;
         Vector2 rayOrigin2 = (Vector2)transform.position + new Vector2(halfWidth,-halfHeight+0.15f) * dir;
-        w1 = Physics2D.Raycast(rayOrigin1,Vector2.right * dir,0.1f,floor);
-        w2 = Physics2D.Raycast(rayOrigin2,Vector2.right * dir,0.1f,floor);
-        Debug.DrawLine(rayOrigin1,rayOrigin1 + new Vector2(0.1f,0) * dir);
-        Debug.DrawLine(rayOrigin2,rayOrigin2 + new Vector2(0.1f,0) * dir);
+        w1 = Physics2D.Raycast(rayOrigin1,Vector2.right * dir,0.13f,floor);
+        w2 = Physics2D.Raycast(rayOrigin2,Vector2.right * dir,0.13f,floor);
+        Debug.DrawLine(rayOrigin1,rayOrigin1 + new Vector2(0.13f,0) * dir);
+        Debug.DrawLine(rayOrigin2,rayOrigin2 + new Vector2(0.13f,0) * dir);
         if(w1.collider!=null || w2.collider!=null && isJumping){
             hitWall = true;
+            if(rb.velocity.magnitude<=0.1f){
+                //rb.velocity = lastFrameVelocity;
+            }
             Vector2 new_vel = rb.velocity;
             new_vel.x*=-1;
             rb.velocity = new_vel;
             Vector2 new_scale_x = transform.localScale;
             new_scale_x.x *=-1;
             transform.localScale = new_scale_x;
-        }       
+        }  
+        lastFrameVelocity = rb.velocity;     
     }
 }
