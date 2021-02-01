@@ -11,9 +11,11 @@ public class PoisonPlant : MonoBehaviour
     float angle;
     Vector2 target, original;
     bool playerInRange = false;
+    Transform weakSpot;
     // Start is called before the first frame update
     void Start()
     {
+        weakSpot = transform.GetChild(0);
         original = head.transform.position;
         target = original;
         sprite_head = head.GetComponent<SpriteRenderer>();
@@ -30,7 +32,8 @@ public class PoisonPlant : MonoBehaviour
     void Move(){
         Vector2 toTarget = target - (Vector2)head.transform.position;
         Vector2 newPosition = (Vector2)head.transform.position + toTarget;
-        head.transform.position = Vector2.Lerp(head.transform.position,newPosition,speed*Time.deltaTime);
+        head.transform.position = Vector2.MoveTowards(head.transform.position,newPosition,speed*Time.deltaTime);
+        weakSpot.position = head.transform.position;
     }
 
     void updateView(){
@@ -45,6 +48,14 @@ public class PoisonPlant : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.tag=="Player"){
+            sprite_head.sprite = active;
+            playerInRange = true;
+            target = other.transform.position;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
             sprite_head.sprite = active;
             playerInRange = true;

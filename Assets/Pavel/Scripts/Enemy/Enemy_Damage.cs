@@ -35,7 +35,7 @@ public class Enemy_Damage : MonoBehaviour
 
     public void Damage(GameObject other){
         if(isDamaged) return;
-            if(other.tag=="Player"){
+            if(other.tag=="Player" && other.layer==9 || other.layer == 10){
             ph = other.GetComponent<Player_Health>();
             if(ph.superman || ph.dead) return;
             player_Movement = other.GetComponent<Player_Movement>();
