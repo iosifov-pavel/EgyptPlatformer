@@ -31,7 +31,6 @@ public class FallingBridge : MonoBehaviour
     void Update()
     {
         if(wasContact){
-            //canSetContact=false;
             StartCoroutine(crash(bridge[contactId-1]));
         }
     }
@@ -52,7 +51,7 @@ public class FallingBridge : MonoBehaviour
                 StartCoroutine(crash(brs.rightN));
             }
             yield return new WaitForSeconds(1f);
-            Destroy(brs.tr.gameObject);
+            brs.tr.gameObject.SetActive(false);
         }
     }
 
