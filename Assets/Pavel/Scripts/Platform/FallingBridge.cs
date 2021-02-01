@@ -42,6 +42,7 @@ public class FallingBridge : MonoBehaviour
     IEnumerator crash(bridgeSec brs){
         if(brs.waAffected){}
         else{
+            brs.tr.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
             yield return new WaitForSeconds(0.6f);
             Action(brs);
             if(brs.leftN!=null){
@@ -57,7 +58,6 @@ public class FallingBridge : MonoBehaviour
 
     void Action(bridgeSec brs){
         brs.waAffected=true;
-        brs.tr.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         brs.rb.bodyType = RigidbodyType2D.Dynamic;
     }
 }
