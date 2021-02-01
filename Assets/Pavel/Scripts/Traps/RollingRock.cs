@@ -7,17 +7,26 @@ public class RollingRock : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] float speed = 2f;
+    [SerializeField] bool isTriggered = true;
     [SerializeField] bool finite = false;
     [SerializeField] float finiteTime = 5f;
     [SerializeField] int dir =1;
     [SerializeField] LayerMask ground;
     Rigidbody2D rb;
+    CircleCollider2D circleCollider2D;
     bool onGround = false;
     float radius;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        radius = GetComponent<CircleCollider2D>().radius * transform.localScale.x;
+        circleCollider2D = GetComponent<CircleCollider2D>();
+        if(isTriggered){
+            circleCollider2D.isTrigger = true;
+        }
+        else{
+            circleCollider2D.isTrigger = false;
+        }
+        radius = circleCollider2D.radius * transform.localScale.x;
         if(finite){
             StartCoroutine(delayFade());
         }
@@ -65,5 +74,9 @@ public class RollingRock : MonoBehaviour
         if(hit2D.collider!=null){
             dir*=-1;
         }
+    }
+
+    public CircleCollider2D getCollider(){
+        return circleCollider2D;
     }
 }
