@@ -5,6 +5,8 @@ using UnityEngine;
 public class FallingBridge : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] bool canRestore = false;
+    [SerializeField] float restoreTime = 1f;
     public List<bridgeSec> bridge = new List<bridgeSec>();
     public bool wasContact=false;
     public bool canSetContact=true;
@@ -30,7 +32,7 @@ public class FallingBridge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(wasContact){
+        if(wasContact && bridge[contactId-1].readyToContact){
             StartCoroutine(crash(bridge[contactId-1]));
         }
     }
@@ -53,24 +55,38 @@ public class FallingBridge : MonoBehaviour
             }
             yield return new WaitForSeconds(1f);
             brs.tr.gameObject.SetActive(false);
+            if(canRestore){
+                yield return new WaitForSeconds(restoreTime);
+                brs.rb.bodyType = RigidbodyType2D.Kinematic;
+                brs.tr.localPosition = brs.original;
+                brs.tr.localRotation = Quaternion.Euler(0,0,0);
+                brs.readyToContact = true;
+                brs.waAffected = false;
+                brs.tr.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                brs.tr.gameObject.SetActive(true);
+            }
         }
     }
 
     void Action(bridgeSec brs){
         brs.waAffected=true;
+
         brs.rb.bodyType = RigidbodyType2D.Dynamic;
     }
+
 }
 
 
 public class bridgeSec{
     public Transform tr;
+    public Vector2 original;
     public Rigidbody2D rb;
     public bridgeSec leftN, rightN;
-    public bool waAffected = false;
+    public bool waAffected = false, readyToContact = true;
 
     public bridgeSec(Transform t){
         tr=t;
+        original = tr.localPosition;
         rb = t.gameObject.GetComponent<Rigidbody2D>();
     }
 
