@@ -40,6 +40,7 @@ float cumulative_reset=0;
 
     // Update is called once per frame
     void Update(){
+        debugMove();
         if(Input.touchCount>0){
             Touch[] touches = Input.touches;
             if(id==-111){
@@ -145,5 +146,24 @@ float cumulative_reset=0;
         delta_jump=0;
         Debug.Log("Touch Ended");
         stick.localPosition = original;
+    }
+
+    void debugMove(){
+        float tempControlX = Input.GetAxis("Horizontal");
+        float tempControlY = Input.GetAxis("Vertical");
+        if(tempControlX!=0 || tempControlY!=0){
+            pm.stickPressed = true;
+            pm.direction.x = tempControlX*2.2f;
+            pm.direction.y = tempControlY*2.2f;
+            pm.hor=68.1f * pm.direction.x;
+            pm.ver=68.1f * pm.direction.y;
+        }
+        else{
+            pm.stickPressed = false;
+            pm.direction.x = 0;
+            pm.direction.y = 0;
+            pm.hor=0;
+            pm.ver=0;
+        }
     }
 }

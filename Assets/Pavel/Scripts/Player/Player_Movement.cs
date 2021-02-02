@@ -345,25 +345,6 @@ public class Player_Movement : MonoBehaviour
         multi_timer = 0;
     }
 
-    //private void OnTriggerStay2D(Collider2D collision) {
-    //    
-    //    if (collision.gameObject.tag == "Ladder"){
-    //        rb.bodyType = RigidbodyType2D.Kinematic;
-    //        transform.Translate(Vector3.up * Input.GetAxis("Vertical") * speed * 0.5f * Time.deltaTime);
-//
-    //        
-    //    }
-    //}
-//
-    //    private void OnTriggerExit2D(Collider2D collision) 
-    //{
-    //      if (collision.gameObject.tag == "Ladder")    
-    //      {
-    //          
-    //          rb.bodyType = RigidbodyType2D.Dynamic;
-    //      }
-    //}
-
     public void multylow(float low)
     {       
         speed_multiplier = low;
@@ -375,22 +356,4 @@ public class Player_Movement : MonoBehaviour
         return rb;
 
     }
-
-  //  private void OnTriggerEnter2D(Collider2D other) 
-  //  {
-  //      if(other.gameObject.tag == "windArea")
-  //      {   
-  //          //other.gameObject.GetComponent<Player_Movement>().GetRb();
-  //          windZone=other.gameObject;
-  //          inWind = true;
-  //      }
-  //  }
-//
-  //  private void OnTriggerExit2D(Collider2D other) 
-  //  {
-  //      if(other.gameObject.tag == "windArea")
-  //      {   
-  //          inWind = false;
-  //      }   
-  //  }
 }

@@ -13,22 +13,32 @@ private void Start() {
 }
 
 private void Update() {
+    if(Input.GetKeyDown(KeyCode.Space)) Pdown();
+    else if(Input.GetKeyUp(KeyCode.Space)) PUp();
 }
- 
-public void OnPointerDown(PointerEventData eventData){
-     if(!buttonPressed){
-     buttonPressed = true;
-     StartCoroutine(delay());
-     Debug.Log("J pressed");
-     }
+
+void Pdown(){
+    if(!buttonPressed){
+    buttonPressed = true;
+    StartCoroutine(delay());
+    Debug.Log("J pressed");
+    }
 }
- 
-public void OnPointerUp(PointerEventData eventData){
+
+void PUp(){
     buttonPressed = false;
     pm.buttonJump = false;
     pm.cant_jump = false;
     pm.jumps++;
     Debug.Log("J released");
+}
+ 
+public void OnPointerDown(PointerEventData eventData){
+    Pdown();
+}
+ 
+public void OnPointerUp(PointerEventData eventData){
+    PUp();
 }
 
 IEnumerator delay(){

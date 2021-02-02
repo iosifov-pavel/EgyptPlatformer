@@ -15,8 +15,10 @@ Player_Attack pa;
 float scale;
 float dist;
 float razbros;
+private Camera cam;
 
     private void Start() {
+        cam = Camera.main;
         pa = aplayer.GetComponent<Player_Attack>();
         stick = transform.GetChild(0);
         original = stick.localPosition;
@@ -27,6 +29,7 @@ float razbros;
     }
 
     private void Update() {
+        debugAttack();
         if(Input.touchCount>0){
             Touch[] touches = Input.touches;
                 if(id==-111){
@@ -92,5 +95,24 @@ float razbros;
         pa.angle=0;
         Debug.Log("Touch Ended");
         stick.localPosition = original;
+    }
+
+    void debugAttack(){
+        bool md = Input.GetMouseButton(0);
+        if(md){
+            pa.buttonAttack=true;
+            Vector2 mpos = Input.mousePosition;
+            Vector3 mrpos = cam.ScreenToWorldPoint(mpos);
+            if(mrpos.y>=pa.gameObject.transform.position.y) pa.bUp=1;
+            else pa.bUp=-1;
+            Vector2 playpos = pa.gameObject.transform.position;
+            Vector2 toMouse = (Vector2)mrpos-playpos;
+            float angle = Vector3.Angle(Vector3.right,toMouse);
+            pa.angle = angle;
+        }
+        else{
+            pa.buttonAttack=false;
+            pa.angle=0;
+        }
     }
 }
