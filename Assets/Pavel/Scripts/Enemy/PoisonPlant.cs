@@ -7,6 +7,8 @@ public class PoisonPlant : MonoBehaviour
     [SerializeField] Sprite active, sleep;
     [SerializeField] GameObject neck, head;
     [SerializeField] float speed = 1.5f;
+    [SerializeField] bool constantAttack = true;
+    bool readyToAttack = true;
     SpriteRenderer sprite_head,sprite_neck;
     float angle;
     Vector2 target, original;
@@ -25,15 +27,28 @@ public class PoisonPlant : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if(constantAttack)Move();
+        else MoveC();
         updateView();
     }
-
+    
     void Move(){
         Vector2 toTarget = target - (Vector2)head.transform.position;
         Vector2 newPosition = (Vector2)head.transform.position + toTarget;
         head.transform.position = Vector2.MoveTowards(head.transform.position,newPosition,speed*Time.deltaTime);
         weakSpot.position = head.transform.position;
+    }
+
+    void MoveC(){
+        if(readyToAttack) return;
+        head.transform.position = Vector2.MoveTowards(head.transform.position,target,speed*Time.deltaTime);
+        weakSpot.position = head.transform.position;
+        if((Vector2)head.transform.position==target){
+            if(target==original){
+                readyToAttack=true;
+            }
+            else target = original;
+        }
     }
 
     void updateView(){
@@ -49,6 +64,8 @@ public class PoisonPlant : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
+            if(!readyToAttack) return;
+            readyToAttack = false;
             sprite_head.sprite = active;
             playerInRange = true;
             target = other.transform.position;
@@ -57,6 +74,8 @@ public class PoisonPlant : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
+            if(!readyToAttack) return;
+            readyToAttack = false;
             sprite_head.sprite = active;
             playerInRange = true;
             target = other.transform.position;
