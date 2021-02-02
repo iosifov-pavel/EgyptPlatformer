@@ -44,7 +44,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
     }
 
     void CheckContact(){
-        if(rb2.velocity.magnitude>0.1f) rb2.isKinematic=false;
+        if(rb2.velocity.magnitude>0.01f) rb2.isKinematic=false;
         else rb2.isKinematic=true;
     }
 

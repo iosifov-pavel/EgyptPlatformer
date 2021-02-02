@@ -11,6 +11,9 @@ Player_Movement pm;
 private void Start() {
     pm = player.GetComponent<Player_Movement>();
 }
+
+private void Update() {
+}
  
 public void OnPointerDown(PointerEventData eventData){
      if(!buttonPressed){
