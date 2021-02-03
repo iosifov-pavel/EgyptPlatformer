@@ -2536,16 +2536,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanPush
       objectReference: {fileID: 0}
-    - target: {fileID: 691334680267010627, guid: ac16dd596a2766c4c890fdd4880a72a7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 691334680267010648, guid: ac16dd596a2766c4c890fdd4880a72a7,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 691334680267010648, guid: ac16dd596a2766c4c890fdd4880a72a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2560,11 +2550,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 691334680267010648, guid: ac16dd596a2766c4c890fdd4880a72a7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 691334680267010648, guid: ac16dd596a2766c4c890fdd4880a72a7,
         type: 3}
@@ -2583,6 +2568,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 691334680267010648, guid: ac16dd596a2766c4c890fdd4880a72a7,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 691334680267010648, guid: ac16dd596a2766c4c890fdd4880a72a7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 691334680267010648, guid: ac16dd596a2766c4c890fdd4880a72a7,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -2595,21 +2590,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 691334680267010649, guid: ac16dd596a2766c4c890fdd4880a72a7,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 691334680267010649, guid: ac16dd596a2766c4c890fdd4880a72a7,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 691334680267010649, guid: ac16dd596a2766c4c890fdd4880a72a7,
-        type: 3}
-      propertyPath: m_LinearDrag
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac16dd596a2766c4c890fdd4880a72a7, type: 3}
