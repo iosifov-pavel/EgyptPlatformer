@@ -106,6 +106,8 @@ public class Player_Movement : MonoBehaviour
         if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
         }
+        Vector2 draw= (Vector2)transform.position + direction;
+        Debug.DrawLine(transform.position,draw,Color.green,0.01f);
     }
 
     public void ResetJumpCount(){
