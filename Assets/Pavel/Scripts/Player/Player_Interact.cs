@@ -7,6 +7,7 @@ public class Player_Interact : MonoBehaviour
     //[SerializeField] private GameObject button;
     GameObject UI;
     GameObject button;
+    bool canInteract = false;
    // public bool interact = false;
     // Start is called before the first frame update
     private void Start() {
@@ -14,11 +15,22 @@ public class Player_Interact : MonoBehaviour
         button = UI.transform.GetChild(1).GetChild(3).gameObject;
     }
 
+    private void Update() {
+        if(canInteract){
+            Debug.Log("1");
+            if(Input.GetKey(KeyCode.U)){
+                Debug.Log("2");
+                button.GetComponent<Button_Use>().Click();
+            }
+        }
+    }
+
     // Update is called once per frame
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Interactable"){
             button.SetActive(true);
+            canInteract=true;
             button.GetComponent<Button_Use>().getData(transform.parent.gameObject,other.transform.parent.gameObject);
         }
     }
@@ -26,6 +38,7 @@ public class Player_Interact : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="Interactable"){
             button.SetActive(false);
+            canInteract=false;
         }
     }
 }
