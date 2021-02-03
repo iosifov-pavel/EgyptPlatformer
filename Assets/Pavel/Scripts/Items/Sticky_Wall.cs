@@ -101,7 +101,7 @@ public class Sticky_Wall : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="GrabWall"|| other.gameObject.tag=="GrabCeiling"){
             float dis = (transform.position - player.transform.position).magnitude;
-            if(dis>=distance+0.1f){
+            if(dis>=distance+0.02f){
                 if(contact && ready) Fall();
             }
         }

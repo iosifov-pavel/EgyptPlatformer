@@ -149,7 +149,7 @@ public class Rope : MonoBehaviour
                 else{
                     dis = Mathf.Abs(transform.position.y - player.transform.position.y);
                 }
-                if(dis>=distance+0.05f){
+                if(dis>=distance+0.02f){
                     x=Vector2.zero;
                     Jump();
                 }
