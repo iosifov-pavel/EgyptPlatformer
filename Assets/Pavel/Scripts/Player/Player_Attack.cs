@@ -6,7 +6,7 @@ public class Player_Attack : MonoBehaviour
 {
 [SerializeField] GameObject bullet_p;
 [SerializeField] Player_Health player_Health;
-private float timeBtwShots=0.2f;
+private float timeBtwShots=0.3f;
 public bool canAttack = true;
 public bool isAttacking = false;
 GameObject parent;
