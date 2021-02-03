@@ -9,16 +9,20 @@ public class Player_Sounds : MonoBehaviour
     [SerializeField] private AudioClip death;
     [SerializeField] private AudioClip jump;
     [SerializeField] private AudioClip steps;
+    [SerializeField] AudioClip shot;
+    public static Player_Sounds sounds;
     AudioSource[] audioSource;
     AudioSource source;
     AudioSource step;
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponents<AudioSource>();
-        source = audioSource[0];
-        step = audioSource[1];
-        step.clip = steps;
+        sounds = this;
+        //audioSource = GetComponents<AudioSource>();
+        //source = audioSource[0];
+        //step = audioSource[1];
+        source = GetComponent<AudioSource>();
+        //step.clip = steps;
     }
 
     // Update is called once per frame
@@ -32,8 +36,11 @@ public class Player_Sounds : MonoBehaviour
                 source.PlayOneShot(death);
                 break;
             case "jump":
-            source.PlayOneShot(jump);
-            break;
+                source.PlayOneShot(jump);
+                break;
+            case "shot":
+                source.PlayOneShot(shot);
+                break;
         }
     }
 

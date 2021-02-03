@@ -47,6 +47,7 @@ Manager_Level LM;
    public void Shoot(float angle_){
       GameObject b = Instantiate(bullet_p,transform.position, transform.rotation) as GameObject;
       b.GetComponent<Player_Bullet>().GetPosition(angle_, bUp, transform.parent.gameObject);  
+      Player_Sounds.sounds.PlaySound("shot");
    }
    IEnumerator AtackTime(){
       canAttack = false;
