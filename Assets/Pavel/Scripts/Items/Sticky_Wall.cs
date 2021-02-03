@@ -13,6 +13,8 @@ public class Sticky_Wall : MonoBehaviour
     GameObject player;
     bool contact = false, ready = false, delay=false;
     float ready_time = 0.25f, delay_time=0.6f, timer=0;
+    public Vector2 distanceV=Vector2.zero;
+    public float distance=0;
     void Start()
     {
         pre_push=transform.right;
@@ -39,23 +41,29 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     void Fall(){
+        distance = 0;
+        distanceV = Vector2.zero;
         player_Movement.jumps=0;
         timer=0;
         ready=false;
         contact=false;
-        rb_player.bodyType = RigidbodyType2D.Dynamic;
+        //rb_player.bodyType = RigidbodyType2D.Dynamic;
+        rb_player.gravityScale = player_Movement.gravity;
         player.transform.parent = null;
         player_Movement.blocked=false;
         StartCoroutine(Delay());
     }
 
     void Jump(){
+        distance = 0;
+        distanceV = Vector2.zero;
         timer=0;
         player_Movement.jumps=0;
         ready=false;
         contact=false;
         player.transform.parent = null;
-        rb_player.bodyType = RigidbodyType2D.Dynamic;
+        //rb_player.bodyType = RigidbodyType2D.Dynamic;
+        rb_player.gravityScale = player_Movement.gravity;
         x=x.normalized;
         if(x.y>-0.3f) rb_player.AddForce(new Vector2(x.x*5,x.y*10), ForceMode2D.Impulse);
         else rb_player.AddForce(new Vector2(x.x*3,x.y*3), ForceMode2D.Impulse);
@@ -71,7 +79,8 @@ public class Sticky_Wall : MonoBehaviour
             player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
             rb_player.velocity = Vector2.zero;
-            rb_player.bodyType = RigidbodyType2D.Static;
+            rb_player.gravityScale = 0;
+            //rb_player.bodyType = RigidbodyType2D.Kinematic;
             player.transform.parent = transform;
             player_Movement.ResetJumpCount();
             player_Movement.blocked=true;
@@ -79,6 +88,8 @@ public class Sticky_Wall : MonoBehaviour
             contact = true;
             player_Movement.verical=Vector2.zero;
             player_Movement.isJumping=false;
+            distanceV =transform.position - player.transform.position;
+            distance = (transform.position - player.transform.position).magnitude;
         }
     }
 
@@ -89,17 +100,20 @@ public class Sticky_Wall : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="GrabWall"|| other.gameObject.tag=="GrabCeiling"){
-            if(contact && ready) Fall();
+            float dis = (transform.position - player.transform.position).magnitude;
+            if(dis>=distance+0.1f){
+                if(contact && ready) Fall();
+            }
         }
     }
 
     IEnumerator Delay(){
         x=Vector2.zero;
         delay=true;
-        yield return new WaitForSeconds(0.20f);
+        yield return new WaitForSeconds(0.15f);
         player_Movement.blocked=false;
-        yield return new WaitForSeconds(0.05f);
         player_Movement.jump_block=false;
+        yield return new WaitForSeconds(0.05f);
         yield return new WaitForSeconds(delay_time-0.25f);
         delay=false;
     }

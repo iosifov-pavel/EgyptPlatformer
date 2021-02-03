@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player_Bullet : MonoBehaviour{
 [SerializeField] Sprite full, afterContact;
 Collider2D col;
-public float speed = 9f;
+public float speed = 8f;
 Vector2 player_scale;
 public int dmg = 1;
 private float lifetime = 0.9f;
@@ -40,8 +40,8 @@ bool wasContact = false;
     {
       Debug.Log(hitInfo.name);
       if (hitInfo.name == "Player" || hitInfo.name == "GroundCheck") return;
-      else if(hitInfo.tag=="Ground" && lifetime>=0.8999f) return;
-      else if(hitInfo.tag=="Ground" && lifetime<0.8999f) StartCoroutine(onContact());
+      //else if(hitInfo.tag=="Ground" && lifetime>=0.89999f) return;
+      else if(hitInfo.tag=="Ground" && lifetime<0.89999f) StartCoroutine(onContact());
       else if(hitInfo.tag=="Ground" && ! wasContact) StartCoroutine(onContact());
       else if(hitInfo.tag == "Shield" && ! wasContact){
           hitInfo.gameObject.GetComponent<Shield_Block>().ReduceDurab();
@@ -56,8 +56,8 @@ bool wasContact = false;
 
     private void OnTriggerStay2D(Collider2D other) {
       if(other.gameObject.tag=="Ground"){
-        if(lifetime<0.8999f && ! wasContact) StartCoroutine(onContact());
-        else if(lifetime>=0.8999f) StartCoroutine(onContact());
+        if(lifetime<0.89999f && ! wasContact) StartCoroutine(onContact());
+        else if(lifetime>=0.89999f) StartCoroutine(onContact());
       }
     }
 

@@ -29,7 +29,7 @@ public class Player_Movement : MonoBehaviour
     int jump_max = 2;
     public int jumps;
     public bool isJumping=false, jump_block=false, buttonJump=false;
-    private float gravity = 2.2f;
+    public float gravity = 2.2f;
     public bool cant_jump=false;
     public Vector2 verical;
     public float hor,ver;
@@ -93,16 +93,19 @@ public class Player_Movement : MonoBehaviour
         }
         hor+=stick_delta.x;
         ver+=stick_delta.y;
-        anima.setDirection(rb.velocity.x);
-        if(!blocked)CheckGround();
-        if(!blocked)DeepCheckGround();
-        
+        if(!blocked){
+            anima.setDirection(rb.velocity.x);
+            CheckGround();
+            DeepCheckGround();
+
+            
+            anima.setBoolAnimation("Ground", isGrounded);
+            anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
+            anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
+        }
         if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
         }
-        anima.setBoolAnimation("Ground", isGrounded);
-        anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
-        anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
     }
 
     public void ResetJumpCount(){
@@ -127,6 +130,7 @@ public class Player_Movement : MonoBehaviour
 
     void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
+        if(blocked) direction.x=0;
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
         move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);

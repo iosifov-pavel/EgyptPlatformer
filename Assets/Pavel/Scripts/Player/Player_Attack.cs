@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Attack : MonoBehaviour
 {
 [SerializeField] GameObject bullet_p;
+[SerializeField] Player_Health player_Health;
 private float timeBtwShots=0.2f;
 public bool canAttack = true;
 public bool isAttacking = false;
@@ -28,6 +29,7 @@ Manager_Level LM;
       pa = parent.GetComponent<Player_Animation>();
    }
    void Update (){
+      if(player_Health.dead) return;
       transform.localPosition = forward;
       if (buttonAttack && canAttack){
          isAttacking=true;
