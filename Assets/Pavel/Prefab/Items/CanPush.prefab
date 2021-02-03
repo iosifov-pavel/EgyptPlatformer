@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 691334680267010629}
   - component: {fileID: 691334680267010628}
   - component: {fileID: 691334680267010649}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: CanPush
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -121,6 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf7768635fed0d46aab9fa1c431d0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onGround: 1
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &691334680267010649
 Rigidbody2D:
   serializedVersion: 4
@@ -129,15 +133,15 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691334680267010627}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 2
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 6e4a07c523e6a2f4897b4cf9bb870785, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

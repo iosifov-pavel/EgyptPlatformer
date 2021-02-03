@@ -104,13 +104,14 @@ public class Player_Movement : MonoBehaviour
             anima.setDirection(rb.velocity.x);
             CheckGround();
             DeepCheckGround();
-
-            
             anima.setBoolAnimation("Ground", isGrounded);
             anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
-            anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
+            if(moveBlock){
+                anima.setFloatAnimation("Direction",Mathf.Abs(0));
+            }
+            else anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
         }
-        if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
+        if(!moveBlock)if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
         }
     }

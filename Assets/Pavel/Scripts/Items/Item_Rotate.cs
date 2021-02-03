@@ -25,6 +25,9 @@ public class Item_Rotate : MonoBehaviour, IIntercatable
     // Update is called once per frame
     void Update()
     {
+        if(player_Health!=null && player_Health.isDamaged && check){
+            Use(player);
+        }
         if(check){
             Action();
         }
@@ -53,13 +56,13 @@ public class Item_Rotate : MonoBehaviour, IIntercatable
                 plrb = player.GetComponent<Rigidbody2D>();
             }
             player_Movement.direction= Vector2.zero;
-            player_Movement.blocked=true;
+            player_Movement.moveBlock=true;
             player_Movement.jump_block=true;
             player_Attack.blockAttack = true;
             plrb.velocity=Vector2.zero;
         }
         else{
-            player_Movement.blocked=false;
+            player_Movement.moveBlock=false;
             player_Movement.jump_block=false;
             player_Attack.blockAttack = false;
         }

@@ -6,71 +6,87 @@ public class Item_Push : MonoBehaviour, IIntercatable
 {
     // Start is called before the first frame update
     GameObject player;
-    Player_Movement pm;
-    Player_Health ph;
+    Player_Movement player_Movement=null;
+    Rigidbody2D plrb;
+    Player_Health player_Health=null;
+    Player_Attack player_Attack=null;
     float speed = 18f;
+    float mov_speed;
     bool on = false;
     Rigidbody2D rb2;
-    Rigidbody2D  playerrb;
-    float distance;
-    Vector2 player_pos;
+    float ext_x, ext_y;
+    BoxCollider2D box;
+    public bool onGround = true;
+    [SerializeField] LayerMask ground;
     void Start()
     {
+        box = GetComponent<BoxCollider2D>();
+        ext_x = box.bounds.extents.x * transform.localScale.x;
+        ext_y = box.bounds.extents.y * transform.localScale.y;
         rb2 = GetComponent<Rigidbody2D>();
         //rb2.isKinematic = true;
         rb2.mass = 200f;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
+        if(player_Health!=null && ( player_Health.isDamaged || !player_Movement.isGrounded  || !onGround ) && on){
+            Use(player);
+        }
         CheckContact();
-        //if(on){
-        //    pm.blocked=true;
-        //    Vector2 diff = transform.position-player.transform.position;
-        //    float dif = Mathf.Abs(diff.magnitude);
-        //    if(!pm.isGrounded || ph.isDamaged || ph.dead || dif>distance+0.06f){
-        //        player.transform.parent=null;
-        //        rb2.velocity=Vector2.zero;
-        //        pm.blocked = false;
-        //        player=null;
-        //        on = false;
-        //        pm=null;
-        //        return;
-        //    }
-        //    float step =(pm.direction.x * speed * Time.deltaTime);
-        //    rb2.velocity=new Vector2(step,0);
-        //    player.transform.localPosition = player_pos;
-        //}
+        if(on){
+            Action();
+        }
     }
 
     void CheckContact(){
-        //if(rb2.velocity.magnitude>0.01f) rb2.isKinematic=false;
-        //else rb2.isKinematic=true;
+        RaycastHit2D hit1,hit2;
+        Vector2 rayOrigin1 = new Vector2(transform.position.x+ext_x, transform.position.y-ext_y);
+        Vector2 rayOrigin2 = new Vector2(transform.position.x-ext_x, transform.position.y-ext_y);
+        hit1 = Physics2D.Raycast(rayOrigin1,Vector2.down,0.05f,ground);
+        hit2 = Physics2D.Raycast(rayOrigin2,Vector2.down,0.05f,ground);
+        Debug.DrawRay(rayOrigin1,Vector2.down*(0.05f),Color.green,0.01f);
+        Debug.DrawRay(rayOrigin2,Vector2.down*(0.05f),Color.green,0.01f);
+        if(hit1.collider!=null || hit2.collider!=null){
+            onGround = true;
+        }
+        else{
+            onGround = false;
+        }
+    }
+
+    void Action(){
+        mov_speed = player_Movement.direction.x;
+        Vector2 newpos_p = plrb.position + new Vector2(mov_speed*Time.deltaTime,0);
+        Vector2 newpos_b = rb2.position + new Vector2(mov_speed*Time.deltaTime,0);
+        plrb.MovePosition(newpos_p);
+        rb2.MovePosition(newpos_b);
     }
 
     public void Use(GameObject _player){
-        on = on==true ? false : true;
+        on = !on;
+        player = _player;
         if(on){
-            rb2.mass = 10;
-            //player=_player;
-            //player.transform.parent=transform;
-            //player_pos =new Vector2(player.transform.localPosition.x,0);
-            //pm=player.GetComponent<Player_Movement>();
-            //playerrb = player.GetComponent<Rigidbody2D>();
-            //ph = player.GetComponent<Player_Health>();
-            //Vector2 dist = transform.position-player.transform.position;
-            //distance = Mathf.Abs(dist.magnitude);
-            //pm.blocked = true;
-        } else{
-
+            rb2.mass = 10f;
+            if(player_Movement==null){
+                player_Movement = player.GetComponent<Player_Movement>();
+                player_Health = player.GetComponent<Player_Health>();
+                player_Attack = player.transform.GetChild(2).gameObject.GetComponent<Player_Attack>();
+                plrb = player.GetComponent<Rigidbody2D>();
+            }
+            player_Movement.direction= Vector2.zero;
+            player_Movement.moveBlock=true;
+            player_Movement.jump_block=true;
+            player_Attack.blockAttack = true;
+            plrb.velocity=Vector2.zero;
+            //transform.parent = player.transform;
+        }
+        else{
             rb2.mass = 200f;
-            //player.transform.parent=null;
-            //rb2.velocity=Vector2.zero;
-            //rb2.isKinematic=true;
-            //pm.blocked = false;
-            //player=null;
-            //pm=null;
+            player_Movement.moveBlock=false;
+            player_Movement.jump_block=false;
+            player_Attack.blockAttack = false;
         }
     }
 }
