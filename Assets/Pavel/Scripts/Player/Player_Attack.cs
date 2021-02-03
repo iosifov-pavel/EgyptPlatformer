@@ -17,6 +17,7 @@ Player_Animation pa;
 public bool buttonAttack=false;
 public int bUp=1;
 public float angle;
+public bool blockAttack = false;
 Manager_Level LM;
 //public int kills=0;
 //static bool killed=false;
@@ -29,7 +30,7 @@ Manager_Level LM;
       pa = parent.GetComponent<Player_Animation>();
    }
    void Update (){
-      if(player_Health.dead) return;
+      if(player_Health.dead || blockAttack) return;
       transform.localPosition = forward;
       if (buttonAttack && canAttack){
          isAttacking=true;

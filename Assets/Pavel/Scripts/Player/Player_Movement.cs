@@ -61,6 +61,7 @@ public class Player_Movement : MonoBehaviour
     //--------------------------------------
     public bool stickPressed = false;
     public bool blocked = false;
+    public bool moveBlock = false;
     
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
@@ -136,13 +137,14 @@ public class Player_Movement : MonoBehaviour
 
     void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
-        if(blocked) direction.x=0;
+        //if(blocked) direction.x=0;
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
         move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
     }
 
     void Horizontal(){
+        if(moveBlock) return;
         if (Mathf.Abs(move.x) > maxSpeed) {
             move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
