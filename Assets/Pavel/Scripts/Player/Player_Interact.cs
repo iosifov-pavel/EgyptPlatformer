@@ -18,7 +18,7 @@ public class Player_Interact : MonoBehaviour
     private void Update() {
         if(canInteract){
             Debug.Log("1");
-            if(Input.GetKey(KeyCode.U)){
+            if(Input.GetKey(KeyCode.U) || Input.GetMouseButtonDown(1)){
                 Debug.Log("2");
                 button.GetComponent<Button_Use>().Click();
             }
