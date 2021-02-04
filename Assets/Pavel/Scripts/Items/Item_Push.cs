@@ -65,6 +65,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
     }
 
     public void Use(GameObject _player){
+        if(!on && Player_Interact.player_Interact.isInteracting) return;
         on = !on;
         player = _player;
         if(on){
@@ -76,9 +77,11 @@ public class Item_Push : MonoBehaviour, IIntercatable
                 plrb = player.GetComponent<Rigidbody2D>();
             }
             player_Movement.direction= Vector2.zero;
+            player_Movement.inertia=0;
             player_Movement.moveBlock=true;
             player_Movement.jump_block=true;
             player_Attack.blockAttack = true;
+            Player_Interact.player_Interact.isInteracting = true;
             plrb.velocity=Vector2.zero;
             //transform.parent = player.transform;
         }
@@ -87,6 +90,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
             player_Movement.moveBlock=false;
             player_Movement.jump_block=false;
             player_Attack.blockAttack = false;
+            Player_Interact.player_Interact.isInteracting = false;
         }
     }
 }
