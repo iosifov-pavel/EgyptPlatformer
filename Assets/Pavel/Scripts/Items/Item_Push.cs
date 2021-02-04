@@ -50,9 +50,11 @@ public class Item_Push : MonoBehaviour, IIntercatable
         Debug.DrawRay(rayOrigin2,Vector2.down*(0.05f),Color.green,0.01f);
         if(hit1.collider!=null || hit2.collider!=null){
             onGround = true;
+            rb2.bodyType = RigidbodyType2D.Kinematic;
         }
         else{
             onGround = false;
+            rb2.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 
@@ -69,7 +71,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
         on = !on;
         player = _player;
         if(on){
-            rb2.mass = 10f;
+            //rb2.mass = 10f;
             if(player_Movement==null){
                 player_Movement = player.GetComponent<Player_Movement>();
                 player_Health = player.GetComponent<Player_Health>();
@@ -86,7 +88,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
             //transform.parent = player.transform;
         }
         else{
-            rb2.mass = 200f;
+            //rb2.mass = 200f;
             player_Movement.moveBlock=false;
             player_Movement.jump_block=false;
             player_Attack.blockAttack = false;
