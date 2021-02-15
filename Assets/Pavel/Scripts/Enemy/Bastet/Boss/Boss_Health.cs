@@ -30,16 +30,18 @@ public class Boss_Health : MonoBehaviour
         if(is_active){
             boss_hp.SetActive(true);
             int health = enemy_Health.health;
-            float percent = health*100/boss_health;
+            float percent = (float)health*100/(float)boss_health;
             health_slider.value = percent;
             if(health<=25) curr_stage = 2;
             if(health<=0) {
+                boss_hp.SetActive(false);
                 FinishLevel();
             }
         }
     }
 
     public void FinishLevel(){
+        boss_hp.SetActive(false);
         finish.FinishLevel(player);
         is_active=false;
     }
