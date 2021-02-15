@@ -10,7 +10,7 @@ public class Summon_Grey_Cat : MonoBehaviour
     bool cats_was_summoned = false;
     [SerializeField] float time_before_new_summon = 2f;
     bool canSummon = true;
-    [SerializeField] Vector2 c1,c2,c3;
+    [SerializeField] Vector2 c1,c2,c3,c4;
     Boss_Health boss_Health;
     List<gCat> cats;
     void Start()
@@ -28,7 +28,7 @@ public class Summon_Grey_Cat : MonoBehaviour
     }
 
     void CheckCats(){
-        int live_cats =3;
+        int live_cats = 4;
         foreach(gCat cat in cats){
             if(cat.tr==null){
                 live_cats--;
@@ -58,7 +58,10 @@ public class Summon_Grey_Cat : MonoBehaviour
         GameObject cat3 = Instantiate(grey_cat_prefab) as GameObject;
         cat3.transform.position = c3;
         cats.Add(new gCat(cat3));
-        cats_alive=3;
+        GameObject cat4 = Instantiate(grey_cat_prefab) as GameObject;
+        cat4.transform.position = c4;
+        cats.Add(new gCat(cat4));
+        cats_alive=4;
         cats_was_summoned = true;
     }
 
