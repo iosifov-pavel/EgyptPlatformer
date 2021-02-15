@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 8069015736632475540}
   - component: {fileID: 8069015736632475541}
   - component: {fileID: 8069015736632475543}
-  - component: {fileID: 8069015736632475546}
   - component: {fileID: 8069015736632475545}
-  - component: {fileID: 8069015736632475544}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -128,24 +126,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8069015736632475546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8069015736632475536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21a339a0e1c5a2440ae109c908ff2ffc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDamaged: 0
-  isGrounded: 1
-  gravitys: 2
-  ground:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!60 &8069015736632475545
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -177,21 +157,6 @@ PolygonCollider2D:
       - {x: -0.26292443, y: -0.68686557}
       - {x: -0.26338762, y: 0.7454468}
       - {x: 0.23100159, y: 0.74526644}
---- !u!114 &8069015736632475544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8069015736632475536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cce41373f6feef479d1169824b9e48b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userin: {fileID: 0}
-  superman: 0
-  dead: 0
 --- !u!1 &8069015736951045497
 GameObject:
   m_ObjectHideFlags: 0
