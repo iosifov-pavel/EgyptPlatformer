@@ -354,7 +354,7 @@ PrefabInstance:
     - target: {fileID: 4332581901215868241, guid: a7caa5ba581bb234dae5f375b6a9602b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4332581901215868241, guid: a7caa5ba581bb234dae5f375b6a9602b,
         type: 3}
@@ -4693,6 +4693,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1818600958}
+    - target: {fileID: 7257489016783712587, guid: a15da64c6412a6f48aa2e8f24635d2fd,
+        type: 3}
+      propertyPath: timeBetweenShoots
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7257489016783712590, guid: a15da64c6412a6f48aa2e8f24635d2fd,
         type: 3}
       propertyPath: health

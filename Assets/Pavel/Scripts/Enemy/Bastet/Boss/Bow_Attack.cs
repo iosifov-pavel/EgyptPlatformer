@@ -7,6 +7,8 @@ public class Bow_Attack : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Transform player;
     [SerializeField] GameObject arrow_p;
+    [SerializeField] float timeBetweenShoots = 1f;
+    bool canAttack = true;
     Boss_Health boss_Health;
     
     void Start()
@@ -17,7 +19,7 @@ public class Bow_Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(boss_Health.is_active){
+        if(boss_Health.is_active && canAttack){
             Shoot();
         }
     }
@@ -29,5 +31,12 @@ public class Bow_Attack : MonoBehaviour
         Vector2 pos = new Vector2(transform.position.x,transform.position.y);
         arrow.transform.right = pl_pos-pos;
         arrow.GetComponent<Rigidbody2D>().velocity = arrow.transform.right * 8;
+        StartCoroutine(delayAttack());
+    }
+
+    IEnumerator delayAttack(){
+        canAttack = false;
+        yield return new WaitForSeconds(timeBetweenShoots);
+        canAttack = true;
     }
 }
