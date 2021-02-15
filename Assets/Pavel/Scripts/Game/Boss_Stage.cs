@@ -29,6 +29,7 @@ public class Boss_Stage : MonoBehaviour
     void Update()
     {
         if(checkPoint.active){
+            if(Boss==null) return;
             Boss.GetComponent<Boss_Health>().is_active=true;
             camera_Follow.LockCamera(camera_lock);
             cam_cam.orthographicSize = cam_size;

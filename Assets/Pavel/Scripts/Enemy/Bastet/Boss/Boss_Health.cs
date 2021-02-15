@@ -27,9 +27,13 @@ public class Boss_Health : MonoBehaviour
             boss_health = enemy_Health.health;
             if(boss_health<=25) curr_stage = 2;
             if(boss_health<=0) {
-                finish.FinishLevel(player);
-                is_active=false;
+                FinishLevel();
             }
         }
+    }
+
+    public void FinishLevel(){
+        finish.FinishLevel(player);
+        is_active=false;
     }
 }

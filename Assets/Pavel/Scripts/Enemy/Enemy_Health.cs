@@ -31,7 +31,14 @@ public class Enemy_Health : MonoBehaviour
 
     public void Death(){
         Manager_Level.EnemyWasKilled();
-        Destroy(this.gameObject);
+        Boss_Health boss_Health = gameObject.GetComponent<Boss_Health>();
+        if(boss_Health!=null){
+            boss_Health.FinishLevel();
+            gameObject.SetActive(false);
+        }
+        else{
+            Destroy(this.gameObject);
+        }
     }
 
     IEnumerator ReactToDamage(){
