@@ -18,11 +18,13 @@ public bool buttonAttack=false;
 public int bUp=1;
 public float angle;
 public bool blockAttack = false;
+AudioSource fire_sound;
 Manager_Level LM;
 //public int kills=0;
 //static bool killed=false;
 
    void Start() {
+      fire_sound = GetComponent<AudioSource>();
       LM = transform.parent.gameObject.GetComponent<Player_InfoHolder>().getLM();
       parent = transform.parent.gameObject;
       partran = parent.GetComponent<Transform>();
@@ -48,7 +50,7 @@ Manager_Level LM;
    public void Shoot(float angle_){
       GameObject b = Instantiate(bullet_p,transform.position, transform.rotation) as GameObject;
       b.GetComponent<Player_Bullet>().GetPosition(angle_, bUp, transform.parent.gameObject);  
-      Player_Sounds.sounds.PlaySound("shot");
+      fire_sound.PlayOneShot(fire_sound.clip);
    }
    IEnumerator AtackTime(){
       canAttack = false;
