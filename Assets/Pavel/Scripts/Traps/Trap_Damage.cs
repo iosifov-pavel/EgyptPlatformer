@@ -29,7 +29,7 @@ public class Trap_Damage : MonoBehaviour
     }
 
     private void Damage(GameObject other){
-            if(other.tag=="Player"){
+            if(other.tag=="Player" && other.layer==9 || other.layer == 10){
             ph = other.GetComponent<Player_Health>();
             player_Movement = other.GetComponent<Player_Movement>();
             player_Movement.BlockMovement(0.25f);

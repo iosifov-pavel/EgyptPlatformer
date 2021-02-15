@@ -11,21 +11,34 @@ Player_Movement pm;
 private void Start() {
     pm = player.GetComponent<Player_Movement>();
 }
- 
-public void OnPointerDown(PointerEventData eventData){
-     if(!buttonPressed){
-     buttonPressed = true;
-     StartCoroutine(delay());
-     Debug.Log("J pressed");
-     }
+
+private void Update() {
+    if(Input.GetKeyDown(KeyCode.Space)) Pdown();
+    else if(Input.GetKeyUp(KeyCode.Space)) PUp();
 }
- 
-public void OnPointerUp(PointerEventData eventData){
+
+void Pdown(){
+    if(!buttonPressed){
+    buttonPressed = true;
+    StartCoroutine(delay());
+    Debug.Log("J pressed");
+    }
+}
+
+void PUp(){
     buttonPressed = false;
     pm.buttonJump = false;
     pm.cant_jump = false;
     pm.jumps++;
     Debug.Log("J released");
+}
+ 
+public void OnPointerDown(PointerEventData eventData){
+    Pdown();
+}
+ 
+public void OnPointerUp(PointerEventData eventData){
+    PUp();
 }
 
 IEnumerator delay(){

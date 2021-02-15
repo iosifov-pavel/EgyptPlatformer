@@ -38,6 +38,11 @@ public class Map_UI_Logic : MonoBehaviour
                 lvl.GetComponent<Image>().sprite = complete;
                 lvl.GetChild(0).GetComponent<Image>().sprite = names[i];
                 lvl.GetComponent<Button>().interactable=true;
+                if(i == levels.Count-1){}
+                else{
+                    info.sections[i+1].blocked=false;
+                }
+               // info.sections[i+1].blocked=false;
             }
             else{
                 lvl.GetComponent<Image>().sprite = open;

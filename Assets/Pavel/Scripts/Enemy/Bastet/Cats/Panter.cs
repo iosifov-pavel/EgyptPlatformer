@@ -17,6 +17,7 @@ public class Panter : MonoBehaviour
     bool can_attack = true, is_jumping=false;
     float delay_attack = 0.5f;
     [SerializeField] float jump_f=3;
+    [SerializeField] bool jumping = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +62,7 @@ public class Panter : MonoBehaviour
         if(!can_attack) return;
         egp.speed= active_speed;
         if(distance<=4){
-            Jump();
+            if(jumping)Jump();
         }
 
     }
@@ -80,4 +81,6 @@ public class Panter : MonoBehaviour
         yield return new WaitForSeconds(delay_attack);
         can_attack=true;
     }
+
+    
 }

@@ -3,7 +3,12 @@ guid: b188a3fb80abb24488ef12389a50239e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - damaged: {instanceID: 0}
+  - death: {instanceID: 0}
+  - jump: {instanceID: 0}
+  - steps: {instanceID: 0}
+  - shot: {fileID: 8300000, guid: 356accaab057a1a43819be1590f7cd14, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

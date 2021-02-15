@@ -13,7 +13,8 @@ public class Enemy_Health : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         sprites=GetComponentsInChildren<SpriteRenderer>();
-        original=sprites[0].color;
+        if(sprites==null){}
+        else original=sprites[0].color;
     }
 
     // Update is called once per frame
@@ -30,7 +31,14 @@ public class Enemy_Health : MonoBehaviour
 
     public void Death(){
         Manager_Level.EnemyWasKilled();
-        Destroy(this.gameObject);
+        Boss_Health boss_Health = gameObject.GetComponent<Boss_Health>();
+        if(boss_Health!=null){
+            boss_Health.FinishLevel();
+            gameObject.SetActive(false);
+        }
+        else{
+            Destroy(this.gameObject);
+        }
     }
 
     IEnumerator ReactToDamage(){

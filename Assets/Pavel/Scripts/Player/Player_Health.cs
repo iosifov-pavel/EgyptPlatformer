@@ -79,6 +79,7 @@ public class Player_Health : MonoBehaviour
     }
 
     public void ChangeHP(int source){
+        Player_Sounds.sounds.PlaySound("damage");
         if(superman || dead) return;
         hp+=source;
         UI_HP.Damaged();

@@ -29,7 +29,7 @@ public class Player_Movement : MonoBehaviour
     int jump_max = 2;
     public int jumps;
     public bool isJumping=false, jump_block=false, buttonJump=false;
-    private float gravity = 2.2f;
+    public float gravity = 2.2f;
     public bool cant_jump=false;
     public Vector2 verical;
     public float hor,ver;
@@ -61,6 +61,8 @@ public class Player_Movement : MonoBehaviour
     //--------------------------------------
     public bool stickPressed = false;
     public bool blocked = false;
+    public bool moveBlock = false;
+    [SerializeField] AudioSource steps;
     
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
@@ -82,6 +84,12 @@ public class Player_Movement : MonoBehaviour
         mass= GetComponent<Rigidbody2D>().mass;
     }
 
+    private void OnDrawGizmos() {
+        Vector2 draw= (Vector2)transform.position + direction;
+        Gizmos.DrawLine(transform.position,draw);
+        //Debug.DrawLine(transform.position,draw,Color.green,0.01f);
+    }
+
     // Update is called once per frame
     void Update(){
         if(stickPressed){
@@ -93,16 +101,20 @@ public class Player_Movement : MonoBehaviour
         }
         hor+=stick_delta.x;
         ver+=stick_delta.y;
-        anima.setDirection(rb.velocity.x);
-        if(!blocked)CheckGround();
-        if(!blocked)DeepCheckGround();
-        
-        if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
+        if(!blocked){
+            anima.setDirection(rb.velocity.x);
+            CheckGround();
+            DeepCheckGround();
+            anima.setBoolAnimation("Ground", isGrounded);
+            anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
+            if(moveBlock){
+                anima.setFloatAnimation("Direction",Mathf.Abs(0));
+            }
+            else anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
+        }
+        if(!moveBlock)if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
         }
-        anima.setBoolAnimation("Ground", isGrounded);
-        anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
-        anima.setFloatAnimation("Direction",Mathf.Abs(direction.x));
     }
 
     public void ResetJumpCount(){
@@ -127,12 +139,19 @@ public class Player_Movement : MonoBehaviour
 
     void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
+        //if(blocked) direction.x=0;
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
         move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
+        if(Mathf.Abs(direction.x)>0.3f && isGrounded) {
+            if(steps.isPlaying){}
+            else steps.Play();
+        }
+        else steps.Stop();
     }
 
     void Horizontal(){
+        if(moveBlock) return;
         if (Mathf.Abs(move.x) > maxSpeed) {
             move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
@@ -345,25 +364,6 @@ public class Player_Movement : MonoBehaviour
         multi_timer = 0;
     }
 
-    //private void OnTriggerStay2D(Collider2D collision) {
-    //    
-    //    if (collision.gameObject.tag == "Ladder"){
-    //        rb.bodyType = RigidbodyType2D.Kinematic;
-    //        transform.Translate(Vector3.up * Input.GetAxis("Vertical") * speed * 0.5f * Time.deltaTime);
-//
-    //        
-    //    }
-    //}
-//
-    //    private void OnTriggerExit2D(Collider2D collision) 
-    //{
-    //      if (collision.gameObject.tag == "Ladder")    
-    //      {
-    //          
-    //          rb.bodyType = RigidbodyType2D.Dynamic;
-    //      }
-    //}
-
     public void multylow(float low)
     {       
         speed_multiplier = low;
@@ -375,22 +375,4 @@ public class Player_Movement : MonoBehaviour
         return rb;
 
     }
-
-  //  private void OnTriggerEnter2D(Collider2D other) 
-  //  {
-  //      if(other.gameObject.tag == "windArea")
-  //      {   
-  //          //other.gameObject.GetComponent<Player_Movement>().GetRb();
-  //          windZone=other.gameObject;
-  //          inWind = true;
-  //      }
-  //  }
-//
-  //  private void OnTriggerExit2D(Collider2D other) 
-  //  {
-  //      if(other.gameObject.tag == "windArea")
-  //      {   
-  //          inWind = false;
-  //      }   
-  //  }
 }

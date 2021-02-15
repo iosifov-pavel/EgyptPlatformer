@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy_Ground_Patroling1 : MonoBehaviour
 {
-    [SerializeField] GameObject legs;
     Animator legs_anim;
     [SerializeField] int dir = 1;
     [SerializeField] public float speed = 2f;
@@ -17,7 +16,6 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
     bool stop=false;
     // Start is called before the first frame update
     void Start(){
-        //legs_anim = legs.GetComponent<Animator>();
         LayerMask m1 = LayerMask.GetMask("Ground");
         LayerMask m2 = LayerMask.GetMask("Traps");
         mask = m1 | m2;
@@ -70,9 +68,9 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
         return hit;   
     }
 
-    RaycastHit2D CheckWall(){   
+    public RaycastHit2D CheckWall(){   
         checkwall = new Vector2(transform.position.x + width*dir, transform.position.y);
-        checkwall.x+=0.05f*dir;
+        checkwall.x+=0.01f*dir;
         RaycastHit2D hit;
         hit =  Physics2D.Raycast(checkwall,new Vector2(dir,0), 0.1f,mask);
         Debug.DrawRay(checkwall,new Vector2(dir,0)*0.1f,Color.yellow,0.02f);

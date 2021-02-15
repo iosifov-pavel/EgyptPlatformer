@@ -40,9 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6896399027451752618}
   - component: {fileID: 6896399027451752619}
-  - component: {fileID: 6896399027451752621}
   - component: {fileID: 5520838489517205210}
   - component: {fileID: 5803333096973935557}
+  - component: {fileID: 6247160096786169275}
   m_Layer: 0
   m_Name: BossCheckPoint
   m_TagString: Untagged
@@ -91,20 +91,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6896399027451752621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6896399027451752616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6cf96a738a545242a214a4e24630bcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 0
-  id: 1
 --- !u!212 &5520838489517205210
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -168,3 +154,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelM: {fileID: 0}
+  cam: {fileID: 0}
+  cam_size: 0
+  tile_block: {fileID: 0}
+  Boss: {fileID: 0}
+  active: 0
+--- !u!114 &6247160096786169275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6896399027451752616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60fddc70cc5ffa34298d57406872a154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  id: 1
