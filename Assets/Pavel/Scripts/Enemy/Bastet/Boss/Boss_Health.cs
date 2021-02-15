@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss_Health : MonoBehaviour
 {
@@ -12,21 +13,27 @@ public class Boss_Health : MonoBehaviour
     public int stages = 2;
     public int curr_stage=1;
     Enemy_Health enemy_Health;
-    [SerializeField] int boss_health;
+    int boss_health;
+    [SerializeField] GameObject boss_hp;
+    Slider health_slider;
     void Start()
     {
         finish = lvl_complete.GetComponent<Finish>();
         enemy_Health = GetComponent<Enemy_Health>();
         boss_health = enemy_Health.health;
+        health_slider = boss_hp.transform.GetChild(0).GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if(is_active){
-            boss_health = enemy_Health.health;
-            if(boss_health<=25) curr_stage = 2;
-            if(boss_health<=0) {
+            boss_hp.SetActive(true);
+            int health = enemy_Health.health;
+            float percent = health*100/boss_health;
+            health_slider.value = percent;
+            if(health<=25) curr_stage = 2;
+            if(health<=0) {
                 FinishLevel();
             }
         }

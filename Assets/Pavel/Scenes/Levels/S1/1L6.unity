@@ -140,6 +140,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 332965082473148764, guid: 2b0842dbf4037b3478788444e0689c89,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 332965082473148764, guid: 2b0842dbf4037b3478788444e0689c89,
+        type: 3}
+      propertyPath: m_WholeNumbers
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2023273116179867788, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -288,6 +298,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7715564417615319560, guid: 2b0842dbf4037b3478788444e0689c89, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2b0842dbf4037b3478788444e0689c89, type: 3}
+--- !u!1 &647429825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4767049544006020070, guid: 2b0842dbf4037b3478788444e0689c89,
+    type: 3}
+  m_PrefabInstance: {fileID: 647429824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &690661404 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 690661404, guid: f34da989c6c2f4140a1e6402d1b9cc36,
@@ -4688,6 +4704,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1818600958}
+    - target: {fileID: 7257489016783712586, guid: a15da64c6412a6f48aa2e8f24635d2fd,
+        type: 3}
+      propertyPath: boss_hp
+      value: 
+      objectReference: {fileID: 647429825}
     - target: {fileID: 7257489016783712587, guid: a15da64c6412a6f48aa2e8f24635d2fd,
         type: 3}
       propertyPath: player
@@ -4701,7 +4722,7 @@ PrefabInstance:
     - target: {fileID: 7257489016783712590, guid: a15da64c6412a6f48aa2e8f24635d2fd,
         type: 3}
       propertyPath: health
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7257489016783712591, guid: a15da64c6412a6f48aa2e8f24635d2fd,
         type: 3}
@@ -4870,6 +4891,11 @@ PrefabInstance:
       propertyPath: Boss
       value: 
       objectReference: {fileID: 314215245}
+    - target: {fileID: 6247160096786169275, guid: f34da989c6c2f4140a1e6402d1b9cc36,
+        type: 3}
+      propertyPath: boss_hp
+      value: 
+      objectReference: {fileID: 647429825}
     - target: {fileID: 6896399027451752616, guid: f34da989c6c2f4140a1e6402d1b9cc36,
         type: 3}
       propertyPath: m_Name
