@@ -1315,6 +1315,9 @@ MonoBehaviour:
   axe: 1
   spear: 1
   shield: 1
+  axe_c: {fileID: 6569836630425333761}
+  spear_c: {fileID: 7290656530511185123}
+  skeleton_c: {fileID: 27022759563349607}
   melee: 2
   attackDelay: 2
 --- !u!114 &978304664014667898
@@ -1880,6 +1883,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2054765183250329198}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &6569836630425333761 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5165419416302657135, guid: cc38e6772869c92439bc21aea4eb7fbe,
+    type: 3}
+  m_PrefabInstance: {fileID: 2054765183250329198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7503222308803140445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1998,6 +2007,12 @@ GameObject:
 --- !u!4 &8782604348912435192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1279823769988670629, guid: ed1498b11a7aa574e86af00e0d6f2502,
+    type: 3}
+  m_PrefabInstance: {fileID: 7503222308803140445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &7290656530511185123 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 940497589168447422, guid: ed1498b11a7aa574e86af00e0d6f2502,
     type: 3}
   m_PrefabInstance: {fileID: 7503222308803140445}
   m_PrefabAsset: {fileID: 0}
