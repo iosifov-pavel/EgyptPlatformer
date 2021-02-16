@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 217561322286293534}
   - component: {fileID: 2596398212196379151}
   - component: {fileID: 5276771129850969481}
-  - component: {fileID: 8480461203481843427}
   - component: {fileID: 8412282499877710645}
   - component: {fileID: 6673896758113773237}
-  m_Layer: 0
+  - component: {fileID: 5969035143544907877}
+  m_Layer: 16
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,19 +112,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87, y: 0.32}
   m_EdgeRadius: 0
---- !u!114 &8480461203481843427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171195764926343589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc29264abdec6d348967db4fd93d6462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDamaged: 0
 --- !u!50 &8412282499877710645
 Rigidbody2D:
   serializedVersion: 4
@@ -156,5 +143,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cb1da999b1070141a83283f30517ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5969035143544907877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171195764926343589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cfea0b60219f147a87fef4b1431bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
