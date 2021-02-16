@@ -50,13 +50,12 @@ public class Skeleton : MonoBehaviour
     }
 
     void ThrowSpear(){
-        egp.enabled = false;
         skelet_anim.SetTrigger("throw");
         StartCoroutine(delay());
     }
 
     void PunchAxe(){
-        egp.enabled = false;
+        if(distance>1) return;
         skelet_anim.SetTrigger("attack");
         StartCoroutine(delay());
     }
