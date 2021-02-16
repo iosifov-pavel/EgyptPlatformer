@@ -32,8 +32,8 @@ public class Trap_Damage : MonoBehaviour
             if(other.tag=="Player" && other.layer==9 || other.layer == 10){
             ph = other.GetComponent<Player_Health>();
             player_Movement = other.GetComponent<Player_Movement>();
-            player_Movement.BlockMovement(0.25f);
             if(ph.superman || ph.dead) return;
+            player_Movement.BlockMovement(0.25f);
             rb = other.GetComponent<Rigidbody2D>();
             float y=0;
             if(rb.velocity.y>0.1) y=1;
