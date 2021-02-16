@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spear : MonoBehaviour
 {
     float lifetime = 5f;
+    [SerializeField] float speed =5f;
     public bool wasThrown = false;
     RigidbodyType2D rb;
     // Start is called before the first frame update
@@ -23,6 +24,11 @@ public class Spear : MonoBehaviour
         if(lifetime<=0){
             Destroy(gameObject);
         }
+    }
+
+    public void Fly(int dir){
+        wasThrown = true;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(dir*speed,0);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

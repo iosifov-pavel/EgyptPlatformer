@@ -64,6 +64,11 @@ public class Skeleton : MonoBehaviour
         canWalking=!canWalking;
         egp.enabled = canWalking;
     }
+    
+    public void Throw(){
+        GameObject new_spear = Instantiate(spear_g, spear_g.transform.position, spear_g.transform.rotation);
+        new_spear.GetComponent<Spear>().Fly(dir);
+    }
 
     IEnumerator delay(){
         canAttack = false;
