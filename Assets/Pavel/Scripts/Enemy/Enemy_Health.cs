@@ -9,7 +9,7 @@ public class Enemy_Health : MonoBehaviour
     public bool is_damaged;
     Color original;
     SpriteRenderer[] sprites;
-    float time=0.3f;
+    [SerializeField] float time=0.3f;
     // Start is called before the first frame update
     void Start(){
         sprites=GetComponentsInChildren<SpriteRenderer>();
