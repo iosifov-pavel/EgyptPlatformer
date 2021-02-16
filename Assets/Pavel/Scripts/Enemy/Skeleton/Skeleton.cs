@@ -11,7 +11,7 @@ public class Skeleton : MonoBehaviour
     Animator skelet_anim;
     [SerializeField] bool axe=false,spear=false,shield=false;
     GameObject axe_g, spear_g, shield_g;
-    [SerializeField] BoxCollider2D axe_c, spear_c, skeleton_c;
+    [SerializeField] BoxCollider2D axe_c, spear_c, skeleton_c, shield_c;
     int dir;
     Transform player;
     float distance=100;
@@ -82,11 +82,15 @@ public class Skeleton : MonoBehaviour
         canAttack = true;
     }
 
-    public void DeathS(){
+
+    public void DeathS2(){
         axe_c.enabled = false;
         spear_c.enabled = false;
         skeleton_c.enabled = false;
+        shield_c.enabled = false;
         transform.GetChild(0).gameObject.SetActive(false);
+    }
+    public void DeathS(){
         Destroy(gameObject, 1f);
     }
 }

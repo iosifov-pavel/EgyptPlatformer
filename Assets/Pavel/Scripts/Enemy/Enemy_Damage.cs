@@ -9,12 +9,13 @@ public class Enemy_Damage : MonoBehaviour
     public bool isDamaged=false;
     Player_Health ph;
     Player_Movement player_Movement;
+    Enemy_Health enemy_Health;
     Rigidbody2D rb;
     Transform tr;
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemy_Health = GetComponent<Enemy_Health>();
     }
     // Update is called once per frame
 
@@ -34,7 +35,7 @@ public class Enemy_Damage : MonoBehaviour
     }
 
     public void Damage(GameObject other){
-        if(isDamaged) return;
+        if(enemy_Health.is_damaged) return;
             if(other.tag=="Player" && other.layer==9 || other.layer == 10){
             ph = other.GetComponent<Player_Health>();
             if(ph.superman || ph.dead) return;
