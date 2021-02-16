@@ -7,7 +7,11 @@ public class Fire : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] ParticleSystem[] fires;
     [SerializeField] BoxCollider2D fire_col;
-    public bool on = true;
+    [SerializeField] bool constant = true;
+    [SerializeField] float switchStateTime = 3f;
+    [SerializeField] bool on = true;
+    [SerializeField] float startDelay = 0f;
+    bool ready = true;
     void Start()
     {
         
@@ -16,6 +20,20 @@ public class Fire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(startDelay>0){
+            startDelay -= Time.deltaTime;
+            return;
+        }
+        if(constant){}
+        else{
+            if(!ready) return;
+            StartCoroutine(switchState());
+        }
+
+    }
+
+    IEnumerator switchState(){
+        on = !on;
         if(on){
             foreach(ParticleSystem ps in fires){
                 var em= ps.emission;
@@ -30,6 +48,9 @@ public class Fire : MonoBehaviour
             }
             StartCoroutine(colidAction(false));
         }
+        ready = false;
+        yield return new WaitForSeconds(switchStateTime);
+        ready = true;
     }
 
     IEnumerator colidAction(bool cond){
