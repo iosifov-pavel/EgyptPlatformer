@@ -6,7 +6,7 @@ public class Enemy_Health : MonoBehaviour
 {
     public int health = 1;
     public bool dead = false;
-    bool is_damaged;
+    public bool is_damaged;
     Color original;
     SpriteRenderer[] sprites;
     float time=0.3f;
@@ -20,16 +20,18 @@ public class Enemy_Health : MonoBehaviour
     // Update is called once per frame
 
     public void TakeDamage(int damage){
+        if(dead) return;
         if(is_damaged) return;
         health-=damage;
         StartCoroutine(ReactToDamage());
         if(health<=0){
-            dead=true;
             Death();
         }
     }
 
     public void Death(){
+        //if(dead) return;
+        dead = true;
         Manager_Level.EnemyWasKilled();
         Boss_Health boss_Health = gameObject.GetComponent<Boss_Health>();
         if(boss_Health!=null){
@@ -37,7 +39,11 @@ public class Enemy_Health : MonoBehaviour
             gameObject.SetActive(false);
         }
         else{
-            Destroy(this.gameObject);
+            Animator death_a = GetComponent<Animator>();
+            if(death_a!=null){
+                death_a.SetTrigger("death");
+            }
+            else Destroy(this.gameObject);
         }
     }
 

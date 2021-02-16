@@ -22,7 +22,8 @@ public class Effect_Fire : MonoBehaviour
              {
                 // FireParticle.gameObject.SetActive(false);//
                  FireParticle.Stop();
-                 FireParticle.enableEmission = false;
+                 var emis = FireParticle.emission;
+                 emis.enabled = false;
                  StartCoroutine (Timer ());
                  //StartCoroutine (FireOn ());
                  //FireOn ();
@@ -51,7 +52,8 @@ public class Effect_Fire : MonoBehaviour
              if(!FireParticle.isPlaying)
              {
                  FireParticle.Play(); 
-                 FireParticle.enableEmission = true; 
+                 var emis = FireParticle.emission;
+                 emis.enabled = true;
                  //FireParticle.gameObject.SetActive(true);
                  StartCoroutine (Timer ());
                  //FireOn ();

@@ -170,6 +170,14 @@ public class Player_Health : MonoBehaviour
         lives++;
         lives_count.text = lives.ToString();
     }
+
+    private void OnParticleTrigger() {
+        
+    }
+
+    private void OnParticleCollision(GameObject other) {
+        
+    }
 }
 
 

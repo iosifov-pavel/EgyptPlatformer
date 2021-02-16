@@ -1341,7 +1341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d0d4cbd7f79be48bebb7f81c9a6da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  legs: {fileID: 0}
   dir: 1
   speed: 2
 --- !u!1 &7544911718450335827
@@ -1814,7 +1813,7 @@ PrefabInstance:
     - target: {fileID: 5004894690828546592, guid: cc38e6772869c92439bc21aea4eb7fbe,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5165419416302657135, guid: cc38e6772869c92439bc21aea4eb7fbe,
         type: 3}
@@ -1944,7 +1943,7 @@ PrefabInstance:
     - target: {fileID: 1779544628152365756, guid: ed1498b11a7aa574e86af00e0d6f2502,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed1498b11a7aa574e86af00e0d6f2502, type: 3}
@@ -2084,12 +2083,12 @@ PrefabInstance:
     - target: {fileID: 7563646382997107489, guid: 6c8f3e9bb23905942a30d0ef6e2e0383,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749266309894745929, guid: 6c8f3e9bb23905942a30d0ef6e2e0383,
         type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8749266309894745930, guid: 6c8f3e9bb23905942a30d0ef6e2e0383,
         type: 3}
@@ -2154,7 +2153,7 @@ PrefabInstance:
     - target: {fileID: 8749266309894745931, guid: 6c8f3e9bb23905942a30d0ef6e2e0383,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c8f3e9bb23905942a30d0ef6e2e0383, type: 3}
