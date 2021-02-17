@@ -19,6 +19,7 @@ public class Skeleton : MonoBehaviour
     [SerializeField] float attackDelay = 2f;
     bool canAttack = true;
     bool canWalking = true;
+    bool canBeDamaged = true;
     void Start()
     {
         enemy_Health = GetComponent<Enemy_Health>();
@@ -36,8 +37,9 @@ public class Skeleton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(enemy_Health.is_damaged){
-            //skelet_anim.SetTrigger("damage");
+        if(enemy_Health.is_damaged && canBeDamaged){       
+            skelet_anim.SetBool("damage",true);
+            canBeDamaged = false;
         }
         dir = (int)Mathf.Sign(transform.localScale.x)*1;
         if(eyes.Check()!=null){
@@ -51,27 +53,37 @@ public class Skeleton : MonoBehaviour
     }
 
     void ThrowSpear(){
+        canBeDamaged = false;
         skelet_anim.SetTrigger("throw");
         StartCoroutine(delay());
     }
 
     void PunchAxe(){
         if(distance>1) return;
+        canBeDamaged = false;
         skelet_anim.SetTrigger("attack");
         StartCoroutine(delay());
     }
 
     public void canWalk(){
-        //canWalking=!canWalking;
-        //egp.enabled = canWalking;
         egp.enabled = true;
     }
     
     public void cantWalk(){
         egp.enabled = false;
     }
+
+    public void damageFalse(){
+        skelet_anim.SetBool("damage",false);
+        StartCoroutine(delayFalseDamage());
+    }
+    IEnumerator delayFalseDamage(){
+        yield return new WaitForSeconds(0.2f);
+        canBeDamaged = true;
+    }
     
     public void Throw(){
+        if(enemy_Health.dead) return;
         GameObject new_spear = Instantiate(spear_g, spear_g.transform.position, spear_g.transform.rotation);
         new_spear.GetComponent<Spear>().Fly(dir);
     }
@@ -80,6 +92,7 @@ public class Skeleton : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(attackDelay);
         canAttack = true;
+        canBeDamaged = true;
     }
 
 
