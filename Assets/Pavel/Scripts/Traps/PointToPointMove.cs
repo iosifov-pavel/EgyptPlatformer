@@ -48,6 +48,7 @@ public class PointToPointMove : MonoBehaviour
                     if(points.IndexOf(point)==points.Count-1){
                         destination = points[0];
                     }
+                    else destination = points[points.IndexOf(point)+1];
                 }
                 else{
                     if(points.IndexOf(point)==0){
