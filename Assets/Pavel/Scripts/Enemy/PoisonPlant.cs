@@ -78,9 +78,9 @@ public class PoisonPlant : MonoBehaviour
         Vector2 neck_pos = (spot.transform.position + transform.position)/2;
         neck.transform.position = neck_pos;
         Vector2 toHead = transform.position - spot.transform.position;
-        angle = Vector2.SignedAngle(spot.transform.right,toHead);
-        neck.transform.rotation = Quaternion.Euler(0,0,angle-90);
-        transform.rotation = Quaternion.Euler(0,0,angle-90);
+        angle = Vector2.SignedAngle(spot.transform.up,toHead);
+        neck.transform.rotation = Quaternion.Euler(0,0,angle);
+        transform.rotation = Quaternion.Euler(0,0,angle);
         spot.transform.rotation = Quaternion.Euler(0,0,0);
         spot.transform.position = spot_place;
         eyes.transform.position = spot_place;
