@@ -14,6 +14,7 @@ public class Jaws : MonoBehaviour
     [SerializeField] float up_speed = 2f;
     [SerializeField] float time_before_attack = 1f;
     [SerializeField] float rot_speed = 1.5f, up_time=1f ,coldown = 1f;
+    float rotationAngle = 0;
     void Start()
     {
         original = transform.position;
@@ -23,8 +24,8 @@ public class Jaws : MonoBehaviour
         left_pos = left.position;
         right = transform.GetChild(2);
         right_pos = right.position;
-        left_point = transform.GetChild(4).position;
-        right_point = transform.GetChild(5).position;
+        left_point = transform.GetChild(3).position;
+        right_point = transform.GetChild(4).position;
         eyes = decoy.gameObject.GetComponent<EnemyCircleEyes>();
         target_p = target_pos.position;
     }
@@ -63,18 +64,19 @@ public class Jaws : MonoBehaviour
         jumped = false;
         yield return new WaitForSeconds(time_before_attack);
         canAttack = true;
-        left_point = transform.GetChild(4).position;
-        right_point = transform.GetChild(5).position;
+        left_point = transform.GetChild(3).position;
+        right_point = transform.GetChild(4).position;
     }
 
     void CloseTeeth(){
         if(cangoback) goBack();
         else{
             if(done && !cangoback) StartCoroutine(upstay());
-            if(Mathf.Abs(left.rotation.eulerAngles.z)>=90 && Mathf.Abs(right.rotation.eulerAngles.z)>=90){
+            if(rotationAngle>=90){
                 done = true;
             }
             else{
+                rotationAngle+=Mathf.Abs(rot_speed*Time.deltaTime);
                 left.RotateAround(left_point, new Vector3(0,0,-1), rot_speed*Time.deltaTime);
                 right.RotateAround(right_point, new Vector3(0,0,1), rot_speed*Time.deltaTime);
             }
@@ -91,13 +93,14 @@ public class Jaws : MonoBehaviour
         if((Vector2)transform.position == original){
             move_back = true;
         }
-        if(Mathf.Abs(left.rotation.eulerAngles.z)>=350 && Mathf.Abs(right.rotation.eulerAngles.z)<=10){
+        if(rotationAngle<=0){
             rot_back = true;
         }
         if(rot_back==true){}
         else{
-            left_point = transform.GetChild(4).position;
-            right_point = transform.GetChild(5).position;
+            left_point = transform.GetChild(3).position;
+            right_point = transform.GetChild(4).position;
+            rotationAngle-=Mathf.Abs(rot_speed*Time.deltaTime);
             left.RotateAround(left_point, new Vector3(0,0,1), rot_speed*Time.deltaTime);
             right.RotateAround(right_point, new Vector3(0,0,-1), rot_speed*Time.deltaTime);
         }
