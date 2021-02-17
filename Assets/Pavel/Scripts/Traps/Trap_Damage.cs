@@ -9,8 +9,11 @@ public class Trap_Damage : MonoBehaviour
     Player_Movement player_Movement;
     Rigidbody2D rb;
     Transform tr;
+    AudioSource source;
     // Start is called before the first frame update
-
+    private void Start() {
+        source = GetComponent<AudioSource>();
+    }
     // Update is called once per frame
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -33,6 +36,7 @@ public class Trap_Damage : MonoBehaviour
             ph = other.GetComponent<Player_Health>();
             player_Movement = other.GetComponent<Player_Movement>();
             if(ph.superman || ph.dead) return;
+            if(source) source.Play();
             player_Movement.BlockMovement(0.25f);
             rb = other.GetComponent<Rigidbody2D>();
             float y=0;
@@ -49,6 +53,14 @@ public class Trap_Damage : MonoBehaviour
     }
 
     private void OnCollisionExit2D(Collision2D other) {
-        
+        if(source) Invoke("stopSound", 0.5f);
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if(source) Invoke("stopSound", 0.35f);
+    }
+
+    void stopSound(){
+        source.Stop();
     }
 }

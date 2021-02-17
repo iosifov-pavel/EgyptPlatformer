@@ -1280,6 +1280,7 @@ MonoBehaviour:
   health: 3
   dead: 0
   is_damaged: 0
+  time: 0.4
 --- !u!114 &27022761592270697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,8 +1332,8 @@ MonoBehaviour:
   spear_c: {fileID: 7290656530511185123}
   skeleton_c: {fileID: 27022759563349607}
   shield_c: {fileID: 1605018534071906543}
-  melee: 2
-  attackDelay: 2
+  melee: 3
+  attackDelay: 1.5
 --- !u!114 &978304664014667898
 MonoBehaviour:
   m_ObjectHideFlags: 0
