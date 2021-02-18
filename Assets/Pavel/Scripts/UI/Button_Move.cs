@@ -40,7 +40,7 @@ float cumulative_reset=0;
 
     // Update is called once per frame
     void Update(){
-        //debugMove();
+        debugMove();
         if(Input.touchCount>0){
             Touch[] touches = Input.touches;
             if(id==-111){
