@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Manager_Level : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Manager_Level : MonoBehaviour
     GameObject ms,mg;
     [SerializeField] GameObject player;
     [SerializeField] GameObject CameraLock;
+    [SerializeField] Text timerText;
     //Manager_Section manager_Section;
     public Manager_Game manager_Game;
     public Level level;
@@ -51,8 +53,12 @@ public class Manager_Level : MonoBehaviour
         float ms=time;
         int seconds = (int)ms;
         int minutes = seconds/60;
+        ms = time - 1*seconds;
+        string newms = ms.ToString().Substring(2,2);
+        int new2ms = int.Parse(newms);
         //string g = string.Format("{0:0.00}",time);
-        string t = $"{minutes}:{seconds-60*minutes}.{time - 1*seconds}";
+        string t = $"{minutes}:{seconds-60*minutes}.{new2ms}";
+        timerText.text = t;
         //Debug.Log(t);
 
         if(killed){
