@@ -213,6 +213,7 @@ MonoBehaviour:
   chainParent: {fileID: 3546771780439419908}
   chainPrefab: {fileID: 3989518669148869452, guid: d1eeb9166930cab48b01046d6be0b451,
     type: 3}
+  delayOnPoints: 0.1
 --- !u!1 &7758351959353422819
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +239,7 @@ Transform:
   m_GameObject: {fileID: 7758351959353422819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 549648527743025727}
   m_RootOrder: 2
