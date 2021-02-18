@@ -39,7 +39,8 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     }
 
     public void Use(GameObject _player){
+        if(!child_script.Done) return;
         player=_player;
-        condition = condition==false ? true : false;
+        condition = !condition;
     }
 }
