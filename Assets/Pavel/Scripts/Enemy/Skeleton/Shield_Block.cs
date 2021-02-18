@@ -6,6 +6,7 @@ public class Shield_Block : MonoBehaviour
 {
     // Start is called before the first frame update
     int durability = 2;
+    public bool canBreak = true;
     void Start()
     {  
     }
@@ -16,6 +17,7 @@ public class Shield_Block : MonoBehaviour
     }
 
     public void ReduceDurab(){
+        if(!canBreak) return;
         durability--;
         if(durability<=0) gameObject.SetActive(false);
     }

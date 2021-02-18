@@ -40,7 +40,7 @@ float cumulative_reset=0;
 
     // Update is called once per frame
     void Update(){
-        debugMove();
+        //debugMove();
         if(Input.touchCount>0){
             Touch[] touches = Input.touches;
             if(id==-111){
@@ -111,9 +111,9 @@ float cumulative_reset=0;
         enogh_y = (Mathf.Abs(local.y)>40);
         dir_x = local.x>=0 ? 1 : -1;
         dir_y = local.y>=0 ? 1 : -1;
-        if(enough) pm.direction.x = dir_x * (power-40) * 0.02f;
+        if(enough) pm.direction.x = dir_x * (power-40) * 0.03f;
         else pm.direction.x=0f;
-        if(enogh_y) pm.direction.y = dir_y * (power-40) * 0.02f;
+        if(enogh_y) pm.direction.y = dir_y * (power-40) * 0.03f;
         else pm.direction.y=0f;
     }
 
@@ -153,8 +153,8 @@ float cumulative_reset=0;
         float tempControlY = Input.GetAxis("Vertical");
         if(tempControlX!=0 || tempControlY!=0){
             pm.stickPressed = true;
-            pm.direction.x = tempControlX*2.2f;
-            pm.direction.y = tempControlY*2.2f;
+            pm.direction.x = tempControlX*3.3f;
+            pm.direction.y = tempControlY*3.3f;
             pm.hor=68.1f * pm.direction.x;
             pm.ver=68.1f * pm.direction.y;
         }

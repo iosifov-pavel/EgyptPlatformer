@@ -16,7 +16,7 @@ public class Player_Health : MonoBehaviour
     Player_Movement pm;
     GameObject UI;
     GameObject Lives;
-    public int lives =3;
+    public int lives = 4;
     Text lives_count;
     GameObject LooseScreen;
     GameObject DeathScreen;

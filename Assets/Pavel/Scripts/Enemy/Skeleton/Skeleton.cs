@@ -17,6 +17,7 @@ public class Skeleton : MonoBehaviour
     float distance=100;
     [SerializeField] float melee = 2;
     [SerializeField] float attackDelay = 2f;
+    [SerializeField] bool unbreakableShield = true;
     bool canAttack = true;
     bool canWalking = true;
     bool canBeDamaged = true;
@@ -31,7 +32,11 @@ public class Skeleton : MonoBehaviour
         shield_g = transform.GetChild(4).gameObject;
         if(axe) axe_g.SetActive(true);
         if(spear) spear_g.SetActive(true);
-        if(shield) shield_g.SetActive(true);
+        if(shield){
+            shield_g.SetActive(true);
+            if(unbreakableShield) shield_g.GetComponent<Shield_Block>().canBreak = false;
+            else shield_g.GetComponent<Shield_Block>().canBreak = true;
+        } 
     }
 
     // Update is called once per frame
