@@ -154,6 +154,8 @@ public class Player_Health : MonoBehaviour
 
     IEnumerator super(float t){
         superman=true;
+        SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
+        player.color = Color.green;
         yield return new WaitForSeconds(t);
         superman = false;
     }
