@@ -22,7 +22,7 @@ public class Player_Interact : MonoBehaviour
         //if(isInteracting) return;
         if(canInteract){
             Debug.Log("1");
-            if(Input.GetKey(KeyCode.U) || Input.GetMouseButtonDown(1)){
+            if(Input.GetKey(KeyCode.U) /*|| Input.GetMouseButtonDown(1)*/){
                 Debug.Log("2");
                 button.GetComponent<Button_Use>().Click();
             }
