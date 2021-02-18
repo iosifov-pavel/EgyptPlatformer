@@ -10,6 +10,9 @@ public class PointToPointMove : MonoBehaviour
     [SerializeField] float speed = 4f;
     [SerializeField] Transform body;
     [SerializeField] bool forward = true;
+    [SerializeField] bool visualize = true;
+    [SerializeField] Transform chainParent;
+    [SerializeField] GameObject chainPrefab;
     Transform destination;
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -28,6 +31,35 @@ public class PointToPointMove : MonoBehaviour
     {
         body.position = points[0].position;
         destination = points[0];
+        if(visualize) drawChains();
+    }
+
+    void drawChains(){
+        foreach(Transform point in points){
+            int index = points.IndexOf(point);
+            if(index == points.Count-1){
+                if(cycle) CrateChain(point,points[0]);
+            }
+            else{
+                CrateChain(point,points[index+1]);
+            }
+        }
+    }
+
+    void CrateChain(Transform p1, Transform p2){
+                Vector2 chainPos = (p1.position + p2.position)/2;
+                Vector2 dir = p1.position - p2.position;
+                float angle = Vector2.Angle(Vector2.up, dir);
+                GameObject chain = Instantiate(chainPrefab);
+                chain.transform.parent = chainParent;
+                chain.transform.position = chainPos;
+                if(dir.x<0) chain.transform.rotation = Quaternion.Euler(0,0,angle);
+                else  chain.transform.rotation = Quaternion.Euler(0,0,-angle);
+                chain.transform.localScale = Vector3.one;
+                SpriteRenderer sprite = chain.GetComponent<SpriteRenderer>();
+                Vector2 newsize = sprite.size;
+                newsize.y = dir.magnitude / chainParent.transform.localScale.y;
+                sprite.size = newsize;
     }
 
     // Update is called once per frame
