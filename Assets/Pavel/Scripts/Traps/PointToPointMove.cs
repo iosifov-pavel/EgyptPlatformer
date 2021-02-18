@@ -13,7 +13,9 @@ public class PointToPointMove : MonoBehaviour
     [SerializeField] bool visualize = true;
     [SerializeField] Transform chainParent;
     [SerializeField] GameObject chainPrefab;
+    [SerializeField] float delayOnPoints = 0.1f;
     Transform destination;
+    bool stop = false;
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
         foreach(Transform point in points){
@@ -65,6 +67,8 @@ public class PointToPointMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(body==null) Destroy(gameObject);
+        if(stop) return;
         MoveToPoint(destination);
         CheckArrive(destination);
     }
@@ -99,6 +103,13 @@ public class PointToPointMove : MonoBehaviour
                 if(forward) destination = points[points.IndexOf(point) + 1];
                 else destination = points[points.IndexOf(point) - 1];
             }
+            StartCoroutine(Delay());
         }
+    }
+
+    IEnumerator Delay(){
+        stop = true;
+        yield return new WaitForSeconds(delayOnPoints);
+        stop = false;
     }
 }
