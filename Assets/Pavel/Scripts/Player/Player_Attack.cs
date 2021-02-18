@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class Player_Attack : MonoBehaviour
 {
 [SerializeField] GameObject bullet_p;

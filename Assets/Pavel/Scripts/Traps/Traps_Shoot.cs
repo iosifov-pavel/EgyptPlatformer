@@ -13,10 +13,12 @@ public class Traps_Shoot : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Trap_Bullet trap_Bullet;
     private GameObject bullet;
+    AudioSource source;
     bool can_attack = true;
     [SerializeField] float wait = 1f;
     // Start is called before the first frame update
     void Start(){
+        source = GetComponent<AudioSource>();
         r_c = transform.GetChild(0);
         up_c = transform.GetChild(1);
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -47,6 +49,7 @@ public class Traps_Shoot : MonoBehaviour
         bullet.transform.position = transform.position + new Vector3(0,0,1);
         if(up) trap_Bullet.GetDirection(transform.up * transform.localScale.y, speed);
         else trap_Bullet.GetDirection(transform.right * transform.localScale.x, speed);
+        source.Play();
         yield return new WaitForSeconds(wait);
         can_attack = true;
     }

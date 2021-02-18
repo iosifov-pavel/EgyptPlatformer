@@ -13,7 +13,7 @@ public class Platform_Move : MonoBehaviour
     
     void OnDrawGizmos(){
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(original, point);
+        Gizmos.DrawLine(transform.position, transform.position + move_point);
     }
 
     // Start is called before the first frame update
