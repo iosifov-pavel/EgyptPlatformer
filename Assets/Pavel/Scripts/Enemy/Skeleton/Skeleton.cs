@@ -42,6 +42,7 @@ public class Skeleton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(enemy_Health.dead) return;
         if(enemy_Health.is_damaged && canBeDamaged){       
             skelet_anim.SetBool("damage",true);
             canBeDamaged = false;
