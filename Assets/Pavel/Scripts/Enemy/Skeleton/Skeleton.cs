@@ -66,12 +66,14 @@ public class Skeleton : MonoBehaviour
     void PunchAxe(){
         if(distance>1) return;
         canBeDamaged = false;
+        axe_g.GetComponent<BoxCollider2D>().enabled = true;
         skelet_anim.SetTrigger("attack");
         StartCoroutine(delay());
     }
 
     public void canWalk(){
         egp.enabled = true;
+        if(axe) axe_g.GetComponent<BoxCollider2D>().enabled = false;
     }
     
     public void cantWalk(){

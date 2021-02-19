@@ -28,6 +28,7 @@ public class Spear : MonoBehaviour
 
     public void Fly(int dir){
         wasThrown = true;
+        GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<Rigidbody2D>().velocity = new Vector2(dir*speed,0);
     }
 
