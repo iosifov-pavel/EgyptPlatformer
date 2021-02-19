@@ -151,7 +151,7 @@ public LineRenderer line;
         laser.transform.parent = lasers;
         laser.transform.position = lasers.position;
         laser.AddComponent<LineRenderer>();
-        laser.AddComponent<Enemy_Damage>();
+        laser.AddComponent<Trap_Damage>();
         laser.AddComponent<BoxCollider2D>();
         size = laser.GetComponent<BoxCollider2D>();
         size.offset = Vector2.zero;
