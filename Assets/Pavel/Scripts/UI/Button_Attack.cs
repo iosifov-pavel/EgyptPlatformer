@@ -29,7 +29,7 @@ private Camera cam;
     }
 
     private void Update() {
-        //debugAttack();
+        debugAttack();
         if(Input.touchCount>0){
             Touch[] touches = Input.touches;
                 if(id==-111){
@@ -84,9 +84,14 @@ private Camera cam;
         if(local.y>=0) pa.bUp=1;
         else pa.bUp=-1;
         bool enough = (power>=30);
-        if(enough)  pa.buttonAttack=true;
-        else pa.buttonAttack=false;
-        pa.angle=angle;
+        if(enough){
+            pa.buttonAttack=true;
+            pa.angle=angle;
+        }  
+        else{
+            pa.buttonAttack=true;
+            pa.angle = 0;
+        } 
     }
 
     public void ResetTouch(){

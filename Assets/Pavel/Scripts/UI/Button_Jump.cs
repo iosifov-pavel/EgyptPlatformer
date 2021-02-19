@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
  
-public class Button_Jump : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
+public class Button_Jump : MonoBehaviour
+, IPointerDownHandler, IPointerUpHandler 
+{
  
 public bool buttonPressed = false;
 [SerializeField] private GameObject player;
@@ -13,30 +15,60 @@ private void Start() {
 }
 
 private void Update() {
-    if(Input.GetKeyDown(KeyCode.Space)) Pdown();
-    else if(Input.GetKeyUp(KeyCode.Space)) PUp();
+    if(Input.GetButtonDown("Jump")) Pdown();
+    else if(Input.GetButtonUp("Jump")) PUp();
+    //else if(Input.GetKeyUp(KeyCode.Space)) PUp();
 }
 
-void Pdown(){
-    if(!buttonPressed){
-    buttonPressed = true;
-    StartCoroutine(delay());
-    Debug.Log("J pressed");
-    }
-}
+//void Pdown(){
+//    if(!buttonPressed){
+//    buttonPressed = true;
+//    StartCoroutine(delay());
+//    Debug.Log("J pressed");
+//    }
+//}
+//void PUp(){
+//    buttonPressed = false;
+//    pm.buttonJump = false;
+//    pm.cant_jump = false;
+//    pm.jumps++;
+//    Debug.Log("J released");
+//}
+//public void OnClick(){
+//    //if(!buttonPressed){
+//    //buttonPressed = true;
+//    pm.buttonJump = true;
+//    pm.jumps++;
+//    Debug.Log("Jump2");
+//    //}
+//}
 
 void PUp(){
     buttonPressed = false;
-    pm.buttonJump = false;
-    pm.cant_jump = false;
-    pm.jumps++;
-    Debug.Log("J released");
+}
+
+void Pdown(){
+    if(buttonPressed){
+        return;
+    }
+    buttonPressed = true;
+    pm.buttonJump = true;
+    //pm.jumps++;
 }
  
+//public void OnPointerDown(PointerEventData eventData){
+//    //Pdown();
+//    Pdown2();
+//}
+ 
+//public void OnPointerUp(PointerEventData eventData){
+//    PUp();
+//}
+
 public void OnPointerDown(PointerEventData eventData){
     Pdown();
+    //Pdown2();
 }
- 
 public void OnPointerUp(PointerEventData eventData){
     PUp();
 }

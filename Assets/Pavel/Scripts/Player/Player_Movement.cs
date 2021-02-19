@@ -22,7 +22,7 @@ public class Player_Movement : MonoBehaviour
     List<Vector2> sources = new List<Vector2>();
     List<int> source_times = new List<int>();
     //--------------------------
-    float jump_force = 5f;
+    [SerializeField] float jump_force = 8f;
     float jump_force_multiplier=1;
     float jump_time = -111f;
     public float jump_time_max = 0.16f;
@@ -165,10 +165,12 @@ public class Player_Movement : MonoBehaviour
             air_direction_change=false;
             isJumping=true;  
             rb.drag=2f;
+            jumps++;
             anima.setBoolAnimation("Ground",false);
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            if(jumps==2) rb.AddForce(Vector3.up * (jump_force), ForceMode2D.Impulse);
+            if(jumps==2) rb.AddForce(Vector3.up * (jump_force * jump_force_multiplier), ForceMode2D.Impulse);
             else rb.AddForce(Vector3.up * jump_force * jump_force_multiplier, ForceMode2D.Impulse);
+            buttonJump = false;
         }
     }
 
@@ -205,6 +207,7 @@ public class Player_Movement : MonoBehaviour
         foreach(Collider2D hit in hits){
             if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){
                 isGrounded=true;
+                if(isJumping)buttonJump = false;
                 check=true;
                 isJumping=false;
                 cant_jump = false;
@@ -263,7 +266,11 @@ public class Player_Movement : MonoBehaviour
             rb.drag=1f;
             if(directionchanged || !stickPressed || needtostop){
             }
-        } else {
+            if(direction.x==0 && last_velocity!=0){
+                rb.velocity +=new Vector2(inertia,0); 
+            }
+        } 
+        else {
             rb.gravityScale = gravity;
             if(ph.dead){
                 rb.drag=4;
