@@ -10389,6 +10389,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 549648527743025726, guid: 962b34a8cc525ed448a8d123969578e5,
         type: 3}
+      propertyPath: points.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 549648527743025726, guid: 962b34a8cc525ed448a8d123969578e5,
+        type: 3}
       propertyPath: cycle
       value: 0
       objectReference: {fileID: 0}
@@ -10406,11 +10411,6 @@ PrefabInstance:
         type: 3}
       propertyPath: delayOnPoints
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 549648527743025726, guid: 962b34a8cc525ed448a8d123969578e5,
-        type: 3}
-      propertyPath: points.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 549648527743025726, guid: 962b34a8cc525ed448a8d123969578e5,
         type: 3}
@@ -24072,12 +24072,12 @@ PrefabInstance:
     - target: {fileID: 6744782389006401232, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.4
+      value: -19.236
       objectReference: {fileID: 0}
     - target: {fileID: 6744782389006401232, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.9
+      value: 16.252
       objectReference: {fileID: 0}
     - target: {fileID: 7065117392950752475, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
