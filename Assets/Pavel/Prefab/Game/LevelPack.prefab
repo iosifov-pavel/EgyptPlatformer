@@ -1120,6 +1120,11 @@ PrefabInstance:
       propertyPath: aplayer
       value: 
       objectReference: {fileID: 7065117394009206671}
+    - target: {fileID: 8772881803171442546, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 6744782389006401232}
     - target: {fileID: 8795077997037952301, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
       propertyPath: m_RootOrder
@@ -1387,6 +1392,10 @@ PrefabInstance:
       propertyPath: player_Health
       value: 
       objectReference: {fileID: 3910020913551992818}
+    - target: {fileID: 933124414, guid: 0855f7da149412f49ab9a4a9aef7b129, type: 3}
+      propertyPath: player_m
+      value: 
+      objectReference: {fileID: 6744782389006401232}
     - target: {fileID: 1140590507, guid: 0855f7da149412f49ab9a4a9aef7b129, type: 3}
       propertyPath: button
       value: 

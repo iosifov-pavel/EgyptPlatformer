@@ -11,6 +11,7 @@ Vector2 original;
 Vector2 center;
 Vector2 point;
 [SerializeField] private GameObject aplayer;
+[SerializeField] Transform player;
 Player_Attack pa;
 float scale;
 float dist;
@@ -29,7 +30,7 @@ private Camera cam;
     }
 
     private void Update() {
-        debugAttack();
+        //debugAttack();
         if(Input.touchCount>0){
             Touch[] touches = Input.touches;
                 if(id==-111){
@@ -83,14 +84,15 @@ private Camera cam;
         float angle = Vector3.Angle(Vector3.right,point);
         if(local.y>=0) pa.bUp=1;
         else pa.bUp=-1;
-        bool enough = (power>=30);
+        bool enough = (power>=50);
         if(enough){
+            pa.notEnough = false;
             pa.buttonAttack=true;
             pa.angle=angle;
         }  
         else{
+            pa.notEnough = true;
             pa.buttonAttack=true;
-            pa.angle = 0;
         } 
     }
 

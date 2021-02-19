@@ -7,6 +7,7 @@ public class Player_Attack : MonoBehaviour
 {
 [SerializeField] GameObject bullet_p;
 [SerializeField] Player_Health player_Health;
+[SerializeField] Transform player_m;
 private float timeBtwShots=0.3f;
 public bool canAttack = true;
 public bool isAttacking = false;
@@ -19,6 +20,7 @@ public bool buttonAttack=false;
 public int bUp=1;
 public float angle;
 public bool blockAttack = false;
+public bool notEnough = true;
 AudioSource fire_sound;
 Manager_Level LM;
 //public int kills=0;
@@ -36,9 +38,16 @@ Manager_Level LM;
       if(player_Health.dead || blockAttack) return;
       transform.localPosition = forward;
       if (buttonAttack && canAttack){
-         isAttacking=true;
-         Shoot(angle);
-         StartCoroutine(AtackTime());
+         if(!notEnough){
+            isAttacking=true;
+            Shoot(angle);
+            StartCoroutine(AtackTime());
+         }
+         else{
+            if(player_m.localScale.x>0){Shoot(0);}
+            else {Shoot(180);}
+            StartCoroutine(AtackTime());
+         }
       }
       pa.setBoolAnimation("Up", up);
       pa.setBoolAnimation("Attack", isAttacking);
