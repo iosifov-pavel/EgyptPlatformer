@@ -108,7 +108,7 @@ public class Skeleton : MonoBehaviour
         spear_c.enabled = false;
         skeleton_c.enabled = false;
         shield_c.enabled = false;
-        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().enabled=false;
     }
     public void DeathS(){
         Destroy(gameObject, 1f);
