@@ -58,6 +58,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] PhysicsMaterial2D zero;
     [SerializeField] PhysicsMaterial2D slope;
     [SerializeField] PhysicsMaterial2D stop_material;
+    [SerializeField] ParticleSystem dust, onGround;
+    ParticleSystem.EmissionModule dust_e;
     //--------------------------------------
     public bool stickPressed = false;
     public bool blocked = false;
@@ -67,6 +69,7 @@ public class Player_Movement : MonoBehaviour
    // PhysicsMaterial2D OnSlope;
     // Start is called before the first frame update
     void Start(){
+        dust_e = dust.emission;
         jumps=0;
         rb = GetComponent<Rigidbody2D>();
         rb.drag=1f;
@@ -93,11 +96,13 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update(){
         if(stickPressed){
-        } else {
+        } 
+        else {
              direction = new Vector2(0, 0);
              stick_delta = new Vector2(0,0);
              hor = 0; 
              ver = 0;
+             dust_e.enabled = false;
         }
         hor+=stick_delta.x;
         ver+=stick_delta.y;
@@ -114,6 +119,12 @@ public class Player_Movement : MonoBehaviour
         }
         if(!moveBlock)if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
+        }
+        if(Mathf.Abs(direction.x)>0.2f && isGrounded){
+            dust_e.enabled=true;
+        }
+        else{
+            dust_e.enabled=false;
         }
     }
 
@@ -162,6 +173,8 @@ public class Player_Movement : MonoBehaviour
         if(jump_block || cant_jump) return;
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(buttonJump && jumps<2){
+            //onGround.Play();
+            dust_e.enabled = false;
             air_direction_change=false;
             isJumping=true;  
             rb.drag=2f;
@@ -207,9 +220,13 @@ public class Player_Movement : MonoBehaviour
         foreach(Collider2D hit in hits){
             if(hit!=null && (hit.gameObject.tag=="Ground" || hit.gameObject.tag=="Trap")){
                 isGrounded=true;
-                if(isJumping)buttonJump = false;
+                if(isJumping || isFalling){
+                    buttonJump = false;
+                    onGround.Play();
+                }
                 check=true;
                 isJumping=false;
+                isFalling = false;
                 cant_jump = false;
                 jumps=0;
                 inertia=0;
@@ -222,6 +239,7 @@ public class Player_Movement : MonoBehaviour
         }
         if(!isJumping && lastcheck && !check){
             lastcheck=false;
+            isFalling = true;
             jumps=1;
         }
         lastcheck=check;

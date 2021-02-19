@@ -30,7 +30,7 @@ private Camera cam;
     }
 
     private void Update() {
-        //debugAttack();
+        debugAttack();
         if(Input.touchCount>0){
             Touch[] touches = Input.touches;
                 if(id==-111){
@@ -107,6 +107,7 @@ private Camera cam;
     void debugAttack(){
         bool md = Input.GetMouseButton(0);
         if(md){
+            pa.notEnough = false;
             pa.buttonAttack=true;
             Vector2 mpos = Input.mousePosition;
             Vector3 mrpos = cam.ScreenToWorldPoint(mpos);
