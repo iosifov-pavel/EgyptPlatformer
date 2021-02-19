@@ -30,7 +30,7 @@ private Camera cam;
     }
 
     private void Update() {
-        debugAttack();
+        if(Application.isEditor)debugAttack();
         if(Input.touchCount>0){
             Touch[] touches = Input.touches;
                 if(id==-111){
