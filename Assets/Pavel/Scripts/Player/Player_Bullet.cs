@@ -8,15 +8,17 @@ Collider2D col;
 public float speed = 8f;
 Vector2 player_scale;
 public int dmg = 1;
-private float lifetime = 0.9f;
+private float lifetime = 1f;
 float angle = 0;
 int direction = 1;
 SpriteRenderer sprt;
 Quaternion rot;
 public GameObject player;
+Rigidbody2D body;
 bool wasContact = false;
   // Start is called before the first frame update
    void Start (){
+      body = GetComponent<Rigidbody2D>();
       sprt = GetComponent<SpriteRenderer>();
       col = GetComponent<Collider2D>();
     }
@@ -28,8 +30,9 @@ bool wasContact = false;
         Color newc = sprt.color;
         newc.a=1;
         sprt.color=newc;
-        float step =  speed * Time.deltaTime; 
-        transform.Translate(Vector3.right*step);
+        //float step =  speed * Time.deltaTime; 
+        //transform.Translate(Vector3.right*step);
+        body.velocity = transform.right * speed;
         lifetime-=Time.deltaTime;
         if(lifetime<=0.8f && !wasContact) sprt.sprite = full; 
         if(lifetime<=0) Destroy(gameObject);
@@ -41,7 +44,7 @@ bool wasContact = false;
       Debug.Log(hitInfo.name);
       if (hitInfo.name == "Player" || hitInfo.name == "GroundCheck") return;
       //else if(hitInfo.tag=="Ground" && lifetime>=0.89999f) return;
-      else if(hitInfo.tag=="Ground" && lifetime<0.89999f) StartCoroutine(onContact());
+      else if(hitInfo.tag=="Ground"/* && lifetime<0.89999f*/) StartCoroutine(onContact());
       else if(hitInfo.tag=="Ground" && ! wasContact) StartCoroutine(onContact());
       else if(hitInfo.tag == "Shield" && ! wasContact){
           hitInfo.gameObject.GetComponent<Shield_Block>().ReduceDurab();
