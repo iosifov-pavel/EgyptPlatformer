@@ -14,14 +14,16 @@ public class Player_Sounds : MonoBehaviour
     AudioSource[] audioSource;
     AudioSource source;
     AudioSource step;
+    float fixedVolume;
     // Start is called before the first frame update
     void Start()
     {
-        sounds = this;
         //audioSource = GetComponents<AudioSource>();
         //source = audioSource[0];
         //step = audioSource[1];
         source = GetComponent<AudioSource>();
+        fixedVolume = source.volume;
+        sounds = this;
         //step.clip = steps;
     }
 
@@ -29,17 +31,25 @@ public class Player_Sounds : MonoBehaviour
 
     public void PlaySound(string src){
         switch(src){
-            case "damage": 
+            case "damage":
+                source.volume = 0.45f;
                 source.PlayOneShot(damaged);
+                //source.volume = fixedVolume;
                 break;
             case "death":
+                source.volume = 0.5f;
                 source.PlayOneShot(death);
+                //source.volume = fixedVolume;
                 break;
             case "jump":
+                source.volume = 0.15f;
                 source.PlayOneShot(jump);
+                //source.volume = fixedVolume;
                 break;
             case "shot":
+                source.volume = 0.35f;
                 source.PlayOneShot(shot);
+                //source.volume = fixedVolume;
                 break;
         }
     }
