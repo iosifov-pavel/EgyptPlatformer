@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2559510660216248533}
   - component: {fileID: 1606876633501816088}
   m_Layer: 9
-  m_Name: Player1
+  m_Name: _Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -229,10 +229,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aeb6bd272fb5b644b55894f0f859f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplier: {x: 1, y: 1}
   maxSpeed: 4
   direction: {x: 0, y: 0}
+  stick_delta_y: {x: 0, y: 0}
+  stick_delta: {x: 0, y: 0}
+  facing: 0
+  jump_force: 8
+  jump_time_max: 0.16
+  jumps: 0
+  isJumping: 0
+  jump_block: 0
+  buttonJump: 0
+  gravity: 2.2
+  cant_jump: 0
+  verical: {x: 0, y: 0}
+  hor: 0
+  ver: 0
+  inertia: 0
+  isFalling: 0
   isGrounded: 1
   onSlope: 0
+  slopeangle:
+  - 0
+  - 0
+  zero: {fileID: 0}
+  slope: {fileID: 0}
+  stop_material: {fileID: 0}
+  dust: {fileID: 0}
+  onGround: {fileID: 0}
+  stickPressed: 0
+  blocked: 0
+  moveBlock: 0
+  steps: {fileID: 0}
 --- !u!114 &2507651598525058792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,9 +274,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c52b3e1a7505145933bcb0dc09ea86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  MAXhp: 3
   isDamaged: 0
   superman: 0
   dead: 0
+  lives: 4
 --- !u!114 &2559510660216248533
 MonoBehaviour:
   m_ObjectHideFlags: 0

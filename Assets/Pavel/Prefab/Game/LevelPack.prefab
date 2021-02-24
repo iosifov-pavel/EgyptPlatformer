@@ -10610,12 +10610,12 @@ PrefabInstance:
       objectReference: {fileID: 338202666734125341}
     - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
-      propertyPath: m_Navigation.m_Mode
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
@@ -10625,14 +10625,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7065117394547642142}
+    - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -10655,14 +10655,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8772881803171442546, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
-      propertyPath: aplayer
-      value: 
-      objectReference: {fileID: 7065117394009206671}
-    - target: {fileID: 8772881803171442546, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
-        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 6744782389006401232}
+    - target: {fileID: 8772881803171442546, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
+        type: 3}
+      propertyPath: aplayer
+      value: 
+      objectReference: {fileID: 7065117394009206671}
     - target: {fileID: 8795077997037952301, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
       propertyPath: m_RootOrder
@@ -10927,13 +10927,13 @@ PrefabInstance:
       objectReference: {fileID: 8446175799290590029, guid: 4742054a5ae59384dbd62c6e45da07ce,
         type: 3}
     - target: {fileID: 933124414, guid: 0855f7da149412f49ab9a4a9aef7b129, type: 3}
-      propertyPath: player_Health
-      value: 
-      objectReference: {fileID: 3910020913551992818}
-    - target: {fileID: 933124414, guid: 0855f7da149412f49ab9a4a9aef7b129, type: 3}
       propertyPath: player_m
       value: 
       objectReference: {fileID: 6744782389006401232}
+    - target: {fileID: 933124414, guid: 0855f7da149412f49ab9a4a9aef7b129, type: 3}
+      propertyPath: player_Health
+      value: 
+      objectReference: {fileID: 3910020913551992818}
     - target: {fileID: 1140590507, guid: 0855f7da149412f49ab9a4a9aef7b129, type: 3}
       propertyPath: button
       value: 
@@ -11040,6 +11040,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7371577357488217339, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
+      propertyPath: dust
+      value: 
+      objectReference: {fileID: 2092079040590866561}
+    - target: {fileID: 7371577357488217339, guid: 0855f7da149412f49ab9a4a9aef7b129,
+        type: 3}
       propertyPath: zero
       value: 
       objectReference: {fileID: 6200000, guid: 6e4a07c523e6a2f4897b4cf9bb870785, type: 2}
@@ -11055,19 +11060,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7371577357488217339, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
-      propertyPath: jump_force
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 7371577357488217339, guid: 0855f7da149412f49ab9a4a9aef7b129,
-        type: 3}
-      propertyPath: dust
-      value: 
-      objectReference: {fileID: 2092079040590866561}
-    - target: {fileID: 7371577357488217339, guid: 0855f7da149412f49ab9a4a9aef7b129,
-        type: 3}
       propertyPath: onGround
       value: 
       objectReference: {fileID: 6331296085346184720}
+    - target: {fileID: 7371577357488217339, guid: 0855f7da149412f49ab9a4a9aef7b129,
+        type: 3}
+      propertyPath: jump_force
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7403318961397528494, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: m_Name
