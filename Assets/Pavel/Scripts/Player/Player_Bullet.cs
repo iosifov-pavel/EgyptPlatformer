@@ -44,7 +44,7 @@ bool wasContact = false;
       Debug.Log(hitInfo.name);
       if (hitInfo.name == "Player" || hitInfo.name == "GroundCheck") return;
       //else if(hitInfo.tag=="Ground" && lifetime>=0.89999f) return;
-      else if(hitInfo.tag=="Ground"/* && lifetime<0.89999f*/) StartCoroutine(onContact());
+      else if(hitInfo.tag=="Ground"  || hitInfo.tag=="Trap"/* && lifetime<0.89999f*/) StartCoroutine(onContact());
       else if(hitInfo.tag=="Ground" && ! wasContact) StartCoroutine(onContact());
       else if(hitInfo.tag == "Shield" && ! wasContact){
           hitInfo.gameObject.GetComponent<Shield_Block>().ReduceDurab();
