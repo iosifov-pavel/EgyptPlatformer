@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Experimental;
 
 public class Debbuger : MonoBehaviour
 {
+    [SerializeField] UnityEngine.Experimental.Rendering.Universal.Light2D lightinh;
     [SerializeField] private Text score;
     static Text text;
 
