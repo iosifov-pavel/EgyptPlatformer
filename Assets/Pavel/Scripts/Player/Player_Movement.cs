@@ -173,6 +173,7 @@ public class Player_Movement : MonoBehaviour
         if(jump_block || cant_jump) return;
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(buttonJump && jumps<2){
+            Player_Sounds.sounds.PlaySound("jump");
             //onGround.Play();
             dust_e.enabled = false;
             air_direction_change=false;

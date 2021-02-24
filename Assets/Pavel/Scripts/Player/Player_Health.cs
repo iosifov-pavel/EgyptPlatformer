@@ -97,6 +97,7 @@ public class Player_Health : MonoBehaviour
     }
 
     public void Death(){
+        Player_Sounds.sounds.PlaySound("death");
         dead = true;
         gameObject.layer=10;
         StopAllCoroutines();
