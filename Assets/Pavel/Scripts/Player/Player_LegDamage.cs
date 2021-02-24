@@ -6,6 +6,7 @@ public class Player_LegDamage : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Player_Movement player_Movement;
+    [SerializeField] Player_Health player_Health;
     Rigidbody2D rb2;
     // Update is called once per frame
 
@@ -16,7 +17,14 @@ public class Player_LegDamage : MonoBehaviour
             rb2 = transform.parent.gameObject.GetComponent<Rigidbody2D>();
             rb2.velocity = new Vector2(rb2.velocity.x,0);
             rb2.AddForce(transform.up*8f, ForceMode2D.Impulse);
+            StartCoroutine(noDamage());
             player_Movement.jumps--;
         }
+    }
+
+    IEnumerator noDamage(){
+        player_Health.afterHeadJump = true;
+        yield return new WaitForSeconds(0.11f);
+        player_Health.afterHeadJump = false;
     }
 }

@@ -23,6 +23,7 @@ public class Player_Health : MonoBehaviour
     GameObject Playing_UI;
     Manager_Level LM;
     Reset_Playing_UI reset_Playing_UI;
+    public bool afterHeadJump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +81,7 @@ public class Player_Health : MonoBehaviour
 
     public void ChangeHP(int source){
         if(superman || dead) return;
+        if(afterHeadJump) return;
         hp+=source;
         UI_HP.Damaged();
         Debug.Log("Health " + hp);
