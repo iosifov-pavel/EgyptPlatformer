@@ -42,7 +42,7 @@ public class Player_Sounds : MonoBehaviour
                 //source.volume = fixedVolume;
                 break;
             case "jump":
-                source.volume = 0.12f;
+                source.volume = 0.15f;
                 source.PlayOneShot(jump);
                 //source.volume = fixedVolume;
                 break;
