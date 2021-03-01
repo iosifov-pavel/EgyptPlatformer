@@ -44,11 +44,11 @@ public class Item_Push : MonoBehaviour, IIntercatable
         RaycastHit2D hit1,hit2;
         Vector2 rayOrigin1 = new Vector2(transform.position.x+ext_x, transform.position.y-ext_y);
         Vector2 rayOrigin2 = new Vector2(transform.position.x-ext_x, transform.position.y-ext_y);
-        hit1 = Physics2D.Raycast(rayOrigin1,Vector2.down,0.05f,ground);
-        hit2 = Physics2D.Raycast(rayOrigin2,Vector2.down,0.05f,ground);
-        Debug.DrawRay(rayOrigin1,Vector2.down*(0.05f),Color.green,0.01f);
-        Debug.DrawRay(rayOrigin2,Vector2.down*(0.05f),Color.green,0.01f);
-        if(hit1.collider!=null || hit2.collider!=null){
+        hit1 = Physics2D.Raycast(rayOrigin1,Vector2.down,0.1f,ground);
+        hit2 = Physics2D.Raycast(rayOrigin2,Vector2.down,0.1f,ground);
+        Debug.DrawRay(rayOrigin1,Vector2.down*(0.1f),Color.green,0.01f);
+        Debug.DrawRay(rayOrigin2,Vector2.down*(0.1f),Color.green,0.01f);
+        if((hit1.collider!=null || hit2.collider!=null)){
             onGround = true;
             rb2.bodyType = RigidbodyType2D.Kinematic;
         }
