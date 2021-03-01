@@ -54,7 +54,12 @@ public class Manager_Level : MonoBehaviour
         int seconds = (int)ms;
         int minutes = seconds/60;
         ms = time - 1*seconds;
-        string newms = ms.ToString().Substring(2,2);
+        string newms= "00000";
+        try{
+            newms = ms.ToString().Substring(2,2);
+        }
+        catch{
+        }
         int new2ms = int.Parse(newms);
         //string g = string.Format("{0:0.00}",time);
         string t = $"{minutes}:{seconds-60*minutes}.{new2ms}";

@@ -57,7 +57,6 @@ public class Player_Health : MonoBehaviour
     }
 
     public void Resurrect(){
-        BecomeSuperman(10);
         pm.BlockMovement(0.4f);
         pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         hp=MAXhp;
