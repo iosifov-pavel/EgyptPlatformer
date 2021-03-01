@@ -77,6 +77,7 @@ public class Rope : MonoBehaviour
         contact=false;
         player.transform.parent = null;
         player_Movement.jumps=1;
+        player_Movement.isJumping = true;
         //rb_player.bodyType = RigidbodyType2D.Dynamic;
         rb_player.gravityScale = player_Movement.gravity;
         x=x.normalized;

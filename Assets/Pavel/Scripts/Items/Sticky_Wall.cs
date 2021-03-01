@@ -60,6 +60,7 @@ public class Sticky_Wall : MonoBehaviour
         distanceV = Vector2.zero;
         timer=0;
         player_Movement.jumps=1;
+        player_Movement.isJumping = true;
         ready=false;
         contact=false;
         player.transform.parent = null;
