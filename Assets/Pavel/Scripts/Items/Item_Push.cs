@@ -35,13 +35,14 @@ public class Item_Push : MonoBehaviour, IIntercatable
         if(player_Health!=null && ( player_Health.isDamaged || !player_Movement.isGrounded  || !onGround ) && on){
             Use(player);
         }
-        CheckContact();
-    }
-
-    private void FixedUpdate() {
+        CheckContact();    
         if(on){
             Action();
         }
+    }
+
+    private void FixedUpdate() {
+    
     }
 
     void CheckContact(){
