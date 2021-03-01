@@ -128,12 +128,14 @@ public class Rope : MonoBehaviour
             player = other.gameObject.transform.parent.gameObject;
             player.transform.parent = transform;
             player_Movement = player.GetComponent<Player_Movement>();
-            if(!player_Movement.isJumping) return;
+            bool yep = player_Movement.isJumping || player_Movement.isFalling;
+            if(!yep) return;
             player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
             rb_player.velocity = Vector2.zero;
             //rb_player.bodyType = RigidbodyType2D.Kinematic;
             player_Movement.ResetJumpCount();
+            rb_player.gravityScale = 0;
             player_Movement.inertia=0;
             player_Movement.blocked=true;
             player_Movement.jump_block=true;

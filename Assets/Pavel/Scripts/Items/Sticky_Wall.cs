@@ -44,7 +44,8 @@ public class Sticky_Wall : MonoBehaviour
     void Fall(){
         distance = 0;
         distanceV = Vector2.zero;
-        player_Movement.jumps=0;
+        player_Movement.jumps=1;
+        player_Movement.isFalling = true;
         timer=0;
         ready=false;
         contact=false;
@@ -74,7 +75,7 @@ public class Sticky_Wall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(delay) return;
-        if(other.gameObject.tag=="GrabWall" || other.gameObject.tag=="GrabCeiling"){
+        if(other.gameObject.tag=="GrabWall"){
             x=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
             player_Movement = player.GetComponent<Player_Movement>();
@@ -101,7 +102,7 @@ public class Sticky_Wall : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag=="GrabWall"|| other.gameObject.tag=="GrabCeiling"){
+        if(other.gameObject.tag=="GrabWall"){
             float dis = (transform.position - player.transform.position).magnitude;
             if(dis>=distance+0.02f){
                 if(contact && ready) Fall();
