@@ -105,6 +105,7 @@ public class Skeleton : MonoBehaviour
 
 
     public void DeathS2(){
+        egp.enabled = false;
         axe_c.enabled = false;
         spear_c.enabled = false;
         skeleton_c.enabled = false;

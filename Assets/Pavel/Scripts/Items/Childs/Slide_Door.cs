@@ -7,12 +7,12 @@ public class Slide_Door : MonoBehaviour, IChild
     public bool On{get;set;} = false;
     public bool Done{get;set;} = true;
     float speed = 5f;
-    Vector2 off, on;
+    Vector3 off, on;
     // Start is called before the first frame update
     void Start()
     {
         off = transform.position;
-        on = (Vector2)transform.position + new Vector2(0,-1.85f);
+        on = transform.position + new Vector3(0,-1.85f,0);
     }
 
     // Update is called once per frame
@@ -22,12 +22,12 @@ public class Slide_Door : MonoBehaviour, IChild
             Done = false;
             float step =  speed * Time.deltaTime; 
             transform.position = Vector3.MoveTowards(transform.position, on, step);
-            if((Vector2)transform.position==on) Done = true;
+            if(transform.position==on) Done = true;
         } else {
             Done = false;
             float step =  speed * Time.deltaTime; 
             transform.position = Vector3.MoveTowards(transform.position, off, step);
-            if((Vector2)transform.position==off) Done = true;
+            if(transform.position==off) Done = true;
         }
         
     }
