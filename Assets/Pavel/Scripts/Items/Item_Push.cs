@@ -18,6 +18,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
     BoxCollider2D box;
     public bool onGround = true;
     [SerializeField] LayerMask ground;
+    Vector2 offset;
     void Start()
     {
         box = GetComponent<BoxCollider2D>();
@@ -35,6 +36,9 @@ public class Item_Push : MonoBehaviour, IIntercatable
             Use(player);
         }
         CheckContact();
+    }
+
+    private void FixedUpdate() {
         if(on){
             Action();
         }
@@ -50,11 +54,12 @@ public class Item_Push : MonoBehaviour, IIntercatable
         Debug.DrawRay(rayOrigin2,Vector2.down*(0.1f),Color.green,0.01f);
         if((hit1.collider!=null || hit2.collider!=null)){
             onGround = true;
-            rb2.bodyType = RigidbodyType2D.Kinematic;
+            //rb2.mass = 2000f;
+            //rb2.bodyType = RigidbodyType2D.Kinematic;
         }
         else{
             onGround = false;
-            rb2.bodyType = RigidbodyType2D.Dynamic;
+            //rb2.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 
@@ -63,7 +68,8 @@ public class Item_Push : MonoBehaviour, IIntercatable
         Vector2 newpos_p = plrb.position + new Vector2(mov_speed*Time.deltaTime,0);
         Vector2 newpos_b = rb2.position + new Vector2(mov_speed*Time.deltaTime,0);
         plrb.MovePosition(newpos_p);
-        rb2.MovePosition(newpos_b);
+        transform.localPosition = offset;
+        //rb2.MovePosition(newpos_b);
     }
 
     public void Use(GameObject _player){
@@ -85,7 +91,9 @@ public class Item_Push : MonoBehaviour, IIntercatable
             player_Attack.blockAttack = true;
             Player_Interact.player_Interact.isInteracting = true;
             plrb.velocity=Vector2.zero;
-            //transform.parent = player.transform;
+            transform.parent = player.transform;
+            offset = transform.localPosition;
+            rb2.mass = 1;
         }
         else{
             //rb2.mass = 200f;
@@ -93,6 +101,9 @@ public class Item_Push : MonoBehaviour, IIntercatable
             player_Movement.jump_block=false;
             player_Attack.blockAttack = false;
             Player_Interact.player_Interact.isInteracting = false;
+            transform.parent = null;
+            offset = Vector2.zero;
+            rb2.mass = 2000f;
         }
     }
 }
