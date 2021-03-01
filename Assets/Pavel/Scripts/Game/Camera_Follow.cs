@@ -11,6 +11,7 @@ public class Camera_Follow : MonoBehaviour
     [SerializeField] GameObject LevelManager;
     Manager_Level LM;
     bool on_boss_stage=false;
+    public bool isFollowing = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class Camera_Follow : MonoBehaviour
     // Update is called once per frame
     void LateUpdate() 
     {
+        if(!isFollowing) return;
         if(target==null) return;
         Vector3 position = target.position;
         position.z = transform.position.z;

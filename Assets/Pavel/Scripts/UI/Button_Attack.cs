@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class Button_Attack : MonoBehaviour{
 
 Touch touch;
-int id=-111;
+public int id=-111;
 Transform stick;
 Vector2 original;
 Vector2 center;
