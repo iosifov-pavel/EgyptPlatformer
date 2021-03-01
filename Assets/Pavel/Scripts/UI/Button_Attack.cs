@@ -84,7 +84,7 @@ private Camera cam;
         float angle = Vector3.Angle(Vector3.right,point);
         if(local.y>=0) pa.bUp=1;
         else pa.bUp=-1;
-        bool enough = (power>=50);
+        bool enough = (power>=60);
         if(enough){
             pa.notEnough = false;
             pa.buttonAttack=true;
