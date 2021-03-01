@@ -14,6 +14,7 @@ public class Rope : MonoBehaviour
     bool contact = false, ready = false, delay=false;
     float ready_time = 0.25f, delay_time=0.6f, timer=0;
     [SerializeField] bool straight = true;
+    [SerializeField] Button_Jump button_Jump;
     Vector2 forward;
     float end_max,end_min;
     BoxCollider2D box;
@@ -75,11 +76,12 @@ public class Rope : MonoBehaviour
         ready=false;
         contact=false;
         player.transform.parent = null;
+        player_Movement.jumps=1;
         //rb_player.bodyType = RigidbodyType2D.Dynamic;
         rb_player.gravityScale = player_Movement.gravity;
         x=x.normalized;
-        if(x.y>-0.3f) rb_player.AddForce(new Vector2(x.x*5,x.y*10), ForceMode2D.Impulse);
-        else rb_player.AddForce(new Vector2(x.x*3,x.y*3), ForceMode2D.Impulse);
+        if(x.y>-0.3f) rb_player.AddForce(new Vector2(x.x*8,x.y*12), ForceMode2D.Impulse);
+        else rb_player.AddForce(new Vector2(x.x*6,x.y*4), ForceMode2D.Impulse);
         StartCoroutine(Delay());
     }
 
@@ -91,7 +93,8 @@ public class Rope : MonoBehaviour
             x=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
             player_Movement = player.GetComponent<Player_Movement>();
-            if(!player_Movement.isJumping) return;
+            bool yep = player_Movement.isJumping || player_Movement.isFalling;
+            if(!yep) return;
             player.transform.parent = transform;
             player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
@@ -159,6 +162,7 @@ public class Rope : MonoBehaviour
     IEnumerator Delay(){
         x=Vector2.zero;
         delay=true;
+        player_Movement.buttonJump = false;
         yield return new WaitForSeconds(0.15f);
         player_Movement.blocked=false;
         player_Movement.jump_block=false;

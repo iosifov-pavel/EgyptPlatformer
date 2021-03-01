@@ -15,6 +15,7 @@ private void Start() {
 }
 
 private void Update() {
+    //if(pm.jump_block) return;
     if(Input.GetButtonDown("Jump")) Pdown();
     else if(Input.GetButtonUp("Jump")) PUp();
     //else if(Input.GetKeyUp(KeyCode.Space)) PUp();
@@ -44,11 +45,12 @@ private void Update() {
 //}
 
 void PUp(){
+    pm.buttonJump = false;
     buttonPressed = false;
 }
 
 void Pdown(){
-    if(buttonPressed){
+    if(pm.buttonJump || buttonPressed){
         return;
     }
     buttonPressed = true;

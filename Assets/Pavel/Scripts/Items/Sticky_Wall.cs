@@ -7,6 +7,7 @@ public class Sticky_Wall : MonoBehaviour
     // Start is called before the first frame update
     Player_Movement player_Movement;
     Player_Health player_Health;
+    [SerializeField] Button_Jump button_Jump;
     public Vector2 x;
     Vector2 pre_push;
     Rigidbody2D rb_player;
@@ -58,15 +59,15 @@ public class Sticky_Wall : MonoBehaviour
         distance = 0;
         distanceV = Vector2.zero;
         timer=0;
-        player_Movement.jumps=0;
+        player_Movement.jumps=1;
         ready=false;
         contact=false;
         player.transform.parent = null;
         //rb_player.bodyType = RigidbodyType2D.Dynamic;
         rb_player.gravityScale = player_Movement.gravity;
         x=x.normalized;
-        if(x.y>-0.3f) rb_player.AddForce(new Vector2(x.x*5,x.y*10), ForceMode2D.Impulse);
-        else rb_player.AddForce(new Vector2(x.x*3,x.y*3), ForceMode2D.Impulse);
+        if(x.y>-0.3f) rb_player.AddForce(new Vector2(x.x*8,x.y*12), ForceMode2D.Impulse);
+        else rb_player.AddForce(new Vector2(x.x*6,x.y*4), ForceMode2D.Impulse);
         StartCoroutine(Delay());
     }
 
@@ -110,11 +111,14 @@ public class Sticky_Wall : MonoBehaviour
     IEnumerator Delay(){
         x=Vector2.zero;
         delay=true;
+        player_Movement.buttonJump = false;
         yield return new WaitForSeconds(0.15f);
         player_Movement.blocked=false;
         player_Movement.jump_block=false;
+        //player_Movement.cant_jump = true;
         yield return new WaitForSeconds(0.05f);
         yield return new WaitForSeconds(delay_time-0.25f);
+        //player_Movement.cant_jump = false;
         delay=false;
     }
 }
