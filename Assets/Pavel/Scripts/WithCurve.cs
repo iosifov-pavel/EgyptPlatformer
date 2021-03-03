@@ -107,6 +107,9 @@ public class WithCurve : MonoBehaviour
     }
 
     void Calculate(){
+        //direction = (end.position - start.position).normalized;
+        //distance = (end.position - start.position).magnitude;
+        //normal = new Vector3(direction.y*-1,direction.x,0);
         if(afterEnd) return;
         float iterator_step = iterator*step;
         float curve_value = parabola.Evaluate(iterator_step);
