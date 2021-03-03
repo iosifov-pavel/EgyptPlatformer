@@ -8,8 +8,8 @@ public class Player_Sounds : MonoBehaviour
     [SerializeField] private AudioClip damaged;
     [SerializeField] private AudioClip death;
     [SerializeField] private AudioClip jump;
-    [SerializeField] private AudioClip steps;
     [SerializeField] AudioClip shot;
+    [SerializeField] AudioClip coin;
     public static Player_Sounds sounds;
     AudioSource[] audioSource;
     AudioSource source;
@@ -51,6 +51,11 @@ public class Player_Sounds : MonoBehaviour
                 source.PlayOneShot(shot);
                 //source.volume = fixedVolume;
                 break;
+            case "coin":
+                source.volume = 0.20f;
+                source.PlayOneShot(coin);
+                break;
+                //source.volume = fixedVolume;
         }
     }
 
