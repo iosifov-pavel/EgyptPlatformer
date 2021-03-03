@@ -6,7 +6,7 @@ public class WithCurve : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] AnimationCurve parabola;
-    [SerializeField] [Range(50,500)] int precision=10;
+    [SerializeField] [Range(10,100)] int precision=20;
     [SerializeField] float multiplier = 1;
     [SerializeField] float speed = 2f;
     [SerializeField] Transform body;
@@ -76,6 +76,7 @@ public class WithCurve : MonoBehaviour
                 end.position = start.position;
                 start.position = temp;
                 iterator = 0;
+                normal*=-1;
             }
             if(backward){
                 forward = false;
