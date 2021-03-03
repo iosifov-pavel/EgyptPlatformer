@@ -45241,22 +45241,22 @@ PrefabInstance:
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[1].time
-      value: 0.50128174
+      value: 0.5026011
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[1].value
-      value: 0.9951477
+      value: 2.0645819
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[1].inSlope
-      value: 0.05348554
+      value: -0.018833209
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[1].outSlope
-      value: 0.05348554
+      value: -0.018833209
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
@@ -45266,7 +45266,7 @@ PrefabInstance:
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[1].outWeight
-      value: 0.09623724
+      value: 0.11426556
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
@@ -45276,17 +45276,17 @@ PrefabInstance:
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[2].inSlope
-      value: -6.121877
+      value: -12.373029
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[2].outSlope
-      value: -4.26693
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[2].inWeight
-      value: 0.037482504
+      value: 0.016517056
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
@@ -45311,27 +45311,32 @@ PrefabInstance:
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[0].outSlope
-      value: 6.0854826
+      value: 12.418258
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: parabola.m_Curve.Array.data[0].outWeight
-      value: 0.04259363
+      value: 0.015851194
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: multiplier
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: goCircleBackward
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: backward
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
+        type: 3}
+      propertyPath: RotateToDirection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009395, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
