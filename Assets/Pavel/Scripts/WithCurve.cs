@@ -15,6 +15,7 @@ public class WithCurve : MonoBehaviour
     [SerializeField] bool destroyAtTheEndPoint = false;
     [SerializeField] bool continueStraightAfterEnd = false;
     [SerializeField] bool goCircleBackward = false;
+    [SerializeField] bool swapNormal = true;
     [SerializeField] bool backward = false;
     [SerializeField] bool RotateToDirection = true;
     [SerializeField] float delayAtPoints = 0f;
@@ -76,7 +77,7 @@ public class WithCurve : MonoBehaviour
                 end.position = start.position;
                 start.position = temp;
                 iterator = 0;
-                normal*=-1;
+                if(swapNormal)normal*=-1;
             }
             if(backward){
                 forward = false;
