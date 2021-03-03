@@ -9,6 +9,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 54.31
       objectReference: {fileID: 0}
@@ -24,6 +39,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -35,16 +55,6 @@ PrefabInstance:
     - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2317681974937762953, guid: d6cd9f494b6d712458e92f550594b244,
@@ -65,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 2317681974937762956, guid: d6cd9f494b6d712458e92f550594b244,
         type: 3}
       propertyPath: m_Name
-      value: Sticky_Wall
+      value: Sticky_Wall Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2317681974937762958, guid: d6cd9f494b6d712458e92f550594b244,
         type: 3}
