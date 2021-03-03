@@ -57,12 +57,16 @@ public class WithCurve : MonoBehaviour
         if(body==null) Destroy(gameObject);
         Debug.DrawLine(start.position,end.position,Color.red,0.001f);
         if(!cango) return;
-        Check();
-        Calculate();
-        Move();
+        try{
+            Check();
+            Calculate();
+            Move();
+        }
+        catch{}
     }
 
     void Check(){
+        if(body==null) Destroy(gameObject);
         if(body.transform.localPosition == end.localPosition){
             if(destroyAtTheEndPoint) Destroy(gameObject);
             if(endless){
@@ -108,6 +112,7 @@ public class WithCurve : MonoBehaviour
     }
 
     void Calculate(){
+        if(body==null) Destroy(gameObject);
         //direction = (end.position - start.position).normalized;
         //distance = (end.position - start.position).magnitude;
         //normal = new Vector3(direction.y*-1,direction.x,0);
@@ -124,6 +129,7 @@ public class WithCurve : MonoBehaviour
     }
 
     void Move(){
+        if(body==null) Destroy(gameObject);
         if(prev_pos != body.transform.localPosition){
             Debug.DrawLine(body.transform.position, prev_pos, Color.green, 10f);
             rotate_direction = body.transform.position - prev_pos;
