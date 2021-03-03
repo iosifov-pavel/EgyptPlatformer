@@ -42,19 +42,20 @@ public class WithCurve : MonoBehaviour
         }
         if(goCircleBackward) backward = false;
         if(backward) goCircleBackward = false;
-        body.transform.position = start.position;
+        body.transform.localPosition = start.localPosition;
         step = 1f / (float)precision;
-        Debug.DrawLine(start.position,end.position,Color.red,0.001f);
-        direction = (end.position - start.position).normalized;
-        distance = (end.position - start.position).magnitude;
+        direction = (end.localPosition - start.localPosition).normalized;
+        distance = (end.localPosition - start.localPosition).magnitude;
         normal = new Vector3(direction.y*-1,direction.x,0);
-        prev_pos = body.transform.position;
-        result_point = body.transform.position;
+        prev_pos = body.transform.localPosition;
+        result_point = body.transform.localPosition;
     }
 
     // Update is called once per frame
     void Update()
     {   
+        
+        Debug.DrawLine(start.position,end.position,Color.red,0.001f);
         if(!cango) return;
         Check();
         Calculate();
@@ -62,20 +63,20 @@ public class WithCurve : MonoBehaviour
     }
 
     void Check(){
-        if(body.transform.position == end.position){
+        if(body.transform.localPosition == end.localPosition){
             if(destroyAtTheEndPoint) Destroy(gameObject);
             if(endless){
-                start.position = end.position;
-                end.position += direction * distance;
+                start.localPosition = end.localPosition;
+                end.localPosition += direction * distance;
                 iterator = 0;
             }
             if(continueStraightAfterEnd){
                 afterEnd = true;
             }
             if(goCircleBackward){
-                Vector3 temp = end.position;
-                end.position = start.position;
-                start.position = temp;
+                Vector3 temp = end.localPosition;
+                end.localPosition = start.localPosition;
+                start.localPosition = temp;
                 iterator = 0;
                 if(swapNormal)normal*=-1;
             }
@@ -84,13 +85,13 @@ public class WithCurve : MonoBehaviour
             }
             StartCoroutine(delay());
         }
-        else if(body.transform.position == start.position){
+        else if(body.transform.localPosition == start.localPosition){
             if(backward){
                 forward = true;
             }
             StartCoroutine(delay());
         }
-        if(body.transform.position == result_point) {
+        if(body.transform.localPosition == result_point) {
             if(!endless && !backward && (iterator>=precision || iterator<0)) return;
             else if(backward){
                 if(forward) iterator++;
@@ -116,14 +117,14 @@ public class WithCurve : MonoBehaviour
         value = curve_value*multiplier;
         Debug.Log("C " + value);
         Debug.Log("N " + normal);
-        result_point = Vector3.Lerp(start.position,end.position,iterator_step);
+        result_point = Vector3.Lerp(start.localPosition,end.localPosition,iterator_step);
         result_point = result_point + normal * value;
         Debug.Log("R " + result_point);
         Debug.Log("R+N " + result_point);
     }
 
     void Move(){
-        if(prev_pos != body.transform.position){
+        if(prev_pos != body.transform.localPosition){
             Debug.DrawLine(body.transform.position, prev_pos, Color.green, 10f);
             rotate_direction = body.transform.position - prev_pos;
             if(RotateToDirection) body.transform.forward = rotate_direction;
@@ -131,11 +132,15 @@ public class WithCurve : MonoBehaviour
         }
         if(afterEnd){
             Vector3 after_end_direction = rotate_direction;
-            Vector3 new_position = body.transform.position + after_end_direction;
-            body.transform.position = Vector3.MoveTowards(body.transform.position,new_position,speed*Time.deltaTime);
+            Vector3 new_position = body.transform.localPosition + after_end_direction;
+            body.transform.localPosition = Vector3.MoveTowards(body.transform.localPosition,new_position,speed*Time.deltaTime);
         }
         else{
-            body.transform.position = Vector3.MoveTowards(body.transform.position,result_point,speed*Time.deltaTime);
+            body.transform.localPosition = Vector3.MoveTowards(body.transform.localPosition,result_point,speed*Time.deltaTime);
         }
+    }
+
+    public void SetDestination(Transform dest){
+        end = dest;
     }
 }

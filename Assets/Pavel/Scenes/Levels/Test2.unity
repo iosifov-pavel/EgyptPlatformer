@@ -45203,6 +45203,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
+        type: 3}
+      propertyPath: endless
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
+        type: 3}
+      propertyPath: goCircleBackward
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
+        type: 3}
+      propertyPath: continueStraightAfterEnd
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635802035206009394, guid: c0217b8957ed75a47aca9fbd704507e0,
+        type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009395, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -45221,17 +45241,17 @@ PrefabInstance:
     - target: {fileID: 4635802035206009395, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009395, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009395, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4635802035206009395, guid: c0217b8957ed75a47aca9fbd704507e0,
         type: 3}
