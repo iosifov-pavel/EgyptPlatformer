@@ -120,12 +120,12 @@ public class WithCurve : MonoBehaviour
         float iterator_step = iterator*step;
         float curve_value = parabola.Evaluate(iterator_step);
         value = curve_value*multiplier;
-        Debug.Log("C " + value);
-        Debug.Log("N " + normal);
+        //Debug.Log("C " + value);
+        //Debug.Log("N " + normal);
         result_point = Vector3.Lerp(start.localPosition,end.localPosition,iterator_step);
         result_point = result_point + normal * value;
-        Debug.Log("R " + result_point);
-        Debug.Log("R+N " + result_point);
+        //Debug.Log("R " + result_point);
+        //Debug.Log("R+N " + result_point);
     }
 
     void Move(){
