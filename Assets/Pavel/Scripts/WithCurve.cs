@@ -54,7 +54,7 @@ public class WithCurve : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        
+        if(body==null) Destroy(gameObject);
         Debug.DrawLine(start.position,end.position,Color.red,0.001f);
         if(!cango) return;
         Check();
@@ -131,7 +131,7 @@ public class WithCurve : MonoBehaviour
             prev_pos = body.transform.position;
         }
         if(afterEnd){
-            Vector3 after_end_direction = rotate_direction;
+            Vector3 after_end_direction = rotate_direction.normalized;
             Vector3 new_position = body.transform.localPosition + after_end_direction;
             body.transform.localPosition = Vector3.MoveTowards(body.transform.localPosition,new_position,speed*Time.deltaTime);
         }
@@ -140,7 +140,8 @@ public class WithCurve : MonoBehaviour
         }
     }
 
-    public void SetDestination(Transform dest){
-        end = dest;
+    public void SetDestination(Transform dest, Transform begin){
+        end.position = dest.position;
+        start.position = begin.position;
     }
 }

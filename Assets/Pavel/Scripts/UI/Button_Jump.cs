@@ -47,6 +47,7 @@ private void Update() {
 void PUp(){
     pm.buttonJump = false;
     buttonPressed = false;
+    pm.cant_jump = false;
 }
 
 void Pdown(){
