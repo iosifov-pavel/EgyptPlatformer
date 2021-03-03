@@ -5097,12 +5097,12 @@ PrefabInstance:
     - target: {fileID: 6744782389006401232, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.38
+      value: -16.84
       objectReference: {fileID: 0}
     - target: {fileID: 6744782389006401232, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.12
+      value: 26.3
       objectReference: {fileID: 0}
     - target: {fileID: 7102491720743367315, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
@@ -5991,6 +5991,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanPush
       objectReference: {fileID: 0}
+    - target: {fileID: 691334680267010628, guid: ac16dd596a2766c4c890fdd4880a72a7,
+        type: 3}
+      propertyPath: strongFriction
+      value: 
+      objectReference: {fileID: 6200000, guid: 24487c0b962b25f47957a3e38c4def6b, type: 2}
+    - target: {fileID: 691334680267010628, guid: ac16dd596a2766c4c890fdd4880a72a7,
+        type: 3}
+      propertyPath: zeroFriction
+      value: 
+      objectReference: {fileID: 6200000, guid: 8855b73970193644ea3645b2b4cc1742, type: 2}
     - target: {fileID: 691334680267010648, guid: ac16dd596a2766c4c890fdd4880a72a7,
         type: 3}
       propertyPath: m_RootOrder

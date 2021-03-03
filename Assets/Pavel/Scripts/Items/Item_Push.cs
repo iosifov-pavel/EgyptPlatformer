@@ -18,6 +18,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
     BoxCollider2D box;
     public bool onGround = true;
     [SerializeField] LayerMask ground;
+    [SerializeField] PhysicsMaterial2D zeroFriction, strongFriction;
     Vector2 offset;
     void Start()
     {
@@ -32,6 +33,8 @@ public class Item_Push : MonoBehaviour, IIntercatable
     // Update is called once per frame
     void Update()
     {
+        if(on) rb2.sharedMaterial = strongFriction;
+        else rb2.sharedMaterial = zeroFriction;
         if(player_Health!=null && ( player_Health.isDamaged || !player_Movement.isGrounded  || !onGround ) && on){
             Use(player);
         }
@@ -47,8 +50,8 @@ public class Item_Push : MonoBehaviour, IIntercatable
 
     void CheckContact(){
         RaycastHit2D hit1,hit2;
-        Vector2 rayOrigin1 = new Vector2(transform.position.x+ext_x, transform.position.y-ext_y);
-        Vector2 rayOrigin2 = new Vector2(transform.position.x-ext_x, transform.position.y-ext_y);
+        Vector2 rayOrigin1 = new Vector2(transform.position.x+ext_x+0.01f, transform.position.y-ext_y);
+        Vector2 rayOrigin2 = new Vector2(transform.position.x-ext_x-0.01f, transform.position.y-ext_y);
         hit1 = Physics2D.Raycast(rayOrigin1,Vector2.down,0.1f,ground);
         hit2 = Physics2D.Raycast(rayOrigin2,Vector2.down,0.1f,ground);
         Debug.DrawRay(rayOrigin1,Vector2.down*(0.1f),Color.green,0.01f);
@@ -60,7 +63,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
         }
         else{
             onGround = false;
-            //rb2.bodyType = RigidbodyType2D.Dynamic;
+            rb2.velocity = new Vector2(0,rb2.velocity.y);
         }
     }
 
