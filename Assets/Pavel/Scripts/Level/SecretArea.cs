@@ -9,9 +9,11 @@ public class SecretArea : MonoBehaviour
     // Start is called before the first frame update   
     Tilemap area;
     CompositeCollider2D ccollider;
+    AudioSource source;
     [SerializeField] bool onlyShoot = true;
     void Start()
     {
+        source = GetComponent<AudioSource>();
         area = GetComponent<Tilemap>();
         ccollider = GetComponent<CompositeCollider2D>();
         if(onlyShoot) ccollider.isTrigger = false;
@@ -34,6 +36,7 @@ public class SecretArea : MonoBehaviour
             //Debug.Log("Wall get Hit");
             wasContact = true;
             ccollider.enabled = false;
+            AudioSource.PlayClipAtPoint(source.clip, other.transform.position);
         }
     }
 
@@ -42,6 +45,7 @@ public class SecretArea : MonoBehaviour
         if(onlyShoot && info == "Player_Bullet"){
             wasContact = true;
             ccollider.enabled = false;
+            AudioSource.PlayClipAtPoint(source.clip, other.transform.position);
         }
     }
 }

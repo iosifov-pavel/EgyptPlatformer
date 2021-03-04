@@ -10,6 +10,7 @@ public class Player_Sounds : MonoBehaviour
     [SerializeField] private AudioClip jump;
     [SerializeField] AudioClip shot;
     [SerializeField] AudioClip coin;
+    [SerializeField] AudioClip bigcoin;
     public static Player_Sounds sounds;
     AudioSource[] audioSource;
     AudioSource source;
@@ -54,6 +55,10 @@ public class Player_Sounds : MonoBehaviour
             case "coin":
                 source.volume = 0.20f;
                 source.PlayOneShot(coin);
+                break;
+            case "bigcoin":
+                source.volume = 0.20f;
+                source.PlayOneShot(bigcoin);
                 break;
                 //source.volume = fixedVolume;
         }

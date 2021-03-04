@@ -6,13 +6,15 @@ public class Trap_Bullet : MonoBehaviour
 {
     //Transform parent;
     [SerializeField] float life_time = 2;
+    [SerializeField] AudioClip touchGround;
     float speed;
     Vector3 move;
     Vector3 vector;
+    AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
-        //parent = transform.parent;
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,7 +27,8 @@ public class Trap_Bullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-       if(other.gameObject.tag=="Ground") {
+        if(other.gameObject.tag=="Ground") {
+            AudioSource.PlayClipAtPoint(touchGround, transform.position, 0.6f);
             Destroy(gameObject);
         } 
     }

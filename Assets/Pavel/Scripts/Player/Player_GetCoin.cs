@@ -23,8 +23,9 @@ public class Player_GetCoin : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
      {
         if (collision.gameObject.tag == "Coin"){
-            Player_Sounds.sounds.PlaySound("coin");
             int v = collision.gameObject.GetComponent<Item_Coins>().getValue();
+            if(v==1) Player_Sounds.sounds.PlaySound("coin");
+            else if(v==5) Player_Sounds.sounds.PlaySound("bigcoin");
             coins+=v;
             Manager_Level.GetCoin(v);
             score_text.text = coins.ToString();
