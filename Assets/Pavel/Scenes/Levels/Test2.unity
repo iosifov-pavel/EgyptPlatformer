@@ -48673,6 +48673,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4294679866212096583, guid: e0782d533011c784d8959ad5857fb5e7,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4294679867294598704, guid: e0782d533011c784d8959ad5857fb5e7,
         type: 3}
       propertyPath: m_Name
@@ -48732,6 +48737,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294679867294598707, guid: e0782d533011c784d8959ad5857fb5e7,
+        type: 3}
+      propertyPath: isChasing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294679867294598707, guid: e0782d533011c784d8959ad5857fb5e7,
+        type: 3}
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0782d533011c784d8959ad5857fb5e7, type: 3}

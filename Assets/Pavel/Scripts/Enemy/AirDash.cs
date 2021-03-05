@@ -8,7 +8,7 @@ public class AirDash : MonoBehaviour
     [SerializeField] Transform body;
     [SerializeField] Transform trigger;
     [SerializeField] EnemyCircleEyes enemyCircleEyes;
-    [SerializeField] float speed = 6;
+    [SerializeField] float speed = 10;
     [SerializeField] float chasingSpeed = 2.5f;
     [SerializeField] float pauseTime = 2f;
     [SerializeField] float prepareTime = 1f;
