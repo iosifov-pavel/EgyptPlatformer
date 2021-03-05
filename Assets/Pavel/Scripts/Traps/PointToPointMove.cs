@@ -10,12 +10,18 @@ public class PointToPointMove : MonoBehaviour
     [SerializeField] float speed = 4f;
     [SerializeField] Transform body;
     [SerializeField] bool forward = true;
+    [SerializeField] bool lerping = true;
+    [SerializeField] float lerpingPercent = 50f;
     [SerializeField] bool visualize = true;
     [SerializeField] Transform chainParent;
     [SerializeField] GameObject chainPrefab;
     [SerializeField] float delayOnPoints = 0.1f;
     Transform destination;
+    Transform previous;
+    Transform nextPoint;
     bool stop = false;
+    bool startLerping = false;
+    float lerpingTimer = 0;
     private void OnDrawGizmos() {
         foreach(Transform point in points){
             if(points.IndexOf(point)==0){
@@ -39,7 +45,9 @@ public class PointToPointMove : MonoBehaviour
     void Start()
     {
         body.position = points[0].position;
-        destination = points[0];
+        destination = points[1];
+        previous = points[0];
+        nextPoint = GetNewPoint(points[1]);
         if(visualize) drawChains();
     }
 
@@ -77,44 +85,74 @@ public class PointToPointMove : MonoBehaviour
         if(body==null) Destroy(gameObject);
         if(stop) return;
         try{
-            MoveToPoint(destination);
             CheckArrive(destination);
         }
         catch{}
     }
 
-    void MoveToPoint(Transform point){
-        body.position = Vector2.MoveTowards(body.position,point.position, speed*Time.deltaTime);
-    }
-
     void CheckArrive(Transform point){
-        if((Vector2)body.position == (Vector2)point.position){
-            if(cycle){
-                if(forward){
-                    if(points.IndexOf(point)==points.Count-1){
-                        destination = points[0];
-                    }
-                    else destination = points[points.IndexOf(point)+1];
-                }
-                else{
-                    if(points.IndexOf(point)==0){
-                        destination = points[points.Count-1];
-                    }
-                    else destination = points[points.IndexOf(point) - 1];
-                }
+        if(lerping){
+            float distanceToPoint = (body.position-point.position).magnitude;
+            float distancePP = (point.position-previous.position).magnitude;
+            float distanceToNextPoint = (nextPoint.position-body.position).magnitude;
+            float percent = distanceToPoint * 100 / distancePP;
+            if(percent<=lerpingPercent && !startLerping){
+                startLerping = true;
+            } 
+            else if((percent>lerpingPercent && startLerping) || (startLerping && distanceToNextPoint<=distanceToPoint)){
+                startLerping = false;
+                previous = destination;
+                destination = nextPoint;
+                point = nextPoint;
+                nextPoint = GetNewPoint(nextPoint);
+                lerpingTimer = 0;
+            }
+            if(startLerping){
+                Vector2 new_pos = Vector2.Lerp(point.position,nextPoint.position,lerpingTimer);
+                lerpingTimer+=Time.deltaTime;
+                body.position = Vector2.MoveTowards(body.position,new_pos, speed*Time.deltaTime);
             }
             else{
-                if(points.IndexOf(point) == points.Count - 1){
-                    forward=false;
-                }
-                else if(points.IndexOf(point) == 0){
-                    forward = true;
-                }
-                if(forward) destination = points[points.IndexOf(point) + 1];
-                else destination = points[points.IndexOf(point) - 1];
+                body.position = Vector2.MoveTowards(body.position,point.position, speed*Time.deltaTime);
             }
-            StartCoroutine(Delay());
         }
+        else{
+            if((Vector2)body.position == (Vector2)point.position){
+                StartCoroutine(Delay());
+                previous = destination;
+                destination = GetNewPoint(point);
+            }
+            else body.position = Vector2.MoveTowards(body.position,point.position, speed*Time.deltaTime);
+        }
+    }
+
+    Transform GetNewPoint(Transform point){
+        Transform new_point = null;
+        if(cycle){
+            if(forward){
+                if(points.IndexOf(point)==points.Count-1){
+                    new_point = points[0];
+                }
+                else new_point = points[points.IndexOf(point)+1];
+            }
+            else{
+                if(points.IndexOf(point)==0){
+                    new_point = points[points.Count-1];
+                }
+                else new_point = points[points.IndexOf(point) - 1];
+            }
+        }
+        else{
+            if(points.IndexOf(point) == points.Count - 1){
+                forward=false;
+            }
+            else if(points.IndexOf(point) == 0){
+                forward = true;
+            }
+            if(forward) new_point = points[points.IndexOf(point) + 1];
+            else new_point = points[points.IndexOf(point) - 1];
+        }
+        return new_point;
     }
 
     IEnumerator Delay(){

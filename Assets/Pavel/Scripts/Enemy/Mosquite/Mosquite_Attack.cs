@@ -5,20 +5,32 @@ using UnityEngine;
 public class Mosquite_Attack : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] Transform body;
     [SerializeField] GameObject spikePrefab;
     [SerializeField] float spikeSpeed = 2f;
     [SerializeField] float timeBetweenAttacks = 2f;
     [SerializeField] float spikeLifetime = 4f;
     bool canAttack = true;
+    float prev_x;
     void Start()
     {
-        
+        prev_x = transform.position.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(prev_x<=transform.position.x){
+            Vector3 new_sc = body.transform.localScale;
+            new_sc.x =Mathf.Abs(new_sc.x);
+            body.transform.localScale = new_sc;
+        }
+        else{
+            Vector3 new_sc = body.transform.localScale;
+            new_sc.x =-Mathf.Abs(new_sc.x);
+            body.transform.localScale = new_sc;
+        }
+        prev_x = transform.position.x;
     }
 
     void Attack(Transform player){
