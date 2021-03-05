@@ -16,12 +16,13 @@ public class PointToPointMove : MonoBehaviour
     [SerializeField] Transform chainParent;
     [SerializeField] GameObject chainPrefab;
     [SerializeField] float delayOnPoints = 0.1f;
+    [SerializeField] float startLerpingTimer = 0.2f;
     Transform destination;
     Transform previous;
     Transform nextPoint;
+    float lerpingTimer;
     bool stop = false;
     bool startLerping = false;
-    float lerpingTimer = 0;
     private void OnDrawGizmos() {
         foreach(Transform point in points){
             if(points.IndexOf(point)==0){
@@ -49,6 +50,7 @@ public class PointToPointMove : MonoBehaviour
         previous = points[0];
         nextPoint = GetNewPoint(points[1]);
         if(visualize) drawChains();
+        lerpingTimer = startLerpingTimer;
     }
 
     void drawChains(){
@@ -105,7 +107,7 @@ public class PointToPointMove : MonoBehaviour
                 destination = nextPoint;
                 point = nextPoint;
                 nextPoint = GetNewPoint(nextPoint);
-                lerpingTimer = 0;
+                lerpingTimer = startLerpingTimer;
             }
             if(startLerping){
                 Vector2 new_pos = Vector2.Lerp(point.position,nextPoint.position,lerpingTimer);

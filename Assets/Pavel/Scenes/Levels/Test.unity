@@ -3107,6 +3107,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8772329406662836279, guid: 09387a0188fcd054499f7a310068ea6f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22999977
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772329406662836279, guid: 09387a0188fcd054499f7a310068ea6f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.14900088
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772329407188952527, guid: 09387a0188fcd054499f7a310068ea6f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772329407188952527, guid: 09387a0188fcd054499f7a310068ea6f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.179
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772329408285440597, guid: 09387a0188fcd054499f7a310068ea6f,
+        type: 3}
+      propertyPath: lerpingTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772329408285440597, guid: 09387a0188fcd054499f7a310068ea6f,
+        type: 3}
+      propertyPath: startLerpingTimer
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 8772329408285440598, guid: 09387a0188fcd054499f7a310068ea6f,
         type: 3}
       propertyPath: m_LocalPosition.x
