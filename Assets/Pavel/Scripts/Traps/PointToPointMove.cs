@@ -12,11 +12,11 @@ public class PointToPointMove : MonoBehaviour
     [SerializeField] bool forward = true;
     [SerializeField] bool lerping = true;
     [SerializeField] float lerpingPercent = 50f;
+    [SerializeField] float startLerpingTimer = 0.2f;
     [SerializeField] bool visualize = true;
     [SerializeField] Transform chainParent;
     [SerializeField] GameObject chainPrefab;
     [SerializeField] float delayOnPoints = 0.1f;
-    [SerializeField] float startLerpingTimer = 0.2f;
     Transform destination;
     Transform previous;
     Transform nextPoint;

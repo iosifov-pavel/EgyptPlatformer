@@ -473,8 +473,9 @@ MonoBehaviour:
   body: {fileID: 8772329406971843497}
   forward: 1
   lerping: 1
-  lerpingPercent: 60
+  lerpingPercent: 50
   visualize: 0
   chainParent: {fileID: 0}
   chainPrefab: {fileID: 0}
   delayOnPoints: 0
+  startLerpingTimer: 0.2
