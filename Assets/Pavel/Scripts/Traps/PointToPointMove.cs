@@ -17,9 +17,16 @@ public class PointToPointMove : MonoBehaviour
     Transform destination;
     bool stop = false;
     private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
         foreach(Transform point in points){
+            if(points.IndexOf(point)==0){
+                Gizmos.color = Color.green;
+            }
+            else if(points.IndexOf(point)==points.Count-1){
+                Gizmos.color = Color.red;
+            }
+            else Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(point.position, 0.1f);
+            Gizmos.color = Color.blue;
             if(points.IndexOf(point)==points.Count-1){
                 if(cycle) Gizmos.DrawLine(point.position,points[0].position);
             }
@@ -69,8 +76,11 @@ public class PointToPointMove : MonoBehaviour
     {
         if(body==null) Destroy(gameObject);
         if(stop) return;
-        MoveToPoint(destination);
-        CheckArrive(destination);
+        try{
+            MoveToPoint(destination);
+            CheckArrive(destination);
+        }
+        catch{}
     }
 
     void MoveToPoint(Transform point){

@@ -18,6 +18,7 @@ public class Enemy_Dont_Kill_Them : MonoBehaviour
 
     private void OnDestroy() {
         player = GameObject.FindGameObjectWithTag("Player");
+        if(player==null) return;
         player.GetComponent<Player_Health>().ChangeHP(-1);
     }
 }

@@ -17,15 +17,19 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     void Start()
     {
         lamp = transform.GetChild(1);
-        child = transform.GetChild(2);
+        try{
+            child = transform.GetChild(2);
+            child_script = child.GetComponent<IChild>();
+        }
+        catch{}
         lamp_sprite = lamp.GetComponent<SpriteRenderer>();
         lamp_sprite.color = condition ? on : off;
-        child_script = child.GetComponent<IChild>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(child_script==null) return;
         if(child_script.Done){
             if(condition){
                 lamp_sprite.color = on;
