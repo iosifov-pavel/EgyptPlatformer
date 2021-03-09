@@ -19,7 +19,7 @@ public class AirDash : MonoBehaviour
     bool prepared = false;
     bool triggered = false;
     bool startPrepare = false;
-    public Transform player;
+    Transform player;
     void Start()
     {
         body_rb = body.GetComponent<Rigidbody2D>();

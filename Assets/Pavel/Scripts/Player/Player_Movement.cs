@@ -205,13 +205,16 @@ public class Player_Movement : MonoBehaviour
                 summary+=sources[i];
                 source_times[i]--;
             }
+        }
+        rb.velocity+=summary;
+        foreach(string name in source_names){
+            int i = source_names.IndexOf(name);
             if(source_times[i]==0){
                 source_names.RemoveAt(i);
                 sources.RemoveAt(i);
                 source_times.RemoveAt(i); 
             }
         }
-        rb.velocity+=summary;
     }
 
     void CheckGround(){  
