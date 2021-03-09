@@ -7,13 +7,15 @@ public class Platform_Move : MonoBehaviour
     //public Vector3 p1;
     [SerializeField] Vector3 move_point;
     private Vector3 original,point;
-    private float speed = 1f;
+    [SerializeField] private float speed = 1f;
     Transform platform;
+    bool start = false;
 
     
     void OnDrawGizmos(){
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + move_point);
+        if(!start)Gizmos.DrawLine(transform.position, transform.position + move_point);
+        else Gizmos.DrawLine(original, point);
     }
 
     // Start is called before the first frame update
@@ -22,6 +24,7 @@ public class Platform_Move : MonoBehaviour
         platform = transform.parent;
         original = platform.transform.position;
         point = original + move_point;
+        start = true;
     }
 
     // Update is called once per frame

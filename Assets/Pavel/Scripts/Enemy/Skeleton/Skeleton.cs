@@ -73,7 +73,7 @@ public class Skeleton : MonoBehaviour
     }
 
     public void canWalk(){
-        egp.enabled = true;
+        if(!enemy_Health.dead)egp.enabled = true;
         if(axe) axe_c.enabled = false;
     }
     
