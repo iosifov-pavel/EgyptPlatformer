@@ -45,9 +45,12 @@ public class AirDash : MonoBehaviour
             triggered = true;
         }
         else if(player==null){
-            body.position = Vector2.Lerp(body.position,transform.position,0.05f);
+            body.position = Vector2.MoveTowards(body.position,transform.position,speed*0.3f*Time.deltaTime);
+            StopAllCoroutines();
+            prepared = false;
             triggered = false;
             startPrepare = false;
+            canAttack = true;
             body.gameObject.GetComponent<SpriteRenderer>().color = Color.Lerp(body.gameObject.GetComponent<SpriteRenderer>().color, Color.white,0.05f);
         } 
         if(triggered){
