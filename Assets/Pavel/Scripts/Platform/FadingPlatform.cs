@@ -54,6 +54,7 @@ public class FadingPlatform : MonoBehaviour
         }
         else if(currentStage==4){
             currentStage = 5;
+            wasContact = false;
             foreach(BoxCollider2D box in boxes){
                 box.enabled=false;
             }
@@ -83,7 +84,6 @@ public class FadingPlatform : MonoBehaviour
                 sr.color = new_c;
             }
             currentStage = 1;
-            wasContact = false;
         }
     }
 }
