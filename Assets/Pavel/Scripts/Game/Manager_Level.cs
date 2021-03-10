@@ -11,6 +11,8 @@ public class Manager_Level : MonoBehaviour
     GameObject ms,mg;
     [SerializeField] GameObject player;
     [SerializeField] GameObject CameraLock;
+    [SerializeField] Text lives;
+    [SerializeField] Text coinsText;
     [SerializeField] Text timerText;
     //Manager_Section manager_Section;
     public Manager_Game manager_Game;
@@ -22,6 +24,7 @@ public class Manager_Level : MonoBehaviour
     public int death=0;
     static bool is_dead=false;
     public int coins=0;
+    public int collected_coins=0;
     static bool coin_get=false;
     static int v=0;
 
@@ -33,6 +36,7 @@ public class Manager_Level : MonoBehaviour
         //manager_Section = ms.GetComponent<Manager_Section>();
         manager_Game = mg.GetComponent<Manager_Game>();
         level = manager_Game.game_info.sections[section_id-1].levels[level_id-1];
+        collected_coins = manager_Game.game_info.coins;
         //level = manager_Section.section.levels[level_id-1];
         Time.timeScale=1;
     }
@@ -49,6 +53,7 @@ public class Manager_Level : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        coinsText.text = manager_Game.game_info.coins.ToString();
         time+=Time.deltaTime;
         float ms=time;
         int seconds = (int)ms;
@@ -72,6 +77,13 @@ public class Manager_Level : MonoBehaviour
         }
         if(coin_get){
             coins+=v;
+            manager_Game.game_info.coins+=v;
+            if(manager_Game.game_info.coins>=100){
+                manager_Game.game_info.Lives++;
+                lives.text = manager_Game.game_info.Lives.ToString();
+                manager_Game.game_info.coins-=100;
+            }
+            collected_coins = manager_Game.game_info.coins;
             v=0;
             coin_get=false;
         }

@@ -33,8 +33,8 @@ public class Player_Health : MonoBehaviour
         LM = GetComponent<Player_InfoHolder>().getLM();
         Lives = UI.transform.GetChild(1).GetChild(6).GetChild(0).gameObject;
         lives_count = Lives.GetComponent<Text>();
-        //lives_count.text=LM.manager_Game.game_info.Lives.ToString();
-        lives_count.text = lives.ToString();
+        lives_count.text=LM.manager_Game.game_info.Lives.ToString();
+        //lives_count.text = lives.ToString();
         LooseScreen = UI.transform.GetChild(4).gameObject;
         DeathScreen = UI.transform.GetChild(5).gameObject;
         Playing_UI = UI.transform.GetChild(1).gameObject;
@@ -44,10 +44,10 @@ public class Player_Health : MonoBehaviour
         anima = GetComponent<Player_Animation>();
         pm = GetComponent<Player_Movement>();
         lastCheckPoint = transform.position;
-        if(LM.level.boss_stage){
-            lives=2;
-            lives_count.text = lives.ToString();
-        }
+        //if(LM.level.boss_stage){
+        //    lives=2;
+        //    lives_count.text = lives.ToString();
+        //}
     }
 
     public void SetCheckPoint(Transform newcp, int id){
@@ -110,10 +110,10 @@ public class Player_Health : MonoBehaviour
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.red;
         UI_HP.Dead();
-        //LM.manager_Game.game_info.Lives--;
-        //lives_count.text = LM.manager_Game.game_info.Lives.ToString();
-        lives--;
-        lives_count.text = lives.ToString();
+        LM.manager_Game.game_info.Lives--;
+        lives_count.text = LM.manager_Game.game_info.Lives.ToString();
+        //lives--;
+        //lives_count.text = lives.ToString();
         Manager_Level.PlayerIsDead();
         LM.Save();
         StartCoroutine(Dekay());
@@ -121,12 +121,12 @@ public class Player_Health : MonoBehaviour
 
     IEnumerator Dekay(){
         yield return new WaitForSeconds(1);
-        //if(LM.manager_Game.game_info.Lives==0){
-        if(lives==0){
+        if(LM.manager_Game.game_info.Lives==0){
+        //if(lives==0){
             Time.timeScale = 0f;
             reset_Playing_UI.ResetInput();
             Playing_UI.SetActive(false);
-            //LM.manager_Game.game_info.Lives=4;
+            LM.manager_Game.game_info.Lives=4;
             DeathScreen.SetActive(true);
         }
         else {
@@ -173,11 +173,11 @@ public class Player_Health : MonoBehaviour
     }
 
     public void OneUp(){
-        //LM.manager_Game.game_info.Lives++;
-        //lives_count.text=LM.manager_Game.game_info.Lives.ToString();
-        lives++;
-        lives_count.text = lives.ToString();
-    }
+        LM.manager_Game.game_info.Lives++;
+        lives_count.text=LM.manager_Game.game_info.Lives.ToString();
+        //lives++;
+        //lives_count.text = lives.ToString();
+    }//
 }
 
 
