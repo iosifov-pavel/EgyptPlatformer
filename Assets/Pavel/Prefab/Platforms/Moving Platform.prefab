@@ -339,6 +339,7 @@ GameObject:
   - component: {fileID: 2623644668149598446}
   - component: {fileID: 1143612094941628293}
   - component: {fileID: 8445762496293316304}
+  - component: {fileID: 4238577233635520389}
   m_Layer: 14
   m_Name: GroundTr
   m_TagString: Untagged
@@ -399,6 +400,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_point: {x: 3, y: 0, z: 0}
+  speed: 1
+  delay: 0
+--- !u!114 &4238577233635520389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445762496293316305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3b46c0142954944a819bd79fd33879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8933420089248699175
 GameObject:
   m_ObjectHideFlags: 0

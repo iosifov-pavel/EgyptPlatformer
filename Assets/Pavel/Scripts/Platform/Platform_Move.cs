@@ -8,6 +8,8 @@ public class Platform_Move : MonoBehaviour
     [SerializeField] Vector3 move_point;
     private Vector3 original,point;
     [SerializeField] private float speed = 1f;
+    [SerializeField] float delay = 0;
+    float timer = 0;
     Transform platform;
     bool start = false;
 
@@ -27,9 +29,16 @@ public class Platform_Move : MonoBehaviour
         start = true;
     }
 
+    bool GetReady(){
+        timer+=Time.deltaTime;
+        if(timer>=delay) return true;
+        else return false;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(!GetReady()) return;
         float step =  speed * Time.deltaTime; 
         platform.transform.position = Vector3.MoveTowards(platform.transform.position, point, step);
         if(platform.transform.position==point){
@@ -39,23 +48,5 @@ public class Platform_Move : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
-    {
-    if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(platform);
-        } 
-    }
-
-    private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(platform);
-        } 
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(null);
-        }
-    }
 }
 

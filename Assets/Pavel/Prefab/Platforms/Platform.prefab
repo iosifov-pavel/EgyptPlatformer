@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4758554863121940021}
   - component: {fileID: 7619575617136537950}
+  - component: {fileID: 6895392747968961964}
   m_Layer: 14
   m_Name: GroundTr
   m_TagString: Untagged
@@ -139,6 +140,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2002046, y: 0.018690255}
   m_EdgeRadius: 0
+--- !u!114 &6895392747968961964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393202991520124938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3b46c0142954944a819bd79fd33879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2132776297006458364
 GameObject:
   m_ObjectHideFlags: 0

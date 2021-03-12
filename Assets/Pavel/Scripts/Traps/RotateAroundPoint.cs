@@ -7,6 +7,7 @@ public class RotateAroundPoint : MonoBehaviour
     [SerializeField] Transform point;
     [SerializeField] float speed = 20f;
     [SerializeField] int dir = 1;
+    [SerializeField] bool staticChildRotation = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +18,6 @@ public class RotateAroundPoint : MonoBehaviour
     void Update()
     {
         transform.RotateAround(point.position,new Vector3(0,0,1),speed*dir*Time.deltaTime);
+        if(staticChildRotation) transform.rotation = Quaternion.Euler(0,0,0);
     }
 }
