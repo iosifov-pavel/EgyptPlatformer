@@ -5,13 +5,14 @@ using UnityEngine;
 public class Platform_Spining : MonoBehaviour
 {
 
-    private float speed = 100f;
+    [SerializeField] float speed = 100f;
+    [SerializeField] float direction = 1f;
     // Start is called before the first frame update
 
     // Update is called once per frame
     void Update()
     {
         float step = speed*Time.deltaTime;
-        transform.Rotate(new Vector3(0,0,step), Space.Self);
+        transform.Rotate(new Vector3(0,0,step*direction), Space.Self);
     }
 }
