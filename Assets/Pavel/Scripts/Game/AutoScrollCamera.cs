@@ -36,7 +36,7 @@ public class AutoScrollCamera : MonoBehaviour
             player_Movement.moveBlock = true;
             player_Movement.jump_block = true;
             cam.position = transform.position + Random.insideUnitSphere*4f*Time.deltaTime;
-            death.transform.position = Vector2.MoveTowards(death.transform.position, point.position, 4*Time.deltaTime);
+            death.transform.position = Vector3.MoveTowards(death.transform.position, point.position, 4*Time.deltaTime);
             if(death.transform.position == point.position){
                 moving = true;
                 triggered = false;
