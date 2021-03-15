@@ -10,6 +10,7 @@ public class Finish : MonoBehaviour
     
     Manager_Level LM;
     GameObject UI_win;
+    [SerializeField] AudioSource source;
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other) 
     {
@@ -20,6 +21,7 @@ public class Finish : MonoBehaviour
     }
 
     public void FinishLevel(Transform other){
+            source.PlayOneShot(source.clip);
             LM = other.gameObject.GetComponent<Player_InfoHolder>().getLM();
             UI_win = other.gameObject.GetComponent<Player_InfoHolder>().getUI().transform.GetChild(3).gameObject;
             //player_GetCoin = other.gameObject.transform.GetChild(3).gameObject.GetComponent<Player_GetCoin>();

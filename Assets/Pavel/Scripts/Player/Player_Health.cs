@@ -24,6 +24,7 @@ public class Player_Health : MonoBehaviour
     Manager_Level LM;
     Reset_Playing_UI reset_Playing_UI;
     public bool afterHeadJump = false;
+    [SerializeField] AutoScrollCamera autoscroll;
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +71,10 @@ public class Player_Health : MonoBehaviour
         transform.position = pos;
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.white;
+        if(autoscroll==null){}
+        else{
+            autoscroll.transform.position = new Vector3(transform.position.x-5,transform.position.y,autoscroll.transform.position.z);
+        }
         Time.timeScale = 1f;
         Playing_UI.SetActive(true);
         reset_Playing_UI.ResetInput();

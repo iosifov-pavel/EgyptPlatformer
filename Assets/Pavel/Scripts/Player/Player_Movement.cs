@@ -120,7 +120,7 @@ public class Player_Movement : MonoBehaviour
         if(!moveBlock)if((direction.x > 0 && tran.localScale.x < 0)||(direction.x < 0 && tran.localScale.x > 0)){
             Flip();
         }
-        if(Mathf.Abs(direction.x)>0.2f && isGrounded){
+        if(Mathf.Abs(direction.x)>0.2f && isGrounded && !moveBlock){
             dust_e.enabled=true;
         }
         else{
@@ -154,7 +154,7 @@ public class Player_Movement : MonoBehaviour
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
         move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
-        if(Mathf.Abs(direction.x)>0.3f && isGrounded) {
+        if(Mathf.Abs(direction.x)>0.3f && isGrounded && !moveBlock) {
             if(steps.isPlaying){}
             else steps.Play();
         }
