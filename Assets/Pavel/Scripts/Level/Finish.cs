@@ -12,12 +12,15 @@ public class Finish : MonoBehaviour
     Manager_Level LM;
     GameObject UI_win;
     Text timer,coins,enemy,total;
+    bool finished = false;
     [SerializeField] AudioSource source;
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other) 
     {
+        if(finished) return;
         if(other.gameObject.tag == "Player")
         {
+            finished = true;
             FinishLevel(other.gameObject.transform);
         }
     }
