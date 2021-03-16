@@ -6,7 +6,7 @@ public class Platform_Move : MonoBehaviour
 {
     //public Vector3 p1;
     [SerializeField] Vector3 move_point;
-    public  Vector3 original,point;
+    public  Vector3 original,point,destination;
     [SerializeField] private float speed = 1f;
     [SerializeField] float delay = 0;
     float timer = 0;
@@ -26,6 +26,7 @@ public class Platform_Move : MonoBehaviour
         original = transform.position;
         point = original + move_point;
         start = true;
+        destination = point;
     }
 
     bool GetReady(){
@@ -39,11 +40,12 @@ public class Platform_Move : MonoBehaviour
     {
         if(!GetReady()) return;
         float step =  speed * Time.deltaTime; 
-        transform.position = Vector3.MoveTowards(transform.position, point, step);
+        transform.position = Vector3.MoveTowards(transform.position, destination, step);
         if(transform.position==point){
-            Vector3 temp = original;
-            original = point;
-            point = temp;
+            destination = original;
+        }
+        else if(transform.position==original){
+            destination = point;
         }
     }
 

@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 3856798447118519440}
   - component: {fileID: 3856798447118519443}
   - component: {fileID: 3856798447118519444}
+  - component: {fileID: 5101322381673452364}
   m_Layer: 8
   m_Name: Spiky Moving Platform
   m_TagString: Ground
@@ -168,6 +169,24 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &5101322381673452364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856798447118519445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a8c3497006e554281471de1bc6e6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move_point: {x: 0, y: 0, z: 0}
+  original: {x: 0, y: 0, z: 0}
+  point: {x: 0, y: 0, z: 0}
+  destination: {x: 0, y: 0, z: 0}
+  speed: 1
+  delay: 0
 --- !u!1 &4905948772442923074
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +279,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1983134954076191627}
   - component: {fileID: 3472945409833219296}
-  - component: {fileID: 5393601965179114933}
   m_Layer: 14
   m_Name: GroundTr
   m_TagString: Untagged
@@ -308,20 +326,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2002046, y: 0.018690255}
   m_EdgeRadius: 0
---- !u!114 &5393601965179114933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5393601965179114932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a8c3497006e554281471de1bc6e6cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  move_point: {x: 0, y: -3, z: 0}
-  speed: 2
 --- !u!1 &5950428606774074306
 GameObject:
   m_ObjectHideFlags: 0

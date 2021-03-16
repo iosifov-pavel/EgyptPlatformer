@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: child
       value: 
       objectReference: {fileID: 8132016726917381162}
+    - target: {fileID: 5277201677171004700, guid: 35e6dc43487f10b498639f76ac168ca9,
+        type: 3}
+      propertyPath: needToBeDone
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5277201677171004703, guid: 35e6dc43487f10b498639f76ac168ca9,
         type: 3}
       propertyPath: m_Name
@@ -202,20 +207,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1886550425390651219, guid: 6a3c1d9f075093948bc4fc4ec6c681e8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.155
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886550425390651219, guid: 6a3c1d9f075093948bc4fc4ec6c681e8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
     - target: {fileID: 2908126439946083929, guid: 6a3c1d9f075093948bc4fc4ec6c681e8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.71437
+      value: 3.573
       objectReference: {fileID: 0}
     - target: {fileID: 2908126439946083929, guid: 6a3c1d9f075093948bc4fc4ec6c681e8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1775208
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 2908126439946083929, guid: 6a3c1d9f075093948bc4fc4ec6c681e8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.375585
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2908126439946083929, guid: 6a3c1d9f075093948bc4fc4ec6c681e8,
         type: 3}
@@ -266,6 +281,11 @@ PrefabInstance:
         type: 3}
       propertyPath: move_point.x
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984464962040878697, guid: 6a3c1d9f075093948bc4fc4ec6c681e8,
+        type: 3}
+      propertyPath: constantMove
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3c1d9f075093948bc4fc4ec6c681e8, type: 3}
@@ -876,6 +896,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 807156969}
     m_Modifications:
+    - target: {fileID: 738282205310408284, guid: 0f89b8a7bf6b82f42adc14b18991f853,
+        type: 3}
+      propertyPath: constantMove
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7300116003057189697, guid: 0f89b8a7bf6b82f42adc14b18991f853,
         type: 3}
       propertyPath: move_point.x
@@ -894,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 8646515250258765426, guid: 0f89b8a7bf6b82f42adc14b18991f853,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.6244154
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8646515250258765426, guid: 0f89b8a7bf6b82f42adc14b18991f853,
         type: 3}
