@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 750576767449677813}
   - component: {fileID: 750576767449677814}
   - component: {fileID: 750576767449677809}
+  - component: {fileID: 204252925645338567}
   m_Layer: 8
   m_Name: Moving Platform
   m_TagString: Ground
@@ -82,6 +83,21 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &204252925645338567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750576767449677808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a8c3497006e554281471de1bc6e6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move_point: {x: 0, y: 0, z: 0}
+  speed: 1
+  delay: 0
 --- !u!1 &3220342655977090591
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +354,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2623644668149598446}
   - component: {fileID: 1143612094941628293}
-  - component: {fileID: 8445762496293316304}
   - component: {fileID: 4238577233635520389}
   m_Layer: 14
   m_Name: GroundTr
@@ -387,21 +402,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2002046, y: 0.018690255}
   m_EdgeRadius: 0
---- !u!114 &8445762496293316304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8445762496293316305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a8c3497006e554281471de1bc6e6cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  move_point: {x: 3, y: 0, z: 0}
-  speed: 1
-  delay: 0
 --- !u!114 &4238577233635520389
 MonoBehaviour:
   m_ObjectHideFlags: 0

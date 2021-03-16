@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 4319628258599421423}
   - component: {fileID: 4319628258599421420}
   - component: {fileID: 4319628258599421419}
+  - component: {fileID: 4006731953130265700}
   m_Layer: 8
   m_Name: Moving Jump Platform
   m_TagString: Ground
@@ -163,6 +164,23 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &4006731953130265700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4319628258599421418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a8c3497006e554281471de1bc6e6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move_point: {x: 0, y: 0, z: 0}
+  original: {x: 0, y: 0, z: 0}
+  point: {x: 0, y: 0, z: 0}
+  speed: 1
+  delay: 0
 --- !u!1 &4948772824443542731
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +192,6 @@ GameObject:
   - component: {fileID: 1581322540370293492}
   - component: {fileID: 4487308919699897759}
   - component: {fileID: 4948772824443542730}
-  - component: {fileID: 4472076179086426126}
   m_Layer: 14
   m_Name: GroundTr
   m_TagString: Untagged
@@ -235,20 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 15
---- !u!114 &4472076179086426126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4948772824443542731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a8c3497006e554281471de1bc6e6cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  move_point: {x: 2, y: 0, z: 0}
-  speed: 1
 --- !u!1 &5359583350706186557
 GameObject:
   m_ObjectHideFlags: 0

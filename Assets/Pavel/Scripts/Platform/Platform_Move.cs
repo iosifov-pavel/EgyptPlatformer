@@ -6,11 +6,10 @@ public class Platform_Move : MonoBehaviour
 {
     //public Vector3 p1;
     [SerializeField] Vector3 move_point;
-    private Vector3 original,point;
+    public  Vector3 original,point;
     [SerializeField] private float speed = 1f;
     [SerializeField] float delay = 0;
     float timer = 0;
-    Transform platform;
     bool start = false;
 
     
@@ -23,8 +22,8 @@ public class Platform_Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        platform = transform.parent;
-        original = platform.transform.position;
+        //platform = transform.parent;
+        original = transform.position;
         point = original + move_point;
         start = true;
     }
@@ -40,8 +39,8 @@ public class Platform_Move : MonoBehaviour
     {
         if(!GetReady()) return;
         float step =  speed * Time.deltaTime; 
-        platform.transform.position = Vector3.MoveTowards(platform.transform.position, point, step);
-        if(platform.transform.position==point){
+        transform.position = Vector3.MoveTowards(transform.position, point, step);
+        if(transform.position==point){
             Vector3 temp = original;
             original = point;
             point = temp;

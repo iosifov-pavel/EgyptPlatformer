@@ -8,9 +8,12 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     bool condition = false;
     Transform lamp;
     SpriteRenderer lamp_sprite;
-    Transform child;
+    [SerializeField] Transform child;
+    [SerializeField] bool withTimer = false;
+    [SerializeField] float timer = 2f;
     [SerializeField] Color on;
     [SerializeField] Color off;
+    [SerializeField] bool needToBeDone = false;
     IChild child_script;
     bool ready=true;
     // Start is called before the first frame update
@@ -18,7 +21,6 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     {
         lamp = transform.GetChild(1);
         try{
-            child = transform.GetChild(2);
             child_script = child.GetComponent<IChild>();
         }
         catch{}
@@ -30,20 +32,30 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     void Update()
     {
         if(child_script==null) return;
-        if(child_script.Done){
-            if(condition){
-                lamp_sprite.color = on;
-                child_script.On = true;
-            } else {
-                lamp_sprite.color = off;
-                child_script.On = false;
-            }
-            
+        if(needToBeDone){
+            if(child_script.Done){
+                if(condition){
+                    lamp_sprite.color = on;
+                    child_script.On = true;
+                } else {
+                    lamp_sprite.color = off;
+                    child_script.On = false;
+                }
+            } 
         }
+        else{
+            if(condition){
+                    lamp_sprite.color = on;
+                    child_script.On = true;
+                } else {
+                    lamp_sprite.color = off;
+                    child_script.On = false;
+                }
+        }    
     }
 
     public void Use(GameObject _player){
-        if(!child_script.Done) return;
+        if(!child_script.Done && needToBeDone) return;
         player=_player;
         condition = !condition;
     }
