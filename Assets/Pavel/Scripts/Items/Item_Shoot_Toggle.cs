@@ -10,7 +10,9 @@ public class Item_Shoot_Toggle : MonoBehaviour
     [SerializeField] bool needToBeDone = false;
     [SerializeField] bool withTimer = false;
     [SerializeField] float timer = 2f;
-    float delay_time = 1f;
+    float time =0;
+    bool counting = false;
+    //float delay_time = 1f;
     //bool recently_activated = false;
     Transform lamp;
     SpriteRenderer lamp_sprite;
@@ -33,6 +35,13 @@ public class Item_Shoot_Toggle : MonoBehaviour
     void Update()
     {
         if(childs.Count==0) return;
+        if(withTimer && counting){
+            time+=Time.deltaTime;
+            if(time>=timer){
+                counting = false;
+                ChangeState();
+            } 
+        }
         lamp_sprite.color = state ? on : off;
         //if(needToBeDone){
         //    if(child_script.Done){
@@ -66,6 +75,10 @@ public class Item_Shoot_Toggle : MonoBehaviour
             if(!child_script.Done && needToBeDone) return;
         }
         state=!state;
+        if(withTimer){
+            if(state==true) counting=true;
+            time = 0;
+        }
         lamp_sprite.color = state ? on : off;
         foreach(IChild child_script in childs){
             if(state){

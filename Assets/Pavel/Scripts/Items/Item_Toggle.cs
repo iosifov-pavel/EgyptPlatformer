@@ -16,6 +16,8 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     [SerializeField] Color off;
     [SerializeField] bool needToBeDone = false;
     bool ready=true;
+    float time=0;
+    bool counting = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,13 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     void Update()
     {
         if(childs.Count==0) return;
+        if(withTimer && counting){
+            time+=Time.deltaTime;
+            if(time>=timer){
+                counting = false;
+                condition = !condition;
+            }
+        }
         if(needToBeDone){
             foreach(IChild child_script in childs){
                     if(child_script.Done){
@@ -67,5 +76,9 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
         }
         player=_player;
         condition = !condition;
+        if(withTimer && condition){
+            time=0;
+            counting=true;
+        }
     }
 }
