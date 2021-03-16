@@ -749,12 +749,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4581868425169406051}
-  - component: {fileID: 7151236667959798405}
   - component: {fileID: 6682345822877321770}
   - component: {fileID: 6075208117721305409}
   - component: {fileID: 3054850153860100432}
   - component: {fileID: 2712096648531622252}
   - component: {fileID: 4797522030648575714}
+  - component: {fileID: 7151236667959798405}
   - component: {fileID: 7371577357488217339}
   - component: {fileID: 1105762041907822609}
   m_Layer: 9
@@ -784,27 +784,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &7151236667959798405
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7403318961397528494}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1.1
-  m_LinearDrag: 1
-  m_AngularDrag: 0
-  m_GravityScale: 4
-  m_Material: {fileID: 6200000, guid: 57b67cfd404e8d84fa644e2c26bd59e2, type: 2}
-  m_Interpolate: 2
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!95 &6682345822877321770
 Animator:
   serializedVersion: 3
@@ -842,6 +821,8 @@ MonoBehaviour:
   superman: 0
   dead: 0
   lives: 3
+  afterHeadJump: 0
+  autoscroll: {fileID: 0}
 --- !u!114 &3054850153860100432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,6 +879,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1.7095478}
   m_EdgeRadius: 0
+--- !u!50 &7151236667959798405
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403318961397528494}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1.1
+  m_LinearDrag: 1
+  m_AngularDrag: 0
+  m_GravityScale: 4
+  m_Material: {fileID: 6200000, guid: 57b67cfd404e8d84fa644e2c26bd59e2, type: 2}
+  m_Interpolate: 2
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &7371577357488217339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,7 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: {x: 1, y: 1}
-  maxSpeed: 3
+  maxSpeed: 4.5
   direction: {x: 0, y: 0}
   stick_delta_y: {x: 0, y: 0}
   stick_delta: {x: 0, y: 0}
@@ -937,6 +939,7 @@ MonoBehaviour:
   zero: {fileID: 6200000, guid: 6e4a07c523e6a2f4897b4cf9bb870785, type: 2}
   slope: {fileID: 6200000, guid: aad76be5d24c1ae48b0d632097737c78, type: 2}
   stop_material: {fileID: 6200000, guid: 39547844f9229ca4f96386a9c867bdcf, type: 2}
+  slopeFace: {x: 1, y: 0}
   dust: {fileID: 0}
   onGround: {fileID: 0}
   stickPressed: 0
@@ -1193,6 +1196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_Movement: {fileID: 0}
+  player_Health: {fileID: 0}
 --- !u!1 &8498772593042003543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,7 +1432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0fd50a893d0874c952a31c3b8210ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LM: {fileID: 0}
   coins: 0
+  collected_coins: 0
 --- !u!114 &1140590507
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -58,6 +58,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] PhysicsMaterial2D zero;
     [SerializeField] PhysicsMaterial2D slope;
     [SerializeField] PhysicsMaterial2D stop_material;
+    public Vector2 slopeFace = Vector2.right;
     [SerializeField] ParticleSystem dust, onGround;
     ParticleSystem.EmissionModule dust_e;
     //--------------------------------------
@@ -153,7 +154,8 @@ public class Player_Movement : MonoBehaviour
         //if(blocked) direction.x=0;
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
-        move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
+        //move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
+        move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, 0);
         if(Mathf.Abs(direction.x)>0.3f && isGrounded && !moveBlock) {
             if(steps.isPlaying){}
             else steps.Play();
@@ -162,11 +164,16 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Horizontal(){
+        //if(moveBlock) return;
+        //if (Mathf.Abs(move.x) > maxSpeed) {
+        //    move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
+        //}
+        //rb.velocity = move;
         if(moveBlock) return;
-        if (Mathf.Abs(move.x) > maxSpeed) {
-            move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
+        rb.AddForce(move);
+        if(Mathf.Abs(rb.velocity.x)>=Mathf.Abs(maxSpeed)){
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x)*maxSpeed,rb.velocity.y);
         }
-        rb.velocity = move;
     }
 
     void Vertical(){
@@ -258,16 +265,28 @@ public class Player_Movement : MonoBehaviour
             hit2 = Physics2D.Raycast(pos2,ray,0.3f,ground);
             if(hit1.collider==null && hit2.collider==null){
                 onSlope=false;
+                slopeFace = Vector2.right;
                 return;
             }
             float diff = Mathf.Abs(hit1.distance-hit2.distance);
             slopeangle[0] = Mathf.Sign(hit1.normal.x) * Vector2.Angle(transform.up, hit1.normal);
             slopeangle[1] = Mathf.Sign(hit2.normal.x) * Vector2.Angle(transform.up, hit2.normal);
 
-            if(diff<0.2f && (Mathf.Abs(slopeangle[0])>3 || Mathf.Abs(slopeangle[1])>3) ){
+            if(diff<0.2f && (Mathf.Abs(slopeangle[0])>5 || Mathf.Abs(slopeangle[1])>5) ){
                 onSlope=true;
+                foreach(float angle in slopeangle){
+                    if(angle==0) continue;
+                    else{
+                        if(angle>0) slopeFace = Quaternion.Euler(0,0,-angle) * Vector2.right; 
+                        else slopeFace = Quaternion.Euler(0,0,-angle) * Vector2.left; 
+                    }
+                }
+                
             }
-            else onSlope = false;
+            else{
+                onSlope = false;
+                slopeFace = Vector2.right;
+            }
     }
 
     void Flip(){
@@ -289,7 +308,7 @@ public class Player_Movement : MonoBehaviour
             if(directionchanged || !stickPressed || needtostop){
             }
             if(direction.x==0 && last_velocity!=0){
-                rb.velocity +=new Vector2(inertia,0); 
+                //rb.velocity +=new Vector2(inertia,0); 
             }
         } 
         else {
@@ -300,44 +319,44 @@ public class Player_Movement : MonoBehaviour
             }
             rb.drag=2f;
             if(direction.x==0){
-                rb.velocity +=new Vector2(inertia,0); 
+               // rb.velocity +=new Vector2(inertia,0); 
             }
             if(Mathf.Sign(last_velocity) != Mathf.Sign(rb.velocity.x)){
                 air_direction_change=true;
             }
-            if(air_direction_change) rb.velocity*=new Vector2(0.8f,1);
+            if(air_direction_change){} //rb.velocity*=new Vector2(0.8f,1);
         }
         //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
         //else
-        inertia = rb.velocity.x*0.921f;
-        last_velocity = rb.velocity.x;
+        //inertia = rb.velocity.x*0.921f;
+        //last_velocity = rb.velocity.x;
     }
 
     void PreMove(){
-        if(onSlope){
-            if(facing==1){
-                if(Mathf.Abs(slopeangle[1])>50){
-                    
-                }
-                else rb.sharedMaterial=slope;
-            }
-            else if(facing==-1){
-                if(Mathf.Abs(slopeangle[0])>50){
-                    
-                }
-                else rb.sharedMaterial=slope;
-            }
-            else {
-                if(Mathf.Abs(slopeangle[1])>50 || Mathf.Abs(slopeangle[0])>50){
-                    rb.sharedMaterial = normal;
-                }
-                else rb.sharedMaterial=stop_material;
-            }
-        }
-         else if(!isGrounded){
-            rb.sharedMaterial = zero;
-        }
-        else rb.sharedMaterial = normal;
+        //if(onSlope){
+        //    if(facing==1){
+        //        if(Mathf.Abs(slopeangle[1])>50){
+        //            
+        //        }
+        //        else rb.sharedMaterial=slope;
+        //    }
+        //    else if(facing==-1){
+        //        if(Mathf.Abs(slopeangle[0])>50){
+        //            
+        //        }
+        //        else rb.sharedMaterial=slope;
+        //    }
+        //    else {
+        //        if(Mathf.Abs(slopeangle[1])>50 || Mathf.Abs(slopeangle[0])>50){
+        //            rb.sharedMaterial = normal;
+        //        }
+        //        else rb.sharedMaterial=stop_material;
+        //    }
+        //}
+        // else if(!isGrounded){
+        //    rb.sharedMaterial = zero;
+        //}
+        //else rb.sharedMaterial = normal;
     }
 
     void PostMove(){
