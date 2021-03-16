@@ -6,15 +6,19 @@ public class Mass_Button : MonoBehaviour
 {
     // Start is called before the first frame update
     Transform sprite;
-    [SerializeField] Transform child;
+    [SerializeField] Transform[] childrens;
     Vector3 position_off, position_on;
     Vector3 phase;
     bool on=false;
     float speed = 1;
-    IChild child_script;
+    List<IChild> childs = new List<IChild>();
+    //List<IChild> child_script;
     void Start()
     {
-        child_script = child.gameObject.GetComponent<IChild>();
+        foreach(Transform child in childrens){
+            //int i = childs.IndexOf(child);
+            childs.Add(child.gameObject.GetComponent<IChild>());
+        }
         sprite = transform.GetChild(0);
         position_off = sprite.localPosition;
         phase = GetComponent<BoxCollider2D>().bounds.extents;
@@ -27,14 +31,18 @@ public class Mass_Button : MonoBehaviour
         if(on){
             float step = speed*Time.deltaTime;
             sprite.localPosition = Vector2.MoveTowards(sprite.localPosition,position_on,step);
-            if(child_script==null) return;
-            child_script.On = true;
+            if(childs.Count==0) return;
+            foreach(IChild child in childs){
+                child.On = true;
+            }
         }
         else{
             float step = speed*Time.deltaTime;
             sprite.localPosition = Vector2.MoveTowards(sprite.localPosition,position_off,step);
-            if(child_script==null) return;
-            child_script.On = false;
+            if(childs.Count==0) return;
+            foreach(IChild child in childs){
+                child.On = false;
+            }
         }
     }
 

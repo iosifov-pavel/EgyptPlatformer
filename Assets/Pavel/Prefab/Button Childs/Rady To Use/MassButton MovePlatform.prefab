@@ -182,6 +182,7 @@ MonoBehaviour:
   move_point: {x: 0, y: 0, z: 0}
   original: {x: 0, y: 0, z: 0}
   point: {x: 0, y: 0, z: 0}
+  destination: {x: 0, y: 0, z: 0}
   speed: 1
   delay: 0
 --- !u!114 &7984464962040878697
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421852e6673e1f04bacd8fa2421a33a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  constantMove: 0
 --- !u!1 &5713254955875830027
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,7 +593,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4805156272271249169, guid: b4484f8ab4db48246b3a6f7b00388f98,
         type: 3}
+      propertyPath: childrens.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805156272271249169, guid: b4484f8ab4db48246b3a6f7b00388f98,
+        type: 3}
       propertyPath: child
+      value: 
+      objectReference: {fileID: 2908126439946083929}
+    - target: {fileID: 4805156272271249169, guid: b4484f8ab4db48246b3a6f7b00388f98,
+        type: 3}
+      propertyPath: childrens.Array.data[0]
       value: 
       objectReference: {fileID: 2908126439946083929}
     m_RemovedComponents: []
