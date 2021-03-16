@@ -27,7 +27,7 @@ public class StickPlayer : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
-            other.gameObject.transform.SetParent(transform);
+            //other.gameObject.transform.SetParent(transform);
         } 
     }
 
