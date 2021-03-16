@@ -30,7 +30,7 @@ public class FadingPlatform : MonoBehaviour
         if(wasContact){
             foreach(Transform child in childs){
                 int i = childs.IndexOf(child);
-                child.position = original[i] + (Vector2)Random.insideUnitSphere*0.03f*currentStage;
+                child.position = original[i] + (Vector2)Random.insideUnitSphere*0.015f*currentStage;
             }
         }
     }

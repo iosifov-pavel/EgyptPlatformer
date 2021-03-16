@@ -45,7 +45,7 @@ public class Portals : MonoBehaviour
     IEnumerator delay(){
         dest_c.enabled = false;
         this_c.enabled = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         dest_c.enabled = true;
         this_c.enabled = true;
     }

@@ -13,6 +13,6 @@ public class Platform_Spining : MonoBehaviour
     void Update()
     {
         float step = speed*Time.deltaTime;
-        transform.Rotate(new Vector3(0,0,step*direction), Space.Self);
+        transform.Rotate(new Vector3(0,0,step*direction));
     }
 }
