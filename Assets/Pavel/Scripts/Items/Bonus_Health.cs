@@ -20,7 +20,7 @@ public class Bonus_Health : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D player) 
     {
-        if(yes) return;
+        //if(yes) return;
         if (player.gameObject.tag == "Player")
         {
             yes=true;
