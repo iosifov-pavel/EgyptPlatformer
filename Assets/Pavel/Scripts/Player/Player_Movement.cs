@@ -7,7 +7,7 @@ public class Player_Movement : MonoBehaviour
 
    // public bool inWind = false;
    // public GameObject windZone;
-    private float speed = 100f;
+    [SerializeField] float speed = 100f;
     float speed_multiplier =1;
     float mass;
     public Vector2 multiplier = Vector2.one;
@@ -127,6 +127,7 @@ public class Player_Movement : MonoBehaviour
         else{
             dust_e.enabled=false;
         }
+        CustomPhysics();
     }
 
     public void ResetJumpCount(){
@@ -144,7 +145,7 @@ public class Player_Movement : MonoBehaviour
         Horizontal();
         Vertical();
         AdditionalMove();
-        CustomPhysics();
+        //CustomPhysics();
         PostMove();
         }
     }
@@ -304,8 +305,10 @@ public class Player_Movement : MonoBehaviour
                 return;
             } 
             rb.gravityScale = gravity;
-            rb.drag=1f;
+            rb.drag=0f;
             if(directionchanged || !stickPressed || needtostop){
+                rb.velocity = Vector2.zero;
+                rb.drag=8;
             }
             if(direction.x==0 && last_velocity!=0){
                 //rb.velocity +=new Vector2(inertia,0); 
