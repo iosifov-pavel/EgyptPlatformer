@@ -7,7 +7,7 @@ public class Player_Movement : MonoBehaviour
 
    // public bool inWind = false;
    // public GameObject windZone;
-    [SerializeField] float speed = 100f;
+    [SerializeField] float speed = 1f;
     float speed_multiplier =1;
     float mass;
     public Vector2 multiplier = Vector2.one;
@@ -171,7 +171,7 @@ public class Player_Movement : MonoBehaviour
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
         //move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
-        move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
+        move = new Vector2((direction.x)*speed*speed_multiplier, rb.velocity.y);
         if(Mathf.Abs(direction.x)>0.3f && isGrounded && !moveBlock) {
             if(steps.isPlaying){}
             else steps.Play();
