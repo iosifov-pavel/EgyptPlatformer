@@ -8,6 +8,7 @@ public class Button_Jump : MonoBehaviour
  
 public bool buttonPressed = false;
 [SerializeField] private GameObject player;
+[SerializeField] Movement player2;
 Player_Movement pm;
 
 private void Start() {

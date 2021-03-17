@@ -114,7 +114,7 @@ public class Player_Movement : MonoBehaviour
             anima.setBoolAnimation("Ground", isGrounded);
             DeepCheckGround();
             PreMove();
-            Hor2();
+            //Hor2();
             anima.setDirection(rb.velocity.x);
             anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
             Vertical();
@@ -150,7 +150,8 @@ public class Player_Movement : MonoBehaviour
         jumps=1;
     }
 
-    //private void FixedUpdate() {
+    private void FixedUpdate() {
+        Hor2();
     //  // if(ph.dead){
     //  //     CustomPhysics();
     //  //     return;
@@ -163,7 +164,7 @@ public class Player_Movement : MonoBehaviour
     //  // AdditionalMove();
     //  // CustomPhysics();
     //  // }
-    //}
+    }
 //
     void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
@@ -209,6 +210,17 @@ public class Player_Movement : MonoBehaviour
         //Vector2 delta = move - rb.velocity;
         //rb.AddForce(delta,ForceMode2D.Impulse);
         rb.velocity = move;
+    }
+
+    void Hor3(){
+        if (moveBlock || slopeBlock) return;
+        if (Mathf.Abs(move.x) > maxSpeed)
+        {
+            move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
+        }
+        //Vector2 delta = move - rb.velocity;
+        //rb.AddForce(delta,ForceMode2D.Impulse);
+        rb.AddForce(move);
     }
 
     void Vertical(){

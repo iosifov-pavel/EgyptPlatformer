@@ -9,6 +9,7 @@ public int id=-111;
 Vector2 original;
 Vector2 center;
 [SerializeField] GameObject player;
+[SerializeField] Movement player2;
 Player_Movement pm;
 Transform stick;
 Vector2 dest;
@@ -157,6 +158,7 @@ float cumulative_reset=0;
             pm.direction.y = tempControlY*3.3f;
             pm.hor=68.1f * pm.direction.x;
             pm.ver=68.1f * pm.direction.y;
+            player2.SetMove(new Vector2(tempControlX*3.3f,tempControlY*3.3f));
         }
         else{
             pm.stickPressed = false;
@@ -164,6 +166,7 @@ float cumulative_reset=0;
             pm.direction.y = 0;
             pm.hor=0;
             pm.ver=0;
+            player2.SetMove(Vector2.zero);
         }
     }
 }
