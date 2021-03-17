@@ -44,6 +44,7 @@ public class Rope : MonoBehaviour
             x=Vector2.zero;
         }
         if(ready){
+            player.transform.rotation = Quaternion.identity;
             x = player_Movement.direction;
             if(player_Health.isDamaged){
                 x=Vector2.zero;
@@ -55,7 +56,7 @@ public class Rope : MonoBehaviour
             }
             Vector3 move;
             if(straight){
-                move = new Vector3(0,x.y,0) * Time.deltaTime;
+                move =  new Vector3(0,x.y,0) * Time.deltaTime;
                 if(player.transform.position.y+move.y >= end_max) return;
                 if(player.transform.position.y+move.y <= end_min) return;
                 player.transform.Translate(move);

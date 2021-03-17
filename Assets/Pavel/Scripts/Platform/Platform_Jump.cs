@@ -13,8 +13,10 @@ public class Platform_Jump : MonoBehaviour
         if(other.gameObject.tag=="GroundCheck"){
         Rigidbody2D rb = other.attachedRigidbody;
         other.transform.parent.gameObject.GetComponent<Player_Movement>().jumps = 1;
-        rb.velocity = new Vector2(rb.velocity.x/4,0);
+        other.transform.parent.gameObject.GetComponent<Player_Movement>().inertia=0;
+        rb.velocity = new Vector2(0,0);
         rb.AddForce(transform.up*force, ForceMode2D.Impulse);
+        //other.transform.parent.gameObject.GetComponent<Player_Movement>().BlockMovement(0.02f);
         }
     }
 }

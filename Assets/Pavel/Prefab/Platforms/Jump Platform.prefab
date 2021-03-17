@@ -50,7 +50,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05447626}
+  m_Offset: {x: 0, y: -0.077976465}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -61,7 +61,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2724655, y: 0.21050549}
+  m_Size: {x: 1.2724655, y: 0.16350508}
   m_EdgeRadius: 0
 --- !u!251 &424014102959524435
 PlatformEffector2D:
@@ -76,7 +76,7 @@ PlatformEffector2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RotationalOffset: 0
-  m_UseOneWay: 1
+  m_UseOneWay: 0
   m_UseOneWayGrouping: 0
   m_SurfaceArc: 180
   m_UseSideFriction: 0
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 8844387134672868210}
   m_Layer: 14
   m_Name: GroundTr
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,7 +454,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.006}
+  m_Offset: {x: 0, y: -0.00092395535}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -465,7 +465,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2577782, y: 0.020747837}
+  m_Size: {x: 1.2577782, y: 0.030899923}
   m_EdgeRadius: 0
 --- !u!114 &8844387134672868210
 MonoBehaviour:
@@ -479,4 +479,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a7ff4e9dd425640b66dd8b78011495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 15
+  force: 16

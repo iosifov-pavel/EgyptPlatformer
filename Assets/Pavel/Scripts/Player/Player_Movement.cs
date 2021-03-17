@@ -14,7 +14,7 @@ public class Player_Movement : MonoBehaviour
     float multi_timer=0;
     [SerializeField] private float maxSpeed = 2.8f;
     public Vector2 direction;
-    Vector2 move;
+    Vector2 move = Vector2.zero, previousMove = Vector2.zero, previousVelocity = Vector2.zero;
     public Vector2 stick_delta_y,stick_delta;
     public int facing=0;
     //---------------------------
@@ -57,6 +57,8 @@ public class Player_Movement : MonoBehaviour
     PhysicsMaterial2D normal;
     [SerializeField] PhysicsMaterial2D zero;
     [SerializeField] PhysicsMaterial2D slope;
+    Vector2 slopeFace = Vector2.zero;
+    bool slopeBlock = false;
     [SerializeField] PhysicsMaterial2D stop_material;
     [SerializeField] ParticleSystem dust, onGround;
     ParticleSystem.EmissionModule dust_e;
@@ -85,6 +87,7 @@ public class Player_Movement : MonoBehaviour
         height = box.size.y/2 * transform.localScale.y;
         ground = LayerMask.GetMask("Ground");
         mass= GetComponent<Rigidbody2D>().mass;
+        rb.velocity=Vector2.zero;
     }
 
     private void OnDrawGizmos() {
@@ -104,14 +107,21 @@ public class Player_Movement : MonoBehaviour
              ver = 0;
              dust_e.enabled = false;
         }
+        GetInput(); 
         hor+=stick_delta.x;
         ver+=stick_delta.y;
         if(!blocked){
-            anima.setDirection(rb.velocity.x);
             CheckGround();
-            DeepCheckGround();
             anima.setBoolAnimation("Ground", isGrounded);
+            DeepCheckGround();
+            PreMove();
+            Hor2();
+            anima.setDirection(rb.velocity.x);
             anima.setFloatAnimation("Velocity",Mathf.Abs(rb.velocity.x));
+            Vertical();
+            AdditionalMove();
+            CustomPhysics();
+            PostMove();
             if(moveBlock){
                 anima.setFloatAnimation("Direction",Mathf.Abs(0));
             }
@@ -126,28 +136,36 @@ public class Player_Movement : MonoBehaviour
         else{
             dust_e.enabled=false;
         }
+
+        //if(ph.dead){
+        //    CustomPhysics();
+        //    return;
+        //}
+        //    GetInput(); 
+        //if(!blocked){
+        //  Horizontal();
+        //}
     }
 
     public void ResetJumpCount(){
         jumps=1;
     }
 
-    private void FixedUpdate() {
-        if(ph.dead){
-            CustomPhysics();
-            return;
-        }
-        GetInput(); 
-        if(!blocked){
-        PreMove();
-        Horizontal();
-        Vertical();
-        AdditionalMove();
-        CustomPhysics();
-        PostMove();
-        }
-    }
-
+    //private void FixedUpdate() {
+    //  // if(ph.dead){
+    //  //     CustomPhysics();
+    //  //     return;
+    //  // }
+    //  // GetInput(); 
+    //  // if(!blocked){
+    //  // //Horizontal();
+    //  // Hor2();
+    //  // Vertical();
+    //  // AdditionalMove();
+    //  // CustomPhysics();
+    //  // }
+    //}
+//
     void GetInput(){
         if( Mathf.Abs(direction.x )<0.2) direction.x = 0;
         //if(blocked) direction.x=0;
@@ -166,11 +184,29 @@ public class Player_Movement : MonoBehaviour
         if (Mathf.Abs(move.x) > maxSpeed) {
             move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         }
+        Vector2 deltaMove = move - previousMove;
+        Vector2 desiredVelocity = rb.velocity;
+        deltaMove.y = rb.velocity.y;
+        rb.velocity = Vector2.zero;
+        rb.velocity = deltaMove + previousVelocity;
+        previousMove = move;
+        previousVelocity = rb.velocity;
+        previousVelocity.y=0;
+        //rb.velocity = move;
+    }
+
+    void Hor2(){
+        if(moveBlock || slopeBlock) return;
+        if (Mathf.Abs(move.x) > maxSpeed) {
+            move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
+        }
+        //Vector2 delta = move - rb.velocity;
+        //rb.AddForce(delta,ForceMode2D.Impulse);
         rb.velocity = move;
     }
 
     void Vertical(){
-        if(jump_block || cant_jump) return;
+        if(jump_block || cant_jump || slopeBlock) return;
         anima.setFloatAnimation("vSpeed",rb.velocity.y);
         if(buttonJump && jumps<2){
             Player_Sounds.sounds.PlaySound("jump");
@@ -250,6 +286,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     void DeepCheckGround(){
+        if(!isGrounded) return;
         Vector2 pos,pos2;
             pos = (Vector2)transform.position + new Vector2(-offset,-height);
             pos2 = (Vector2)transform.position + new Vector2(offset,-height);
@@ -264,8 +301,15 @@ public class Player_Movement : MonoBehaviour
             slopeangle[0] = Mathf.Sign(hit1.normal.x) * Vector2.Angle(transform.up, hit1.normal);
             slopeangle[1] = Mathf.Sign(hit2.normal.x) * Vector2.Angle(transform.up, hit2.normal);
 
-            if(diff<0.2f && (Mathf.Abs(slopeangle[0])>3 || Mathf.Abs(slopeangle[1])>3) ){
+            if(diff<0.2f && (Mathf.Abs(slopeangle[0])>5 || Mathf.Abs(slopeangle[1])>5) ){
                 onSlope=true;
+                foreach(float angle in slopeangle){
+                    if(angle==0) continue;
+                    else{
+                        if(angle>0) slopeFace = Quaternion.Euler(0,0,-angle) * Vector2.right; 
+                        else slopeFace = Quaternion.Euler(0,0,-angle) * Vector2.left; 
+                    }
+                }
             }
             else onSlope = false;
     }
@@ -295,7 +339,7 @@ public class Player_Movement : MonoBehaviour
         else {
             rb.gravityScale = gravity;
             if(ph.dead){
-                rb.drag=4;
+                rb.drag=4f;
                 return;
             }
             rb.drag=2f;
@@ -307,43 +351,54 @@ public class Player_Movement : MonoBehaviour
             }
             if(air_direction_change) rb.velocity*=new Vector2(0.8f,1);
         }
-        //if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
-        //else
+        if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
+        else
         inertia = rb.velocity.x*0.921f;
         last_velocity = rb.velocity.x;
     }
 
     void PreMove(){
-        if(onSlope){
-            if(facing==1){
-                if(Mathf.Abs(slopeangle[1])>50){
-                    
-                }
-                else rb.sharedMaterial=slope;
-            }
-            else if(facing==-1){
-                if(Mathf.Abs(slopeangle[0])>50){
-                    
-                }
-                else rb.sharedMaterial=slope;
-            }
-            else {
-                if(Mathf.Abs(slopeangle[1])>50 || Mathf.Abs(slopeangle[0])>50){
-                    rb.sharedMaterial = normal;
-                }
-                else rb.sharedMaterial=stop_material;
-            }
+        if(onSlope && isGrounded){
+            //rb.sharedMaterial = slope;
+            //if(slopeangle[0]>=60 || slopeangle[1]<=-60){
+            //    slopeBlock = true;
+            //    moveBlock = true;
+            //    isGrounded = false;
+            //}
+            //else{
+            //    slopeBlock = false;
+            //    moveBlock = false;
+            //} 
         }
-         else if(!isGrounded){
-            rb.sharedMaterial = zero;
+        else {
+            //rb.sharedMaterial = zero;
+            //slopeBlock = false;
         }
-        else rb.sharedMaterial = normal;
+    
     }
 
     void PostMove(){
         if(onSlope){
-
+            //if(slopeangle[0]>=50 || slopeangle[1]<=-50){
+            //    moveBlock = false;
+            //    //rb.velocity+=slopeFace;
+            //}
+            //if(slopeangle[0]>=60 || slopeangle[1]<=-60){
+            //    slopeBlock = true;
+            //    moveBlock = true;
+            //    isGrounded = false;
+            //    //rb.velocity+=slopeFace;
+            //}
+            //if(rb.velocity.x>0 && slopeangle[1]<-50){
+            //    Vector2 nv = rb.velocity;
+            //    nv.x=0;
+            //    rb.velocity = nv;
+            //    rb.velocity+=slopeFace;
+            //}
         } 
+        else{
+            //moveBlock = false;
+        }
     }
 
     public void SetOtherSource(string name, Vector2 source, int frames){

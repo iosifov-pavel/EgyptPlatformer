@@ -11499,7 +11499,7 @@ PrefabInstance:
     - target: {fileID: 9095678852869601927, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0, type: 3}
@@ -11958,6 +11958,11 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7151236667959798405, guid: 0855f7da149412f49ab9a4a9aef7b129,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 6e4a07c523e6a2f4897b4cf9bb870785, type: 2}
     - target: {fileID: 7371577357488217339, guid: 0855f7da149412f49ab9a4a9aef7b129,
         type: 3}
       propertyPath: dust
