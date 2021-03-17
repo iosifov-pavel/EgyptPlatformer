@@ -59,7 +59,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] PhysicsMaterial2D slope;
     Vector2 slopeFace = Vector2.zero;
     bool slopeBlock = false;
-    [SerializeField] PhysicsMaterial2D stop_material;
     [SerializeField] ParticleSystem dust, onGround;
     ParticleSystem.EmissionModule dust_e;
     //--------------------------------------
@@ -186,7 +185,7 @@ public class Player_Movement : MonoBehaviour
         //    move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
         //}
         //rb.velocity = move;
-        if(moveBlock) return;
+        if(moveBlock || slopeBlock) return;
         rb.AddForce(move);
         if(Mathf.Abs(rb.velocity.x)>=Mathf.Abs(maxSpeed)){
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x)*maxSpeed,rb.velocity.y);
@@ -293,7 +292,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     void DeepCheckGround(){
-        if(!isGrounded) return;
+        //if(!isGrounded) return;
         Vector2 pos,pos2;
             pos = (Vector2)transform.position + new Vector2(-offset,-height);
             pos2 = (Vector2)transform.position + new Vector2(offset,-height);
@@ -367,27 +366,29 @@ public class Player_Movement : MonoBehaviour
     }
 
     void PreMove(){
-        if(onSlope && isGrounded){
-            //rb.sharedMaterial = slope;
-            //if(slopeangle[0]>=60 || slopeangle[1]<=-60){
-            //    slopeBlock = true;
-            //    moveBlock = true;
-            //    isGrounded = false;
-            //}
-            //else{
-            //    slopeBlock = false;
-            //    moveBlock = false;
-            //} 
+        if(onSlope){
+            //bool tooSlope = false;
+            foreach(float angle in slopeangle){
+                    if(angle==0) continue;
+                    else{
+                        if(Mathf.Abs(angle)>=50){
+                            //if(slopeBlock) return;
+                            //rb.velocity = Vector2.zero;
+                            slopeBlock = true;
+                            isGrounded = false;
+                        }
+                    }
+                }
         }
         else {
-            //rb.sharedMaterial = zero;
-            //slopeBlock = false;
+            slopeBlock = false;
         }
     
     }
 
     void PostMove(){
         if(onSlope){
+
             //if(slopeangle[0]>=50 || slopeangle[1]<=-50){
             //    moveBlock = false;
             //    //rb.velocity+=slopeFace;
