@@ -172,7 +172,7 @@ public class Player_Movement : MonoBehaviour
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
         //move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
-        move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, 0);
+        move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
         if(Mathf.Abs(direction.x)>0.3f && isGrounded && !moveBlock) {
             if(steps.isPlaying){}
             else steps.Play();
@@ -338,8 +338,8 @@ public class Player_Movement : MonoBehaviour
             rb.gravityScale = gravity;
             rb.drag=0f;
             if(directionchanged || !stickPressed || needtostop){
-                rb.velocity = Vector2.zero;
-                rb.drag=8;
+                //rb.velocity = Vector2.zero;
+                //rb.drag=8;
             }
             if(direction.x==0 && last_velocity!=0){
                 //rb.velocity +=new Vector2(inertia,0); 
@@ -362,7 +362,7 @@ public class Player_Movement : MonoBehaviour
         }
         if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
         else
-        inertia = rb.velocity.x*0.921f;
+        inertia = rb.velocity.x*0.931f;
         last_velocity = rb.velocity.x;
     }
 
