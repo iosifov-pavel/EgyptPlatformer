@@ -7,7 +7,7 @@ public class Player_Movement : MonoBehaviour
 
    // public bool inWind = false;
    // public GameObject windZone;
-    private float speed = 100f;
+    [SerializeField] float speed = 100f;
     float speed_multiplier =1;
     float mass;
     public Vector2 multiplier = Vector2.one;
@@ -171,7 +171,8 @@ public class Player_Movement : MonoBehaviour
         //if(blocked) direction.x=0;
         if(direction.x==0) facing=0;
         else facing = (int)Mathf.Sign(direction.x);
-        move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
+        //move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, rb.velocity.y);
+        move = new Vector2((direction.x)*Time.deltaTime*speed*speed_multiplier, 0);
         if(Mathf.Abs(direction.x)>0.3f && isGrounded && !moveBlock) {
             if(steps.isPlaying){}
             else steps.Play();
@@ -180,9 +181,15 @@ public class Player_Movement : MonoBehaviour
     }
 
     void Horizontal(){
+        //if(moveBlock) return;
+        //if (Mathf.Abs(move.x) > maxSpeed) {
+        //    move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
+        //}
+        //rb.velocity = move;
         if(moveBlock) return;
-        if (Mathf.Abs(move.x) > maxSpeed) {
-            move = new Vector2(Mathf.Sign(move.x) * maxSpeed, rb.velocity.y);
+        rb.AddForce(move);
+        if(Mathf.Abs(rb.velocity.x)>=Mathf.Abs(maxSpeed)){
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x)*maxSpeed,rb.velocity.y);
         }
         Vector2 deltaMove = move - previousMove;
         Vector2 desiredVelocity = rb.velocity;
@@ -295,6 +302,7 @@ public class Player_Movement : MonoBehaviour
             hit2 = Physics2D.Raycast(pos2,ray,0.3f,ground);
             if(hit1.collider==null && hit2.collider==null){
                 onSlope=false;
+                slopeFace = Vector2.right;
                 return;
             }
             float diff = Mathf.Abs(hit1.distance-hit2.distance);
@@ -311,7 +319,6 @@ public class Player_Movement : MonoBehaviour
                     }
                 }
             }
-            else onSlope = false;
     }
 
     void Flip(){
@@ -329,11 +336,13 @@ public class Player_Movement : MonoBehaviour
                 return;
             } 
             rb.gravityScale = gravity;
-            rb.drag=1f;
+            rb.drag=0f;
             if(directionchanged || !stickPressed || needtostop){
+                rb.velocity = Vector2.zero;
+                rb.drag=8;
             }
             if(direction.x==0 && last_velocity!=0){
-                rb.velocity +=new Vector2(inertia,0); 
+                //rb.velocity +=new Vector2(inertia,0); 
             }
         } 
         else {
@@ -344,12 +353,12 @@ public class Player_Movement : MonoBehaviour
             }
             rb.drag=2f;
             if(direction.x==0){
-                rb.velocity +=new Vector2(inertia,0); 
+               // rb.velocity +=new Vector2(inertia,0); 
             }
             if(Mathf.Sign(last_velocity) != Mathf.Sign(rb.velocity.x)){
                 air_direction_change=true;
             }
-            if(air_direction_change) rb.velocity*=new Vector2(0.8f,1);
+            if(air_direction_change){} //rb.velocity*=new Vector2(0.8f,1);
         }
         if(inertia!=0 && Mathf.Sign(inertia) != Mathf.Sign(rb.velocity.x)) inertia *= 0.7f;
         else
