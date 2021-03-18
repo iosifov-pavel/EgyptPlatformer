@@ -42,6 +42,9 @@ public class Movement : MonoBehaviour
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(groundCheck.position, new Vector2(groundedWidth,groundedHeight));
+        Vector2 draw= (Vector2)transform.position + input;
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position,draw);
     }
     void Start(){
         stepDustEmission = stepsDust.emission;
@@ -130,6 +133,10 @@ public class Movement : MonoBehaviour
         jumpBlock = state;
     }
 
+    public void RestoreGravity(){
+        playerRigidbody.gravityScale = 2.4f;
+    }
+
     private void CalculateVelocity(){
         targetVelocity = new Vector2(input.x*speed, playerRigidbody.velocity.y);
         if(moveBlock) targetVelocity.x=0;
@@ -154,6 +161,9 @@ public class Movement : MonoBehaviour
 
     public void setJumpButton(bool state){
         jumpButton = state;
+    }
+    public bool GetJumpButton(){
+        return jumpButton;
     }
 
     void StepDust(){
