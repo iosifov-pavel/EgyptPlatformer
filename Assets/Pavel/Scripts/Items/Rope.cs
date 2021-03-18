@@ -17,11 +17,11 @@ public class Rope : MonoBehaviour
     [SerializeField] Button_Jump button_Jump;
     Vector2 forward;
     float end_max,end_min;
-    BoxCollider2D box;
+    BoxCollider2D box, playerBox;
     public float distance=0;
+    float dis;
     void Start()
     {
-        forward = transform.up;
         box = GetComponent<BoxCollider2D>();
         if(straight){
             end_max = box.bounds.max.y;
@@ -45,6 +45,11 @@ public class Rope : MonoBehaviour
         }
         if(ready){
             player.transform.rotation = Quaternion.identity;
+            dis = Physics2D.Distance(playerBox,box).distance;
+            if(dis>0.1f){
+                playerInput=Vector2.zero;
+                Jump();
+            }
             playerInput = player_Movement.GetInput();
             if(player_Health.isDamaged){
                 playerInput=Vector2.zero;
@@ -55,17 +60,21 @@ public class Rope : MonoBehaviour
                 Jump();
                 return;
             }
-            Vector3 move;
-            if(straight){
-                move =  new Vector3(0,playerInput.y,0) * Time.deltaTime;
-                if(player.transform.position.y+move.y >= end_max) return;
-                if(player.transform.position.y+move.y <= end_min) return;
+            Vector2 move;
+            if(straight){   
+                forward = transform.up; 
+                end_max = box.bounds.max.y;
+                end_min = box.bounds.min.y;
+                move = new Vector2(forward.x*playerInput.y,forward.y*playerInput.y);
+                move*=Time.deltaTime;
+                if(player.transform.position.y+move.y >= end_max-0.08f) return;
+                if(player.transform.position.y+move.y <= end_min+0.08f) return;
                 player.transform.Translate(move);
             }
             else{
                 move = new Vector3(playerInput.x,0,0) * Time.deltaTime;
-                if(player.transform.position.x+move.x >= end_max) return;
-                if(player.transform.position.x+move.x <= end_min) return;
+                if(player.transform.position.x+move.x >= end_max-0.08f) return;
+                if(player.transform.position.x+move.x <= end_min+0.08f) return;
                 player.transform.Translate(move);
             }
         }
@@ -96,7 +105,9 @@ public class Rope : MonoBehaviour
             bool yep = player_Movement.IsJumpOrFall();
             if(!yep) return;
             player.transform.parent = transform;
+            player.transform.rotation = Quaternion.identity;
             player_Health = player.GetComponent<Player_Health>();
+            playerBox = player.GetComponent<BoxCollider2D>();
             rb_player = player.GetComponent<Rigidbody2D>();
             rb_player.velocity = Vector2.zero;
             rb_player.gravityScale = 0;
@@ -113,45 +124,30 @@ public class Rope : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if(delay || contact) return;
-        if(other.gameObject.tag=="GrabWall" || other.gameObject.tag=="GrabCeiling"){
-            if(!straight && other.gameObject.tag=="GrabWall") return;
-            if(other.gameObject.tag=="GrabCeiling" && straight) return;
-            playerInput=Vector2.zero;
-            player = other.gameObject.transform.parent.gameObject;
-            player.transform.parent = transform;
-            player_Movement = player.GetComponent<Movement>();
-            bool yep = player_Movement.IsJumpOrFall();
-            if(!yep) return;
-            player_Health = player.GetComponent<Player_Health>();
-            rb_player = player.GetComponent<Rigidbody2D>();
-            rb_player.velocity = Vector2.zero;
-            player_Movement.ResetJumpCount();
-            rb_player.gravityScale = 0;
-            player_Movement.BlockMove(true);
-            player_Movement.BlockJump(true);
-            contact = true;
-        }
-    }
+    //private void OnTriggerStay2D(Collider2D other) {
+    //    if(contact && ready){
+    //        if(other.gameObject.tag!="Player") return;
+    //            if(straight){
+    //                dis = Physics2D.Distance(other,box).distance;
+    //                //dis = Mathf.Abs(transform.position.x - player.transform.position.x);
+    //            }
+    //            else{
+    //                //dis = Mathf.Abs(transform.position.y - player.transform.position.y);
+    //            }
+    //            if(dis>0.06f){
+    //                playerInput=Vector2.zero;
+    //                Jump();
+    //            }
+    //        }
+    //}
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag=="GrabWall"|| other.gameObject.tag=="GrabCeiling"){
-            if(contact && ready){
-                float dis;
-                if(straight){
-                    dis = Mathf.Abs(transform.position.x - player.transform.position.x);
-                }
-                else{
-                    dis = Mathf.Abs(transform.position.y - player.transform.position.y);
-                }
-                if(dis>=distance+0.02f){
-                    playerInput=Vector2.zero;
-                    Jump();
-                }
-            }
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D other) {
+    //    if(!contact || !ready) return;
+    //    if(other.gameObject.tag=="Player"){
+    //       //playerInput=Vector2.zero;
+    //       //Jump();
+    //    }
+    //}
     IEnumerator Delay(){
         playerInput=Vector2.zero;
         delay=true;
