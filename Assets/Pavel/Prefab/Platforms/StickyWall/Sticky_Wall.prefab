@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2317681974937762952}
   m_Layer: 0
   m_Name: Sticky_Wall
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button_Jump: {fileID: 0}
-  x: {x: 0, y: 0}
+  playerInput: {x: 0, y: 0}
   distanceV: {x: 0, y: 0}
   distance: 0
