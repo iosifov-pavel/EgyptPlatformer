@@ -49,6 +49,7 @@ void PUp(){
     pm.buttonJump = false;
     buttonPressed = false;
     pm.cant_jump = false;
+    player2.setJumpButton(false);
 }
 
 void Pdown(){
@@ -57,6 +58,7 @@ void Pdown(){
     }
     buttonPressed = true;
     pm.buttonJump = true;
+    player2.setJumpButton(true);
     //pm.jumps++;
 }
  

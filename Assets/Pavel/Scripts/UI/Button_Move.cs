@@ -158,7 +158,7 @@ float cumulative_reset=0;
             pm.direction.y = tempControlY*3.3f;
             pm.hor=68.1f * pm.direction.x;
             pm.ver=68.1f * pm.direction.y;
-            player2.SetMove(new Vector2(tempControlX*3.3f,tempControlY*3.3f));
+            player2.GetInput(new Vector2(tempControlX*3.3f,tempControlY*3.3f));
         }
         else{
             pm.stickPressed = false;
@@ -166,7 +166,7 @@ float cumulative_reset=0;
             pm.direction.y = 0;
             pm.hor=0;
             pm.ver=0;
-            player2.SetMove(Vector2.zero);
+            player2.GetInput(Vector2.zero);
         }
     }
 }

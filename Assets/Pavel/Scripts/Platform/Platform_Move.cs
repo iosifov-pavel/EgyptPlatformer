@@ -40,7 +40,7 @@ public class Platform_Move : MonoBehaviour
     {
         if(!GetReady()) return;
         float step =  speed * Time.deltaTime; 
-        transform.position = Vector3.MoveTowards(transform.position, destination, step);
+        transform.position =  Vector3.MoveTowards(transform.position, destination, step);
         if(transform.position==point){
             destination = original;
         }

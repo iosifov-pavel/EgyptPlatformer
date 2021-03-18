@@ -268,28 +268,6 @@ MonoBehaviour:
   shot: {fileID: 8300000, guid: 356accaab057a1a43819be1590f7cd14, type: 3}
   coin: {fileID: 8300000, guid: 24c76f77d072f3c488a09e80adfb5a21, type: 3}
   bigcoin: {fileID: 8300000, guid: c466498e62f30df4086eee7ff7dc92ff, type: 3}
---- !u!114 &2761010940026472596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338202666734125341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ff7a42f5040500418a5c6472a552597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  m_MovementSmoothing: 0.05
-  jumpForce: 8
-  groundCheck: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  isGrounded: 1
-  groundedWidth: 0.05
-  groundedHeight: 0.05
 --- !u!82 &1261987562868047971
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11456,12 +11434,12 @@ PrefabInstance:
       objectReference: {fileID: 6738711864002462148}
     - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
-      propertyPath: m_Navigation.m_Mode
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8772881803087815303, guid: 14edc3bd6bb816e4584f9fe3eb1c3db0,
@@ -11628,11 +11606,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 965550409620755294, guid: ee2790ed4089d864c92f7b754f0f5859,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 965550409620755294, guid: ee2790ed4089d864c92f7b754f0f5859,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.732
       objectReference: {fileID: 0}
@@ -11648,11 +11621,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 965550409620755294, guid: ee2790ed4089d864c92f7b754f0f5859,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 965550409620755294, guid: ee2790ed4089d864c92f7b754f0f5859,
-        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -11665,6 +11633,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 965550409620755294, guid: ee2790ed4089d864c92f7b754f0f5859,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 965550409620755294, guid: ee2790ed4089d864c92f7b754f0f5859,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 965550409620755294, guid: ee2790ed4089d864c92f7b754f0f5859,
         type: 3}
