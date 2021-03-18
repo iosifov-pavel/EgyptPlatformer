@@ -50,6 +50,7 @@ void PUp(){
     buttonPressed = false;
     pm.cant_jump = false;
     player2.setJumpButton(false);
+    player2.jumpBlock = false;
 }
 
 void Pdown(){

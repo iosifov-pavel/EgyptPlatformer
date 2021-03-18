@@ -43,7 +43,7 @@ public class Player_Health : MonoBehaviour
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
-        pm = GetComponent<Player_Movement>();
+        //pm = GetComponent<Player_Movement>();
         lastCheckPoint = transform.position;
         //if(LM.level.boss_stage){
         //    lives=2;
@@ -58,14 +58,14 @@ public class Player_Health : MonoBehaviour
     }
 
     public void Resurrect(){
-        pm.BlockMovement(0.4f);
-        pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
+        //pm.BlockMovement(0.4f);
+        //pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         hp=MAXhp;
         UI_HP.Recreate();
         dead=false;
         StopAllCoroutines();
         BecomeSuperman(3);
-        anima.setBoolAnimation("Dead",false);
+        //anima.setBoolAnimation("Dead",false);
         Vector3 pos = lastCheckPoint;
         pos.z = 0;
         transform.position = pos;
@@ -111,7 +111,7 @@ public class Player_Health : MonoBehaviour
         dead = true;
         gameObject.layer=10;
         StopAllCoroutines();
-        anima.setBoolAnimation("Dead",dead);
+        //anima.setBoolAnimation("Dead",dead);
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.red;
         UI_HP.Dead();
@@ -148,11 +148,11 @@ public class Player_Health : MonoBehaviour
         superman=true;
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.gray;
-        anima.setBoolAnimation("Damaged",isDamaged);
+        //anima.setBoolAnimation("Damaged",isDamaged);
         gameObject.layer=10;
         yield return new WaitForSeconds(0.2f);
         isDamaged=false;
-        anima.setBoolAnimation("Damaged",isDamaged);
+        //anima.setBoolAnimation("Damaged",isDamaged);
         yield return new WaitForSeconds(1.7f);
         gameObject.layer=9;
         superman=false;

@@ -19,8 +19,8 @@ public class Game_Over : MonoBehaviour
     }
 
     public void GameIsOver(){
-        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Game_Preload>();
-        manager.Loading();
-        SceneManager.LoadScene("Main Menu");
+        //manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Game_Preload>();
+        //manager.Loading();
+        SceneManager.LoadScene("Map");
     }
 }

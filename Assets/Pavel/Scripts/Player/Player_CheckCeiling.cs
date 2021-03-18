@@ -5,11 +5,11 @@ using UnityEngine;
 public class Player_CheckCeiling : MonoBehaviour
 {
     // Start is called before the first frame update
-    Player_Movement player_Movement;
+    Movement player;
     Rigidbody2D rb;
     void Start()
     {
-        player_Movement = transform.parent.gameObject.GetComponent<Player_Movement>();
+        player = transform.parent.gameObject.GetComponent<Movement>();
         rb = transform.parent.gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -20,15 +20,13 @@ public class Player_CheckCeiling : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Ground"){
-            //rb.velocity = new Vector2(rb.velocity.x,0);
-            player_Movement.cant_jump=true;
+            rb.velocity = new Vector2(rb.velocity.x,0);
+            //player.jumpBlock=true;
         }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Ground"){
-           // rb.velocity = new Vector2(rb.velocity.x,0);
-            //player_Movement.buttonJump=false;
         }
     }
 }

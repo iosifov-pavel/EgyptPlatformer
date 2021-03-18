@@ -15,7 +15,7 @@ public class Player_GetCoin : MonoBehaviour
     // Start is called before the first frame update
     private void Start() {
         collected_coins = LM.collected_coins;
-        UI = transform.parent.gameObject.GetComponent<Player_InfoHolder>().getUI();
+        UI = GetComponent<Player_InfoHolder>().getUI();
         score = UI.transform.GetChild(1).GetChild(4).GetChild(0).gameObject;
         score_text = score.GetComponent<Text>();
         score_text.text = collected_coins.ToString();

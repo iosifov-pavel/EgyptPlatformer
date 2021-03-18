@@ -34,20 +34,17 @@ public class Trap_Damage : MonoBehaviour
     private void Damage(GameObject other){
             if(other.tag=="Player" && other.layer==9 || other.layer == 10){
             ph = other.GetComponent<Player_Health>();
-            player_Movement = other.GetComponent<Player_Movement>();
             if(ph.superman || ph.dead) return;
             if(source) source.Play();
-            player_Movement.BlockMovement(0.25f);
             rb = other.GetComponent<Rigidbody2D>();
             float y=0;
             if(rb.velocity.y>0.1) y=1;
             else y=-1;
-            tr = other.GetComponent<Transform>();
-            Vector3 player_dir = new Vector3(Mathf.Sign(tr.localScale.x)*1,y,0);    
+            Vector3 player_dir = new Vector3(Mathf.Sign(other.transform.localScale.x)*1,y,0);    
             player_dir*=-1;
             player_dir.Normalize();
             ph.ChangeHP(damage);
-            rb.velocity = new Vector2(rb.velocity.x,0);
+            rb.velocity = new Vector2(0,0);
             rb.AddForce(player_dir*4,ForceMode2D.Impulse);
         }
     }

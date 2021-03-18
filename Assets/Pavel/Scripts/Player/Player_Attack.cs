@@ -49,8 +49,8 @@ Manager_Level LM;
             StartCoroutine(AtackTime());
          }
       }
-      pa.setBoolAnimation("Up", up);
-      pa.setBoolAnimation("Attack", isAttacking);
+      //ddpa.setBoolAnimation("Up", up);
+      //ddpa.setBoolAnimation("Attack", isAttacking);
 
       //if(killed){
       //   kills++;

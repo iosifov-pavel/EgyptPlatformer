@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class Player_Animation : MonoBehaviour
 {
-    Animator anim;
+    Animator animatioController;
     SpriteRenderer head;
     [SerializeField] Sprite right;
     [SerializeField] Sprite stand;
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        animatioController = GetComponent<Animator>();
         head = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
-
+    private void Update() {
+        //animatioController
+    }
 
     public void setBoolAnimation(string name, bool state){
-        anim.SetBool(name, state);
+        animatioController.SetBool(name, state);
     }
 
     public void setFloatAnimation(string name, float value){
-        anim.SetFloat(name, value);
+        animatioController.SetFloat(name, value);
     }
 
     public void setDirection(float dir){

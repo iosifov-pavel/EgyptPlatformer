@@ -17,8 +17,10 @@ public class Movement : MonoBehaviour
     float currentJumps = 0;
     bool jumpButton = false;
     bool isJumping = false;
+    public bool jumpBlock = false;
     bool isFalling = false;
     bool lastGroundCheck = true;
+    bool movementBlocked = false;
     [Header("Ground Settings")]
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask whatIsGround;
@@ -53,11 +55,13 @@ public class Movement : MonoBehaviour
     void Update(){
         CheckGround();
         StepDust();
+        Flip();
         //GetInput();
     }
 
     private void FixedUpdate() {
         CalculateVelocity();
+        if(movementBlocked) return;
         Move();
         Jump();
     }
@@ -78,12 +82,26 @@ public class Movement : MonoBehaviour
         else{
             isGrounded = true;
             lastGroundCheck = true;
+            jumpBlock = false;
             if(isJumping || isFalling) jumpOnGroundDust.Play();
             isJumping = false;
             isFalling = false;
             MovementSmoothing = groundSmoothing;
             currentJumps = 0;
         } 
+    }
+
+    void Flip(){
+        if(input.x>0){
+            Vector3 newscale = transform.localScale;
+            newscale.x = Mathf.Abs(newscale.x);
+            transform.localScale = newscale;
+        }
+        else{           
+            Vector3 newscale = transform.localScale;
+            newscale.x = -Mathf.Abs(newscale.x);
+            transform.localScale = newscale;
+        }
     }
 
     public void GetInput(Vector2 dest){
@@ -102,7 +120,9 @@ public class Movement : MonoBehaviour
     }
     
     void Jump(){
+        if(jumpBlock) return;
         if(jumpButton && currentJumps<2){
+            Player_Sounds.sounds.PlaySound("jump");
             isJumping = true;
             isFalling = false;
             currentJumps++;
@@ -117,7 +137,7 @@ public class Movement : MonoBehaviour
     }
 
     void StepDust(){
-        if(Mathf.Abs(playerRigidbody.velocity.x)>=0.1f && isGrounded){
+        if(Mathf.Abs(input.x)!=0 && isGrounded){
             stepDustEmission.enabled = true;
             if(!stepsSound.isPlaying)stepsSound.Play();
         } 
