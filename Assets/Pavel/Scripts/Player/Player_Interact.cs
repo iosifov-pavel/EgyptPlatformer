@@ -14,7 +14,7 @@ public class Player_Interact : MonoBehaviour
     // Start is called before the first frame update
     private void Start() {
         player_Interact = this;
-        UI = transform.parent.gameObject.GetComponent<Player_InfoHolder>().getUI();
+        UI = GetComponent<Player_InfoHolder>().getUI();
         button = UI.transform.GetChild(1).GetChild(3).gameObject;
     }
 
@@ -36,7 +36,7 @@ public class Player_Interact : MonoBehaviour
         if(other.gameObject.tag=="Interactable"){
             button.SetActive(true);
             canInteract=true;
-            button.GetComponent<Button_Use>().getData(transform.parent.gameObject,other.transform.parent.gameObject);
+            button.GetComponent<Button_Use>().getData(gameObject,other.transform.parent.gameObject);
         }
     }
 

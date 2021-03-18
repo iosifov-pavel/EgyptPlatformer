@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 691334680267010628}
   - component: {fileID: 691334680267010649}
   - component: {fileID: 7052158489681426599}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: CanPush
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -77,6 +77,8 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
+  zeroFriction: {fileID: 0}
+  strongFriction: {fileID: 0}
 --- !u!50 &691334680267010649
 Rigidbody2D:
   serializedVersion: 4

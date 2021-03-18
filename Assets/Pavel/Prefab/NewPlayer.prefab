@@ -5094,6 +5094,7 @@ GameObject:
   - component: {fileID: 1254525090335289023}
   - component: {fileID: 7807281862061323208}
   - component: {fileID: 3026660148763225139}
+  - component: {fileID: 5110927200279892419}
   m_Layer: 9
   m_Name: NewPlayer
   m_TagString: Player
@@ -5385,6 +5386,19 @@ MonoBehaviour:
   LM: {fileID: 0}
   coins: 0
   collected_coins: 0
+--- !u!114 &5110927200279892419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965550409620755282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abdd886b6365b04ca10761feddb2f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInteracting: 0
 --- !u!1 &1119268447760133482
 GameObject:
   m_ObjectHideFlags: 0

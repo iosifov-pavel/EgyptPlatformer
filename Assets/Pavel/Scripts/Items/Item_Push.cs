@@ -6,7 +6,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
 {
     // Start is called before the first frame update
     GameObject player;
-    Player_Movement player_Movement=null;
+    Movement player_Movement=null;
     Rigidbody2D plrb;
     Player_Health player_Health=null;
     Player_Attack player_Attack=null;
@@ -68,7 +68,7 @@ public class Item_Push : MonoBehaviour, IIntercatable
     }
 
     void Action(){
-        mov_speed = player_Movement.direction.x;
+        mov_speed = player_Movement.GetInput().x;
         Vector2 newpos_p = plrb.position + new Vector2(mov_speed*Time.deltaTime,0);
         Vector2 newpos_b = rb2.position + new Vector2(mov_speed*Time.deltaTime,0);
         plrb.MovePosition(newpos_p);
@@ -83,15 +83,13 @@ public class Item_Push : MonoBehaviour, IIntercatable
         if(on){
             //rb2.mass = 10f;
             if(player_Movement==null){
-                player_Movement = player.GetComponent<Player_Movement>();
+                player_Movement = player.GetComponent<Movement>();
                 player_Health = player.GetComponent<Player_Health>();
-                player_Attack = player.transform.GetChild(2).gameObject.GetComponent<Player_Attack>();
+                player_Attack = player.transform.GetChild(1).gameObject.GetComponent<Player_Attack>();
                 plrb = player.GetComponent<Rigidbody2D>();
             }
-            player_Movement.direction= Vector2.zero;
-            player_Movement.inertia=0;
-            player_Movement.moveBlock=true;
-            player_Movement.jump_block=true;
+            player_Movement.SetInput(Vector2.zero);
+            player_Movement.BlockAll(true);
             player_Attack.blockAttack = true;
             Player_Interact.player_Interact.isInteracting = true;
             plrb.velocity=Vector2.zero;
@@ -101,8 +99,9 @@ public class Item_Push : MonoBehaviour, IIntercatable
         }
         else{
             //rb2.mass = 200f;
-            player_Movement.moveBlock=false;
-            player_Movement.jump_block=false;
+            //player_Movement.moveBlock=false;
+            //player_Movement.jump_block=false;
+            player_Movement.BlockAll(false);
             player_Attack.blockAttack = false;
             Player_Interact.player_Interact.isInteracting = false;
             transform.parent = null;

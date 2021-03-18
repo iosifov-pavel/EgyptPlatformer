@@ -17,10 +17,8 @@ public class Movement : MonoBehaviour
     float currentJumps = 0;
     bool jumpButton = false;
     bool isJumping = false;
-    public bool jumpBlock = false;
     bool isFalling = false;
     bool lastGroundCheck = true;
-    bool movementBlocked = false;
     [Header("Ground Settings")]
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask whatIsGround;
@@ -28,6 +26,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float groundedWidth = 0.05f;
     [SerializeField] float groundedHeight = 0.05f;
     Vector2 input = Vector2.zero;
+    bool flipBlock = false, moveBlock=false, jumpBlock = false;
     Vector2 targetVelocity = Vector2.zero;
     Vector2 resultVelocity = Vector2.zero;
     Rigidbody2D playerRigidbody;
@@ -55,13 +54,12 @@ public class Movement : MonoBehaviour
     void Update(){
         CheckGround();
         StepDust();
-        Flip();
+        if(!flipBlock)Flip();
         //GetInput();
     }
 
     private void FixedUpdate() {
         CalculateVelocity();
-        if(movementBlocked) return;
         Move();
         Jump();
     }
@@ -82,7 +80,6 @@ public class Movement : MonoBehaviour
         else{
             isGrounded = true;
             lastGroundCheck = true;
-            jumpBlock = false;
             if(isJumping || isFalling) jumpOnGroundDust.Play();
             isJumping = false;
             isFalling = false;
@@ -97,22 +94,45 @@ public class Movement : MonoBehaviour
             newscale.x = Mathf.Abs(newscale.x);
             transform.localScale = newscale;
         }
-        else{           
+        else if(input.x<0){           
             Vector3 newscale = transform.localScale;
             newscale.x = -Mathf.Abs(newscale.x);
             transform.localScale = newscale;
         }
     }
 
-    public void GetInput(Vector2 dest){
+    public void SetInput(Vector2 dest){
         input = dest;
+    }
+
+    public Vector2 GetInput(){
+        return input;
     }
     public void ResetJumpCount(){
         currentJumps=1;
     }
 
+    public void BlockFlip(bool state){
+        flipBlock = state;
+    }
+
+    public void BlockMove(bool state){
+        moveBlock = state;
+    }
+
+    public void BlockJump(bool state){
+        jumpBlock = state;
+    }
+
+    public void BlockAll(bool state){
+        flipBlock = state;
+        moveBlock = state;
+        jumpBlock = state;
+    }
+
     private void CalculateVelocity(){
         targetVelocity = new Vector2(input.x*speed, playerRigidbody.velocity.y);
+        if(moveBlock) targetVelocity.x=0;
     }
 
     void Move(){
