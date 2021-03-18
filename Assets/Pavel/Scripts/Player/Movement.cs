@@ -137,6 +137,11 @@ public class Movement : MonoBehaviour
         playerRigidbody.gravityScale = 2.4f;
     }
 
+    public bool IsJumpOrFall(){
+        if(isFalling || isJumping) return true;
+        else return false;
+    }
+
     private void CalculateVelocity(){
         targetVelocity = new Vector2(input.x*speed, playerRigidbody.velocity.y);
         if(moveBlock) targetVelocity.x=0;

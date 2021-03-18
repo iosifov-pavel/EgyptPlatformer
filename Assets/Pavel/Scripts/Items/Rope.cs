@@ -5,9 +5,9 @@ using UnityEngine;
 public class Rope : MonoBehaviour
 {
     // Start is called before the first frame update
-    Player_Movement player_Movement;
+    Movement player_Movement;
     Player_Health player_Health;
-    public Vector2 x;
+    public Vector2 playerInput;
     Vector2 pre_push;
     Rigidbody2D rb_player;
     GameObject player;
@@ -41,28 +41,29 @@ public class Rope : MonoBehaviour
         if(contact) timer+=Time.deltaTime;
         if(contact && timer>=ready_time && !ready){
             ready = true;
-            x=Vector2.zero;
+            playerInput=Vector2.zero;
         }
         if(ready){
             player.transform.rotation = Quaternion.identity;
-            x = player_Movement.direction;
+            playerInput = player_Movement.GetInput();
             if(player_Health.isDamaged){
-                x=Vector2.zero;
+                playerInput=Vector2.zero;
                 Jump();
+                return;
             }
-            if(player_Movement.buttonJump){
+            if(player_Movement.GetJumpButton()){
                 Jump();
                 return;
             }
             Vector3 move;
             if(straight){
-                move =  new Vector3(0,x.y,0) * Time.deltaTime;
+                move =  new Vector3(0,playerInput.y,0) * Time.deltaTime;
                 if(player.transform.position.y+move.y >= end_max) return;
                 if(player.transform.position.y+move.y <= end_min) return;
                 player.transform.Translate(move);
             }
             else{
-                move = new Vector3(x.x,0,0) * Time.deltaTime;
+                move = new Vector3(playerInput.x,0,0) * Time.deltaTime;
                 if(player.transform.position.x+move.x >= end_max) return;
                 if(player.transform.position.x+move.x <= end_min) return;
                 player.transform.Translate(move);
@@ -73,17 +74,14 @@ public class Rope : MonoBehaviour
     void Jump(){
         distance = 0;
         timer=0;
-        player_Movement.jumps=0;
         ready=false;
         contact=false;
         player.transform.parent = null;
-        player_Movement.jumps=1;
-        player_Movement.isJumping = true;
-        //rb_player.bodyType = RigidbodyType2D.Dynamic;
-        rb_player.gravityScale = player_Movement.gravity;
-        x=x.normalized;
-        if(x.y>-0.3f) rb_player.AddForce(new Vector2(x.x*8,x.y*12), ForceMode2D.Impulse);
-        else rb_player.AddForce(new Vector2(x.x*6,x.y*4), ForceMode2D.Impulse);
+        player_Movement.ResetJumpCount();
+        player_Movement.RestoreGravity();
+        playerInput=playerInput.normalized;
+        if(playerInput.y>-0.3f) rb_player.AddForce(playerInput*10f, ForceMode2D.Impulse);
+        else rb_player.AddForce(playerInput*5f, ForceMode2D.Impulse);
         StartCoroutine(Delay());
     }
 
@@ -92,29 +90,24 @@ public class Rope : MonoBehaviour
         if(other.gameObject.tag=="GrabWall" || other.gameObject.tag=="GrabCeiling"){
             if(!straight && other.gameObject.tag=="GrabWall") return;
             if(other.gameObject.tag=="GrabCeiling" && straight) return;
-            x=Vector2.zero;
+            playerInput=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
-            player_Movement = player.GetComponent<Player_Movement>();
-            bool yep = player_Movement.isJumping || player_Movement.isFalling;
+            player_Movement = player.GetComponent<Movement>();
+            bool yep = player_Movement.IsJumpOrFall();
             if(!yep) return;
             player.transform.parent = transform;
             player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
             rb_player.velocity = Vector2.zero;
             rb_player.gravityScale = 0;
-            //rb_player.bodyType = RigidbodyType2D.Kinematic;
             player_Movement.ResetJumpCount();
-            player_Movement.inertia=0;
-            player_Movement.blocked=true;
-            player_Movement.jump_block=true;
+            player_Movement.BlockMove(true);
+            player_Movement.BlockJump(true);
             contact = true;
-            player_Movement.verical=Vector2.zero;
-            player_Movement.isJumping=false;
             if(straight){
                 distance = Mathf.Abs(transform.position.x - player.transform.position.x);
             }
-            else{
-                
+            else{  
                 distance = Mathf.Abs(transform.position.y - player.transform.position.y);
             }
         }
@@ -125,24 +118,20 @@ public class Rope : MonoBehaviour
         if(other.gameObject.tag=="GrabWall" || other.gameObject.tag=="GrabCeiling"){
             if(!straight && other.gameObject.tag=="GrabWall") return;
             if(other.gameObject.tag=="GrabCeiling" && straight) return;
-            x=Vector2.zero;
+            playerInput=Vector2.zero;
             player = other.gameObject.transform.parent.gameObject;
             player.transform.parent = transform;
-            player_Movement = player.GetComponent<Player_Movement>();
-            bool yep = player_Movement.isJumping || player_Movement.isFalling;
+            player_Movement = player.GetComponent<Movement>();
+            bool yep = player_Movement.IsJumpOrFall();
             if(!yep) return;
             player_Health = player.GetComponent<Player_Health>();
             rb_player = player.GetComponent<Rigidbody2D>();
             rb_player.velocity = Vector2.zero;
-            //rb_player.bodyType = RigidbodyType2D.Kinematic;
             player_Movement.ResetJumpCount();
             rb_player.gravityScale = 0;
-            player_Movement.inertia=0;
-            player_Movement.blocked=true;
-            player_Movement.jump_block=true;
+            player_Movement.BlockMove(true);
+            player_Movement.BlockJump(true);
             contact = true;
-            player_Movement.verical=Vector2.zero;
-            player_Movement.isJumping=false;
         }
     }
 
@@ -157,19 +146,19 @@ public class Rope : MonoBehaviour
                     dis = Mathf.Abs(transform.position.y - player.transform.position.y);
                 }
                 if(dis>=distance+0.02f){
-                    x=Vector2.zero;
+                    playerInput=Vector2.zero;
                     Jump();
                 }
             }
         }
     }
     IEnumerator Delay(){
-        x=Vector2.zero;
+        playerInput=Vector2.zero;
         delay=true;
-        player_Movement.buttonJump = false;
+        player_Movement.setJumpButton(false);
+        player_Movement.BlockMove(false);
+        player_Movement.BlockJump(false);
         yield return new WaitForSeconds(0.15f);
-        player_Movement.blocked=false;
-        player_Movement.jump_block=false;
         yield return new WaitForSeconds(0.05f);
         yield return new WaitForSeconds(delay_time-0.25f);
         delay=false;
