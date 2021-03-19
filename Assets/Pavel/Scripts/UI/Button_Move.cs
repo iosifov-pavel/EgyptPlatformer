@@ -8,9 +8,8 @@ Touch touch;
 public int id=-111;
 Vector2 original;
 Vector2 center;
-[SerializeField] GameObject player;
-[SerializeField] Movement player2;
-Player_Movement pm;
+//[SerializeField] GameObject player;
+[SerializeField] Movement player;
 Transform stick;
 Vector2 dest;
 float scale;
@@ -33,7 +32,7 @@ float cumulative_reset=0;
         stick = transform.GetChild(0);
         original = stick.localPosition;
         center = transform.position;
-        pm = player.GetComponent<Player_Movement>();
+        //pm = player.GetComponent<Movement>();
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
         dist = gameObject.GetComponent<RectTransform>().rect.width/2 * scale;
         razbros = (gameObject.GetComponent<RectTransform>().rect.width + 60)/2 * scale;
@@ -67,7 +66,7 @@ float cumulative_reset=0;
                 switch(touch.phase){
                 case TouchPhase.Began:
                     Debug.Log("Touch Began");
-                    pm.stickPressed = true;
+                    //pm.stickPressed = true;
                     cumulative_reset=0;
                     cumulative_jump=0;
                     last_y=0;
@@ -79,15 +78,15 @@ float cumulative_reset=0;
                 case TouchPhase.Moved:
                     Debug.Log("Touch Moved");
                     Action();
-                    Axis();
+                    //Axis();
                     break;
                 case TouchPhase.Canceled:
-                    pm.stickPressed = false;
+                    //pm.stickPressed = false;
                     Debug.Log("Touch Canceled");
                     stick.localPosition = original;
                     break;
                 case TouchPhase.Ended:
-                    pm.stickPressed = false;
+                    //pm.stickPressed = false;
                     id=-111;
                     cumulative_reset=0;
                     cumulative_jump=0;
@@ -112,32 +111,38 @@ float cumulative_reset=0;
         enogh_y = (Mathf.Abs(local.y)>40);
         dir_x = local.x>=0 ? 1 : -1;
         dir_y = local.y>=0 ? 1 : -1;
-        if(enough) pm.direction.x = dir_x * (power-40) * 0.03f;
-        else pm.direction.x=0f;
-        if(enogh_y) pm.direction.y = dir_y * (power-40) * 0.03f;
-        else pm.direction.y=0f;
+        Vector2 output = Vector2.zero;
+        if(enough) output.x = dir_x * (power-40) * 0.03f;
+        else output.x=0f;
+        if(enogh_y) output.y = dir_y * (power-40) * 0.03f;
+        else output.y=0f;
+        if(output.x>3) output.x=3;
+        else if(output.x<-3) output.x=-3;
+        if(output.y>3) output.y=3;
+        else if(output.y<-3) output.y=-3;
+        player.SetInput(output);
     }
 
-    private void Axis(){
-        delta_jump=(local.y-last_y);
-        delta_move=(local.x-last_x);
-
-        if(delta_jump>0){
-            pm.stick_delta_y= new Vector2(delta_jump,0);
-        } else if(delta_jump<0) {
-            pm.stick_delta_y= new Vector2(0,Mathf.Abs(delta_jump));
-        }
-        else{
-           pm.stick_delta_y= new Vector2(0,0); 
-        }
-
-        pm.stick_delta= new Vector2(delta_move,delta_jump);
-        last_y=local.y;
-        last_x=local.x;
-    }
+    //private void Axis(){
+    //    delta_jump=(local.y-last_y);
+    //    delta_move=(local.x-last_x);
+//
+    //    if(delta_jump>0){
+    //        pm.stick_delta_y= new Vector2(delta_jump,0);
+    //    } else if(delta_jump<0) {
+    //        pm.stick_delta_y= new Vector2(0,Mathf.Abs(delta_jump));
+    //    }
+    //    else{
+    //       pm.stick_delta_y= new Vector2(0,0); 
+    //    }
+//
+    //    pm.stick_delta= new Vector2(delta_move,delta_jump);
+    //    last_y=local.y;
+    //    last_x=local.x;
+    //}
 
     public void ResetTouch(){
-        pm.stickPressed = false;
+        //pm.stickPressed = false;
         id=-111;
         cumulative_reset=0;
         cumulative_jump=0;
@@ -153,20 +158,20 @@ float cumulative_reset=0;
         float tempControlX = Input.GetAxis("Horizontal");
         float tempControlY = Input.GetAxis("Vertical");
         if(tempControlX!=0 || tempControlY!=0){
-            pm.stickPressed = true;
-            pm.direction.x = tempControlX*3.3f;
-            pm.direction.y = tempControlY*3.3f;
-            pm.hor=68.1f * pm.direction.x;
-            pm.ver=68.1f * pm.direction.y;
-            player2.SetInput(new Vector2(tempControlX*3f,tempControlY*3f));
+            //pm.stickPressed = true;
+            //pm.direction.x = tempControlX*3.3f;
+            //pm.direction.y = tempControlY*3.3f;
+            //pm.hor=68.1f * pm.direction.x;
+            //pm.ver=68.1f * pm.direction.y;
+            player.SetInput(new Vector2(tempControlX*3f,tempControlY*3f));
         }
         else{
-            pm.stickPressed = false;
-            pm.direction.x = 0;
-            pm.direction.y = 0;
-            pm.hor=0;
-            pm.ver=0;
-            player2.SetInput(Vector2.zero);
+            //pm.stickPressed = false;
+            //pm.direction.x = 0;
+            //pm.direction.y = 0;
+            //pm.hor=0;
+            //pm.ver=0;
+            player.SetInput(Vector2.zero);
         }
     }
 }
