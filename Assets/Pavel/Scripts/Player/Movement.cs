@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     [Range(0, .5f)] [SerializeField] private float jumpingSmoothing = .2f;
     private float MovementSmoothing;
     [SerializeField] float jumpForce = 8f;
+    Vector3 movementMultiplier;
     float maxJumpCount = 2;
     float currentJumps = 0;
     float gravityOriginal;
@@ -48,6 +49,9 @@ public class Movement : MonoBehaviour
         Gizmos.DrawLine(transform.position,draw);
     }
     void Start(){
+        movementMultiplier.x = speed;
+        movementMultiplier.y = jumpForce;
+        movementMultiplier.z = jumpForce;
         stepDustEmission = stepsDust.emission;
         stepDustEmission.enabled=false;
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -144,6 +148,10 @@ public class Movement : MonoBehaviour
     public void RestoreGravity(){
         playerRigidbody.gravityScale = gravityOriginal;
     }
+    public void SetGravity(bool rewrite, float gravityMultiplier){
+        if(rewrite) playerRigidbody.gravityScale = gravityMultiplier;
+        else playerRigidbody.gravityScale *= gravityMultiplier;
+    }
 
     public bool IsJumpOrFall(){
         if(isFalling || isJumping) return true;
@@ -151,7 +159,7 @@ public class Movement : MonoBehaviour
     }
 
     private void CalculateVelocity(){
-        targetVelocity = new Vector2(input.x*speed, playerRigidbody.velocity.y);
+        targetVelocity = new Vector2(input.x*movementMultiplier.x, playerRigidbody.velocity.y);
         if(moveBlock) targetVelocity.x=0;
     }
 
@@ -160,17 +168,27 @@ public class Movement : MonoBehaviour
     }
 
     void AdditionalMove(){
-        if(playerRigidbody.velocity.y>jumpForce){
-            Vector2 clampedVelocity = playerRigidbody.velocity;
-            clampedVelocity.x=0;
-            clampedVelocity = Vector2.ClampMagnitude(clampedVelocity,jumpForce);
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x,clampedVelocity.y);
-        }
+        ClampVerticalSpeed();
         foreach(Force force in forces){
             playerRigidbody.velocity += force.force;
             if(!force.constant) force.force = Vector2.Lerp(force.force, Vector2.zero, force.xLerp);
         }
         ForceUpdate();
+    }
+
+    void ClampVerticalSpeed(){
+        if(playerRigidbody.velocity.y>movementMultiplier.y){
+            Vector2 clampedVelocity = playerRigidbody.velocity;
+            clampedVelocity.x=0;
+            clampedVelocity = Vector2.ClampMagnitude(clampedVelocity,movementMultiplier.y);
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x,clampedVelocity.y);
+        }
+        else if(playerRigidbody.velocity.y<movementMultiplier.z){
+            Vector2 clampedVelocity = playerRigidbody.velocity;
+            clampedVelocity.x=0;
+            clampedVelocity = Vector2.ClampMagnitude(clampedVelocity,movementMultiplier.z);
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x,clampedVelocity.y);
+        }
     }
 
     void ForceUpdate(){
@@ -194,7 +212,7 @@ public class Movement : MonoBehaviour
             isFalling = false;
             currentJumps++;
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, 0);
-            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            playerRigidbody.AddForce(Vector3.up * movementMultiplier.y, ForceMode2D.Impulse);
             jumpButton = false;
         }
     }
@@ -220,6 +238,21 @@ public class Movement : MonoBehaviour
         Force f = forces.Find(x=> x.ID == name);
         f.constant = false;
         f.force = Vector2.zero;
+    }
+
+    public void SetMultiplierMovement(Vector3 multiplier){
+        //x - режет множитель скорости по горизонтали
+        //y - определяет максимальную величину по вертикали вверх
+        //z - определяет максимальную величину по вертикали вниз
+        movementMultiplier.x *= multiplier.x;
+        movementMultiplier.y *= multiplier.y;
+        movementMultiplier.z *= multiplier.z;
+    }
+
+    public void ResetMultiplier(){
+        movementMultiplier.x = speed;
+        movementMultiplier.y = jumpForce;
+        movementMultiplier.z = jumpForce;
     }
 
     void StepDust(){
