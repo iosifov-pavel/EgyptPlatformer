@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float jumpForce = 8f;
     float maxJumpCount = 2;
     float currentJumps = 0;
+    float gravityOriginal;
     bool jumpButton = false;
     bool isJumping = false;
     bool isFalling = false;
@@ -51,6 +52,7 @@ public class Movement : MonoBehaviour
         stepDustEmission.enabled=false;
         playerRigidbody = GetComponent<Rigidbody2D>();
         MovementSmoothing = groundSmoothing;
+        gravityOriginal = playerRigidbody.gravityScale;
     }
 
     // Update is called once per frame
@@ -140,7 +142,7 @@ public class Movement : MonoBehaviour
     }
 
     public void RestoreGravity(){
-        playerRigidbody.gravityScale = 2.4f;
+        playerRigidbody.gravityScale = gravityOriginal;
     }
 
     public bool IsJumpOrFall(){

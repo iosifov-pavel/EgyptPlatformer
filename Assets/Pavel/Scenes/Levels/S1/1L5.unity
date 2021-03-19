@@ -2160,29 +2160,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eeeea40ed2800b40ad8ae8a2ead3c18, type: 3}
---- !u!1 &1319461117 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6043836746189691776, guid: 96732dc9a8be3134d9163fa216832769,
-    type: 3}
-  m_PrefabInstance: {fileID: 6043836745361111933}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1319461118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1319461117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 132185b38f66cab41b84ba2a2ee573c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceStrength: 0.5
-  forceTime: 0.5
-  isImpulse: 1
-  id: Wind
-  forceDirection: {x: 0, y: 1}
 --- !u!1 &1319825610 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3588571692092623080, guid: d8b0d16308f6198469b14c39f2c1f83b,
@@ -5291,23 +5268,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wind
       objectReference: {fileID: 0}
-    - target: {fileID: 6043836746189691779, guid: 96732dc9a8be3134d9163fa216832769,
-        type: 3}
-      propertyPath: direction.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6043836746189691779, guid: 96732dc9a8be3134d9163fa216832769,
-        type: 3}
-      propertyPath: direction.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6043836746189691779, guid: 96732dc9a8be3134d9163fa216832769,
-        type: 3}
-      propertyPath: isImpulse
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6043836746189691779, guid: 96732dc9a8be3134d9163fa216832769, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96732dc9a8be3134d9163fa216832769, type: 3}
 --- !u!4 &6144480227009803174
 Transform:
