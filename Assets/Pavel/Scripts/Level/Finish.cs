@@ -26,6 +26,7 @@ public class Finish : MonoBehaviour
     }
 
     public void FinishLevel(Transform other){
+            other.gameObject.GetComponent<Movement>().BlockAll(true);
             source.PlayOneShot(source.clip);
             LM = other.gameObject.GetComponent<Player_InfoHolder>().getLM();
             UI_win = other.gameObject.GetComponent<Player_InfoHolder>().getUI().transform.GetChild(3).gameObject;

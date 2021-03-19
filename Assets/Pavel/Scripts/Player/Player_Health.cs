@@ -124,7 +124,7 @@ public class Player_Health : MonoBehaviour
 
     IEnumerator Dekay(){
         yield return new WaitForSeconds(1);
-        if(LM.manager_Game.game_info.Lives==0){
+        if(LM.manager_Game.game_info.Lives<=0){
         //if(lives==0){
             Time.timeScale = 0f;
             reset_Playing_UI.ResetInput();

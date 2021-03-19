@@ -17,7 +17,7 @@ public class Player_LegDamage : MonoBehaviour
             if(rb2.velocity.y>0) return;
             other.transform.parent.gameObject.GetComponent<Enemy_Health>().TakeDamage(3);
             rb2.velocity = new Vector2(rb2.velocity.x,0);
-            player_Movement.SetImpulseForce(Vector2.up*4f, 0.35f);
+            player_Movement.SetImpulseForce(Vector2.up*3.3f, 0.35f);
             StartCoroutine(noDamage());
             player_Movement.ResetJumpCount();
         }
