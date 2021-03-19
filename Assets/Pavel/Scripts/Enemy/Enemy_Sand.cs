@@ -12,9 +12,6 @@ public class Enemy_Sand : MonoBehaviour
 
     Player_Health ph;
 
-    Player_Movement pm;
-
-
     bool moving = false;
 
     bool con=false, enough=false, vk = false;

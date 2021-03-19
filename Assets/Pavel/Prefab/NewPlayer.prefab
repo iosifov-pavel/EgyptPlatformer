@@ -4932,6 +4932,7 @@ GameObject:
   - component: {fileID: 965550409194298199}
   - component: {fileID: 3018070483530909802}
   - component: {fileID: 610957146764642049}
+  - component: {fileID: 776680696597333805}
   m_Layer: 15
   m_Name: GroundCheck
   m_TagString: GroundCheck
@@ -5075,6 +5076,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &776680696597333805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965550409194298216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caba3839fdf562c4493f221e9cbf4408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_Movement: {fileID: 965550409620755280}
+  player_Health: {fileID: 3857126262106167889}
 --- !u!1 &965550409620755282
 GameObject:
   m_ObjectHideFlags: 0

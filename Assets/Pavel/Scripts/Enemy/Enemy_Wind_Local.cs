@@ -25,7 +25,7 @@ public class Enemy_Wind_Local : MonoBehaviour
    {
        if(other.gameObject.tag == "Player")
        {   
-          rgdb= other.gameObject.GetComponent<Player_Movement>().GetRb();
+          rgdb= other.gameObject.GetComponent<Rigidbody2D>();
           inWind = true;
        }
    }

@@ -28,7 +28,6 @@ public class Door : MonoBehaviour
 
     public void Teleport (GameObject Player)
     {   
-       // Player_Movement plar  = Player.GetComponent<Player_Movement>(); 
         Player.transform.position = door.transform.position;
     }
 }

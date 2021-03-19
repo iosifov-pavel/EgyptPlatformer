@@ -35,10 +35,6 @@ public class Portals : MonoBehaviour
             other.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             StartCoroutine(delay());
             other.transform.position = destination.position;
-            //Vector2 to = dest_p.where;
-            //to.Normalize();
-            //to*=power;
-            //other.gameObject.GetComponent<Player_Movement>().SetOtherSource("portal",to, -1);
         }
     }
 
@@ -51,8 +47,5 @@ public class Portals : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        //if(other.gameObject.tag=="Player"){
-        //    other.gameObject.GetComponent<Player_Movement>().ResetOtherSource("portal");
-        //}
     }
 }

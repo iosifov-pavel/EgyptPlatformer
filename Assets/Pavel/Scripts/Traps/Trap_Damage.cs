@@ -6,7 +6,6 @@ public class Trap_Damage : MonoBehaviour
 {
     int damage = -1;
     Player_Health ph;
-    Player_Movement player_Movement;
     Rigidbody2D rb;
     Transform tr;
     AudioSource source;

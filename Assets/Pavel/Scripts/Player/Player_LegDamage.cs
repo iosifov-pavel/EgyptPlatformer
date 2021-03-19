@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player_LegDamage : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] Player_Movement player_Movement;
+    [SerializeField] Movement player_Movement;
     [SerializeField] Player_Health player_Health;
     Rigidbody2D rb2;
     // Update is called once per frame
@@ -13,18 +13,19 @@ public class Player_LegDamage : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="WeakSpot"){
             if(other.transform.position.y>transform.position.y) return;
-            other.transform.parent.gameObject.GetComponent<Enemy_Health>().TakeDamage(3);
             rb2 = transform.parent.gameObject.GetComponent<Rigidbody2D>();
+            if(rb2.velocity.y>0) return;
+            other.transform.parent.gameObject.GetComponent<Enemy_Health>().TakeDamage(3);
             rb2.velocity = new Vector2(rb2.velocity.x,0);
-            rb2.AddForce(transform.up*8f, ForceMode2D.Impulse);
+            player_Movement.SetImpulseForce(Vector2.up*4f, 0.35f);
             StartCoroutine(noDamage());
-            player_Movement.jumps--;
+            player_Movement.ResetJumpCount();
         }
     }
 
     IEnumerator noDamage(){
         player_Health.afterHeadJump = true;
-        yield return new WaitForSeconds(0.11f);
+        yield return new WaitForSeconds(0.25f);
         player_Health.afterHeadJump = false;
     }
 }

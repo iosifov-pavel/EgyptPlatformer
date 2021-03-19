@@ -8,7 +8,6 @@ public class Enemy_Damage : MonoBehaviour
     int damage = -1;
     public bool isDamaged=false;
     Player_Health ph;
-    Player_Movement player_Movement;
     Enemy_Health enemy_Health;
     Rigidbody2D rb;
     Transform tr;

@@ -8,7 +8,6 @@ public class Enemy_WInd_Global : MonoBehaviour
 
     public Vector2 dir;
 
-    Player_Movement pm;
     // Start is called before the first frame update
     void Start()
     {

@@ -13,7 +13,6 @@ public class Player_Health : MonoBehaviour
     public bool superman = false;
     public bool dead = false;
     Player_Animation anima;
-    Player_Movement pm;
     GameObject UI;
     GameObject Lives;
     public int lives = 4;
@@ -43,7 +42,6 @@ public class Player_Health : MonoBehaviour
         dead=false;
         hp=MAXhp;
         anima = GetComponent<Player_Animation>();
-        //pm = GetComponent<Player_Movement>();
         lastCheckPoint = transform.position;
         //if(LM.level.boss_stage){
         //    lives=2;
