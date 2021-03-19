@@ -37,7 +37,7 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem stepsDust;
     [SerializeField] ParticleSystem jumpOnGroundDust;
     ParticleSystem.EmissionModule stepDustEmission;
-
+    List<Force> forces = new List<Force>();
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -58,12 +58,14 @@ public class Movement : MonoBehaviour
         CheckGround();
         StepDust();
         if(!flipBlock)Flip();
+
         //GetInput();
     }
 
     private void FixedUpdate() {
         CalculateVelocity();
         Move();
+        AdditionalMove();
         Jump();
     }
 
@@ -115,6 +117,10 @@ public class Movement : MonoBehaviour
         currentJumps=1;
     }
 
+    public float GetJumpCount(){
+        return currentJumps;
+    }
+
     public void BlockFlip(bool state){
         flipBlock = state;
     }
@@ -150,6 +156,33 @@ public class Movement : MonoBehaviour
     void Move(){
         playerRigidbody.velocity = Vector2.SmoothDamp(playerRigidbody.velocity,targetVelocity, ref resultVelocity, MovementSmoothing);
     }
+
+    void AdditionalMove(){
+        if(playerRigidbody.velocity.y>jumpForce){
+            Vector2 clampedVelocity = playerRigidbody.velocity;
+            clampedVelocity.x=0;
+            clampedVelocity = Vector2.ClampMagnitude(clampedVelocity,jumpForce);
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x,clampedVelocity.y);
+        }
+        foreach(Force force in forces){
+            playerRigidbody.velocity += force.force;
+            if(!force.constant) force.force = Vector2.Lerp(force.force, Vector2.zero, force.xLerp);
+        }
+        ForceUpdate();
+    }
+
+    void ForceUpdate(){
+        for(int i = forces.Count-1; i>=0;i--){
+            if(forces[i].constant){
+                //do nothing
+            }
+            else{
+                if(forces[i].force.magnitude<=0.1f){
+                    forces.RemoveAt(i);
+                }
+            } 
+        }
+    }
     
     void Jump(){
         if(jumpBlock) return;
@@ -171,6 +204,22 @@ public class Movement : MonoBehaviour
         return jumpButton;
     }
 
+    public void SetImpulseForce(Vector2 vector, float xLerp){
+        Force force = new Force(vector,xLerp);
+        forces.Add(force);
+    }
+
+    public void SetConstantForce(string nameForce, Vector2 vector){
+        Force force = new Force(nameForce,vector);
+        forces.Add(force);
+    }
+
+    public void RemoveForce(string name){
+        Force f = forces.Find(x=> x.ID == name);
+        f.constant = false;
+        f.force = Vector2.zero;
+    }
+
     void StepDust(){
         if(Mathf.Abs(input.x)!=0 && isGrounded){
             stepDustEmission.enabled = true;
@@ -180,5 +229,25 @@ public class Movement : MonoBehaviour
             stepDustEmission.enabled = false;
             stepsSound.Stop();
         } 
+    }
+}
+
+public class Force{
+    public Vector2 force;
+    public float xLerp;
+    public string ID = "";
+    public bool constant = false;
+
+    public Force(Vector2 vector, float lerp){
+        force = vector;
+        xLerp = lerp;
+        ID = "Temporary";
+        constant = false;
+    }
+
+    public Force(string id,Vector2 vector){
+        constant = true;
+        ID = id;
+        force = vector;
     }
 }
