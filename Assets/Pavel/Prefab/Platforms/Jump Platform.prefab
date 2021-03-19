@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 424014102959524439}
   - component: {fileID: 424014102959524436}
   - component: {fileID: 424014102959524435}
-  - component: {fileID: 6847786706193649162}
+  - component: {fileID: 297029262}
   m_Layer: 0
   m_Name: Jump Platform
   m_TagString: Untagged
@@ -83,7 +83,7 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &6847786706193649162
+--- !u!114 &297029262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,15 +92,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 424014102959524434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 132185b38f66cab41b84ba2a2ee573c4, type: 3}
+  m_Script: {fileID: 11500000, guid: e3a7ff4e9dd425640b66dd8b78011495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceStrength: 4.4
-  forceTime: 0.35
-  isImpulse: 1
-  id: force name
-  forceDirection: {x: 0, y: 1}
-  isLegApply: 1
+  force: 4.4
 --- !u!1 &2537786730889239485
 GameObject:
   m_ObjectHideFlags: 0

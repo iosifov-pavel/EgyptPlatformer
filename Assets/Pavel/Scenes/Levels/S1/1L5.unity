@@ -944,6 +944,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 761077974, guid: 6fcfc2f415f34394cb5ad3137768882c, type: 3}
+      propertyPath: forceStrength
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 2835249059303601114, guid: 6fcfc2f415f34394cb5ad3137768882c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1815,6 +1819,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2059498805769238352, guid: aff78f128b24ca847b5da44e3c3d30c5,
+        type: 3}
+      propertyPath: slow_multiplier
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4512099517392337436, guid: aff78f128b24ca847b5da44e3c3d30c5,
         type: 3}
       propertyPath: m_RootOrder
@@ -4052,7 +4061,7 @@ PrefabInstance:
     - target: {fileID: 978304664014667898, guid: d21028ccd8906734797aa06dd2e03da1,
         type: 3}
       propertyPath: speed
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7065463008442081480, guid: d21028ccd8906734797aa06dd2e03da1,
         type: 3}
@@ -4769,12 +4778,12 @@ PrefabInstance:
     - target: {fileID: 6738711864002462154, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.34
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 6738711864002462154, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16
+      value: 3.66
       objectReference: {fileID: 0}
     - target: {fileID: 6738711864002462154, guid: 2b0842dbf4037b3478788444e0689c89,
         type: 3}
@@ -5057,7 +5066,7 @@ MonoBehaviour:
   original: {x: 0, y: 0, z: 0}
   point: {x: 0, y: 0, z: 0}
   destination: {x: 0, y: 0, z: 0}
-  speed: 2
+  speed: 1.2
   delay: 0
 --- !u!212 &334957105128491941
 SpriteRenderer:
@@ -5658,8 +5667,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1319461118, guid: 96732dc9a8be3134d9163fa216832769, type: 3}
+      propertyPath: forceTime
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319461118, guid: 96732dc9a8be3134d9163fa216832769, type: 3}
       propertyPath: isImpulse
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319461118, guid: 96732dc9a8be3134d9163fa216832769, type: 3}
+      propertyPath: forceStrength
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 6043836746189691517, guid: 96732dc9a8be3134d9163fa216832769,
         type: 3}
