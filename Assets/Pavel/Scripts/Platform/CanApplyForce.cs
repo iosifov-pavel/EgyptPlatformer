@@ -9,6 +9,7 @@ public class CanApplyForce : MonoBehaviour
     [SerializeField] bool isImpulse = false;
     [SerializeField]string id = "force name";
     [SerializeField] Vector2 forceDirection = Vector2.zero;
+    [SerializeField] bool isLegApply = false;
     Vector2 resultForce;
     Movement player;
     // Start is called before the first frame update
@@ -23,21 +24,28 @@ public class CanApplyForce : MonoBehaviour
     // Update is called once per frame
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag=="GroundCheck"){
-            player = other.transform.parent.gameObject.GetComponent<Movement>();
+        if(isLegApply && other.gameObject.tag=="GroundCheck" || !isLegApply && other.gameObject.tag=="Player"){
+            if(isLegApply) player = other.GetComponentInParent<Movement>();
+            else player = other.GetComponent<Movement>();
             if(!isImpulse) player.SetConstantForce(id,resultForce);
         }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag=="GroundCheck"){
-            if(isImpulse) player.SetImpulseForce(resultForce,forceTime);
-            //player.AddForces(force);
+        if (isLegApply && other.gameObject.tag == "GroundCheck" || !isLegApply && other.gameObject.tag == "Player")
+        {
+            if (isLegApply) player = other.GetComponentInParent<Movement>();
+            else player = other.GetComponent<Movement>();
+            if (isImpulse) player.SetImpulseForce(resultForce, forceTime);
         }
     }
+
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag=="GroundCheck"){
-            if(!isImpulse) player.RemoveForce(id);
+        if (isLegApply && other.gameObject.tag == "GroundCheck" || !isLegApply && other.gameObject.tag == "Player")
+        {
+            if (isLegApply) player = other.GetComponentInParent<Movement>();
+            else player = other.GetComponent<Movement>();
+            if (!isImpulse) player.RemoveForce(id);
         }
     }
 }
