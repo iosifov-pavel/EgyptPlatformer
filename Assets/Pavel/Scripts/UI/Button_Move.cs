@@ -87,6 +87,7 @@ float cumulative_reset=0;
                     break;
                 case TouchPhase.Ended:
                     //pm.stickPressed = false;
+                    player.SetInput(Vector2.zero);
                     id=-111;
                     cumulative_reset=0;
                     cumulative_jump=0;
