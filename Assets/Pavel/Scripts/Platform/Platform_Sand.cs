@@ -9,7 +9,7 @@ public class Platform_Sand : MonoBehaviour
     BoxCollider2D trigger,floor_collider;
     [SerializeField] bool in_contact = false;
     bool too_low=false;
-    Player_Movement player_Movement;
+    Movement player;
     Player_Health player_Health;
     Vector2 original;
     float speed=1f, speed_up = 0.5f;
@@ -66,10 +66,10 @@ public class Platform_Sand : MonoBehaviour
         if(other.gameObject.tag=="Player"){
             if(other.gameObject.layer==10 || other.gameObject.layer==9){
                 StopAllCoroutines();
-                player_Movement = other.gameObject.GetComponent<Player_Movement>();
+                player = other.gameObject.GetComponent<Movement>();
                 player_Health = other.gameObject.GetComponent<Player_Health>();
                 other.transform.parent = floor;
-                player_Movement.multylow(0.5f);
+                player.SetMultiplierMovement(new Vector3(0.6f,0.75f,1));
             }
         }
         else if(other.gameObject.tag=="GrabCeiling"){
@@ -86,7 +86,7 @@ public class Platform_Sand : MonoBehaviour
         }
     }
     IEnumerator DelayedExit(){
-        yield return new WaitForSeconds(1);
-        player_Movement.multylow(1);
+        yield return new WaitForSeconds(0.2f);
+        player.ResetMultiplier();
     }
 }

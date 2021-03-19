@@ -32,6 +32,7 @@ public class Movement : MonoBehaviour
     Vector2 targetVelocity = Vector2.zero;
     Vector2 resultVelocity = Vector2.zero;
     Rigidbody2D playerRigidbody;
+    Player_Health player_Health;
     
     [Header("Dust Particles")]
 
@@ -49,6 +50,7 @@ public class Movement : MonoBehaviour
         Gizmos.DrawLine(transform.position,draw);
     }
     void Start(){
+        player_Health = GetComponent<Player_Health>();
         movementMultiplier.x = speed;
         movementMultiplier.y = jumpForce;
         movementMultiplier.z = jumpForce;
@@ -70,6 +72,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate() {
         CalculateVelocity();
+        if(player_Health.dead) return;
         Move();
         AdditionalMove();
         Jump();
@@ -244,9 +247,9 @@ public class Movement : MonoBehaviour
         //x - режет множитель скорости по горизонтали
         //y - определяет максимальную величину по вертикали вверх
         //z - определяет максимальную величину по вертикали вниз
-        movementMultiplier.x *= multiplier.x;
-        movementMultiplier.y *= multiplier.y;
-        movementMultiplier.z *= multiplier.z;
+        movementMultiplier.x = speed * multiplier.x;
+        movementMultiplier.y = jumpForce * multiplier.y;
+        movementMultiplier.z = jumpForce * multiplier.z;
     }
 
     public void ResetMultiplier(){
@@ -256,7 +259,7 @@ public class Movement : MonoBehaviour
     }
 
     void StepDust(){
-        if(Mathf.Abs(input.x)!=0 && isGrounded){
+        if(Mathf.Abs(input.x)!=0 && isGrounded && !player_Health.dead){
             stepDustEmission.enabled = true;
             if(!stepsSound.isPlaying)stepsSound.Play();
         } 
