@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform_Conveyer : MonoBehaviour
+public class CanApplyForce : MonoBehaviour
 {
-    [SerializeField] float speed = 1f;
+    [SerializeField] float forceStrength = 1f;
     [SerializeField] float forceTime = 0.5f;
     [SerializeField] bool isImpulse = false;
-    string tittle = "conveyer";
-    [SerializeField] int dir = -1;
-    Vector2 force;
+    [SerializeField]string id = "force name";
+    [SerializeField] Vector2 forceDirection = Vector2.zero;
+    Vector2 resultForce;
     Movement player;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class Platform_Conveyer : MonoBehaviour
     }
 
     private void Update() {
-            force = new Vector2(speed*dir,0);
+        resultForce = forceDirection * forceStrength;
     }
 
     // Update is called once per frame
@@ -25,19 +25,19 @@ public class Platform_Conveyer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="GroundCheck"){
             player = other.transform.parent.gameObject.GetComponent<Movement>();
-            if(!isImpulse) player.SetConstantForce(tittle,force);
+            if(!isImpulse) player.SetConstantForce(id,resultForce);
         }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="GroundCheck"){
-            if(isImpulse) player.SetImpulseForce(force,forceTime);
+            if(isImpulse) player.SetImpulseForce(resultForce,forceTime);
             //player.AddForces(force);
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="GroundCheck"){
-            if(!isImpulse) player.RemoveForce(tittle);
+            if(!isImpulse) player.RemoveForce(id);
         }
     }
 }

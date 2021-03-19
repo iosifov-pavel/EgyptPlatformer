@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2835249059303601114}
   - component: {fileID: 2835249059303601113}
   - component: {fileID: 2835249059303601118}
-  - component: {fileID: 761077977}
+  - component: {fileID: 761077974}
   m_Layer: 8
   m_Name: Conveyer Platform
   m_TagString: Ground
@@ -165,7 +165,7 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &761077977
+--- !u!114 &761077974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,13 +174,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2835249059303601119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 109c6a3bd8e8dcf4fa302ec9cded0b4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 132185b38f66cab41b84ba2a2ee573c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  forceStrength: 0.2
   forceTime: 0.5
   isImpulse: 0
-  dir: -1
+  id: Conveyer
+  forceDirection: {x: -1, y: 0}
 --- !u!1 &4632763059589178504
 GameObject:
   m_ObjectHideFlags: 0
