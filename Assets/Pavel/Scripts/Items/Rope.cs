@@ -7,6 +7,7 @@ public class Rope : MonoBehaviour
     // Start is called before the first frame update
     Movement player_Movement;
     Player_Health player_Health;
+    Vector2 playerHead, playerLegs;
     public Vector2 playerInput;
     Vector2 pre_push;
     Rigidbody2D rb_player;
@@ -46,7 +47,7 @@ public class Rope : MonoBehaviour
         if(ready){
             player.transform.rotation = Quaternion.identity;
             dis = Physics2D.Distance(playerBox,box).distance;
-            if(dis>0.1f){
+            if(dis>0.2f){
                 playerInput=Vector2.zero;
                 Jump();
             }
@@ -62,19 +63,21 @@ public class Rope : MonoBehaviour
             }
             Vector2 move;
             if(straight){   
+                playerHead = player.transform.GetChild(3).position;
+                playerLegs = player.transform.GetChild(2).position;
                 forward = transform.up; 
                 end_max = box.bounds.max.y;
                 end_min = box.bounds.min.y;
                 move = new Vector2(forward.x*playerInput.y,forward.y*playerInput.y);
                 move*=Time.deltaTime;
-                if(player.transform.position.y+move.y >= end_max-0.08f) return;
-                if(player.transform.position.y+move.y <= end_min+0.08f) return;
+                if(playerHead.y+move.y >= end_max-0.2f && move.y>0) return;
+                if(playerLegs.y+move.y <= end_min+0.05f && move.y<0) return;
                 player.transform.Translate(move);
             }
             else{
                 move = new Vector3(playerInput.x,0,0) * Time.deltaTime;
-                if(player.transform.position.x+move.x >= end_max-0.08f) return;
-                if(player.transform.position.x+move.x <= end_min+0.08f) return;
+                if(player.transform.position.x+move.x >= end_max-0.02f && move.x>0) return;
+                if(player.transform.position.x+move.x <= end_min+0.02f && move.x<0) return;
                 player.transform.Translate(move);
             }
         }
@@ -115,39 +118,9 @@ public class Rope : MonoBehaviour
             player_Movement.BlockMove(true);
             player_Movement.BlockJump(true);
             contact = true;
-            if(straight){
-                distance = Mathf.Abs(transform.position.x - player.transform.position.x);
-            }
-            else{  
-                distance = Mathf.Abs(transform.position.y - player.transform.position.y);
-            }
         }
     }
 
-    //private void OnTriggerStay2D(Collider2D other) {
-    //    if(contact && ready){
-    //        if(other.gameObject.tag!="Player") return;
-    //            if(straight){
-    //                dis = Physics2D.Distance(other,box).distance;
-    //                //dis = Mathf.Abs(transform.position.x - player.transform.position.x);
-    //            }
-    //            else{
-    //                //dis = Mathf.Abs(transform.position.y - player.transform.position.y);
-    //            }
-    //            if(dis>0.06f){
-    //                playerInput=Vector2.zero;
-    //                Jump();
-    //            }
-    //        }
-    //}
-
-    //private void OnTriggerExit2D(Collider2D other) {
-    //    if(!contact || !ready) return;
-    //    if(other.gameObject.tag=="Player"){
-    //       //playerInput=Vector2.zero;
-    //       //Jump();
-    //    }
-    //}
     IEnumerator Delay(){
         playerInput=Vector2.zero;
         delay=true;
