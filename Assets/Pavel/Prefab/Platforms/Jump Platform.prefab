@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 424014102959524439}
   - component: {fileID: 424014102959524436}
   - component: {fileID: 424014102959524435}
-  m_Layer: 8
+  - component: {fileID: 1769023573}
+  m_Layer: 0
   m_Name: Jump Platform
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,6 +83,19 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &1769023573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424014102959524434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a7ff4e9dd425640b66dd8b78011495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 5
 --- !u!1 &2537786730889239485
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,10 +433,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3162087619269016908}
   - component: {fileID: 24240002007380519}
-  - component: {fileID: 8844387134672868210}
   m_Layer: 14
   m_Name: GroundTr
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -467,16 +480,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2577782, y: 0.030899923}
   m_EdgeRadius: 0
---- !u!114 &8844387134672868210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8844387134672868211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3a7ff4e9dd425640b66dd8b78011495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 16

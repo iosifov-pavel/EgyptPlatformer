@@ -5,7 +5,7 @@ using UnityEngine;
 public class Platform_Jump : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] float force=2;
+    [SerializeField] float force=5;
     Force impulse;
     
     Movement player;
