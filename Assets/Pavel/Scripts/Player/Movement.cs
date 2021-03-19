@@ -245,8 +245,8 @@ public class Movement : MonoBehaviour
 
     public void SetMultiplierMovement(Vector3 multiplier){
         //x - режет множитель скорости по горизонтали
-        //y - определяет максимальную величину по вертикали вверх
-        //z - определяет максимальную величину по вертикали вниз
+        //y - определяет максимальную величину по вертикали для прыжка
+        //z - определяет максимальную величину по вертикали для падения
         movementMultiplier.x = speed * multiplier.x;
         movementMultiplier.y = jumpForce * multiplier.y;
         movementMultiplier.z = jumpForce * multiplier.z;
