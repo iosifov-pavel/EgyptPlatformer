@@ -8,7 +8,7 @@ public class Item_Rotate : MonoBehaviour, IIntercatable
     bool check = false;
     Transform rotates;
     List<Rotatable> rot_childs = new List<Rotatable>();
-    Player_Movement player_Movement=null;
+    Movement player_Movement=null;
     Rigidbody2D plrb;
     Player_Health player_Health=null;
     Player_Attack player_Attack=null;
@@ -34,7 +34,7 @@ public class Item_Rotate : MonoBehaviour, IIntercatable
     }
 
     void Action(){
-        float rot_pow = player_Movement.direction.x;
+        float rot_pow = player_Movement.GetInput().x;
         Debug.Log(rot_pow);
         transform.Rotate(new Vector3(0,0,30*rot_pow*Time.deltaTime));
         foreach(Rotatable child in rot_childs){
@@ -51,22 +51,19 @@ public class Item_Rotate : MonoBehaviour, IIntercatable
         player = _player;
         if(check){
             if(player_Movement==null){
-                player_Movement = player.GetComponent<Player_Movement>();
+                player_Movement = player.GetComponent<Movement>();
                 player_Health = player.GetComponent<Player_Health>();
                 player_Attack = player.transform.GetChild(2).gameObject.GetComponent<Player_Attack>();
                 plrb = player.GetComponent<Rigidbody2D>();
             }
-            player_Movement.direction= Vector2.zero;
-            player_Movement.inertia=0;
-            player_Movement.moveBlock=true;
-            player_Movement.jump_block=true;
+            player_Movement.SetInput(Vector2.zero);
+            player_Movement.BlockAll(true);
             player_Attack.blockAttack = true;
             Player_Interact.player_Interact.isInteracting = true;
             plrb.velocity=Vector2.zero;
         }
         else{
-            player_Movement.moveBlock=false;
-            player_Movement.jump_block=false;
+            player_Movement.BlockAll(false);
             player_Attack.blockAttack = false;
             Player_Interact.player_Interact.isInteracting = false;
         }

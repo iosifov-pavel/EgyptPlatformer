@@ -32,7 +32,6 @@ float cumulative_reset=0;
         stick = transform.GetChild(0);
         original = stick.localPosition;
         center = transform.position;
-        //pm = player.GetComponent<Movement>();
         scale = transform.parent.transform.parent.GetComponent<RectTransform>().localScale.x;
         dist = gameObject.GetComponent<RectTransform>().rect.width/2 * scale;
         razbros = (gameObject.GetComponent<RectTransform>().rect.width + 60)/2 * scale;
