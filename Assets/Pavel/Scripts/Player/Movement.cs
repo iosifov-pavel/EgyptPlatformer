@@ -64,7 +64,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update(){
         CheckGround();
-        StepDust();
+        if(!moveBlock)StepDust();
         if(!flipBlock)Flip();
 
         //GetInput();

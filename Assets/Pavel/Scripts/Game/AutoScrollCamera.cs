@@ -11,7 +11,7 @@ public class AutoScrollCamera : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] Transform point;
     [SerializeField] Transform cam;
-    Player_Movement player_Movement;
+    Movement playerM;
     Rigidbody2D playerbody;
     Rigidbody2D rb2;
     Vector2 original;
@@ -19,7 +19,7 @@ public class AutoScrollCamera : MonoBehaviour
     bool moving = false;
     void Start()
     {
-        player_Movement = player.gameObject.GetComponent<Player_Movement>();
+        playerM = player.gameObject.GetComponent<Movement>();
         playerbody = player.gameObject.GetComponent<Rigidbody2D>();
         original = transform.position;
         rb2 = GetComponent<Rigidbody2D>();
@@ -33,15 +33,13 @@ public class AutoScrollCamera : MonoBehaviour
             Vector2 temp = playerbody.velocity;
             temp.x=0;
             playerbody.velocity = temp;
-            player_Movement.moveBlock = true;
-            player_Movement.jump_block = true;
+            playerM.BlockAll(true);
             cam.position = transform.position + Random.insideUnitSphere*0.15f;
             death.transform.position = Vector3.MoveTowards(death.transform.position, point.position, 4*Time.deltaTime);
             if(death.transform.position == point.position){
                 moving = true;
                 triggered = false;
-                player_Movement.moveBlock=false;
-                player_Movement.jump_block = false;
+                playerM.BlockAll(false);
                 StartCoroutine(LetsGo());
             } 
         }
