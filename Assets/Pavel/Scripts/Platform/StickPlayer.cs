@@ -5,7 +5,7 @@ using UnityEngine;
 public class StickPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
-    Transform playerParent;
+    Movement player;
     void Start()
     {
         
@@ -20,20 +20,25 @@ public class StickPlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) 
     {
     if(other.gameObject.tag=="Player"){
-            playerParent = other.transform.parent;
+            player = other.GetComponent<Movement>();
             other.gameObject.transform.SetParent(transform);
         } 
     }
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
-            //other.gameObject.transform.SetParent(transform);
+            Vector2 move = player.GetInput();
+            if(Mathf.Abs(move.x)>1f){
+                other.gameObject.transform.SetParent(null);
+            }
+            else{
+                other.gameObject.transform.SetParent(transform);
+            }
         } 
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
-
             other.gameObject.transform.SetParent(null);
         }
     }
