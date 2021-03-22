@@ -22,6 +22,10 @@ public class Platform_Move : MonoBehaviour
         else Gizmos.DrawLine(original, point);
     }
 
+    private void OnEnable() {
+        timer = 0;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
