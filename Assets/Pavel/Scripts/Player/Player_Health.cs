@@ -59,7 +59,7 @@ public class Player_Health : MonoBehaviour
         //pm.BlockMovement(0.4f);
         //pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         hp=MAXhp;
-        UI_HP.Recreate();
+        //UI_HP.Recreate();
         dead=false;
         StopAllCoroutines();
         BecomeSuperman(3);
@@ -89,7 +89,7 @@ public class Player_Health : MonoBehaviour
         if(superman || dead) return;
         if(afterHeadJump) return;
         hp+=source;
-        UI_HP.Damaged();
+        //UI_HP.Damaged();
         Debug.Log("Health " + hp);
         if(hp<=0){
              Death();
@@ -101,7 +101,7 @@ public class Player_Health : MonoBehaviour
 
     public void Heal(){
         hp++;
-        UI_HP.Heal();
+        //UI_HP.Heal();
     }
 
     public void Death(){
@@ -112,7 +112,7 @@ public class Player_Health : MonoBehaviour
         //anima.setBoolAnimation("Dead",dead);
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.red;
-        UI_HP.Dead();
+        //UI_HP.Dead();
         LM.manager_Game.game_info.Lives--;
         lives_count.text = LM.manager_Game.game_info.Lives.ToString();
         //lives--;
@@ -172,7 +172,7 @@ public class Player_Health : MonoBehaviour
     public void MaxHPPlus(){
         MAXhp++;
         hp++;
-        UI_HP.MaxHPInc();
+        //UI_HP.MaxHPInc();
     }
 
     public void OneUp(){

@@ -99,7 +99,12 @@ public class Movement : MonoBehaviour
             isFalling = false;
             MovementSmoothing = groundSmoothing;
             currentJumps = 0;
+            CheckSlopes();
         } 
+    }
+
+    void CheckSlopes(){
+
     }
 
     void Flip(){
