@@ -28,10 +28,10 @@ public class Game_Preload : MonoBehaviour
         for(first_index=1;first_index<=11;first_index++){
             string sn = string.Format("S{0}",first_index);
             manager.game_info.sections.Add(new Section(first_index,sn));
-            for(second_index=1;second_index<=6;second_index++){
+            for(second_index=1;second_index<=10;second_index++){
                 string sl = string.Format("{0}L{1}",first_index,second_index);
                 manager.game_info.sections[first_index-1].levels.Add(new Level(second_index,sl));
-                if(second_index==6){
+                if(second_index==10){
                     manager.game_info.sections[first_index-1].levels[second_index-1].boss_stage=true;
                 }
             }
