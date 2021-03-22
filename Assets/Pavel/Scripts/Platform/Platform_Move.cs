@@ -7,8 +7,11 @@ public class Platform_Move : MonoBehaviour
     //public Vector3 p1;
     [SerializeField] Vector3 move_point;
     public  Vector3 original,point,destination;
+    [SerializeField] bool sameSpeed = true;
     [SerializeField] private float speed = 1f;
+    [SerializeField] float speedBack = 1f;
     [SerializeField] float delay = 0;
+    float resultSpeed;
     float timer = 0;
     bool start = false;
 
@@ -22,11 +25,11 @@ public class Platform_Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //platform = transform.parent;
         original = transform.position;
         point = original + move_point;
         start = true;
         destination = point;
+        resultSpeed = speed;
     }
 
     bool GetReady(){
@@ -39,13 +42,15 @@ public class Platform_Move : MonoBehaviour
     void FixedUpdate()
     {
         if(!GetReady()) return;
-        float step =  speed * Time.fixedDeltaTime; 
+        float step =  resultSpeed * Time.fixedDeltaTime; 
         transform.position =  Vector3.MoveTowards(transform.position, destination, step);
         if(transform.position==point){
             destination = original;
+            if(!sameSpeed) resultSpeed = speedBack;
         }
         else if(transform.position==original){
             destination = point;
+            if(!sameSpeed) resultSpeed = speed;
         }
     }
 

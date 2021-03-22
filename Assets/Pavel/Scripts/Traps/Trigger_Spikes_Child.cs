@@ -20,10 +20,14 @@ public class Trigger_Spikes_Child : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        trigger_Spikes.Triggered();
+        if(other.gameObject.tag=="Player"){
+            trigger_Spikes.Triggered();
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        trigger_Spikes.Triggered();
+        if(other.gameObject.tag=="Player"){
+            trigger_Spikes.Triggered();
+        }
     }
 }
