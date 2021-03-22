@@ -7,15 +7,18 @@ public class Trigger_Spikes : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Sprite calm, warning, attack;
     [SerializeField] float warning_time, up_time, after_time;
+    [SerializeField] AudioClip ups, downs;
     float timer=0;
     bool trigered=false, up=false, ready=true;
     BoxCollider2D box;
     SpriteRenderer spriteRenderer;
+    AudioSource source;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         box = GetComponent<BoxCollider2D>();
         box.enabled=false;
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class Trigger_Spikes : MonoBehaviour
                 trigered=false;
                 up=true;
                 timer=0;
+                source.PlayOneShot(ups);
             }
         }
         if(up){
@@ -39,6 +43,7 @@ public class Trigger_Spikes : MonoBehaviour
                 box.enabled=false;
                 timer=0;
                 up=false;
+                source.PlayOneShot(downs);
             }
         }
         if(!trigered && !up){
