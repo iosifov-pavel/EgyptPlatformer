@@ -71,7 +71,7 @@ public class Player_Health : MonoBehaviour
         player.color = Color.white;
         if(autoscroll==null){}
         else{
-            autoscroll.transform.position = new Vector3(transform.position.x-5,transform.position.y,autoscroll.transform.position.z);
+            autoscroll.transform.position = new Vector3(transform.position.x-6,transform.position.y,autoscroll.transform.position.z);
         }
         Time.timeScale = 1f;
         Playing_UI.SetActive(true);
