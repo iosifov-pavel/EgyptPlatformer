@@ -59,15 +59,18 @@ public class Player_Health : MonoBehaviour
     public void Resurrect(){
         //pm.BlockMovement(0.4f);
         GetComponent<Rigidbody2D>().velocity=Vector2.zero;
-        player_m.BlockJump(false);
+        player_m.SetInput(Vector2.zero);
+        player_m.BlockAll(false);
+
         hp=MAXhp;
         //UI_HP.Recreate();
         dead=false;
         StopAllCoroutines();
-        BecomeSuperman(3);
+        BecomeSuperman(2);
         //anima.setBoolAnimation("Dead",false);
         Vector3 pos = lastCheckPoint;
         pos.z = 0;
+        pos.y+=1;
         transform.position = pos;
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.white;
