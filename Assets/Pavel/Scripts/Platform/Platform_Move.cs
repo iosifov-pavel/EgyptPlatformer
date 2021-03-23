@@ -43,10 +43,10 @@ public class Platform_Move : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(!GetReady()) return;
-        float step =  resultSpeed * Time.fixedDeltaTime; 
+        float step =  resultSpeed * Time.deltaTime; 
         transform.position =  Vector3.MoveTowards(transform.position, destination, step);
         if(transform.position==point){
             destination = original;

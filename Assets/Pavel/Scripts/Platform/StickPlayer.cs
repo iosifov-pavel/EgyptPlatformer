@@ -22,7 +22,7 @@ public class StickPlayer : MonoBehaviour
     {
     if(other.gameObject.tag=="Player"){
             player = other.GetComponent<Movement>();
-            //playerRigidbody = other.GetComponent<Rigidbody2D>();
+            playerRigidbody = other.GetComponent<Rigidbody2D>();
             //playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
             //playerRigidbody.velocity = Vector2.zero;
             //playerRigidbody.gravityScale = 0;
@@ -31,15 +31,15 @@ public class StickPlayer : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        //if(other.gameObject.tag=="Player"){
-        //    Vector2 move = player.GetInput();
-        //    //if(Mathf.Abs(move.x)>1f){
-        //    //    other.gameObject.transform.SetParent(null);
-        //    //}
-        //    //else{
-        //    //    other.gameObject.transform.SetParent(transform);
-        //    //}
-        //} 
+        if(other.gameObject.tag=="Player"){
+            Vector2 move = player.GetInput();
+            if(Mathf.Abs(move.x)>1.5f){
+                other.gameObject.transform.SetParent(null);
+            }
+            else{
+                other.gameObject.transform.SetParent(transform);
+            }
+        } 
     }
 
     private void OnTriggerExit2D(Collider2D other) {
