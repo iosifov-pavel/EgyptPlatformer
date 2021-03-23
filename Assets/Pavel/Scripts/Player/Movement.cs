@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask whatIsGround;
     public bool isGrounded = true;
+    bool insideGround = false;
     [SerializeField] float groundedWidth = 0.05f;
     [SerializeField] float groundedHeight = 0.05f;
     Vector2 input = Vector2.zero;
@@ -41,6 +42,9 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem jumpOnGroundDust;
     ParticleSystem.EmissionModule stepDustEmission;
     List<Force> forces = new List<Force>();
+    [SerializeField] BoxCollider2D playerBoxCollider;
+    List<Collider2D> groundHits = new List<Collider2D>();
+    Vector3 safePosition = Vector3.zero;
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -64,6 +68,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update(){
         CheckGround();
+        CheckOverlapColliders();
         if(!moveBlock)StepDust();
         if(!flipBlock)Flip();
 
@@ -106,6 +111,22 @@ public class Movement : MonoBehaviour
 
     void CheckSlopes(){
 
+    }
+
+    void CheckOverlapColliders(){
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.useLayerMask = true;
+        filter.layerMask = whatIsGround;
+        int hitsCount = 0;
+        hitsCount = Physics2D.OverlapCollider(playerBoxCollider,filter,groundHits);
+        if(hitsCount!=0){
+            insideGround = true;
+            transform.position = safePosition;
+        }
+        else{
+            insideGround = false;
+            safePosition = transform.position;
+        }
     }
 
     void Flip(){
