@@ -92,6 +92,7 @@ public class Movement : MonoBehaviour
             return;
         }
         else{
+            if(IsJumpBlocked() && !IsJumpOrFall()) StartCoroutine(UnblockJump());
             isGrounded = true;
             lastGroundCheck = true;
             if(isJumping || isFalling) jumpOnGroundDust.Play();
@@ -145,6 +146,14 @@ public class Movement : MonoBehaviour
 
     public void BlockJump(bool state){
         jumpBlock = state;
+    }
+
+    public bool IsJumpBlocked(){
+        return jumpBlock;
+    }
+    IEnumerator UnblockJump(){
+        yield return new WaitForSeconds(0.1f);
+        BlockJump(false);
     }
 
     public void BlockAll(bool state){

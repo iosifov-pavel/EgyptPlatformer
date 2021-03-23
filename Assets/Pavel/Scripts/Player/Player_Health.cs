@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player_Health : MonoBehaviour
 {
     Vector3 lastCheckPoint;
+    [SerializeField] Movement player_m;
     int last_id=0;
     public int hp;
     public int MAXhp = 3;
@@ -58,6 +59,7 @@ public class Player_Health : MonoBehaviour
     public void Resurrect(){
         //pm.BlockMovement(0.4f);
         GetComponent<Rigidbody2D>().velocity=Vector2.zero;
+        player_m.BlockJump(false);
         hp=MAXhp;
         //UI_HP.Recreate();
         dead=false;

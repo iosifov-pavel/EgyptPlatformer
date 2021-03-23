@@ -32,6 +32,12 @@ public class Player_LegDamage : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D other) {
+        if(other.gameObject.tag == "Trap"){
+            player_Movement.BlockJump(false);
+        }
+    }
+
     IEnumerator noDamage(){
         player_Health.afterHeadJump = true;
         yield return new WaitForSeconds(0.25f);
