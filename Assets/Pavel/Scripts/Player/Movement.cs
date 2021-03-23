@@ -73,6 +73,11 @@ public class Movement : MonoBehaviour
         if(!flipBlock)Flip();
 
         //GetInput();
+        //CalculateVelocity();
+        //if(player_Health.dead) return;
+        //Move();
+        //AdditionalMove();
+        //Jump();
     }
 
     private void FixedUpdate() {
@@ -122,10 +127,14 @@ public class Movement : MonoBehaviour
         if(hitsCount!=0){
             insideGround = true;
             transform.position = safePosition;
+            playerRigidbody.bodyType = RigidbodyType2D.Static;
+            //playerRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         }
         else{
             insideGround = false;
             safePosition = transform.position;
+            playerRigidbody.bodyType = RigidbodyType2D.Dynamic;
+            //playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 

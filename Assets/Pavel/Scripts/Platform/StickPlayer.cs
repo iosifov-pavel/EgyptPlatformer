@@ -32,13 +32,13 @@ public class StickPlayer : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
-            Vector2 move = player.GetInput();
-            if(Mathf.Abs(move.x)>1.5f){
-                other.gameObject.transform.SetParent(null);
-            }
-            else{
-                other.gameObject.transform.SetParent(transform);
-            }
+           Vector2 move = player.GetInput();
+           if(Mathf.Abs(move.x)>1.5f){
+               other.gameObject.transform.SetParent(null);
+           }
+           else{
+               other.gameObject.transform.SetParent(transform);
+           }
         } 
     }
 
