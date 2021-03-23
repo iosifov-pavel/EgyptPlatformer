@@ -57,7 +57,7 @@ public class Player_Health : MonoBehaviour
 
     public void Resurrect(){
         //pm.BlockMovement(0.4f);
-        //pm.gameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
+        GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         hp=MAXhp;
         //UI_HP.Recreate();
         dead=false;

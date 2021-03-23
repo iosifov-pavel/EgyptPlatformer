@@ -21,6 +21,15 @@ public class Player_LegDamage : MonoBehaviour
             StartCoroutine(noDamage());
             player_Movement.ResetJumpCount();
         }
+        else if(other.gameObject.tag == "Trap"){
+            player_Movement.BlockJump(true);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if(other.gameObject.tag == "Trap"){
+            player_Movement.BlockJump(false);
+        }
     }
 
     IEnumerator noDamage(){

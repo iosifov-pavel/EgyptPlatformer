@@ -144,12 +144,7 @@ float cumulative_reset=0;
     public void ResetTouch(){
         //pm.stickPressed = false;
         id=-111;
-        cumulative_reset=0;
-        cumulative_jump=0;
-        last_y=0;
-        last_x=0;
-        delta_move=0;
-        delta_jump=0;
+        player.SetInput(Vector2.zero);
         Debug.Log("Touch Ended");
         stick.localPosition = original;
     }
