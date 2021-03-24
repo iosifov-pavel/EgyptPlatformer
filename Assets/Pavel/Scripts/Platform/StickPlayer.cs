@@ -21,22 +21,28 @@ public class StickPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.gameObject.tag=="Player"){
+        if(other.gameObject.tag=="GroundCheck"){
             if(player == null){
-                player = other.GetComponent<Movement>();
-                playerTransform = other.transform;
-                playerRigidbody = other.GetComponent<Rigidbody2D>();
+                player = other.transform.parent.GetComponent<Movement>();
+                playerTransform = other.transform.parent.transform;
+                playerRigidbody = other.transform.parent.GetComponent<Rigidbody2D>();
             }
             player.SetNonPhysicMovement(true);
-            other.gameObject.transform.SetParent(transform);
+            playerTransform.SetParent(transform);
         } 
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if(other.gameObject.tag=="GroundCheck"){
+            playerTransform.SetParent(transform);
+        }
     }
 
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag=="Player"){
+        if(other.gameObject.tag=="GroundCheck"){
             player.SetNonPhysicMovement(false);
-            other.gameObject.transform.SetParent(null);
+            playerTransform.SetParent(null);
         }
     }
 }
