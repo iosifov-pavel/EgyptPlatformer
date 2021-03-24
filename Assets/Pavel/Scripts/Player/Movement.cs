@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[SelectionBase]
 public class Movement : MonoBehaviour
 {
     // Start is called before the first frame update
-    
     [Header("Basic Control")]
     [SerializeField] float speed = 1.5f;
     [Range(0, .5f)] [SerializeField] private float groundSmoothing = .1f;
@@ -47,6 +48,14 @@ public class Movement : MonoBehaviour
     [SerializeField] BoxCollider2D playerBoxCollider;
     List<Collider2D> groundHits = new List<Collider2D>();
     Vector3 safePosition = Vector3.zero;
+    
+    [Header("Slopes")]
+    public bool onSlope = false;
+    [SerializeField] float maxSlopeAngle = 60f;
+    public Vector2 slopeSpeed = Vector2.zero;
+    public float[] slopeangle = new float[2];
+    [SerializeField] Transform ray1,ray2;
+    public bool highAngle = false;
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -113,7 +122,38 @@ public class Movement : MonoBehaviour
     }
 
     void CheckSlopes(){
+            Color debugColor1 = Color.red;
+            Color debugColor2 = Color.red;
+            RaycastHit2D hit1 = Physics2D.Raycast(ray1.position,Vector2.down,0.2f,whatIsGround);
+            RaycastHit2D hit2 = Physics2D.Raycast(ray2.position,Vector2.down,0.2f,whatIsGround);
+            if(hit1.collider!=null) debugColor1 = Color.green;
+            if(hit2.collider!=null) debugColor2 = Color.green;        
+            Debug.DrawRay(ray1.position,Vector2.down*0.2f,debugColor1, 0.01f);
+            Debug.DrawRay(ray2.position,Vector2.down*0.2f,debugColor2, 0.01f);
+            if(hit1.collider==null && hit2.collider==null){
+                onSlope = false;
+                return;
+            }
+            float diff = Mathf.Abs(hit1.distance-hit2.distance);
+            slopeangle[0] = Mathf.Sign(hit1.normal.x) * Vector2.Angle(transform.up, hit1.normal);
+            slopeangle[1] = Mathf.Sign(hit2.normal.x) * Vector2.Angle(transform.up, hit2.normal);
 
+            if(diff<0.2f && (Mathf.Abs(slopeangle[0])>5 || Mathf.Abs(slopeangle[1])>5) ){
+                onSlope=true;
+                highAngle = false;
+                foreach(float angle in slopeangle){
+                    if(angle==0) continue;
+                    else{
+                        if(angle>0) slopeSpeed = Quaternion.Euler(0,0,-angle) * Vector2.right;
+                        else slopeSpeed = Quaternion.Euler(0,0,-angle) * Vector2.left; 
+                        if(Mathf.Abs(angle) >= maxSlopeAngle) highAngle = true; 
+                    }
+                }
+            }
+            else{
+                onSlope = false;
+                slopeSpeed = Vector2.zero;
+            }
     }
 
     void CheckOverlapColliders(){
