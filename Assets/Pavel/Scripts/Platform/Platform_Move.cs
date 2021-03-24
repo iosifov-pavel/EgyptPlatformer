@@ -57,7 +57,5 @@ public class Platform_Move : MonoBehaviour
             if(!sameSpeed) resultSpeed = speed;
         }
     }
-
-
 }
 

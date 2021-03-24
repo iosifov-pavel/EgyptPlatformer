@@ -20,6 +20,7 @@ public class Movement : MonoBehaviour
     bool jumpButton = false;
     bool isJumping = false;
     bool isFalling = false;
+    bool nonPhysicMovement = false;
     bool lastGroundCheck = true;
     [Header("Ground Settings")]
     [SerializeField] Transform groundCheck;
@@ -32,6 +33,7 @@ public class Movement : MonoBehaviour
     bool flipBlock = false, moveBlock=false, jumpBlock = false;
     Vector2 targetVelocity = Vector2.zero;
     Vector2 resultVelocity = Vector2.zero;
+    Vector2 nonPhysicMove = Vector2.zero;
     Rigidbody2D playerRigidbody;
     Player_Health player_Health;
     
@@ -71,20 +73,24 @@ public class Movement : MonoBehaviour
         CheckOverlapColliders();
         if(!moveBlock)StepDust();
         if(!flipBlock)Flip();
+        if(nonPhysicMovement) NoPhysicMove();
 
-        //GetInput();
+        //----
         //CalculateVelocity();
         //if(player_Health.dead) return;
         //Move();
         //AdditionalMove();
         //Jump();
+        //-----
     }
 
     private void FixedUpdate() {
+        if(!nonPhysicMovement){
         CalculateVelocity();
         if(player_Health.dead) return;
         Move();
         AdditionalMove();
+        }
         Jump();
     }
 
@@ -127,14 +133,16 @@ public class Movement : MonoBehaviour
         if(hitsCount!=0){
             insideGround = true;
             transform.position = safePosition;
-            playerRigidbody.bodyType = RigidbodyType2D.Static;
-            //playerRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            //foreach(Collider2D hit in groundHits){
+            //        ColliderDistance2D colliderDistance = hit.Distance(playerBoxCollider);
+            //        if (colliderDistance.isOverlapped){
+	        //        	transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
+	        //        }
+            //    }
         }
         else{
             insideGround = false;
             safePosition = transform.position;
-            playerRigidbody.bodyType = RigidbodyType2D.Dynamic;
-            //playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
@@ -206,12 +214,24 @@ public class Movement : MonoBehaviour
     }
 
     private void CalculateVelocity(){
+        if(playerRigidbody.velocity.x == 0 && nonPhysicMove.magnitude!=0){
+            playerRigidbody.velocity = new Vector2(nonPhysicMove.x,playerRigidbody.velocity.y);
+            nonPhysicMove = Vector2.zero;
+        }
         targetVelocity = new Vector2(input.x*movementMultiplier.x, playerRigidbody.velocity.y);
         if(moveBlock) targetVelocity.x=0;
     }
 
     void Move(){
         playerRigidbody.velocity = Vector2.SmoothDamp(playerRigidbody.velocity,targetVelocity, ref resultVelocity, MovementSmoothing);
+    }
+
+    void NoPhysicMove(){
+        Vector2 playerVelocity = playerRigidbody.velocity;
+        playerVelocity.x = 0;
+        playerRigidbody.velocity = playerVelocity;
+        nonPhysicMove = new Vector2(input.x*movementMultiplier.x, playerRigidbody.velocity.y);
+        transform.Translate(nonPhysicMove*Time.deltaTime);
     }
 
     void AdditionalMove(){
@@ -300,6 +320,10 @@ public class Movement : MonoBehaviour
         movementMultiplier.x = speed;
         movementMultiplier.y = jumpForce;
         movementMultiplier.z = jumpForce;
+    }
+
+    public void SetNonPhysicMovement(bool state){
+        nonPhysicMovement = state;
     }
 
     void StepDust(){

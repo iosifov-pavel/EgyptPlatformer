@@ -183,8 +183,11 @@ MonoBehaviour:
   original: {x: 0, y: 0, z: 0}
   point: {x: 0, y: 0, z: 0}
   destination: {x: 0, y: 0, z: 0}
+  sameSpeed: 1
   speed: 1
+  speedBack: 1
   delay: 0
+  stickPlayer: {fileID: 2008805173922220763}
 --- !u!114 &7984464962040878697
 MonoBehaviour:
   m_ObjectHideFlags: 0
