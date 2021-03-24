@@ -55,7 +55,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float additiveForceAngle = 50f;
     [SerializeField] float blockSlopeAngle = 60f;
     public Vector2 slopeSpeed = Vector2.zero;
-    public float slopeangle = 0;
+    public float[] slopeangle = new float[2];
     [SerializeField] Transform slopeRay;
     public bool blockAngle = false;
     public bool highAngle = false;
@@ -103,7 +103,6 @@ public class Movement : MonoBehaviour
 
     void CheckGround(){
         isGrounded = false;
-        //Vector2 groundCheckSize = new Vector2(groundedWidth,groundedHeight);
         Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheck.position, groundCheckSize, 0, whatIsGround);
         if(colliders.Length==0){
             if(!isFalling && !isJumping && lastGroundCheck){
@@ -127,34 +126,48 @@ public class Movement : MonoBehaviour
     }
 
     void CheckSlopes(){
-            Color debugColor = Color.red;
-            RaycastHit2D hit = Physics2D.BoxCast(transform.position,groundCheckSize,0,Vector2.down,0.5f,whatIsGround);
-            if(hit.collider!=null) debugColor = Color.green;       
+            Color debugColor1 = Color.red;
+            Color debugColor2 = Color.red;
+            Vector3 p1,p2;
+            p1 = slopeRay.position + new Vector3(-0.13f,0,0);
+            p2 = slopeRay.position + new Vector3(0.13f,0,0);
+            
+            RaycastHit2D hit1 = Physics2D.Raycast(p1,Vector2.down,0.3f,whatIsGround);
+            RaycastHit2D hit2 = Physics2D.Raycast(p2,Vector2.down,0.3f,whatIsGround);
+            if(hit1.collider!=null) debugColor1 = Color.green;
+            if(hit2.collider!=null) debugColor2 = Color.green;              
             //Debug.DrawLine(p1,p2,debugColor, 0.01f);
-            if(hit.collider==null || !isGrounded){
+            if(hit1.collider==null && hit2.collider==null || !isGrounded){
                 onSlope = false;
-                slopeangle = 0;
+                slopeangle[0] = 0;
+                slopeangle[1] = 0;
                 slopeSpeed = Vector2.zero;
                 blockAngle = false;
                 highAngle = false;
                 return;
             }
-            slopeangle = Mathf.Sign(hit.normal.x) * Vector2.Angle(transform.up, hit.normal);
-            if((Mathf.Abs(slopeangle)>5)){
+            slopeangle[0] = Mathf.Sign(hit1.normal.x) * Vector2.Angle(transform.up, hit1.normal);
+            slopeangle[1] = Mathf.Sign(hit2.normal.x) * Vector2.Angle(transform.up, hit2.normal);
+
+            if((Mathf.Abs(slopeangle[0])>5) || (Mathf.Abs(slopeangle[1])>5)){
                 onSlope=true;
                 blockAngle = false;
                 highAngle = false;
-                if(slopeangle>0) slopeSpeed = Quaternion.Euler(0,0,-slopeangle) * Vector2.right;
-                else slopeSpeed = Quaternion.Euler(0,0,-slopeangle) * Vector2.left; 
-                if(Mathf.Abs(slopeangle) >= additiveForceAngle) highAngle = true; 
-                if(Mathf.Abs(slopeangle) >= blockSlopeAngle) blockAngle = true;      
+                foreach(float angle in slopeangle){
+                    if(angle==0) continue;
+                    if(angle>0) slopeSpeed = Quaternion.Euler(0,0,-angle) * Vector2.right;
+                    else slopeSpeed = Quaternion.Euler(0,0,-angle) * Vector2.left; 
+                    if(Mathf.Abs(angle) >= additiveForceAngle) highAngle = true; 
+                    if(Mathf.Abs(angle) >= blockSlopeAngle) blockAngle = true; 
+                }     
             }
             else{
                 onSlope = false;
                 blockAngle = false;
                 highAngle = false;
                 slopeSpeed = Vector2.zero;
-                slopeangle = 0;
+                slopeangle[0] = 0;
+                slopeangle[1] = 0;
             }
     }
 
