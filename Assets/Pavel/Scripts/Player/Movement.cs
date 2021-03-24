@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
     bool lastGroundCheck = true;
     [Header("Ground Settings")]
     [SerializeField] Transform groundCheck;
+    [SerializeField] BoxCollider2D playerBoxCollider;
     [SerializeField] LayerMask whatIsGround;
     public bool isGrounded = true;
     bool insideGround = false;
@@ -46,7 +47,6 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem jumpOnGroundDust;
     ParticleSystem.EmissionModule stepDustEmission;
     List<Force> forces = new List<Force>();
-    [SerializeField] BoxCollider2D playerBoxCollider;
     List<Collider2D> groundHits = new List<Collider2D>();
     Vector3 safePosition = Vector3.zero;
     
@@ -57,8 +57,10 @@ public class Movement : MonoBehaviour
     public Vector2 slopeSpeed = Vector2.zero;
     public float[] slopeangle = new float[2];
     [SerializeField] Transform slopeRay;
+    [Range(0, .8f)] [SerializeField] private float slopeAcceleration = .4f;
+    [Range(0, 1f)] [SerializeField] private float slopeAccelerationFallTime = .5f;
     public bool blockAngle = false;
-    public bool highAngle = false;
+    public bool highAngle = false; 
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -96,9 +98,9 @@ public class Movement : MonoBehaviour
         if(player_Health.dead) return;
         Move();
         AdditionalMove();
+        SlopeEffect();
         }
         Jump();
-        SlopeEffect();
     }
 
     void CheckGround(){
@@ -108,6 +110,7 @@ public class Movement : MonoBehaviour
             if(!isFalling && !isJumping && lastGroundCheck){
                 isFalling = true;
                 currentJumps=1;
+                if(blockAngle) currentJumps=2;
             }
             lastGroundCheck = false;
             MovementSmoothing = jumpingSmoothing;
@@ -136,7 +139,8 @@ public class Movement : MonoBehaviour
             RaycastHit2D hit2 = Physics2D.Raycast(p2,Vector2.down,0.3f,whatIsGround);
             if(hit1.collider!=null) debugColor1 = Color.green;
             if(hit2.collider!=null) debugColor2 = Color.green;              
-            //Debug.DrawLine(p1,p2,debugColor, 0.01f);
+            Debug.DrawRay(p1,Vector2.down*0.3f,debugColor1, 0.01f);      
+            Debug.DrawRay(p2,Vector2.down*0.3f,debugColor2, 0.01f);
             if(hit1.collider==null && hit2.collider==null || !isGrounded){
                 onSlope = false;
                 slopeangle[0] = 0;
@@ -169,6 +173,7 @@ public class Movement : MonoBehaviour
                 slopeangle[0] = 0;
                 slopeangle[1] = 0;
             }
+            if(blockAngle) jumpBlock = true;
     }
 
     void CheckOverlapColliders(){
@@ -325,6 +330,15 @@ public class Movement : MonoBehaviour
             isJumping = true;
             isFalling = false;
             currentJumps++;
+            if(onSlope && highAngle){
+                //add speed when jump from slope
+
+                //Debug.Log("Jump from slope");
+                //Vector2 velocity = playerRigidbody.velocity;
+                //velocity.Normalize();
+                //Vector2 resultSlopreSpeed = velocity+slopeSpeed;
+                //SetImpulseForce(resultSlopreSpeed,0.4f);
+            }
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, 0);
             playerRigidbody.AddForce(Vector3.up * movementMultiplier.y, ForceMode2D.Impulse);
             jumpButton = false;
@@ -332,7 +346,9 @@ public class Movement : MonoBehaviour
     }
 
     void SlopeEffect(){
-
+        if(highAngle){
+            SetImpulseForce(slopeSpeed*slopeAcceleration,slopeAccelerationFallTime);
+        }
     }
 
     public void setJumpButton(bool state){

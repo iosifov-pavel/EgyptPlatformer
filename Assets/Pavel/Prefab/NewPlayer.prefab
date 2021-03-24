@@ -4950,8 +4950,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.485, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4087333880872656427}
+  m_Children: []
   m_Father: {fileID: 965550409620755294}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5137,6 +5136,7 @@ Transform:
   - {fileID: 5445102037037700548}
   - {fileID: 1311990509248043647}
   - {fileID: 3354237665009168402}
+  - {fileID: 4087333880872656427}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5225,6 +5225,7 @@ MonoBehaviour:
   jumpingSmoothing: 0.16
   jumpForce: 9.8
   groundCheck: {fileID: 965550409194298199}
+  playerBoxCollider: {fileID: 7497213416775800503}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -5234,13 +5235,16 @@ MonoBehaviour:
   stepsSound: {fileID: 610957146764642049}
   stepsDust: {fileID: 6440808090973105431}
   jumpOnGroundDust: {fileID: 8837288426688881493}
-  playerBoxCollider: {fileID: 7497213416775800503}
   onSlope: 0
   additiveForceAngle: 50
   blockSlopeAngle: 60
   slopeSpeed: {x: 0, y: 0}
-  slopeangle: 0
+  slopeangle:
+  - 0
+  - 0
   slopeRay: {fileID: 4087333880872656427}
+  slopeAcceleration: 0.25
+  slopeAccelerationFallTime: 0.55
   blockAngle: 0
   highAngle: 0
 --- !u!114 &5766897965507767494
@@ -11111,11 +11115,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8309830674909451841}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 965550409194298199}
-  m_RootOrder: 0
+  m_Father: {fileID: 965550409620755294}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8426616163414760221
 GameObject:
