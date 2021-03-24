@@ -70,18 +70,10 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update(){
         CheckGround();
-        CheckOverlapColliders();
         if(!moveBlock)StepDust();
         if(!flipBlock)Flip();
         if(nonPhysicMovement) NoPhysicMove();
-
-        //----
-        //CalculateVelocity();
-        //if(player_Health.dead) return;
-        //Move();
-        //AdditionalMove();
-        //Jump();
-        //-----
+        CheckOverlapColliders();
     }
 
     private void FixedUpdate() {
