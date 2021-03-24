@@ -30,6 +30,7 @@ public class Movement : MonoBehaviour
     bool insideGround = false;
     [SerializeField] float groundedWidth = 0.05f;
     [SerializeField] float groundedHeight = 0.05f;
+    Vector2 groundCheckSize;
     Vector2 input = Vector2.zero;
     bool flipBlock = false, moveBlock=false, jumpBlock = false;
     Vector2 targetVelocity = Vector2.zero;
@@ -51,10 +52,12 @@ public class Movement : MonoBehaviour
     
     [Header("Slopes")]
     public bool onSlope = false;
-    [SerializeField] float maxSlopeAngle = 60f;
+    [SerializeField] float additiveForceAngle = 50f;
+    [SerializeField] float blockSlopeAngle = 60f;
     public Vector2 slopeSpeed = Vector2.zero;
-    public float[] slopeangle = new float[2];
-    [SerializeField] Transform ray1,ray2;
+    public float slopeangle = 0;
+    [SerializeField] Transform slopeRay;
+    public bool blockAngle = false;
     public bool highAngle = false;
 
     private void OnDrawGizmos() {
@@ -74,14 +77,16 @@ public class Movement : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         MovementSmoothing = groundSmoothing;
         gravityOriginal = playerRigidbody.gravityScale;
+        groundCheckSize = new Vector2(groundedWidth,groundedHeight);
     }
 
     // Update is called once per frame
     void Update(){
         CheckGround();
+        CheckSlopes();
         if(!moveBlock)StepDust();
         if(!flipBlock)Flip();
-        if(nonPhysicMovement) NoPhysicMove();
+        if(nonPhysicMovement && isGrounded && Mathf.Abs(playerRigidbody.velocity.y)<0.05f) NoPhysicMove();
         CheckOverlapColliders();
     }
 
@@ -93,11 +98,12 @@ public class Movement : MonoBehaviour
         AdditionalMove();
         }
         Jump();
+        SlopeEffect();
     }
 
     void CheckGround(){
         isGrounded = false;
-        Vector2 groundCheckSize = new Vector2(groundedWidth,groundedHeight);
+        //Vector2 groundCheckSize = new Vector2(groundedWidth,groundedHeight);
         Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheck.position, groundCheckSize, 0, whatIsGround);
         if(colliders.Length==0){
             if(!isFalling && !isJumping && lastGroundCheck){
@@ -117,42 +123,38 @@ public class Movement : MonoBehaviour
             isFalling = false;
             MovementSmoothing = groundSmoothing;
             currentJumps = 0;
-            CheckSlopes();
         } 
     }
 
     void CheckSlopes(){
-            Color debugColor1 = Color.red;
-            Color debugColor2 = Color.red;
-            RaycastHit2D hit1 = Physics2D.Raycast(ray1.position,Vector2.down,0.2f,whatIsGround);
-            RaycastHit2D hit2 = Physics2D.Raycast(ray2.position,Vector2.down,0.2f,whatIsGround);
-            if(hit1.collider!=null) debugColor1 = Color.green;
-            if(hit2.collider!=null) debugColor2 = Color.green;        
-            Debug.DrawRay(ray1.position,Vector2.down*0.2f,debugColor1, 0.01f);
-            Debug.DrawRay(ray2.position,Vector2.down*0.2f,debugColor2, 0.01f);
-            if(hit1.collider==null && hit2.collider==null){
+            Color debugColor = Color.red;
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position,groundCheckSize,0,Vector2.down,0.5f,whatIsGround);
+            if(hit.collider!=null) debugColor = Color.green;       
+            //Debug.DrawLine(p1,p2,debugColor, 0.01f);
+            if(hit.collider==null || !isGrounded){
                 onSlope = false;
+                slopeangle = 0;
+                slopeSpeed = Vector2.zero;
+                blockAngle = false;
+                highAngle = false;
                 return;
             }
-            float diff = Mathf.Abs(hit1.distance-hit2.distance);
-            slopeangle[0] = Mathf.Sign(hit1.normal.x) * Vector2.Angle(transform.up, hit1.normal);
-            slopeangle[1] = Mathf.Sign(hit2.normal.x) * Vector2.Angle(transform.up, hit2.normal);
-
-            if(diff<0.2f && (Mathf.Abs(slopeangle[0])>5 || Mathf.Abs(slopeangle[1])>5) ){
+            slopeangle = Mathf.Sign(hit.normal.x) * Vector2.Angle(transform.up, hit.normal);
+            if((Mathf.Abs(slopeangle)>5)){
                 onSlope=true;
+                blockAngle = false;
                 highAngle = false;
-                foreach(float angle in slopeangle){
-                    if(angle==0) continue;
-                    else{
-                        if(angle>0) slopeSpeed = Quaternion.Euler(0,0,-angle) * Vector2.right;
-                        else slopeSpeed = Quaternion.Euler(0,0,-angle) * Vector2.left; 
-                        if(Mathf.Abs(angle) >= maxSlopeAngle) highAngle = true; 
-                    }
-                }
+                if(slopeangle>0) slopeSpeed = Quaternion.Euler(0,0,-slopeangle) * Vector2.right;
+                else slopeSpeed = Quaternion.Euler(0,0,-slopeangle) * Vector2.left; 
+                if(Mathf.Abs(slopeangle) >= additiveForceAngle) highAngle = true; 
+                if(Mathf.Abs(slopeangle) >= blockSlopeAngle) blockAngle = true;      
             }
             else{
                 onSlope = false;
+                blockAngle = false;
+                highAngle = false;
                 slopeSpeed = Vector2.zero;
+                slopeangle = 0;
             }
     }
 
@@ -251,7 +253,7 @@ public class Movement : MonoBehaviour
             nonPhysicMove = Vector2.zero;
         }
         targetVelocity = new Vector2(input.x*movementMultiplier.x, playerRigidbody.velocity.y);
-        if(moveBlock) targetVelocity.x=0;
+        if(moveBlock || blockAngle) targetVelocity.x=0;
     }
 
     void Move(){
@@ -304,7 +306,7 @@ public class Movement : MonoBehaviour
     }
     
     void Jump(){
-        if(jumpBlock) return;
+        if(jumpBlock || blockAngle) return;
         if(jumpButton && currentJumps<2){
             Player_Sounds.sounds.PlaySound("jump");
             isJumping = true;
@@ -314,6 +316,10 @@ public class Movement : MonoBehaviour
             playerRigidbody.AddForce(Vector3.up * movementMultiplier.y, ForceMode2D.Impulse);
             jumpButton = false;
         }
+    }
+
+    void SlopeEffect(){
+
     }
 
     public void setJumpButton(bool state){
