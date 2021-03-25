@@ -21,8 +21,11 @@ public class Skeleton : MonoBehaviour
     bool canAttack = true;
     bool canWalking = true;
     bool canBeDamaged = true;
+    [SerializeField] AudioClip spearSound, axeSound;
+    AudioSource source;
     void Start()
     {
+        source = GetComponent<AudioSource>();
         enemy_Health = GetComponent<Enemy_Health>();
         skelet_anim = GetComponent<Animator>();
         eyes = GetComponent<Enemy_Ray_Eyes>();
@@ -61,7 +64,13 @@ public class Skeleton : MonoBehaviour
     void ThrowSpear(){
         canBeDamaged = false;
         skelet_anim.SetTrigger("throw");
+        StartCoroutine(SpearSoundPlay());
         StartCoroutine(delay());
+    }
+
+    IEnumerator SpearSoundPlay(){
+        yield return new WaitForSeconds(0.3f);
+        source.PlayOneShot(spearSound);
     }
 
     void PunchAxe(){
@@ -69,6 +78,7 @@ public class Skeleton : MonoBehaviour
         canBeDamaged = false;
         axe_c.enabled = true;
         skelet_anim.SetTrigger("attack");
+        source.PlayOneShot(axeSound);
         StartCoroutine(delay());
     }
 
