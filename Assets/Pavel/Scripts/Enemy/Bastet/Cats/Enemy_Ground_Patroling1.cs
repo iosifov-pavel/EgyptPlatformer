@@ -7,6 +7,7 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
     Animator legs_anim;
     [SerializeField] int dir = 1;
     [SerializeField] public float speed = 2f;
+    [SerializeField] Transform rayPoint;
     Vector2 checkground;
     Vector2 checkwall;
     float width;
@@ -62,11 +63,11 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
     }
 
     RaycastHit2D CheckGround(){    
-        checkground =new Vector2(transform.position.x + width*dir, transform.position.y);
+        checkground = new Vector2(transform.position.x + width*dir, transform.position.y);
         checkground.x+=0.05f*dir;
         RaycastHit2D hit;
-        hit =  Physics2D.Raycast(checkground,Vector3.down, height*transform.localScale.y+0.2f,mask);
-        Debug.DrawRay(checkground,Vector3.down*(height*transform.localScale.y+0.2f),Color.red,0.02f);
+        hit =  Physics2D.Raycast(rayPoint.position,Vector3.down, 0.2f,mask);
+        Debug.DrawRay(rayPoint.position,Vector3.down*(0.2f),Color.red,0.02f);
         return hit;   
     }
 
@@ -74,8 +75,8 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
         checkwall = new Vector2(transform.position.x + width*dir, transform.position.y - height + 0.2f);
         checkwall.x+=0.01f*dir;
         RaycastHit2D hit;
-        hit =  Physics2D.Raycast(checkwall,new Vector2(dir,0), 0.1f,mask);
-        Debug.DrawRay(checkwall,new Vector2(dir,0)*0.1f,Color.yellow,0.02f);
+        hit =  Physics2D.Raycast(rayPoint.position,new Vector2(dir,0), 0.1f,mask);
+        Debug.DrawRay(rayPoint.position,new Vector2(dir,0)*0.1f,Color.yellow,0.02f);
         return hit;   
     }
 
