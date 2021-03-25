@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132185b38f66cab41b84ba2a2ee573c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceStrength: 0.2
+  forceStrength: 0.6
   forceTime: 0.5
   isImpulse: 0
   id: Conveyer
@@ -357,7 +357,6 @@ GameObject:
   m_Component:
   - component: {fileID: 674212302204241089}
   - component: {fileID: 2516574637419432874}
-  - component: {fileID: 1505288318923614040}
   m_Layer: 14
   m_Name: GroundTr
   m_TagString: Untagged
@@ -405,18 +404,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.26, y: 0.018690255}
   m_EdgeRadius: 0
---- !u!114 &1505288318923614040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6343080753887423230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3b46c0142954944a819bd79fd33879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8920059106814809265
 GameObject:
   m_ObjectHideFlags: 0

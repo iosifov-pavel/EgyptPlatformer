@@ -9,13 +9,15 @@ public class Trap_Sway : MonoBehaviour
     float sway_angle = 50;
     float curr_angle;
     [SerializeField] int dir = 1;
+    AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
-         Quaternion angle = Quaternion.Euler(0,0,-dir*sway_angle);
-         transform.rotation = angle;
-         curr_angle=0;
-         //accelaration=speed/100;
+        source = GetComponent<AudioSource>();
+        Quaternion angle = Quaternion.Euler(0,0,-dir*sway_angle);
+        transform.rotation = angle;
+        curr_angle=0;
+        //accelaration=speed/100;
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class Trap_Sway : MonoBehaviour
         } else{
             dop_speed=(base_speed*2*(50-2*(percent-50))/100) + 15;
         } 
+        if(percent>20 && percent<30)  if(!source.isPlaying)source.PlayOneShot(source.clip);
         float step = dir*(base_speed+dop_speed)*Time.deltaTime;
         curr_angle+=step;
         if(Mathf.Abs(curr_angle)>=2*sway_angle){
