@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour
 {
-    public int health = 1;
+    [SerializeField] public  int health = 1;
+    [SerializeField] public int weakSpotDamage = 3;
     public bool dead = false;
     public bool is_damaged;
     Color original;

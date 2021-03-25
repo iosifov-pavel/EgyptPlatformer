@@ -8,7 +8,7 @@ public class Platform_MassResponse : MonoBehaviour
     BoxCollider2D box;
     float size;
     float diff;
-    float max_angle = 45;
+    [SerializeField] float max_angle = 55;
     float percent;
     float smooth = 1.5f;
     // Start is called before the first frame update

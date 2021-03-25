@@ -109,8 +109,9 @@ public class Movement : MonoBehaviour
         if(colliders.Length==0){
             if(!isFalling && !isJumping && lastGroundCheck){
                 isFalling = true;
-                currentJumps=1;
-                if(blockAngle) currentJumps=2;
+                //currentJumps=1;
+                if(!blockAngle) StartCoroutine(StillCanJump());
+                else if(blockAngle) currentJumps=2;
             }
             lastGroundCheck = false;
             MovementSmoothing = jumpingSmoothing;
@@ -126,6 +127,12 @@ public class Movement : MonoBehaviour
             MovementSmoothing = groundSmoothing;
             currentJumps = 0;
         } 
+    }
+
+    IEnumerator StillCanJump(){
+        currentJumps = 0;
+        yield return new WaitForSeconds(0.2f);
+        currentJumps = 1;
     }
 
     void CheckSlopes(){
