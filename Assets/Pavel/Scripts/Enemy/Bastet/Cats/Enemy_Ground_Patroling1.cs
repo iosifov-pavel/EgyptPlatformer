@@ -14,6 +14,7 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
     LayerMask mask;
     BoxCollider2D box;
     bool stop=false;
+    public bool changedDirection = false;
     // Start is called before the first frame update
     void Start(){
         LayerMask m1 = LayerMask.GetMask("Ground");
@@ -46,6 +47,7 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
     }
 
     void changeDirection(){
+        StartCoroutine(flipDir());
         if(dir==1){
             Vector3 thisScale = transform.localScale;
             thisScale.x *= -1;
@@ -85,6 +87,12 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
         stop=true;
         yield return new WaitForSeconds(t);
         stop = false;
+    }
+
+    IEnumerator flipDir(){
+        changedDirection = true;
+        yield return new WaitForSeconds(0.15f);
+        changedDirection = false;
     }
 
     public void CanGo(){

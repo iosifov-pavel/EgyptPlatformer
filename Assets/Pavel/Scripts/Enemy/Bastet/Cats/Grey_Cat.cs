@@ -13,6 +13,7 @@ public class Grey_Cat : MonoBehaviour
     float active_speed;
     bool can_attack = true;
     float delay_attack = 0.5f;
+    bool triggered = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,16 +26,15 @@ public class Grey_Cat : MonoBehaviour
     void Update()
     {
         dir = (int)Mathf.Sign(transform.localScale.x) * 1;
-        if(eyes.Check()!=null){
-            player = eyes.Check();
-            distance=Mathf.Abs(transform.position.x-player.position.x);
-        }
-        else{
-            egp.speed = active_speed/2;
-            return;
-        } 
+        //if(eyes.Check()!=null){
+        //    player = eyes.Check();
+        //    distance=Mathf.Abs(transform.position.x-player.position.x);
+        //}
+        player = eyes.Check(); 
         if(!can_attack) return;
-        egp.speed= active_speed;
-        
+        if(player!=null) triggered = true;
+        if(egp.changedDirection) triggered = false; 
+        if(triggered) egp.speed = active_speed;
+        else egp.speed = active_speed/2; 
     }
 }
