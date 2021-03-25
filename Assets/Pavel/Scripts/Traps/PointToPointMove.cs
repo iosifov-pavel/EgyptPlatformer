@@ -66,7 +66,8 @@ public class PointToPointMove : MonoBehaviour
     }
 
     void CrateChain(Transform p1, Transform p2){
-                Vector2 chainPos = (p1.position + p2.position)/2;
+                Vector3 chainPos = (p1.position + p2.position)/2;
+                chainPos.z = 50;
                 Vector2 dir = p1.position - p2.position;
                 float angle = Vector2.Angle(Vector2.up, dir);
                 GameObject chain = Instantiate(chainPrefab);
@@ -110,21 +111,21 @@ public class PointToPointMove : MonoBehaviour
                 lerpingTimer = startLerpingTimer;
             }
             if(startLerping){
-                Vector2 new_pos = Vector2.Lerp(point.position,nextPoint.position,lerpingTimer);
+                Vector3 new_pos = Vector3.Lerp(point.position,nextPoint.position,lerpingTimer);
                 lerpingTimer+=Time.deltaTime;
-                body.position = Vector2.MoveTowards(body.position,new_pos, speed*Time.deltaTime);
+                body.position = Vector3.MoveTowards(body.position,new_pos, speed*Time.deltaTime);
             }
             else{
-                body.position = Vector2.MoveTowards(body.position,point.position, speed*Time.deltaTime);
+                body.position = Vector3.MoveTowards(body.position,point.position, speed*Time.deltaTime);
             }
         }
         else{
-            if((Vector2)body.position == (Vector2)point.position){
+            if((Vector3)body.position == (Vector3)point.position){
                 StartCoroutine(Delay());
                 previous = destination;
                 destination = GetNewPoint(point);
             }
-            else body.position = Vector2.MoveTowards(body.position,point.position, speed*Time.deltaTime);
+            else body.position = Vector3.MoveTowards(body.position,point.position, speed*Time.deltaTime);
         }
     }
 

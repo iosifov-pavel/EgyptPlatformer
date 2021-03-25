@@ -91,7 +91,7 @@ public class Enemy_Ground_Patroling1 : MonoBehaviour
 
     IEnumerator flipDir(){
         changedDirection = true;
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.1f);
         changedDirection = false;
     }
 
