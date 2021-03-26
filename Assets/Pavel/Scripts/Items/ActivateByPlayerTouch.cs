@@ -29,6 +29,7 @@ public class ActivateByPlayerTouch : MonoBehaviour
         if(other.gameObject.tag=="Player"){
             if(ObjectNotScript) robject.SetActive(true);
             else script.enabled=true;
+            StopAllCoroutines();
         }
     }
 

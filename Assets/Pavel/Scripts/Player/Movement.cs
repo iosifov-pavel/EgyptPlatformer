@@ -29,8 +29,8 @@ public class Movement : MonoBehaviour
     [SerializeField] LayerMask whatIsGround;
     public bool isGrounded = true;
     bool insideGround = false;
-    [SerializeField] float groundedWidth = 0.05f;
-    [SerializeField] float groundedHeight = 0.05f;
+    [SerializeField] float groundedWidth = 0.22f;
+    [SerializeField] float groundedHeight = 0.04f;
     Vector2 groundCheckSize;
     Vector2 input = Vector2.zero;
     bool flipBlock = false, moveBlock=false, jumpBlock = false;
@@ -191,18 +191,22 @@ public class Movement : MonoBehaviour
         hitsCount = Physics2D.OverlapCollider(playerBoxCollider,filter,groundHits);
         if(hitsCount!=0){
             insideGround = true;
-            transform.position = safePosition;
-            //foreach(Collider2D hit in groundHits){
-            //        ColliderDistance2D colliderDistance = hit.Distance(playerBoxCollider);
-            //        if (colliderDistance.isOverlapped){
-	        //        	transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-	        //        }
-            //    }
+            //transform.position = safePosition;
+            foreach(Collider2D hit in groundHits){
+                    ColliderDistance2D colliderDistance = hit.Distance(playerBoxCollider);
+                    if (colliderDistance.isOverlapped){
+	                	transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
+	                }
+                }
         }
         else{
             insideGround = false;
-            safePosition = transform.position;
+            //safePosition = transform.position;
         }
+    }
+
+    public void SetSafePosition(Vector2 pos){
+        safePosition = pos;
     }
 
     void Flip(){

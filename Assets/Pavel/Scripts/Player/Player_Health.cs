@@ -69,8 +69,9 @@ public class Player_Health : MonoBehaviour
         BecomeSuperman(2);
         //anima.setBoolAnimation("Dead",false);
         Vector3 pos = lastCheckPoint;
+        //player_m.SetSafePosition(lastCheckPoint);
         pos.z = 0;
-        pos.y+=1;
+        pos.y+=0.5f;
         transform.position = pos;
         SpriteRenderer player = transform.GetChild(0).transform.GetChild(0).GetComponent<SpriteRenderer>();
         player.color = Color.white;

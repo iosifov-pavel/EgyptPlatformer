@@ -22,9 +22,11 @@ public class RollingRock : MonoBehaviour
         circleCollider2D = GetComponent<CircleCollider2D>();
         if(isTriggered){
             circleCollider2D.isTrigger = true;
+            gameObject.layer = 12;
         }
         else{
             circleCollider2D.isTrigger = false;
+            gameObject.layer = 11;
         }
         radius = circleCollider2D.radius * transform.localScale.x;
         if(finite){
