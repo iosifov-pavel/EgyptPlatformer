@@ -17,6 +17,8 @@ public class PointToPointMove : MonoBehaviour
     [SerializeField] Transform chainParent;
     [SerializeField] GameObject chainPrefab;
     [SerializeField] float delayOnPoints = 0.1f;
+    [SerializeField] float delayOnStart = 0;
+    float timer = 0;
     Transform destination;
     Transform previous;
     Transform nextPoint;
@@ -43,6 +45,11 @@ public class PointToPointMove : MonoBehaviour
             }
         }
     }
+    
+    private void OnEnable() {
+        timer = 0;
+    }
+    
     void Start()
     {
         body.position = points[0].position;
@@ -65,6 +72,12 @@ public class PointToPointMove : MonoBehaviour
         }
     }
 
+    bool GetReady(){
+        timer+=Time.deltaTime;
+        if(timer>=delayOnStart) return true;
+        else return false;
+    }
+
     void CrateChain(Transform p1, Transform p2){
                 Vector3 chainPos = (p1.position + p2.position)/2;
                 chainPos.z = 50;
@@ -85,6 +98,7 @@ public class PointToPointMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!GetReady()) return;
         if(body==null) Destroy(gameObject);
         if(stop) return;
         try{

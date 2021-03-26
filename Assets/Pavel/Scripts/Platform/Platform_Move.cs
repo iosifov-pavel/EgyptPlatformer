@@ -11,8 +11,8 @@ public class Platform_Move : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] float speedBack = 1f;
     [SerializeField] float delay = 0;
-    float resultSpeed;
     float timer = 0;
+    float resultSpeed;
     bool start = false;
 
     
