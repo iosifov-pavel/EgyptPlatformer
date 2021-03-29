@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grey_Cat : MonoBehaviour
 {
     Enemy_Ray_Eyes eyes;
-    Enemy_Ground_Patroling1 egp;
+    EnemyGroundWalking egp;
     Rigidbody2D rb;
     float distance;
     int dir = 1;
@@ -18,23 +18,18 @@ public class Grey_Cat : MonoBehaviour
     void Start()
     {
         eyes = GetComponent<Enemy_Ray_Eyes>();
-        egp = GetComponent<Enemy_Ground_Patroling1>();
-        active_speed = egp.speed * 2;
+        egp = transform.parent.GetComponent<EnemyGroundWalking>();
     }
 
     // Update is called once per frame
     void Update()
     {
         dir = (int)Mathf.Sign(transform.localScale.x) * 1;
-        //if(eyes.Check()!=null){
-        //    player = eyes.Check();
-        //    distance=Mathf.Abs(transform.position.x-player.position.x);
-        //}
         player = eyes.Check(); 
         if(!can_attack) return;
         if(player!=null) triggered = true;
-        if(egp.changedDirection) triggered = false; 
-        if(triggered) egp.speed = active_speed;
-        else egp.speed = active_speed/2; 
+        if(egp.ChangeDirection()) triggered = false; 
+        if(triggered) egp.SpeedMultiplier(2);
+        else egp.SpeedMultiplier(1);
     }
 }

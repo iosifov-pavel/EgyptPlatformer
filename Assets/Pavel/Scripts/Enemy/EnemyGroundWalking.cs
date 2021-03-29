@@ -26,6 +26,7 @@ public class EnemyGroundWalking : MonoBehaviour
     Vector2 move;
     Vector3 oldPosition;
     bool onGround=false;
+    bool directionChanged = false;
     [SerializeField] bool forward = true;
     // Start is called before the first frame update
     private void OnDrawGizmos() {
@@ -109,6 +110,7 @@ public class EnemyGroundWalking : MonoBehaviour
     }
 
     void Flip(){
+        StartCoroutine(flipdir());
         if(dir==1){
             Vector3 newScale = body.localScale;
             newScale.x = Mathf.Abs(newScale.x);
@@ -119,6 +121,11 @@ public class EnemyGroundWalking : MonoBehaviour
             newScale.x = -Mathf.Abs(newScale.x);
             body.localScale = newScale;
         }
+    }
+    IEnumerator flipdir(){
+        directionChanged = true;
+        yield return new WaitForSeconds(0.025f);
+        directionChanged = false;
     }
 
     private void Move()
@@ -182,5 +189,13 @@ public class EnemyGroundWalking : MonoBehaviour
 
     public void WalkAgain(){
         resultSpeed = speed;
+    }
+
+    public void SpeedMultiplier(int m){
+        resultSpeed = speed * m;
+    }
+
+    public bool ChangeDirection(){
+        return directionChanged;
     }
 }
