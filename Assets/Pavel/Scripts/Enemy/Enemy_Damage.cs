@@ -42,7 +42,7 @@ public class Enemy_Damage : MonoBehaviour
             catch{
                 Debug.Log("ERRROORRRRR!!!! "+gameObject);
             }
-            if(other.tag=="Player" && other.layer==9 || other.layer == 10){
+            if(other.tag=="Player" && (other.layer==9 || other.layer == 10)){
                 ph = other.GetComponent<Player_Health>();
                 if(ph.superman || ph.dead) return;
                 rb = other.GetComponent<Rigidbody2D>();

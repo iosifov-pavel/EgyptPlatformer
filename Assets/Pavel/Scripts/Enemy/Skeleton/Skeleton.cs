@@ -6,7 +6,7 @@ public class Skeleton : MonoBehaviour
 {
     // Start is called before the first frame update
     Enemy_Ray_Eyes eyes;
-    Enemy_Ground_Patroling1 egp;
+    EnemyGroundWalking egp2;
     Enemy_Health enemy_Health;
     Animator skelet_anim;
     [SerializeField] bool axe=false,spear=false,shield=false;
@@ -29,7 +29,7 @@ public class Skeleton : MonoBehaviour
         enemy_Health = GetComponent<Enemy_Health>();
         skelet_anim = GetComponent<Animator>();
         eyes = GetComponent<Enemy_Ray_Eyes>();
-        egp = GetComponent<Enemy_Ground_Patroling1>();
+        egp2 = transform.parent.GetComponent<EnemyGroundWalking>();
         axe_g = transform.GetChild(2).gameObject;
         spear_g = transform.GetChild(3).gameObject;
         shield_g = transform.GetChild(4).gameObject;
@@ -83,12 +83,12 @@ public class Skeleton : MonoBehaviour
     }
 
     public void canWalk(){
-        if(!enemy_Health.dead)egp.enabled = true;
+        if(!enemy_Health.dead)egp2.WalkAgain();
         if(axe) axe_c.enabled = false;
     }
     
     public void cantWalk(){
-        egp.enabled = false;
+        egp2.StopWalk();
     }
 
     public void damageFalse(){
@@ -115,7 +115,7 @@ public class Skeleton : MonoBehaviour
 
 
     public void DeathS2(){
-        egp.enabled = false;
+        egp2.StopWalk();
         axe_c.enabled = false;
         spear_c.enabled = false;
         skeleton_c.enabled = false;

@@ -31,7 +31,7 @@ public class Trap_Damage : MonoBehaviour
     }
 
     private void Damage(GameObject other){
-            if(other.tag=="Player" && other.layer==9 || other.layer == 10){
+            if(other.tag=="Player" && (other.layer==9 || other.layer == 10)){
             ph = other.GetComponent<Player_Health>();
             if(ph.superman || ph.dead) return;
             if(source) source.Play();

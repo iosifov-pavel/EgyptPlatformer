@@ -17,6 +17,7 @@ public class EnemyGroundWalking : MonoBehaviour
     [SerializeField] float checkGroundDistance = 0.22f;
     [SerializeField] LayerMask whatIsGround;
     float timer=0;
+    float resultSpeed;
     float jumpTimer=0;
     float startPoint, endPoint;
     int dir = 1;
@@ -28,12 +29,16 @@ public class EnemyGroundWalking : MonoBehaviour
     [SerializeField] bool forward = true;
     // Start is called before the first frame update
     private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(start.position,end.position);
-        Gizmos.DrawLine(body.position, body.position+body.transform.up*(-checkGroundDistance));
+        try{
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(start.position,end.position);
+            Gizmos.DrawLine(body.position, body.position+body.transform.up*(-checkGroundDistance));
+        }
+        catch{}
     }
     void Start()
     {
+        resultSpeed = speed;
         if(vertical){
             startPoint = start.position.y;
             endPoint = end.position.y;
@@ -115,8 +120,8 @@ public class EnemyGroundWalking : MonoBehaviour
 
     private void Move()
     {
-        if(vertical) rb.velocity = new Vector2(rb.velocity.x,dir*speed);
-        else rb.velocity = new Vector2(dir*speed,rb.velocity.y);
+        if(vertical) rb.velocity = new Vector2(rb.velocity.x,dir*resultSpeed);
+        else rb.velocity = new Vector2(dir*resultSpeed,rb.velocity.y);
         Vector2 gravityV = gravityDirection*gravityScale*(Physics2D.gravity.magnitude)*Time.deltaTime;
         rb.velocity+=gravityV;
     }
@@ -167,4 +172,12 @@ public class EnemyGroundWalking : MonoBehaviour
         }
     }
 
+
+    public void StopWalk(){
+        resultSpeed = 0;
+    }
+
+    public void WalkAgain(){
+        resultSpeed = speed;
+    }
 }
