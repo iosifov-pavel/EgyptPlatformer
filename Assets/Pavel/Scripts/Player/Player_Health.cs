@@ -66,7 +66,8 @@ public class Player_Health : MonoBehaviour
         //UI_HP.Recreate();
         dead=false;
         StopAllCoroutines();
-        BecomeSuperman(2);
+        gameObject.layer=9;
+        //BecomeSuperman(2);
         //anima.setBoolAnimation("Dead",false);
         Vector3 pos = lastCheckPoint;
         //player_m.SetSafePosition(lastCheckPoint);
