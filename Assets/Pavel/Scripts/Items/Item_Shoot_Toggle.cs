@@ -10,6 +10,8 @@ public class Item_Shoot_Toggle : MonoBehaviour
     [SerializeField] bool needToBeDone = false;
     [SerializeField] bool withTimer = false;
     [SerializeField] float timer = 2f;
+    AudioSource source;
+    [SerializeField] AudioClip onSound, offSound;
     float time =0;
     bool counting = false;
     //float delay_time = 1f;
@@ -22,6 +24,7 @@ public class Item_Shoot_Toggle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         lamp = transform.GetChild(0);
         lamp_sprite = lamp.GetComponent<SpriteRenderer>();
         lamp_sprite.color = state ? on : off;
@@ -75,6 +78,8 @@ public class Item_Shoot_Toggle : MonoBehaviour
             if(!child_script.Done && needToBeDone) return;
         }
         state=!state;
+        if(state)source.PlayOneShot(onSound);
+        else source.PlayOneShot(offSound);
         if(withTimer){
             if(state==true) counting=true;
             time = 0;

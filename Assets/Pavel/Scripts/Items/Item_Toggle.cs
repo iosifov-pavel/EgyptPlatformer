@@ -15,12 +15,15 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
     [SerializeField] Color on;
     [SerializeField] Color off;
     [SerializeField] bool needToBeDone = false;
+    AudioSource source;
+    [SerializeField] AudioClip onSound, offSound;
     bool ready=true;
     float time=0;
     bool counting = false;
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         lamp = transform.GetChild(1);
         try{
             foreach(Transform child in childrens){
@@ -42,6 +45,8 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
             if(time>=timer){
                 counting = false;
                 condition = !condition;
+                if(condition)source.PlayOneShot(onSound);
+                else source.PlayOneShot(offSound);
             }
         }
         if(needToBeDone){
@@ -76,6 +81,8 @@ public class Item_Toggle : MonoBehaviour,IIntercatable
         }
         player=_player;
         condition = !condition;
+        if(condition)source.PlayOneShot(onSound);
+        else source.PlayOneShot(offSound);
         if(withTimer && condition){
             time=0;
             counting=true;

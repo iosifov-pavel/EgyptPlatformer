@@ -1299,6 +1299,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   weakSpotDamage: 3
+  damaged: {fileID: 8300000, guid: e280219e581def549a758711cd18d105, type: 3}
+  death: {fileID: 8300000, guid: d6205686308fa024697a964d272d6530, type: 3}
   dead: 0
   is_damaged: 0
   time: 0.4

@@ -6,6 +6,8 @@ public class Enemy_Health : MonoBehaviour
 {
     [SerializeField] public  int health = 1;
     [SerializeField] public int weakSpotDamage = 3;
+    [SerializeField] AudioClip damaged, death;
+    AudioSource source;
     public bool dead = false;
     public bool is_damaged;
     Color original;
@@ -13,6 +15,7 @@ public class Enemy_Health : MonoBehaviour
     [SerializeField] float time=0.3f;
     // Start is called before the first frame update
     void Start(){
+        source = GetComponent<AudioSource>();
         sprites=GetComponentsInChildren<SpriteRenderer>();
         if(sprites==null){}
         else original=sprites[0].color;
@@ -27,11 +30,14 @@ public class Enemy_Health : MonoBehaviour
         StartCoroutine(ReactToDamage());
         if(health<=0){
             Death();
+            return;
         }
+        if(source)source.PlayOneShot(damaged);
     }
 
     public void Death(){
         //if(dead) return;
+        if(source)source.PlayOneShot(death);
         dead = true;
         Manager_Level.EnemyWasKilled();
         Boss_Health boss_Health = gameObject.GetComponent<Boss_Health>();

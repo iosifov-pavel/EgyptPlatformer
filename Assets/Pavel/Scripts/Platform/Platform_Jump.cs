@@ -6,11 +6,13 @@ public class Platform_Jump : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] float force=5;
+    AudioSource source;
     Force impulse;
     
     Movement player;
     // Update is called once per frame
     private void Start() {
+        source = GetComponent<AudioSource>();
         //impulse = new Force(transform.up*force, 0.12f);
     }
 
@@ -24,6 +26,7 @@ public class Platform_Jump : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x/4,0);
         Vector2 dir = transform.up;
         dir = new Vector2(dir.x*force*2.4f,dir.y*force);
+        source.PlayOneShot(source.clip);
         player.SetImpulseForce(dir, 0.35f);
         StartCoroutine(jumpThings());
         //rb.AddForce(dir, ForceMode2D.Impulse);
