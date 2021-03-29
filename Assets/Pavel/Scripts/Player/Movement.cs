@@ -109,8 +109,7 @@ public class Movement : MonoBehaviour
         if(colliders.Length==0){
             if(!isFalling && !isJumping && lastGroundCheck){
                 isFalling = true;
-                //currentJumps=1;
-                if(!blockAngle) StartCoroutine(StillCanJump());
+                if(!blockAngle && onSlope) StartCoroutine(StillCanJump());
                 else if(blockAngle) currentJumps=2;
             }
             lastGroundCheck = false;
@@ -130,7 +129,6 @@ public class Movement : MonoBehaviour
     }
 
     IEnumerator StillCanJump(){
-        currentJumps = 0;
         yield return new WaitForSeconds(0.2f);
         currentJumps = 1;
     }

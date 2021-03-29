@@ -23,7 +23,7 @@ public class Button_Jump : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     void Pdown(){
-        if(buttonPressed || player2.GetJumpCount()==2){
+        if(buttonPressed || player2.GetJumpCount()>=2){
             return;
         }
         buttonPressed = true;
