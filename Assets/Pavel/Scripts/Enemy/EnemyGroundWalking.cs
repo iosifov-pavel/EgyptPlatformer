@@ -27,6 +27,7 @@ public class EnemyGroundWalking : MonoBehaviour
     Vector3 oldPosition;
     bool onGround=false;
     bool directionChanged = false;
+    public bool fromOutsideScriptJump=false;
     [SerializeField] bool forward = true;
     // Start is called before the first frame update
     private void OnDrawGizmos() {
@@ -72,7 +73,7 @@ public class EnemyGroundWalking : MonoBehaviour
         try{
             Check();
             Move();
-            if(jumping) Jump();
+            if(jumping || fromOutsideScriptJump) Jump();
             CheckWalls();
         }
         catch{
@@ -167,7 +168,7 @@ public class EnemyGroundWalking : MonoBehaviour
 
     void Jump(){
         jumpTimer+=Time.deltaTime;
-        if(jumpTimer>=jumpPeriodTime && onGround){
+        if((jumpTimer>=jumpPeriodTime && onGround) || (fromOutsideScriptJump && onGround)){
             jumpTimer=0;
                 Vector2 newVelo = rb.velocity;
             if(vertical){
@@ -179,6 +180,7 @@ public class EnemyGroundWalking : MonoBehaviour
                 rb.velocity = newVelo;
             }
             rb.AddForce(-gravityDirection*jumpForce, ForceMode2D.Impulse);
+            fromOutsideScriptJump = false;
         }
     }
 
