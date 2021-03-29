@@ -29,12 +29,10 @@ public class EnemyGroundWalking : MonoBehaviour
     [SerializeField] bool forward = true;
     // Start is called before the first frame update
     private void OnDrawGizmos() {
-        try{
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(start.position,end.position);
-            Gizmos.DrawLine(body.position, body.position+body.transform.up*(-checkGroundDistance));
-        }
-        catch{}
+        if(body==null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(start.position,end.position);
+        Gizmos.DrawLine(body.position, body.position+body.transform.up*(-checkGroundDistance));
     }
     void Start()
     {
@@ -52,7 +50,12 @@ public class EnemyGroundWalking : MonoBehaviour
     }
 
     private void Update() {
+        try{
         CheckGround();
+        }
+        catch{
+            if(body==null) Destroy(gameObject);
+        }
     }
 
     private void CheckGround()

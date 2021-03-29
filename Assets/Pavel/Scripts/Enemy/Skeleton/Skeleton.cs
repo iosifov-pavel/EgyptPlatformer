@@ -8,6 +8,7 @@ public class Skeleton : MonoBehaviour
     Enemy_Ray_Eyes eyes;
     EnemyGroundWalking egp2;
     Enemy_Health enemy_Health;
+    Enemy_Damage enemy_Damage;
     Animator skelet_anim;
     [SerializeField] bool axe=false,spear=false,shield=false;
     GameObject axe_g, spear_g, shield_g;
@@ -27,6 +28,7 @@ public class Skeleton : MonoBehaviour
     {
         source = GetComponent<AudioSource>();
         enemy_Health = GetComponent<Enemy_Health>();
+        enemy_Damage = GetComponent<Enemy_Damage>();
         skelet_anim = GetComponent<Animator>();
         eyes = GetComponent<Enemy_Ray_Eyes>();
         egp2 = transform.parent.GetComponent<EnemyGroundWalking>();
@@ -118,8 +120,11 @@ public class Skeleton : MonoBehaviour
         egp2.StopWalk();
         axe_c.enabled = false;
         spear_c.enabled = false;
-        skeleton_c.enabled = false;
+        //skeleton_c.enabled = false;
+        //enemy_Damage.enabled = false;
+        gameObject.layer =22;
         shield_c.enabled = false;
+        //this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().enabled=false;
     }
     public void DeathS(){

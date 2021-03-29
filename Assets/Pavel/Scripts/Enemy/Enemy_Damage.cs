@@ -35,7 +35,7 @@ public class Enemy_Damage : MonoBehaviour
 
     public void Damage(GameObject other){
             try{
-                if(enemy_Health.is_damaged){
+                if(enemy_Health.is_damaged || enemy_Health.dead){
                     return;
                 } 
             }
