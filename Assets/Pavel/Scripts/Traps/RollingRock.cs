@@ -7,6 +7,7 @@ public class RollingRock : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] float speed = 2f;
+    [SerializeField] float bounceCoeff = 0;
     [SerializeField] bool isTriggered = true;
     [SerializeField] bool finite = false;
     [SerializeField] float finiteTime = 5f;
@@ -19,14 +20,17 @@ public class RollingRock : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        PhysicsMaterial2D material = new PhysicsMaterial2D();
+        material.bounciness = bounceCoeff;
+        rb.sharedMaterial = material;
         circleCollider2D = GetComponent<CircleCollider2D>();
         if(isTriggered){
             circleCollider2D.isTrigger = true;
-            gameObject.layer = 12;
+            rb.bodyType = RigidbodyType2D.Kinematic;
         }
         else{
             circleCollider2D.isTrigger = false;
-            gameObject.layer = 11;
+            rb.bodyType = RigidbodyType2D.Dynamic;
         }
         radius = circleCollider2D.radius * transform.localScale.x;
         if(finite){
@@ -43,9 +47,10 @@ public class RollingRock : MonoBehaviour
     void Update()
     {
         checkGround();
-        checkWall();
+        //checkWall();
         if(onGround){
             rb.velocity = new Vector2(dir*speed,rb.velocity.y);
+            rb.velocity += Vector2.down * Physics2D.gravity.magnitude * Time.deltaTime;
         }
         else{
             rb.velocity = new Vector2(0,rb.velocity.y);
@@ -53,19 +58,21 @@ public class RollingRock : MonoBehaviour
     }
 
     void checkGround(){
-        RaycastHit2D hit1,hit2;
-        Vector2 rayOrigin1 = new Vector2(transform.position.x+radius, transform.position.y);
-        Vector2 rayOrigin2 = new Vector2(transform.position.x-radius, transform.position.y);
-        hit1 = Physics2D.Raycast(rayOrigin1,Vector2.down,radius+0.04f,ground);
-        hit2 = Physics2D.Raycast(rayOrigin2,Vector2.down,radius+0.04f,ground);
-        Debug.DrawRay(rayOrigin1,Vector2.down*(radius+0.04f),Color.green,0.01f);
-        Debug.DrawRay(rayOrigin2,Vector2.down*(radius+0.04f),Color.green,0.01f);
-        if(hit1.collider!=null || hit2.collider!=null){
-            onGround = true;
-        }
-        else{
-            onGround = false;
-        }
+        onGround = true;
+        //RaycastHit2D hit1
+        //hit2;
+        //Vector2 rayOrigin1 = new Vector2(transform.position.x+radius, transform.position.y);
+        //Vector2 rayOrigin2 = new Vector2(transform.position.x-radius, transform.position.y);
+        //hit1 = Physics2D.Raycast(rayOrigin1,Vector2.down,radius+0.04f,ground);
+        //hit2 = Physics2D.Raycast(rayOrigin2,Vector2.down,radius+0.04f,ground);
+        //Debug.DrawRay(rayOrigin1,Vector2.down*(radius+0.04f),Color.green,0.01f);
+        //Debug.DrawRay(rayOrigin2,Vector2.down*(radius+0.04f),Color.green,0.01f);
+        //if(hit1.collider!=null || hit2.collider!=null){
+        //    onGround = true;
+        //}
+        //else{
+        //    onGround = false;
+        //}
     }
 
     void checkWall(){

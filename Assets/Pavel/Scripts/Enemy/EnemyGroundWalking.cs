@@ -20,6 +20,10 @@ public class EnemyGroundWalking : MonoBehaviour
     Vector3 oldPosition;
     [SerializeField] bool forward = true;
     // Start is called before the first frame update
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(start.position,end.position);
+    }
     void Start()
     {
         if(vertical){
@@ -66,7 +70,6 @@ public class EnemyGroundWalking : MonoBehaviour
     {
         if(vertical) rb.velocity = new Vector2(rb.velocity.x,dir*speed);
         else rb.velocity = new Vector2(dir*speed,rb.velocity.y);
-        //Debug.Log(Physics2D.gravity);
         Vector2 gravityV = gravityDirection*gravityScale*(Physics2D.gravity.magnitude)*Time.deltaTime;
         rb.velocity+=gravityV;
     }
