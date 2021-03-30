@@ -42,9 +42,7 @@ public class Mosquite_Attack : MonoBehaviour
     void Attack(Transform player){
         GameObject new_spike = Instantiate(spikePrefab);
         new_spike.transform.position = transform.position;
-        //new_spike.SetActive(false);
         new_spike.transform.right = player.position - new_spike.transform.position;
-        //new_spike.SetActive(true);
         new_spike.GetComponent<Rigidbody2D>().velocity = new_spike.transform.right * spikeSpeed;
         StartCoroutine(delay());
         StartCoroutine(destroySpike(new_spike));
@@ -64,17 +62,4 @@ public class Mosquite_Attack : MonoBehaviour
         catch{}
     }
 
-    //private void OnTriggerEnter2D(Collider2D other) {
-    //    if(!canAttack) return;
-    //    if(other.gameObject.tag=="Player"){
-    //        Attack(other.transform);
-    //    }
-    //}
-//
-    //private void OnTriggerStay2D(Collider2D other) {
-    //    if(!canAttack) return;
-    //    if(other.gameObject.tag=="Player"){
-    //        Attack(other.transform);
-    //    }
-    //}
 }
