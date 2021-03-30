@@ -10,8 +10,10 @@ public class Mosquite_Attack : MonoBehaviour
     [SerializeField] float spikeSpeed = 2f;
     [SerializeField] float timeBetweenAttacks = 2f;
     [SerializeField] float spikeLifetime = 4f;
+    [SerializeField] EnemyCircleEyes enemyCircleEyes;
     bool canAttack = true;
     float prev_x;
+    Transform target=null;
     void Start()
     {
         prev_x = transform.position.x;
@@ -31,6 +33,10 @@ public class Mosquite_Attack : MonoBehaviour
             body.transform.localScale = new_sc;
         }
         prev_x = transform.position.x;
+        target = enemyCircleEyes.GetPlayer();
+        if(target!=null && canAttack){
+            Attack(target);
+        }
     }
 
     void Attack(Transform player){
@@ -58,17 +64,17 @@ public class Mosquite_Attack : MonoBehaviour
         catch{}
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(!canAttack) return;
-        if(other.gameObject.tag=="Player"){
-            Attack(other.transform);
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D other) {
-        if(!canAttack) return;
-        if(other.gameObject.tag=="Player"){
-            Attack(other.transform);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D other) {
+    //    if(!canAttack) return;
+    //    if(other.gameObject.tag=="Player"){
+    //        Attack(other.transform);
+    //    }
+    //}
+//
+    //private void OnTriggerStay2D(Collider2D other) {
+    //    if(!canAttack) return;
+    //    if(other.gameObject.tag=="Player"){
+    //        Attack(other.transform);
+    //    }
+    //}
 }

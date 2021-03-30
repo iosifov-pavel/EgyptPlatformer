@@ -6,6 +6,9 @@ public class EnemyCircleEyes : MonoBehaviour
 {
     // Start is called before the first frame update
     Transform player;
+    bool groundOnTheWay = false;
+    [SerializeField] bool dontCareAboutGround = false;
+    [SerializeField] LayerMask ground;
     void Start()
     {
         
@@ -19,39 +22,39 @@ public class EnemyCircleEyes : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
             player = other.transform;
-       //     if(!constantAttack){
-       //         if(!readyToAttack) return;
-       //         readyToAttack = false;
-       //     }
-       //     sprite_head.sprite = active;
-       //     playerInRange = true;
-       //     target = other.transform.position;
+            CastRay();   
         }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
             player = other.transform;
-        //   if(!constantAttack){
-        //       if(!readyToAttack) return;
-        //       readyToAttack = false;
-        //   }
-        //   sprite_head.sprite = active;
-        //   playerInRange = true;
-        //   target = other.transform.position;
+            CastRay();   
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag=="Player"){
             player = null;
-        //    sprite_head.sprite = sleep;
-        //    playerInRange = false;
-        //    target = original;
         }
     }
 
     public Transform GetPlayer(){
-        return player;
+        if(dontCareAboutGround) return player;
+        else{
+            if(groundOnTheWay) return null;
+            else return player;
+        }
+    }
+
+
+    void CastRay(){
+        Vector3 pos= transform.position;
+        Vector3 dir = player.position - transform.position;
+        dir.Normalize();
+        RaycastHit2D hit = Physics2D.Raycast(pos,dir,10,ground);
+        Debug.DrawRay(pos,dir*10,Color.red,0.01f);
+        if(hit.collider!=null) groundOnTheWay = true;
+        else groundOnTheWay = false;
     }
 }
