@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4530599982847118333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 48.14, y: 7.5, z: -1.51}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1, z: 1}
   m_Children:
   - {fileID: 4131688685289526601}
   - {fileID: 6212580498192001809}
@@ -130,10 +130,13 @@ MonoBehaviour:
   - {fileID: 933967631433956220}
   - {fileID: 933409535170551204}
   fire_col: {fileID: 7889712529627379261}
-  constant: 1
-  switchStateTime: 3
-  on: 1
+  constant: 0
+  switchStateTime: 4
+  on: 0
   startDelay: 0
+  warning: 1
+  warningTime: 0.08
+  afterWarningTime: 1.5
 --- !u!1 &5484638117765449302
 GameObject:
   m_ObjectHideFlags: 0

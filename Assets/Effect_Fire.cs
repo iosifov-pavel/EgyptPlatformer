@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Effect_Fire : MonoBehaviour
 {
-     bool letPlay = false;
+    bool letPlay = false;
     //private bool playFire = true;
     //float initialTime = 2f;
     //[SerializeField] ParticleSystem FireParticle ;
@@ -15,71 +15,71 @@ public class Effect_Fire : MonoBehaviour
     void Update()
     {       
         
-        letPlay = !letPlay;
-      if(letPlay)
-         {
-             if(FireParticle.isPlaying)
-             {
-                // FireParticle.gameObject.SetActive(false);//
-                 FireParticle.Stop();
-                 var emis = FireParticle.emission;
-                 emis.enabled = false;
-                 StartCoroutine (Timer ());
-                 //StartCoroutine (FireOn ());
-                 //FireOn ();
-                 letPlay = false;
-             }
-           //  if(!FireParticle.isPlaying)
-           //  {
-           //      FireParticle.Play(); 
-           //      FireParticle.enableEmission = true; 
-           //      //FireParticle.gameObject.SetActive(true);
-           //      StartCoroutine (Timer ());
-           //      //FireOn ();
-           //      letPlay = true;
-           // }
-         }else{
-            // if(FireParticle.isPlaying)
-            // {
-            //    // FireParticle.gameObject.SetActive(false);//
-            //     FireParticle.Stop();
-            //     FireParticle.enableEmission = false;
-            //     StartCoroutine (Timer ());
-            //     //StartCoroutine (FireOn ());
-            //     //FireOn ();
-            //     letPlay = false;
-            // }
-             if(!FireParticle.isPlaying)
-             {
-                 FireParticle.Play(); 
-                 var emis = FireParticle.emission;
-                 emis.enabled = true;
-                 //FireParticle.gameObject.SetActive(true);
-                 StartCoroutine (Timer ());
-                 //FireOn ();
-                 letPlay = true;
-            }
+    letPlay = !letPlay;
+    if(letPlay)
+      {
+          if(FireParticle.isPlaying)
+          {
+             // FireParticle.gameObject.SetActive(false);//
+              FireParticle.Stop();
+              var emis = FireParticle.emission;
+              emis.enabled = false;
+              StartCoroutine (Timer ());
+              //StartCoroutine (FireOn ());
+              //FireOn ();
+              letPlay = false;
+          }
+        //  if(!FireParticle.isPlaying)
+        //  {
+        //      FireParticle.Play(); 
+        //      FireParticle.enableEmission = true; 
+        //      //FireParticle.gameObject.SetActive(true);
+        //      StartCoroutine (Timer ());
+        //      //FireOn ();
+        //      letPlay = true;
+        // }
+      }else{
+         // if(FireParticle.isPlaying)
+         // {
+         //    // FireParticle.gameObject.SetActive(false);//
+         //     FireParticle.Stop();
+         //     FireParticle.enableEmission = false;
+         //     StartCoroutine (Timer ());
+         //     //StartCoroutine (FireOn ());
+         //     //FireOn ();
+         //     letPlay = false;
+         // }
+          if(!FireParticle.isPlaying)
+          {
+              FireParticle.Play(); 
+              var emis = FireParticle.emission;
+              emis.enabled = true;
+              //FireParticle.gameObject.SetActive(true);
+              StartCoroutine (Timer ());
+              //FireOn ();
+              letPlay = true;
          }
+      }
 
     }
 
 
     private void FireOn ()
     {
-        
-        if(letPlay == false)
-        {
-            letPlay = true;
-        }
-        else 
-        {
-            letPlay = false;
-        }
-        //letPlay = true;
-        //yield return new WaitForSeconds(5f);
-        
-       // yield return new WaitForSeconds(5f);
-       // FireParticle.Stop();
+     
+    if(letPlay == false)
+    {
+        letPlay = true;
+    }
+    else 
+    {
+        letPlay = false;
+    }
+    //letPlay = true;
+    //yield return new WaitForSeconds(5f);
+    
+    // yield return new WaitForSeconds(5f);
+    // FireParticle.Stop();
     }
 
     IEnumerator Timer ()

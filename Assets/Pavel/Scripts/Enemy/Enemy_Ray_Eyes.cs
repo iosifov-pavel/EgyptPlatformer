@@ -12,8 +12,11 @@ public class Enemy_Ray_Eyes : MonoBehaviour
     RaycastHit2D hit;
     LayerMask player;
     LayerMask player2;
-    LayerMask p;
+    LayerMask resultMask;
     [SerializeField] float distance = 4f;
+    [SerializeField] bool dontCareAboutGround = false;
+    [SerializeField] LayerMask ground;
+    Transform target=null;
     void Start()
     {
         box = GetComponent<BoxCollider2D>();
@@ -21,8 +24,6 @@ public class Enemy_Ray_Eyes : MonoBehaviour
         eyes = Vector2.zero;
         player = LayerMask.GetMask("Player");
         player2 = LayerMask.GetMask("Damaged");
-        LayerMask ground = LayerMask.GetMask("Ground");
-        p = player | player2 | ground;
     }
 
     // Update is called once per frame
@@ -35,14 +36,25 @@ public class Enemy_Ray_Eyes : MonoBehaviour
 
     void Ray(){
         eyes = transform.position;
-        hit =  Physics2D.Raycast(eyes,Vector3.right*dir, distance,p);
+        if(dontCareAboutGround){
+            resultMask = player | player2;
+        }
+        else{
+            resultMask = player | player2 | ground;
+        }
+        hit =  Physics2D.Raycast(eyes,Vector3.right*dir, distance,resultMask);
+        if(hit.collider != null && dontCareAboutGround){
+            target = hit.transform;
+        }
+        else if(hit.collider != null && !dontCareAboutGround){
+            if(hit.collider.gameObject.tag != "Player")target = null;
+            else target = hit.transform;
+        }
+        else target = null;
         Debug.DrawRay(eyes,Vector3.right*dir*distance,Color.red,0.02f);
     }
 
     public Transform Check(){
-        if(hit.collider!=null && hit.collider.gameObject.tag=="Player"){
-            return hit.collider.transform;
-        }
-        else return null;
+        return target;
     }
 }

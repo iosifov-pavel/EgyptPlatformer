@@ -277,6 +277,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  weakSpotDamage: 3
+  damaged: {fileID: 0}
+  death: {fileID: 0}
   dead: 0
   is_damaged: 0
   time: 0.3
@@ -462,3 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c4d884c11bbb34a9b11f7e65458c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontCareAboutGround: 1
+  ground:
+    serializedVersion: 2
+    m_Bits: 256

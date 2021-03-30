@@ -272,6 +272,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  weakSpotDamage: 3
+  damaged: {fileID: 0}
+  death: {fileID: 0}
   dead: 0
   is_damaged: 0
   time: 0.3
@@ -329,6 +332,7 @@ GameObject:
   - component: {fileID: 8772329407780572759}
   - component: {fileID: 8772329407780572758}
   - component: {fileID: 8772329407780572757}
+  - component: {fileID: 3813389845197410831}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -384,6 +388,23 @@ MonoBehaviour:
   spikeSpeed: 3
   timeBetweenAttacks: 2
   spikeLifetime: 4
+  enemyCircleEyes: {fileID: 3813389845197410831}
+--- !u!114 &3813389845197410831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8772329407780572752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c4d884c11bbb34a9b11f7e65458c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontCareAboutGround: 0
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &8772329408177265639
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,8 +495,9 @@ MonoBehaviour:
   forward: 1
   lerping: 1
   lerpingPercent: 50
+  startLerpingTimer: 0.2
   visualize: 0
   chainParent: {fileID: 0}
   chainPrefab: {fileID: 0}
   delayOnPoints: 0
-  startLerpingTimer: 0.2
+  delayOnStart: 0

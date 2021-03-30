@@ -1208,6 +1208,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  fromOutsideScriptJump: 0
   forward: 1
 --- !u!1 &7256194385014884611
 GameObject:
@@ -1718,6 +1719,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 6
+  dontCareAboutGround: 0
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!95 &4857601961383762605
 Animator:
   serializedVersion: 3
