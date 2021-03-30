@@ -21,7 +21,8 @@ public class Enemy_Ray_Eyes : MonoBehaviour
         eyes = Vector2.zero;
         player = LayerMask.GetMask("Player");
         player2 = LayerMask.GetMask("Damaged");
-        p = player | player2;
+        LayerMask ground = LayerMask.GetMask("Ground");
+        p = player | player2 | ground;
     }
 
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class Enemy_Ray_Eyes : MonoBehaviour
     }
 
     public Transform Check(){
-        if(hit.collider!=null){
+        if(hit.collider!=null && hit.collider.gameObject.tag=="Player"){
             return hit.collider.transform;
         }
         else return null;

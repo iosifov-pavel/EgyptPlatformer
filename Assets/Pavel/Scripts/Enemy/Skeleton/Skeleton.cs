@@ -52,12 +52,10 @@ public class Skeleton : MonoBehaviour
             skelet_anim.SetBool("damage",true);
             canBeDamaged = false;
         }
-        dir = (int)Mathf.Sign(transform.localScale.x)*1;
-        if(eyes.Check()!=null){
-            player = eyes.Check();
-            distance=Mathf.Abs(transform.position.x-player.position.x);
-        }
-        else return;
+        dir = (int)Mathf.Sign(transform.localScale.x)*1;       
+        player = eyes.Check();
+        if(player==null) return;
+        distance=Mathf.Abs(transform.position.x-player.position.x);   
         if(distance>=melee && spear && canAttack) ThrowSpear();
         else if(axe && canAttack) PunchAxe();
         else{}

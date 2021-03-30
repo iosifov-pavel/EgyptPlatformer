@@ -125,7 +125,7 @@ public class EnemyGroundWalking : MonoBehaviour
     }
     IEnumerator flipdir(){
         directionChanged = true;
-        yield return new WaitForSeconds(0.025f);
+        yield return new WaitForSeconds(0.035f);
         directionChanged = false;
     }
 
