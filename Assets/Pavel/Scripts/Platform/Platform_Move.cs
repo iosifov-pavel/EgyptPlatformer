@@ -11,6 +11,7 @@ public class Platform_Move : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] float speedBack = 1f;
     [SerializeField] float delay = 0;
+    [SerializeField] bool resetPosition = false;
     float timer = 0;
     float resultSpeed;
     bool start = false;
@@ -24,6 +25,10 @@ public class Platform_Move : MonoBehaviour
 
     private void OnEnable() {
         timer = 0;
+    }
+
+    private void OnDisable() {
+        if(resetPosition)transform.position = original;
     }
 
     // Start is called before the first frame update

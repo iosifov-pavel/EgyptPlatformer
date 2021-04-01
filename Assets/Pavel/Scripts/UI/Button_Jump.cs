@@ -20,6 +20,7 @@ public class Button_Jump : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     void PUp(){
         buttonPressed = false;
         player2.setJumpButton(false);
+        player2.Jumping();
     }
 
     void Pdown(){
@@ -27,7 +28,9 @@ public class Button_Jump : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             return;
         }
         buttonPressed = true;
+        //player2.Jumping();
         player2.setJumpButton(true);
+
     }
 
 

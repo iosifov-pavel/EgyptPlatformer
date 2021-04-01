@@ -32,6 +32,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float groundedWidth = 0.22f;
     [SerializeField] float groundedHeight = 0.04f;
     Vector2 groundCheckSize;
+    bool dontCheckGround = false;
     Vector2 input = Vector2.zero;
     bool flipBlock = false, moveBlock=false, jumpBlock = false;
     Vector2 targetVelocity = Vector2.zero;
@@ -111,6 +112,7 @@ public class Movement : MonoBehaviour
                 isFalling = true;
                 if(!blockAngle && onSlope) StartCoroutine(StillCanJump());
                 else if(blockAngle) currentJumps=2;
+                else currentJumps = 1;
             }
             lastGroundCheck = false;
             MovementSmoothing = jumpingSmoothing;
@@ -118,6 +120,7 @@ public class Movement : MonoBehaviour
         }
         else{
             if(IsJumpBlocked() && !IsJumpOrFall()) StartCoroutine(UnblockJump());
+            if(jumpButton && !isJumping) return;
             isGrounded = true;
             lastGroundCheck = true;
             if(isJumping || isFalling) jumpOnGroundDust.Play();
@@ -334,11 +337,12 @@ public class Movement : MonoBehaviour
     
     void Jump(){
         if(jumpBlock || blockAngle) return;
-        if(jumpButton && currentJumps<2){
+        if(jumpButton && currentJumps<=maxJumpCount){
             Player_Sounds.sounds.PlaySound("jump");
             isJumping = true;
             isFalling = false;
-            currentJumps++;
+            //if(currentJumps>=1) Debug.Break();
+            //currentJumps++;
             if(onSlope && highAngle){
                 //add speed when jump from slope
 
@@ -352,6 +356,16 @@ public class Movement : MonoBehaviour
             playerRigidbody.AddForce(Vector3.up * movementMultiplier.y, ForceMode2D.Impulse);
             jumpButton = false;
         }
+    }
+
+    public void Jumping(){
+        currentJumps++;
+    }
+
+    IEnumerator DontGroundCheck(){
+        dontCheckGround = true;
+        yield return new WaitForSeconds(0.1f);
+        dontCheckGround = false;
     }
 
     void SlopeEffect(){
