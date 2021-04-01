@@ -120,7 +120,7 @@ public class Movement : MonoBehaviour
         }
         else{
             if(IsJumpBlocked() && !IsJumpOrFall()) StartCoroutine(UnblockJump());
-            if(jumpButton && !isJumping) return;
+            //if(jumpButton && !isJumping) return;
             isGrounded = true;
             lastGroundCheck = true;
             if(isJumping || isFalling) jumpOnGroundDust.Play();
